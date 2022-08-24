@@ -54,6 +54,7 @@
 
 #include <QHBoxLayout>
 #include <QSplitter>
+#include "layer.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new QGraphicsScene(this))
@@ -77,27 +78,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowTitle(tr("Map viewer"));
 
-    QGeoJson map;
-    QJsonDocument JsonDoc = loadJson("/Users/arash/Projects/GraphicsViewMap/sample.json");
+
+    QJsonDocument JsonDoc = loadJson("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
+    Layer layer;
+    layer.GetFromJsonDocument(JsonDoc);
 
 
-    QVariantList maplist = map.importGeoJson(JsonDoc);
-
-    for (int i=0; i<maplist.count(); i++)
-    {   qDebug()<<maplist[i];
-        QMap<QString,QVariant> maplistlist = maplist[i].toMap();
-        //qDebug()<<i<<":"<<maplistlist;
-        for (QMap<QString,QVariant>::Iterator it=maplistlist.begin(); it!=maplistlist.end(); it++)
-        {   qDebug() << it.key() << ":" << it.value();
-            QMap<QString,QVariant> maplistlistlist = it.value().toMap();
-            for (QMap<QString,QVariant>::Iterator it1=maplistlistlist.begin(); it1!=maplistlistlist.end(); it1++)
-            {
-                qDebug() << it1.key() << ":" << it1.value();
-            }
-        }
-
-        qDebug()<<"---------------";
-    }
 }
 
 void MainWindow::populateScene()

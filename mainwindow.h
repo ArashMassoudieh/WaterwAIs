@@ -53,7 +53,6 @@
 
 #include <QWidget>
 #include <QJsonDocument>
-#include </Users/arash/Qt/5.15.2/Src/qtlocation/src/location/labs/qgeojson_p.h>
 #include <QFile>
 
 QT_BEGIN_NAMESPACE
