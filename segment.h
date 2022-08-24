@@ -48,62 +48,33 @@
 **
 ****************************************************************************/
 
-#include "segment.h"
-#include "mainwindow.h"
-#include "view.h"
+#ifndef Segment_H
+#define Segment_H
 
-#include <QHBoxLayout>
-#include <QSplitter>
-#include "layer.h"
+#include <QColor>
+#include <QGraphicsItem>
+#include <cpoint.h>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent), scene(new QGraphicsScene(this))
-    , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
+class Segment : public QGraphicsLineItem
 {
-    populateScene();
+public:
+    Segment(const QColor &color, const CPoint &s_point, const CPoint &e_point);
+    Segment(const CPoint &s_point, const CPoint &e_point);
 
-    QSplitter *vSplitter = new QSplitter;
-    vSplitter->setOrientation(Qt::Vertical);
-    vSplitter->addWidget(h1Splitter);
-    vSplitter->addWidget(h2Splitter);
+    QRectF boundingRect() const override;
+    QPainterPath shape() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
 
-    View *view = new View("Map");
-    view->view()->setScene(scene);
-    h1Splitter->addWidget(view);
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
-
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(vSplitter);
-    setLayout(layout);
-
-    setWindowTitle(tr("Map viewer"));
-
-
-    QJsonDocument JsonDoc = loadJson("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
-    Layer layer;
-    layer.GetFromJsonDocument(JsonDoc);
-
-
-}
-
-void MainWindow::populateScene()
-{
-    // Populate scene
-
-    for (int i = 0; i < 10; i ++) {
-        CPoint p1,p2;
-        p1.setx(-10);
-        p1.sety(-i);
-        p2.setx(10);
-        p2.sety(i);
-        QGraphicsItem *item = new Segment(p1, p2);
-        scene->addItem(item);
-
-     }
-}
-
-QJsonDocument loadJson(QString fileName) {
-    QFile jsonFile(fileName);
-    jsonFile.open(QFile::ReadOnly);
-    return QJsonDocument().fromJson(jsonFile.readAll());
+private:
+    CPoint start_point;
+    CPoint end_point;
+    QColor color;
+    QVector<QPointF> stuff;
 };
+
+#endif // Segment_H

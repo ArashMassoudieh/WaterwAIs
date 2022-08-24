@@ -64,3 +64,20 @@ _FeatureType Feature::Feature_Type(const string &FT)
 
     return _FeatureType::Unknown;
 }
+
+bool Feature::GetGeometryFromJsonArray(const QJsonArray &array)
+{
+    for (int i=0; i<array.count(); i++)
+    {
+        QJsonArray level1 = array[i].toArray();
+        for (int j=0; j<level1.size(); j++)
+        {
+            QJsonArray coords = level1[j].toArray();
+            CPoint p;
+            p.setx(coords[0].toDouble());
+            p.sety(coords[1].toDouble());
+            geometry.push_back(p);
+        }
+    }
+    return true;
+}

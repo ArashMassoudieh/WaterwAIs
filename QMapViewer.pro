@@ -13,7 +13,8 @@ HEADERS += mainwindow.h view.h chip.h \
     ../Utilities/Vector.h \
     ../Utilities/cpoint.h \
     feature.h \
-    layer.h
+    layer.h \
+    segment.h
 SOURCES += main.cpp \
     ../Utilities/Matrix.cpp \
     ../Utilities/QuickSort.cpp \
@@ -21,7 +22,8 @@ SOURCES += main.cpp \
     ../Utilities/Vector.cpp \
     ../Utilities/cpoint.cpp \
     feature.cpp \
-    layer.cpp
+    layer.cpp \
+    segment.cpp
 SOURCES += mainwindow.cpp view.cpp chip.cpp
 
 QT += widgets location core

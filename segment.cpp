@@ -49,61 +49,72 @@
 ****************************************************************************/
 
 #include "segment.h"
-#include "mainwindow.h"
-#include "view.h"
 
-#include <QHBoxLayout>
-#include <QSplitter>
-#include "layer.h"
+#include <QGraphicsSceneMouseEvent>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent), scene(new QGraphicsScene(this))
-    , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
+Segment::Segment(const QColor &color, const CPoint &s_point , const CPoint &e_point)
 {
-    populateScene();
+    Segment(s_point,e_point);
+    this->color = color;
 
-    QSplitter *vSplitter = new QSplitter;
-    vSplitter->setOrientation(Qt::Vertical);
-    vSplitter->addWidget(h1Splitter);
-    vSplitter->addWidget(h2Splitter);
+}
 
-    View *view = new View("Map");
-    view->view()->setScene(scene);
-    h1Splitter->addWidget(view);
+Segment::Segment(const CPoint &s_point , const CPoint &e_point)
+{
+    start_point = s_point;
+    end_point = e_point;
+    QGraphicsLineItem::setLine(s_point.x(),s_point.y(),e_point.x(),e_point.y());
+    //setZValue((x + y) % 2);
+    this->color = Qt::black;
+    setFlags(ItemIsSelectable);
+    setAcceptHoverEvents(true);
+}
 
+QRectF Segment::boundingRect() const
+{
+    return QRectF(0, 0, 110, 70);
+}
 
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(vSplitter);
-    setLayout(layout);
+QPainterPath Segment::shape() const
+{
+    QPainterPath path;
+    path.addRect(14, 14, 82, 42);
+    return path;
+}
 
-    setWindowTitle(tr("Map viewer"));
+void Segment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Q_UNUSED(widget);
 
+    QColor fillColor = (option->state & QStyle::State_Selected) ? color.darker(150) : color;
+    if (option->state & QStyle::State_MouseOver)
+        fillColor = fillColor.lighter(125);
 
-    QJsonDocument JsonDoc = loadJson("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
-    Layer layer;
-    layer.GetFromJsonDocument(JsonDoc);
+    painter->drawLine(start_point.x(),start_point.y(), end_point.x(),end_point.y());
 
 
 }
 
-void MainWindow::populateScene()
+void Segment::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    // Populate scene
-
-    for (int i = 0; i < 10; i ++) {
-        CPoint p1,p2;
-        p1.setx(-10);
-        p1.sety(-i);
-        p2.setx(10);
-        p2.sety(i);
-        QGraphicsItem *item = new Segment(p1, p2);
-        scene->addItem(item);
-
-     }
+    QGraphicsItem::mousePressEvent(event);
+    update();
 }
 
-QJsonDocument loadJson(QString fileName) {
-    QFile jsonFile(fileName);
-    jsonFile.open(QFile::ReadOnly);
-    return QJsonDocument().fromJson(jsonFile.readAll());
-};
+void Segment::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->modifiers() & Qt::ShiftModifier) {
+        stuff << event->pos();
+        update();
+        return;
+    }
+    QGraphicsItem::mouseMoveEvent(event);
+}
+
+void Segment::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::mouseReleaseEvent(event);
+    update();
+}

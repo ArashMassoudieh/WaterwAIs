@@ -4,6 +4,7 @@
 #include <string>
 #include "cpoint.h"
 #include <QString>
+#include "QJsonArray"
 enum class _FeatureType {MultiLineString, Unknown};
 
 using namespace std;
@@ -21,6 +22,7 @@ public:
     void AppendToGeometry(const CPoint &pt);
     static _FeatureType Feature_Type(const string &FT);
     vector<CPoint> GetGeometry();
+    bool GetGeometryFromJsonArray(const QJsonArray &array);
 private:
     _FeatureType FeatureType;
     vector<CPoint> geometry;

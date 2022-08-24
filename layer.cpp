@@ -54,14 +54,17 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
         QJsonValue value = JsonObject.value(key);
         qDebug() << "Key = " << key << ", Value = " << value.toString();
     }
-    QJsonArray features = JsonObject.value("features").toArray();
-    for (int i=0; i<features.count(); i++) {
-        QJsonObject value = features[i].toObject();
+    QJsonArray Jfeatures = JsonObject.value("features").toArray();
+    for (int i=0; i<Jfeatures.count(); i++) {
+        QJsonObject value = Jfeatures[i].toObject();
         QJsonObject geometry = value["geometry"].toObject();
         qDebug()<<"Geometry: " <<geometry;
         QJsonArray coordinates = geometry["coordinates"].toArray();
         QString type = geometry["type"].toString();
         qDebug() << "Key = " << i << ", Coordinates = " << coordinates << ", Type = " << type;
+        Feature feature;
+        feature.GetGeometryFromJsonArray(coordinates);
+        features.push_back(feature);
     }
 
     return true;
