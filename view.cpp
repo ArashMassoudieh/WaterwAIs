@@ -207,7 +207,7 @@ View::View(const QString &name, QWidget *parent)
     connect(zoomOutIcon, &QAbstractButton::clicked, this, &View::zoomOut);
     connect(printButton, &QAbstractButton::clicked, this, &View::print);
 
-    setupMatrix();
+    //setupMatrix();
 }
 
 QGraphicsView *View::view() const

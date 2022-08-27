@@ -54,11 +54,17 @@
 #include <QWidget>
 #include <QJsonDocument>
 #include <QFile>
+#include "layer.h"
+#include "view.h"
+#include "filedownloader.h"
+
 
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;
 class QSplitter;
 QT_END_NAMESPACE
+
+enum class downloadmode {localfile, url};
 
 class MainWindow : public QWidget
 {
@@ -69,11 +75,23 @@ public:
 private:
 
     void populateScene();
-
+    void ZoomAll();
     QGraphicsScene *scene;
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;
+    Layer layer;
+    View *view = nullptr;
+    downloadmode DownloadMode = downloadmode::url;
+    QJsonDocument JsonDoc;
+
+public slots:
+    void OnDownloadFinished();
+
+private:
+    Downloader downloader;
 };
 
-QJsonDocument loadJson(QString fileName);
+QJsonDocument loadJson(const QString &fileName);
+QJsonDocument loadJson(QNetworkReply *fileName);
+QJsonDocument loadJson(QUrl fileName);
 #endif // MAINWINDOW_H

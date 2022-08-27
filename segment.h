@@ -60,11 +60,14 @@ class Segment : public QGraphicsLineItem
 public:
     Segment(const QColor &color, const CPoint &s_point, const CPoint &e_point);
     Segment(const CPoint &s_point, const CPoint &e_point);
+    Segment(const Segment &seg);
+    Segment(Segment *seg);
+    Segment *operator=(const Segment &seg);
 
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
-
+    vector<double> bounds();
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

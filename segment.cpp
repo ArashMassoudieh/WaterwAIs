@@ -74,7 +74,7 @@ Segment::Segment(const CPoint &s_point , const CPoint &e_point)
 
 QRectF Segment::boundingRect() const
 {
-    return QRectF(0, 0, 110, 70);
+    return QRectF(start_point.x(),start_point.y(),end_point.x()-start_point.x(), end_point.y()-start_point.y());
 }
 
 QPainterPath Segment::shape() const
@@ -97,6 +97,25 @@ void Segment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 
 }
 
+Segment::Segment(const Segment &seg)
+{
+    start_point = seg.start_point;
+    end_point = seg.end_point;
+}
+
+Segment::Segment(Segment *seg)
+{
+    start_point = seg->start_point;
+    end_point = seg->end_point;
+}
+
+Segment *Segment::operator=(const Segment &seg)
+{
+    start_point = seg.start_point;
+    end_point = seg.end_point;
+    return this;
+}
+
 void Segment::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
@@ -117,4 +136,15 @@ void Segment::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mouseReleaseEvent(event);
     update();
+}
+
+vector<double> Segment::bounds()
+{
+    vector<double> out;
+    out.push_back(start_point.x() );
+    out.push_back(start_point.y() );
+    out.push_back(end_point.x() );
+    out.push_back(end_point.y() );
+
+    return out;
 }

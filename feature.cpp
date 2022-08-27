@@ -1,4 +1,5 @@
 #include "feature.h"
+#include "segment.h"
 
 Feature::Feature()
 {
@@ -80,4 +81,42 @@ bool Feature::GetGeometryFromJsonArray(const QJsonArray &array)
         }
     }
     return true;
+}
+
+
+QVector<shared_ptr<QGraphicsItem>> Feature::toGraphicItems()
+{
+    QVector<shared_ptr<QGraphicsItem>> out;
+    for (int i=0; i<geometry.size()-1; i++)
+    {
+        shared_ptr<Segment> seg( new Segment(geometry[i],geometry[i+1]));
+        out.push_back(seg);
+    }
+    return out;
+}
+
+double Feature::GetRange(range rng, dir dr)
+{
+    double extreme;
+    if (!geometry.size())
+        return 0;
+    int range_i=0;
+    if (rng==range::max)
+        range_i=-1;
+    else
+        range_i = 1;
+    extreme = range_i*1e12;
+    for (int i=0; i<geometry.size(); i++)
+    {
+        if (dr==dir::x)
+        {   if (range_i*geometry[i].x()<range_i*extreme)
+                extreme = geometry[i].x();
+        }
+        else
+        {
+            if (range_i*geometry[i].y()<range_i*extreme)
+                extreme = geometry[i].y();
+        }
+    }
+    return extreme;
 }

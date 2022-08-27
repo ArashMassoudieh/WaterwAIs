@@ -69,3 +69,38 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
 
     return true;
 }
+
+QVector<QVector<shared_ptr<QGraphicsItem>>> Layer::toGraphicItems()
+{
+    QVector<QVector<shared_ptr<QGraphicsItem>>> out;
+    for (int i=0; i<features.size(); i++)
+    {
+        out.push_back(features[i].toGraphicItems());
+    }
+    return out;
+}
+
+double Layer::GetRange(range rng, dir dr)
+{
+    if (features.size()==0)
+        return 0;
+    double extreme = features[0].GetRange(rng,dr);
+    for (int i=1; i<features.size(); i++)
+    {
+        if (rng==range::max)
+        {
+            extreme = max(extreme,features[i].GetRange(rng,dr));
+        }
+        if (rng==range::min)
+        {
+            extreme = min(extreme,features[i].GetRange(rng,dr));
+        }
+
+    }
+    return extreme;
+}
+
+QRectF Layer::GetBoundingRect()
+{
+    return QRectF(GetRange(range::min,dir::x),GetRange(range::min,dir::y),GetRange(range::max,dir::x)-GetRange(range::min,dir::x),GetRange(range::max,dir::y)-GetRange(range::min,dir::y));
+}

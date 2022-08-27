@@ -50,25 +50,60 @@
 
 #include "segment.h"
 #include "mainwindow.h"
-#include "view.h"
-
+#include <QMessageBox>
 #include <QHBoxLayout>
 #include <QSplitter>
-#include "layer.h"
+#include <QUrl>
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new QGraphicsScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
-    populateScene();
 
+    if (DownloadMode == downloadmode::localfile)
+    {   QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
+        if (layerfile.exists())
+        {
+            qDebug()<<"File '"<<layerfile.fileName() << "' exists!";
+        }
+        else
+        {
+            QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
+            qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
+        }
+        JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
+        layer.GetFromJsonDocument(JsonDoc);
+        populateScene();
+
+    }
+    else if (DownloadMode == downloadmode::url)
+    {
+        connect (&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
+        downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson"));
+    }
+
+
+/*
+    int i=0;
+    foreach(QGraphicsItem *item, scene->items())
+    {
+          Segment *segitem = static_cast<Segment *>(item);
+          qDebug()<<i<<":"<<segitem->boundingRect();
+          qDebug()<<i<<":"<<segitem->bounds()[0];
+          i++;
+    }
+*/
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
     vSplitter->addWidget(h2Splitter);
 
-    View *view = new View("Map");
+    view = new View("Map");
+
     view->view()->setScene(scene);
+
     h1Splitter->addWidget(view);
 
 
@@ -77,11 +112,9 @@ MainWindow::MainWindow(QWidget *parent)
     setLayout(layout);
 
     setWindowTitle(tr("Map viewer"));
+    ZoomAll();
 
 
-    QJsonDocument JsonDoc = loadJson("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
-    Layer layer;
-    layer.GetFromJsonDocument(JsonDoc);
 
 
 }
@@ -89,21 +122,79 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::populateScene()
 {
     // Populate scene
+    QVector<QVector<shared_ptr<QGraphicsItem>>> Items = layer.toGraphicItems();
+    for (int i = 0; i<Items.size(); i++) {
+        for (int j=0; j<Items[i].size(); j++)
+        {
+            Segment *item = new Segment(static_cast<Segment*>(Items[i][j].get()));
+            //qDebug()<<item->boundingRect();
+            //qDebug()<<item->bounds()[0];
+            scene->addItem(item);
+        }
 
-    for (int i = 0; i < 10; i ++) {
-        CPoint p1,p2;
-        p1.setx(-10);
-        p1.sety(-i);
-        p2.setx(10);
-        p2.sety(i);
-        QGraphicsItem *item = new Segment(p1, p2);
-        scene->addItem(item);
+    }
+/*
+    int i=0;
+    foreach(QGraphicsItem *item, scene->items())
+    {
+          Segment *segitem = static_cast<Segment *>(item);
+          qDebug()<<i<<":"<<segitem->boundingRect();
+          qDebug()<<i<<":"<<segitem->bounds()[0];
+          i++;
+    }
+*/
 
-     }
 }
 
-QJsonDocument loadJson(QString fileName) {
+QJsonDocument loadJson(const QString &fileName) {
     QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
     return QJsonDocument().fromJson(jsonFile.readAll());
 };
+
+QJsonDocument loadJson(QNetworkReply* fileName) {
+    QByteArray data = fileName->readAll();
+    qDebug()<<fileName->header(QNetworkRequest::KnownHeaders());
+    return QJsonDocument().fromJson(data);
+};
+
+
+void MainWindow::ZoomAll()
+{   //QRectF newRect = scene->itemsBoundingRect();
+
+/*
+    int i=0;
+    foreach(QGraphicsItem *item, scene->items())
+    {
+          Segment *segitem = static_cast<Segment *>(item);
+          qDebug()<<i<<":"<<segitem->boundingRect();
+          qDebug()<<i<<":"<<segitem->bounds()[0];
+          i++;
+    }
+*/
+    QRectF newRect = layer.GetBoundingRect();
+    float width = float(newRect.width());
+    float height = float(newRect.height());
+
+    if (width>scene->width() || height>scene->sceneRect().height())
+        scene->setSceneRect(newRect);
+    view->view()->fitInView(newRect,Qt::KeepAspectRatio);
+    view->view()->repaint();
+}
+
+void MainWindow::OnDownloadFinished()
+{
+    qDebug()<<"Download Finished!";
+    JsonDoc = loadJson(downloader.Downloaded);
+    layer.GetFromJsonDocument(JsonDoc);
+    populateScene();
+    int i=0;
+    foreach(QGraphicsItem *item, scene->items())
+    {
+          Segment *segitem = static_cast<Segment *>(item);
+          qDebug()<<i<<":"<<segitem->boundingRect();
+          qDebug()<<i<<":"<<segitem->bounds()[0];
+          i++;
+    }
+    ZoomAll();
+}

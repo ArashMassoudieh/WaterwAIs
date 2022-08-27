@@ -5,6 +5,8 @@
 #include "cpoint.h"
 #include <QString>
 #include "QJsonArray"
+#include "QGraphicsItem"
+#include "QVector"
 enum class _FeatureType {MultiLineString, Unknown};
 
 using namespace std;
@@ -23,6 +25,8 @@ public:
     static _FeatureType Feature_Type(const string &FT);
     vector<CPoint> GetGeometry();
     bool GetGeometryFromJsonArray(const QJsonArray &array);
+    QVector<shared_ptr<QGraphicsItem>> toGraphicItems();
+    double GetRange(range rng, dir dr);
 private:
     _FeatureType FeatureType;
     vector<CPoint> geometry;

@@ -3,6 +3,7 @@
 
 #include "feature.h"
 #include "QJsonDocument"
+#include "QRectF"
 
 class Layer
 {
@@ -16,6 +17,10 @@ public:
     Layer(const Layer&);
     Layer& operator = (const Layer &C);
     void AppendToFeatures(const Feature &feature);
+    QVector<QVector<shared_ptr<QGraphicsItem>>> toGraphicItems();
+    double GetRange(range rng, dir dr);
+    QRectF GetBoundingRect();
+
 private:
     vector<Feature> features;
     _FeatureType FeatureType;

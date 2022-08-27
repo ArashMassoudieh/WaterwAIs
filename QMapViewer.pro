@@ -13,6 +13,7 @@ HEADERS += mainwindow.h view.h chip.h \
     ../Utilities/Vector.h \
     ../Utilities/cpoint.h \
     feature.h \
+    filedownloader.h \
     layer.h \
     segment.h
 SOURCES += main.cpp \
@@ -22,12 +23,13 @@ SOURCES += main.cpp \
     ../Utilities/Vector.cpp \
     ../Utilities/cpoint.cpp \
     feature.cpp \
+    filedownloader.cpp \
     layer.cpp \
     segment.cpp
 SOURCES += mainwindow.cpp view.cpp chip.cpp
 
-QT += widgets location core
-QT += location-private
+QT += widgets core network
+
 qtHaveModule(printsupport): QT += printsupport
 qtHaveModule(opengl): QT += opengl
 
