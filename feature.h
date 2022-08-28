@@ -28,9 +28,12 @@ public:
     bool GetGeometryFromJsonArray(const QJsonArray &array);
     QVector<shared_ptr<QGraphicsItem>> toGraphicItems();
     double GetRange(range rng, dir dr);
+    vector<QGraphicsItem*> &GetGraphicalObjects() {return graphical_objects;}
+    void ClearGraphicalObjects();
 private:
     _FeatureType FeatureType;
     vector<CPoint> geometry;
+    vector<QGraphicsItem*> graphical_objects;
 
 };
 

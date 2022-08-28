@@ -52,10 +52,10 @@
 #define Segment_H
 
 #include <QColor>
-#include <QGraphicsItem>
+#include "graphicsitem.h"
 #include <cpoint.h>
 
-class Segment : public QGraphicsLineItem
+class Segment : public GraphicsItem
 {
 public:
     Segment(const QColor &color, const CPoint &s_point, const CPoint &e_point);

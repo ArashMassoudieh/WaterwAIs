@@ -120,3 +120,12 @@ double Feature::GetRange(range rng, dir dr)
     }
     return extreme;
 }
+
+void Feature::ClearGraphicalObjects()
+{
+    for (int i=0; i<graphical_objects.size(); i++)
+        if (graphical_objects[i]!=nullptr)
+        delete(graphical_objects[i]);
+
+    graphical_objects.clear();
+}

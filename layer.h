@@ -20,6 +20,7 @@ public:
     QVector<QVector<shared_ptr<QGraphicsItem>>> toGraphicItems();
     double GetRange(range rng, dir dr);
     QRectF GetBoundingRect();
+    Feature *feature(int i);
 
 private:
     vector<Feature> features;

@@ -85,16 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 
-/*
-    int i=0;
-    foreach(QGraphicsItem *item, scene->items())
-    {
-          Segment *segitem = static_cast<Segment *>(item);
-          qDebug()<<i<<":"<<segitem->boundingRect();
-          qDebug()<<i<<":"<<segitem->bounds()[0];
-          i++;
-    }
-*/
+
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
@@ -124,25 +115,18 @@ void MainWindow::populateScene()
     // Populate scene
     QVector<QVector<shared_ptr<QGraphicsItem>>> Items = layer.toGraphicItems();
     for (int i = 0; i<Items.size(); i++) {
+        layer.feature(i)->ClearGraphicalObjects();
         for (int j=0; j<Items[i].size(); j++)
         {
             Segment *item = new Segment(static_cast<Segment*>(Items[i][j].get()));
+            layer.feature(i)->GetGraphicalObjects().push_back(item);
             //qDebug()<<item->boundingRect();
             //qDebug()<<item->bounds()[0];
             scene->addItem(item);
         }
 
     }
-/*
-    int i=0;
-    foreach(QGraphicsItem *item, scene->items())
-    {
-          Segment *segitem = static_cast<Segment *>(item);
-          qDebug()<<i<<":"<<segitem->boundingRect();
-          qDebug()<<i<<":"<<segitem->bounds()[0];
-          i++;
-    }
-*/
+
 
 }
 

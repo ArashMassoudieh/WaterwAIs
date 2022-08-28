@@ -14,6 +14,8 @@ HEADERS += mainwindow.h view.h chip.h \
     ../Utilities/cpoint.h \
     feature.h \
     filedownloader.h \
+    graphicsitem.h \
+    graphicsitemcollection.h \
     layer.h \
     segment.h
 SOURCES += main.cpp \
@@ -24,6 +26,8 @@ SOURCES += main.cpp \
     ../Utilities/cpoint.cpp \
     feature.cpp \
     filedownloader.cpp \
+    graphicsitem.cpp \
+    graphicsitemcollection.cpp \
     layer.cpp \
     segment.cpp
 SOURCES += mainwindow.cpp view.cpp chip.cpp
