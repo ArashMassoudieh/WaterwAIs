@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+.DS_Store
+
+QMapViewer.pro.user
+
+QMapViewer.pro.user.5afcbe3

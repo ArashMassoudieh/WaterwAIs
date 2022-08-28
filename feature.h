@@ -7,6 +7,7 @@
 #include "QJsonArray"
 #include "QGraphicsItem"
 #include "QVector"
+
 enum class _FeatureType {MultiLineString, Unknown};
 
 using namespace std;
@@ -30,6 +31,7 @@ public:
 private:
     _FeatureType FeatureType;
     vector<CPoint> geometry;
+
 };
 
 #endif // FEATURE_H
