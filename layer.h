@@ -25,6 +25,7 @@ public:
     void SetColor(const QColor &c) {color = c; pen.setColor(c);}
     void SetPen(const QPen &p) {pen = p;}
     QPen Pen() {return pen;}
+    Feature *feature(int i);
 
 private:
     vector<Feature> features;

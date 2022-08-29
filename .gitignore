@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+.DS_Store
+
+QMapViewer.pro.user
+
+QMapViewer.pro.user.5afcbe3
+
+.qtc_clangd/.cache/clangd/index/
+
+.qtc_clangd/
+
+build/release/

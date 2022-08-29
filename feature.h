@@ -7,6 +7,7 @@
 #include "QJsonArray"
 #include "QGraphicsItem"
 #include "QVector"
+
 enum class _FeatureType {MultiLineString, Unknown};
 
 using namespace std;
@@ -27,9 +28,13 @@ public:
     bool GetGeometryFromJsonArray(const QJsonArray &array);
     QVector<shared_ptr<QGraphicsItem>> toGraphicItems();
     double GetRange(range rng, dir dr);
+    vector<QGraphicsItem*> &GetGraphicalObjects() {return graphical_objects;}
+    void ClearGraphicalObjects();
 private:
     _FeatureType FeatureType;
     vector<CPoint> geometry;
+    vector<QGraphicsItem*> graphical_objects;
+
 };
 
 #endif // FEATURE_H

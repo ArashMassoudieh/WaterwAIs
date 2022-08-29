@@ -119,6 +119,7 @@ void MainWindow::populateScene()
     // Populate scene
     QVector<QVector<shared_ptr<QGraphicsItem>>> Items = layer.toGraphicItems();
     for (int i = 0; i<Items.size(); i++) {
+        layer.feature(i)->ClearGraphicalObjects();
         for (int j=0; j<Items[i].size(); j++)
         {
             Segment *item = new Segment(static_cast<Segment*>(Items[i][j].get()));
@@ -128,6 +129,7 @@ void MainWindow::populateScene()
         }
 
     }
+
 
 }
 

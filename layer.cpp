@@ -104,3 +104,11 @@ QRectF Layer::GetBoundingRect()
 {
     return QRectF(GetRange(range::min,dir::x),GetRange(range::min,dir::y),GetRange(range::max,dir::x)-GetRange(range::min,dir::x),GetRange(range::max,dir::y)-GetRange(range::min,dir::y));
 }
+
+Feature *Layer::feature(int i)
+{
+    if (features.size()>i)
+        return &features[i];
+    else
+        return nullptr;
+}
