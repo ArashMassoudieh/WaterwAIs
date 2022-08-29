@@ -4,6 +4,8 @@
 #include "feature.h"
 #include "QJsonDocument"
 #include "QRectF"
+#include "QColor"
+#include "QPen"
 
 class Layer
 {
@@ -20,10 +22,15 @@ public:
     QVector<QVector<shared_ptr<QGraphicsItem>>> toGraphicItems();
     double GetRange(range rng, dir dr);
     QRectF GetBoundingRect();
+    void SetColor(const QColor &c) {color = c; pen.setColor(c);}
+    void SetPen(const QPen &p) {pen = p;}
+    QPen Pen() {return pen;}
 
 private:
     vector<Feature> features;
     _FeatureType FeatureType;
+    QColor color;
+    QPen pen;
 
 };
 

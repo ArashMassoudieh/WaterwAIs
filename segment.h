@@ -54,6 +54,7 @@
 #include <QColor>
 #include <QGraphicsItem>
 #include <cpoint.h>
+#include <QPen>
 
 class Segment : public QGraphicsLineItem
 {
@@ -68,6 +69,8 @@ public:
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
     vector<double> bounds();
+    void SetColor(const QColor &c) {color = c;}
+    void SetPen(const QPen &p) {pen = p; pen.setColor(color);}
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
@@ -77,7 +80,9 @@ private:
     CPoint start_point;
     CPoint end_point;
     QColor color;
+    QPen pen;
     QVector<QPointF> stuff;
+
 };
 
 #endif // Segment_H

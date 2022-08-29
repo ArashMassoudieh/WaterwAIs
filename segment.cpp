@@ -53,6 +53,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
+#include <QDebug>
 
 Segment::Segment(const QColor &color, const CPoint &s_point , const CPoint &e_point)
 {
@@ -91,7 +92,8 @@ void Segment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     QColor fillColor = (option->state & QStyle::State_Selected) ? color.darker(150) : color;
     if (option->state & QStyle::State_MouseOver)
         fillColor = fillColor.lighter(125);
-
+    pen.setColor(color);
+    painter->setPen(pen);
     painter->drawLine(start_point.x(),start_point.y(), end_point.x(),end_point.y());
 
 

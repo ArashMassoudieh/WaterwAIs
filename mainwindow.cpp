@@ -62,6 +62,12 @@ MainWindow::MainWindow(QWidget *parent)
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
 
+
+    QPen pen;
+    pen.setColor(QColor(255,0,0));
+    qDebug()<<pen.color();
+    pen.setWidth(3);
+    layer.SetPen(pen);
     if (DownloadMode == downloadmode::localfile)
     {   QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
         if (layerfile.exists())
@@ -84,17 +90,6 @@ MainWindow::MainWindow(QWidget *parent)
         downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson"));
     }
 
-
-/*
-    int i=0;
-    foreach(QGraphicsItem *item, scene->items())
-    {
-          Segment *segitem = static_cast<Segment *>(item);
-          qDebug()<<i<<":"<<segitem->boundingRect();
-          qDebug()<<i<<":"<<segitem->bounds()[0];
-          i++;
-    }
-*/
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
@@ -127,22 +122,12 @@ void MainWindow::populateScene()
         for (int j=0; j<Items[i].size(); j++)
         {
             Segment *item = new Segment(static_cast<Segment*>(Items[i][j].get()));
-            //qDebug()<<item->boundingRect();
-            //qDebug()<<item->bounds()[0];
+            item->SetPen(layer.Pen());
+            item->SetColor(layer.Pen().color());
             scene->addItem(item);
         }
 
     }
-/*
-    int i=0;
-    foreach(QGraphicsItem *item, scene->items())
-    {
-          Segment *segitem = static_cast<Segment *>(item);
-          qDebug()<<i<<":"<<segitem->boundingRect();
-          qDebug()<<i<<":"<<segitem->bounds()[0];
-          i++;
-    }
-*/
 
 }
 
@@ -162,16 +147,6 @@ QJsonDocument loadJson(QNetworkReply* fileName) {
 void MainWindow::ZoomAll()
 {   //QRectF newRect = scene->itemsBoundingRect();
 
-/*
-    int i=0;
-    foreach(QGraphicsItem *item, scene->items())
-    {
-          Segment *segitem = static_cast<Segment *>(item);
-          qDebug()<<i<<":"<<segitem->boundingRect();
-          qDebug()<<i<<":"<<segitem->bounds()[0];
-          i++;
-    }
-*/
     QRectF newRect = layer.GetBoundingRect();
     float width = float(newRect.width());
     float height = float(newRect.height());
