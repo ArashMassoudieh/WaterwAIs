@@ -48,50 +48,102 @@
 **
 ****************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "Circle.h"
 
-#include <QWidget>
-#include <QJsonDocument>
-#include <QFile>
-#include "layer.h"
-#include "view.h"
-#include "filedownloader.h"
-#include "mapscene.h"
+#include <QGraphicsSceneMouseEvent>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
+#include <QDebug>
 
-QT_BEGIN_NAMESPACE
-class QGraphicsScene;
-class QSplitter;
-QT_END_NAMESPACE
-
-enum class downloadmode {localfile, url};
-
-class MainWindow : public QWidget
+Circle::Circle(const QColor &color, const CPoint &_center , const double &_radious)
 {
-    Q_OBJECT
-public:
-    MainWindow(QWidget *parent = nullptr);
+    Circle(_center,_radious);
+    this->color = color;
 
-private:
+}
 
-    void populateScene();
-    void ZoomAll();
-    MapScene *scene;
-    QSplitter *h1Splitter;
-    QSplitter *h2Splitter;
-    Layer layer;
-    View *view = nullptr;
-    downloadmode DownloadMode = downloadmode::url;
-    QJsonDocument JsonDoc;
+Circle::Circle(const CPoint &_center , const double &_radious)
+{
+    center = _center;
+    radious = _radious;
+    this->color = Qt::black;
+    setFlags(ItemIsSelectable);
+    setAcceptHoverEvents(true);
+}
 
-public slots:
-    void OnDownloadFinished();
+QRectF Circle::boundingRect() const
+{
+    return QRectF(center.x()-radious,center.y()-radious,center.x()+radious, center.y()+radious);
+}
 
-private:
-    Downloader downloader;
-};
+QPainterPath Circle::shape() const
+{
+    QPainterPath path;
+    path.addRect(14, 14, 82, 42);
+    return path;
+}
 
-QJsonDocument loadJson(const QString &fileName);
-QJsonDocument loadJson(QNetworkReply *fileName);
-QJsonDocument loadJson(QUrl fileName);
-#endif // MAINWINDOW_H
+void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Q_UNUSED(widget);
+
+    QColor fillColor = (option->state & QStyle::State_Selected) ? color.darker(150) : color;
+    if (option->state & QStyle::State_MouseOver)
+        fillColor = fillColor.lighter(125);
+    pen.setColor(color);
+    painter->setPen(pen);
+    painter->drawEllipse(center.x()-radious,center.y()-radious,radious*2, radious*2);
+
+
+}
+
+Circle::Circle(const Circle &seg)
+{
+    center = seg.center;
+    radious = seg.radious;
+}
+
+Circle::Circle(Circle *seg)
+{
+    center = seg->center;
+    radious = seg->radious;
+}
+
+Circle *Circle::operator=(const Circle &seg)
+{
+    center = seg.center;
+    radious = seg.radious;
+    return this;
+}
+
+void Circle::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::mousePressEvent(event);
+    update();
+}
+
+void Circle::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->modifiers() & Qt::ShiftModifier) {
+        update();
+        return;
+    }
+    QGraphicsItem::mouseMoveEvent(event);
+}
+
+void Circle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::mouseReleaseEvent(event);
+    update();
+}
+
+vector<double> Circle::bounds()
+{
+    vector<double> out;
+    out.push_back(center.x()-radious );
+    out.push_back(center.y()-radious );
+    out.push_back(center.x()+radious);
+    out.push_back(center.y()+radious);
+
+    return out;
+}

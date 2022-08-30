@@ -12,11 +12,13 @@ HEADERS += mainwindow.h view.h chip.h \
     ../Utilities/Utilities.h \
     ../Utilities/Vector.h \
     ../Utilities/cpoint.h \
+    Circle.h \
     feature.h \
     filedownloader.h \
     graphicsitem.h \
     graphicsitemcollection.h \
     layer.h \
+    mapscene.h \
     segment.h
 SOURCES += main.cpp \
     ../Utilities/Matrix.cpp \
@@ -24,11 +26,13 @@ SOURCES += main.cpp \
     ../Utilities/Utilities.cpp \
     ../Utilities/Vector.cpp \
     ../Utilities/cpoint.cpp \
+    Circle.cpp \
     feature.cpp \
     filedownloader.cpp \
     graphicsitem.cpp \
     graphicsitemcollection.cpp \
     layer.cpp \
+    mapscene.cpp \
     segment.cpp
 SOURCES += mainwindow.cpp view.cpp chip.cpp
 

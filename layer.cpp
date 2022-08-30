@@ -62,8 +62,21 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
         QJsonArray coordinates = geometry["coordinates"].toArray();
         QString type = geometry["type"].toString();
         qDebug() << "Key = " << i << ", Coordinates = " << coordinates << ", Type = " << type;
+
         Feature feature;
-        feature.GetGeometryFromJsonArray(coordinates);
+        if (type == "MultiLineString")
+        {   feature.GetGeometryFromJsonArray(coordinates,_FeatureType::MultiLineString);
+            FeatureType = _FeatureType::MultiLineString;
+        }
+        else if (type == "Point")
+        {   feature.GetGeometryFromJsonArray(coordinates,_FeatureType::Point);
+            FeatureType = _FeatureType::Point;
+        }
+        else if (type == "MultiPolygon")
+        {   feature.GetGeometryFromJsonArray(coordinates,_FeatureType::MultiPolygon);
+            FeatureType = _FeatureType::MultiPolygon;
+
+        }
         features.push_back(feature);
     }
 

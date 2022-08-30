@@ -8,7 +8,7 @@
 #include "QGraphicsItem"
 #include "QVector"
 
-enum class _FeatureType {MultiLineString, Unknown};
+enum class _FeatureType {MultiLineString, Point, MultiPolygon, Unknown};
 
 using namespace std;
 
@@ -25,7 +25,7 @@ public:
     void AppendToGeometry(const CPoint &pt);
     static _FeatureType Feature_Type(const string &FT);
     vector<CPoint> GetGeometry();
-    bool GetGeometryFromJsonArray(const QJsonArray &array);
+    bool GetGeometryFromJsonArray(const QJsonArray &array, _FeatureType FT=_FeatureType::Unknown);
     QVector<shared_ptr<QGraphicsItem>> toGraphicItems();
     double GetRange(range rng, dir dr);
     vector<QGraphicsItem*> &GetGraphicalObjects() {return graphical_objects;}

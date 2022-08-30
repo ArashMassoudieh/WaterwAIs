@@ -1,5 +1,6 @@
 #include "feature.h"
 #include "segment.h"
+#include "Circle.h"
 
 Feature::Feature()
 {
@@ -66,19 +67,30 @@ _FeatureType Feature::Feature_Type(const string &FT)
     return _FeatureType::Unknown;
 }
 
-bool Feature::GetGeometryFromJsonArray(const QJsonArray &array)
+bool Feature::GetGeometryFromJsonArray(const QJsonArray &array, _FeatureType FT)
 {
-    for (int i=0; i<array.count(); i++)
-    {
-        QJsonArray level1 = array[i].toArray();
-        for (int j=0; j<level1.size(); j++)
+    FeatureType = FT;
+    if (FeatureType == _FeatureType::MultiLineString)
+    {   for (int i=0; i<array.count(); i++)
         {
-            QJsonArray coords = level1[j].toArray();
-            CPoint p;
-            p.setx(coords[0].toDouble());
-            p.sety(coords[1].toDouble());
-            geometry.push_back(p);
+            QJsonArray level1 = array[i].toArray();
+            for (int j=0; j<level1.size(); j++)
+            {
+                QJsonArray coords = level1[j].toArray();
+                CPoint p;
+                p.setx(coords[0].toDouble());
+                p.sety(coords[1].toDouble());
+                geometry.push_back(p);
+            }
         }
+    }
+    else if (FeatureType == _FeatureType::Point)
+    {
+        QJsonArray coords = array;
+        CPoint p;
+        p.setx(coords[0].toDouble());
+        p.sety(coords[1].toDouble());
+        geometry.push_back(p);
     }
     return true;
 }
@@ -87,10 +99,18 @@ bool Feature::GetGeometryFromJsonArray(const QJsonArray &array)
 QVector<shared_ptr<QGraphicsItem>> Feature::toGraphicItems()
 {
     QVector<shared_ptr<QGraphicsItem>> out;
-    for (int i=0; i<geometry.size()-1; i++)
-    {
-        shared_ptr<Segment> seg( new Segment(geometry[i],geometry[i+1]));
-        out.push_back(seg);
+    if (FeatureType==_FeatureType::MultiLineString)
+    {   for (int i=0; i<geometry.size()-1; i++)
+        {
+            if (FeatureType == _FeatureType::MultiLineString)
+            {   shared_ptr<Segment> seg( new Segment(geometry[i],geometry[i+1]));
+                out.push_back(seg);
+            }
+        }
+    }
+    if (FeatureType == _FeatureType::Point)
+    {   shared_ptr<Circle> circle( new Circle(geometry[0],50));
+        out.push_back(circle);
     }
     return out;
 }

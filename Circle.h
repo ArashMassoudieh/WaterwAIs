@@ -48,50 +48,40 @@
 **
 ****************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef Circle_H
+#define Circle_H
 
-#include <QWidget>
-#include <QJsonDocument>
-#include <QFile>
-#include "layer.h"
-#include "view.h"
-#include "filedownloader.h"
-#include "mapscene.h"
+#include <QColor>
+#include "graphicsitem.h"
+#include <cpoint.h>
+#include <QPen>
 
-QT_BEGIN_NAMESPACE
-class QGraphicsScene;
-class QSplitter;
-QT_END_NAMESPACE
-
-enum class downloadmode {localfile, url};
-
-class MainWindow : public QWidget
+class Circle : public GraphicsItem
 {
-    Q_OBJECT
 public:
-    MainWindow(QWidget *parent = nullptr);
+    Circle(const QColor &color, const CPoint &center, const double &radius);
+    Circle(const CPoint &center, const double &radius);
+    Circle(const Circle &circle);
+    Circle(Circle *seg);
+    Circle *operator=(const Circle &seg);
+
+    QRectF boundingRect() const override;
+    QPainterPath shape() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
+    vector<double> bounds();
+    void SetColor(const QColor &c) {color = c;}
+    void SetPen(const QPen &p) {pen = p; pen.setColor(color);}
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
+    CPoint center;
+    double radious;
+    QColor color;
+    QPen pen;
 
-    void populateScene();
-    void ZoomAll();
-    MapScene *scene;
-    QSplitter *h1Splitter;
-    QSplitter *h2Splitter;
-    Layer layer;
-    View *view = nullptr;
-    downloadmode DownloadMode = downloadmode::url;
-    QJsonDocument JsonDoc;
-
-public slots:
-    void OnDownloadFinished();
-
-private:
-    Downloader downloader;
 };
 
-QJsonDocument loadJson(const QString &fileName);
-QJsonDocument loadJson(QNetworkReply *fileName);
-QJsonDocument loadJson(QUrl fileName);
-#endif // MAINWINDOW_H
+#endif // Circle_H

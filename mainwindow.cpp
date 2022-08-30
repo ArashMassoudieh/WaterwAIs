@@ -58,7 +58,7 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent), scene(new QGraphicsScene(this))
+    : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
 
@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
     else if (DownloadMode == downloadmode::url)
     {
         connect (&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
-        downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson"));
+        downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson"));
     }
 
     QSplitter *vSplitter = new QSplitter;
@@ -117,20 +117,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::populateScene()
 {
     // Populate scene
-    QVector<QVector<shared_ptr<QGraphicsItem>>> Items = layer.toGraphicItems();
-    for (int i = 0; i<Items.size(); i++) {
-        layer.feature(i)->ClearGraphicalObjects();
-        for (int j=0; j<Items[i].size(); j++)
-        {
-            Segment *item = new Segment(static_cast<Segment*>(Items[i][j].get()));
-            item->SetPen(layer.Pen());
-            item->SetColor(layer.Pen().color());
-            scene->addItem(item);
-        }
-
-    }
-
-
+    scene->AppendLayer(&layer);
 }
 
 QJsonDocument loadJson(const QString &fileName) {
@@ -165,13 +152,5 @@ void MainWindow::OnDownloadFinished()
     JsonDoc = loadJson(downloader.Downloaded);
     layer.GetFromJsonDocument(JsonDoc);
     populateScene();
-    int i=0;
-    foreach(QGraphicsItem *item, scene->items())
-    {
-          Segment *segitem = static_cast<Segment *>(item);
-          qDebug()<<i<<":"<<segitem->boundingRect();
-          qDebug()<<i<<":"<<segitem->bounds()[0];
-          i++;
-    }
     ZoomAll();
 }
