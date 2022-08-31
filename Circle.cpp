@@ -92,6 +92,7 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         fillColor = fillColor.lighter(125);
     pen.setColor(color);
     painter->setPen(pen);
+    painter->setBrush(color);
     painter->drawEllipse(center.x()-radious,center.y()-radious,radious*2, radious*2);
 
 

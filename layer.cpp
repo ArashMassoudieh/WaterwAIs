@@ -35,11 +35,15 @@ Layer::Layer(const Layer& L)
 {
     features = L.features;
     FeatureType = L.FeatureType;
+    color = L.color;
+    pen = L.pen;
 }
 Layer& Layer::operator = (const Layer &L)
 {
     features = L.features;
     FeatureType = L.FeatureType;
+    color = L.color;
+    pen = L.pen;
     return *this;
 }
 void Layer::AppendToFeatures(const Feature &feature)

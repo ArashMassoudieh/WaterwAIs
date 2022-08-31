@@ -48,7 +48,6 @@
 **
 ****************************************************************************/
 
-#include "segment.h"
 #include "mainwindow.h"
 #include <QMessageBox>
 #include <QHBoxLayout>
@@ -62,34 +61,49 @@ MainWindow::MainWindow(QWidget *parent)
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
 
+    layerinfo Layer1;
+    Layer1.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson";
+    Layer1.color = Qt::red;
+    layers<<Layer1;
+    layerinfo Layer2;
+    Layer2.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson";
+    Layer2.color = Qt::blue;
+    layers<<Layer2;
+    layerinfo Layer3;
+    Layer3.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/PourPoints.geojson";
+    Layer3.color = Qt::green;
+    layers<<Layer3;
+
+
 
     QPen pen;
     pen.setColor(QColor(255,0,0));
     qDebug()<<pen.color();
     pen.setWidth(3);
-    layer.SetPen(pen);
-    if (DownloadMode == downloadmode::localfile)
-    {   QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
-        if (layerfile.exists())
-        {
-            qDebug()<<"File '"<<layerfile.fileName() << "' exists!";
-        }
-        else
-        {
-            QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
-            qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
-        }
-        JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
-        layer.GetFromJsonDocument(JsonDoc);
-        populateScene();
 
-    }
-    else if (DownloadMode == downloadmode::url)
-    {
-        connect (&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
-        downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson"));
-    }
+    for (int i=0; i<layers.count(); i++)
+    {   if (DownloadMode == downloadmode::localfile)
+        {   QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
+            if (layerfile.exists())
+            {
+                qDebug()<<"File '"<<layerfile.fileName() << "' exists!";
+            }
+            else
+            {
+                QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
+                qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
+            }
+            layers[i].JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
+            layers[i].layer.GetFromJsonDocument(layers[i].JsonDoc);
+            populateScene();
 
+        }
+        else if (DownloadMode == downloadmode::url)
+        {
+            connect (&layers[i].downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished(i)));
+            layers[i].downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson"));
+        }
+    }
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
@@ -117,7 +131,8 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::populateScene()
 {
     // Populate scene
-    scene->AppendLayer(&layer);
+    for (int i=0; i<layers.count(); i++)
+    scene->AppendLayer(&layers[i].layer);
 }
 
 QJsonDocument loadJson(const QString &fileName) {
@@ -136,7 +151,7 @@ QJsonDocument loadJson(QNetworkReply* fileName) {
 void MainWindow::ZoomAll()
 {   //QRectF newRect = scene->itemsBoundingRect();
 
-    QRectF newRect = layer.GetBoundingRect();
+    QRectF newRect = layers[0].layer.GetBoundingRect();
     float width = float(newRect.width());
     float height = float(newRect.height());
 
@@ -146,11 +161,11 @@ void MainWindow::ZoomAll()
     view->view()->repaint();
 }
 
-void MainWindow::OnDownloadFinished()
+void MainWindow::OnDownloadFinished(int i)
 {
     qDebug()<<"Download Finished!";
-    JsonDoc = loadJson(downloader.Downloaded);
-    layer.GetFromJsonDocument(JsonDoc);
+    JsonDoc = loadJson(layers[i].downloader.Downloaded);
+    layers[i].layer.GetFromJsonDocument(JsonDoc);
     populateScene();
     ZoomAll();
 }

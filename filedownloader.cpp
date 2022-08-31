@@ -5,6 +5,16 @@ Downloader::Downloader(QObject *parent) :
 {
 }
 
+Downloader::Downloader(const Downloader &downloader)
+{
+
+}
+
+Downloader & Downloader::operator=( const Downloader &downloader)
+{
+
+}
+
 void Downloader::doDownload(const QUrl &url)
 {
     qDebug()<< "Trying to access the file...";
