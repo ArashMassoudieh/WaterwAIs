@@ -42,3 +42,5 @@ QMapViewer.pro.user.5afcbe3
 .qtc_clangd/
 
 build/release/
+
+build/debug/
