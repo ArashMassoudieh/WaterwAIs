@@ -6,11 +6,16 @@
 #include "QRectF"
 #include "QColor"
 #include "QPen"
+#include "filedownloader.h"
 
-class Layer
+class MapScene;
+
+class Layer : public QObject
 {
+Q_OBJECT
+
 public:
-    Layer();
+    explicit Layer(QObject *parent = 0);
     bool SetFeatureType(const string &FT);
     void SetFeatureType(_FeatureType FT);
     bool SetFeatureType(const QString &FT);
@@ -26,13 +31,25 @@ public:
     void SetPen(const QPen &p) {pen = p;}
     QPen Pen() {return pen;}
     Feature *feature(int i);
-
+    QString address;
+    Downloader downloader;
+    QJsonDocument JsonDoc;
+    MapScene *Scene() {return scene;}
+    void SetScene(MapScene *_scene) {scene = _scene;}
 private:
     vector<Feature> features;
     _FeatureType FeatureType;
     QColor color;
     QPen pen;
+    MapScene *scene=nullptr;
+
+public slots:
+    void OnDownloadFinished();
 
 };
+
+QJsonDocument loadJson(const QString &fileName);
+QJsonDocument loadJson(QNetworkReply *fileName);
+QJsonDocument loadJson(QUrl fileName);
 
 #endif // LAYER_H

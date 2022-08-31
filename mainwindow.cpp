@@ -61,17 +61,20 @@ MainWindow::MainWindow(QWidget *parent)
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
 
-    layerinfo Layer1;
+    Layer Layer1;
     Layer1.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson";
-    Layer1.color = Qt::red;
+    Layer1.SetColor(Qt::red);
+    Layer1.SetScene(scene);
     layers<<Layer1;
-    layerinfo Layer2;
+    Layer Layer2;
     Layer2.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson";
-    Layer2.color = Qt::blue;
+    Layer2.SetColor(Qt::blue);
+    Layer2.SetScene(scene);
     layers<<Layer2;
-    layerinfo Layer3;
+    Layer Layer3;
     Layer3.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/PourPoints.geojson";
-    Layer3.color = Qt::green;
+    Layer3.SetColor(Qt::green);
+    Layer3.SetScene(scene);
     layers<<Layer3;
 
 
@@ -94,14 +97,13 @@ MainWindow::MainWindow(QWidget *parent)
                 qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
             }
             layers[i].JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
-            layers[i].layer.GetFromJsonDocument(layers[i].JsonDoc);
+            layers[i].GetFromJsonDocument(layers[i].JsonDoc);
             populateScene();
 
         }
         else if (DownloadMode == downloadmode::url)
         {
-            connect (&layers[i].downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished(i)));
-            layers[i].downloader.doDownload(QUrl("http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson"));
+            layers[i].downloader.doDownload(QUrl(layers[i].address));
         }
     }
     QSplitter *vSplitter = new QSplitter;
@@ -132,26 +134,15 @@ void MainWindow::populateScene()
 {
     // Populate scene
     for (int i=0; i<layers.count(); i++)
-    scene->AppendLayer(&layers[i].layer);
+    scene->AppendLayer(&layers[i]);
 }
 
-QJsonDocument loadJson(const QString &fileName) {
-    QFile jsonFile(fileName);
-    jsonFile.open(QFile::ReadOnly);
-    return QJsonDocument().fromJson(jsonFile.readAll());
-};
-
-QJsonDocument loadJson(QNetworkReply* fileName) {
-    QByteArray data = fileName->readAll();
-    qDebug()<<fileName->header(QNetworkRequest::KnownHeaders());
-    return QJsonDocument().fromJson(data);
-};
 
 
 void MainWindow::ZoomAll()
 {   //QRectF newRect = scene->itemsBoundingRect();
 
-    QRectF newRect = layers[0].layer.GetBoundingRect();
+    QRectF newRect = layers[0].GetBoundingRect();
     float width = float(newRect.width());
     float height = float(newRect.height());
 
@@ -161,11 +152,9 @@ void MainWindow::ZoomAll()
     view->view()->repaint();
 }
 
-void MainWindow::OnDownloadFinished(int i)
+void MainWindow::OnDownloadFinished()
 {
-    qDebug()<<"Download Finished!";
-    JsonDoc = loadJson(layers[i].downloader.Downloaded);
-    layers[i].layer.GetFromJsonDocument(JsonDoc);
+
     populateScene();
     ZoomAll();
 }

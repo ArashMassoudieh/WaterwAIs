@@ -1,10 +1,12 @@
 #include "layer.h"
 #include "QJsonObject"
 #include "QJsonArray"
+#include "mapscene.h"
 
-Layer::Layer()
+Layer::Layer(QObject *parent):
+    QObject(parent)
 {
-
+    connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
 }
 
 bool Layer::SetFeatureType(const string &FT)
@@ -37,6 +39,9 @@ Layer::Layer(const Layer& L)
     FeatureType = L.FeatureType;
     color = L.color;
     pen = L.pen;
+    scene = L.scene;
+    address = L.address;
+    connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
 }
 Layer& Layer::operator = (const Layer &L)
 {
@@ -44,6 +49,9 @@ Layer& Layer::operator = (const Layer &L)
     FeatureType = L.FeatureType;
     color = L.color;
     pen = L.pen;
+    scene = L.scene;
+    address = L.address;
+    connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
     return *this;
 }
 void Layer::AppendToFeatures(const Feature &feature)
@@ -129,3 +137,24 @@ Feature *Layer::feature(int i)
     else
         return nullptr;
 }
+
+void Layer::OnDownloadFinished()
+{
+    qDebug()<<"Download Finished!";
+    JsonDoc = loadJson(downloader.Downloaded);
+    GetFromJsonDocument(JsonDoc);
+    scene->AppendLayer(this);
+
+}
+
+QJsonDocument loadJson(const QString &fileName) {
+    QFile jsonFile(fileName);
+    jsonFile.open(QFile::ReadOnly);
+    return QJsonDocument().fromJson(jsonFile.readAll());
+};
+
+QJsonDocument loadJson(QNetworkReply* fileName) {
+    QByteArray data = fileName->readAll();
+    qDebug()<<fileName->header(QNetworkRequest::KnownHeaders());
+    return QJsonDocument().fromJson(data);
+};

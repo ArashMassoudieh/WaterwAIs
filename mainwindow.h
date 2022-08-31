@@ -66,21 +66,14 @@ QT_END_NAMESPACE
 
 enum class downloadmode {localfile, url};
 
-struct layerinfo
-{
-    QColor color;
-    QString address;
-    Layer layer;
-    Downloader downloader;
-    QJsonDocument JsonDoc;
-};
+
 
 class MainWindow : public QWidget
 {
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
-
+    MapScene* Scene() {return scene;}
 private:
 
     void populateScene();
@@ -88,19 +81,17 @@ private:
     MapScene *scene;
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;
-    QVector<layerinfo> layers;
+    QVector<Layer> layers;
     View *view = nullptr;
     downloadmode DownloadMode = downloadmode::url;
 
 
 public slots:
-    void OnDownloadFinished(int i);
+    void OnDownloadFinished();
 
 private:
 
 };
 
-QJsonDocument loadJson(const QString &fileName);
-QJsonDocument loadJson(QNetworkReply *fileName);
-QJsonDocument loadJson(QUrl fileName);
+
 #endif // MAINWINDOW_H
