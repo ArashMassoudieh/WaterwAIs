@@ -1,6 +1,8 @@
 #include "mapscene.h"
 #include "segment.h"
 #include "Circle.h"
+#include "polygon.h"
+
 MapScene::MapScene()
 {
 
@@ -25,9 +27,16 @@ bool MapScene::AppendLayer(Layer *layer)
                 addItem(item);
             }
             else if (layer->GetFeatureType()==_FeatureType::Point)
-            {   Circle*item = new Circle(static_cast<Circle*>(Items[i][j].get()));
+            {   Circle *item = new Circle(static_cast<Circle*>(Items[i][j].get()));
                 item->SetPen(layer->Pen());
                 item->SetColor(layer->Pen().color());
+                addItem(item);
+            }
+            else if (layer->GetFeatureType()==_FeatureType::MultiPolygon)
+            {   Polygon *item = new Polygon(static_cast<Polygon*>(Items[i][j].get()));
+                item->setBrush(QBrush(layer->Pen().color()));
+                item->setPen(QPen(layer->Pen().color()));
+                qDebug()<<item->polygon();
                 addItem(item);
             }
         }

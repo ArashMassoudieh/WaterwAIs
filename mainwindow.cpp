@@ -76,6 +76,11 @@ MainWindow::MainWindow(QWidget *parent)
     Layer3.SetColor(Qt::green);
     Layer3.SetScene(scene);
     layers<<Layer3;
+    Layer Layer4;
+    Layer4.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/SubWaterSheds.geojson";
+    Layer4.SetColor(Qt::yellow);
+    Layer4.SetScene(scene);
+    layers<<Layer4;
 
 
 

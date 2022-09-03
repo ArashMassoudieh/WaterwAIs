@@ -8,6 +8,8 @@
 #include "QGraphicsItem"
 #include "QVector"
 
+class Layer;
+
 enum class _FeatureType {MultiLineString, Point, MultiPolygon, Unknown};
 
 using namespace std;
@@ -15,7 +17,7 @@ using namespace std;
 class Feature
 {
 public:
-    Feature();
+    Feature(Layer *parent=nullptr);
     bool SetFeatureType(const string &FT);
     void SetFeatureType(_FeatureType FT);
     bool SetFeatureType(const QString &FT);
@@ -30,9 +32,12 @@ public:
     double GetRange(range rng, dir dr);
     vector<QGraphicsItem*> &GetGraphicalObjects() {return graphical_objects;}
     void ClearGraphicalObjects();
+    Layer *Parent() {return parent;}
+    void SetParent(Layer *p) {parent = p;}
 private:
     _FeatureType FeatureType;
     vector<CPoint> geometry;
+    Layer *parent;
     vector<QGraphicsItem*> graphical_objects;
 
 };

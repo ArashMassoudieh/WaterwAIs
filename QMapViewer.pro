@@ -19,6 +19,7 @@ HEADERS += mainwindow.h view.h chip.h \
     graphicsitemcollection.h \
     layer.h \
     mapscene.h \
+    polygon.h \
     segment.h
 SOURCES += main.cpp \
     ../Utilities/Matrix.cpp \
@@ -33,6 +34,7 @@ SOURCES += main.cpp \
     graphicsitemcollection.cpp \
     layer.cpp \
     mapscene.cpp \
+    polygon.cpp \
     segment.cpp
 SOURCES += mainwindow.cpp view.cpp chip.cpp
 

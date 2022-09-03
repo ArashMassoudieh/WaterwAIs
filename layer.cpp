@@ -57,6 +57,7 @@ Layer& Layer::operator = (const Layer &L)
 void Layer::AppendToFeatures(const Feature &feature)
 {
     features.push_back(feature);
+    features[features.size()-1].SetParent(this);
 }
 
 bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
@@ -89,7 +90,7 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
             FeatureType = _FeatureType::MultiPolygon;
 
         }
-        features.push_back(feature);
+        AppendToFeatures(feature);
     }
 
     return true;

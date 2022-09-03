@@ -1,10 +1,12 @@
 #include "feature.h"
 #include "segment.h"
 #include "Circle.h"
+#include "layer.h"
+#include "polygon.h"
 
-Feature::Feature()
+Feature::Feature(Layer *p)
 {
-
+    parent = p;
 }
 
 bool Feature::SetFeatureType(const string &FT)
@@ -92,6 +94,25 @@ bool Feature::GetGeometryFromJsonArray(const QJsonArray &array, _FeatureType FT)
         p.sety(coords[1].toDouble());
         geometry.push_back(p);
     }
+    else if (FeatureType == _FeatureType::MultiPolygon)
+    {
+        for (int i=0; i<array.count(); i++)
+        {
+            QJsonArray level1 = array[i].toArray();
+            for (int j=0; j<level1.size(); j++)
+            {
+                QJsonArray level2 = level1[j].toArray();
+                for (int k=0; k<level2.size(); k++)
+                {
+                    QJsonArray coords = level2[k].toArray();
+                    CPoint p;
+                    p.setx(coords[0].toDouble());
+                    p.sety(coords[1].toDouble());
+                    geometry.push_back(p);
+                }
+            }
+        }
+    }
     return true;
 }
 
@@ -111,6 +132,16 @@ QVector<shared_ptr<QGraphicsItem>> Feature::toGraphicItems()
     if (FeatureType == _FeatureType::Point)
     {   shared_ptr<Circle> circle( new Circle(geometry[0],50));
         out.push_back(circle);
+    }
+    if (FeatureType == _FeatureType::MultiPolygon)
+    {   QPolygonF plygn;
+        for (int i=0; i<geometry.size(); i++)
+        {
+            plygn.append(QPointF(geometry[i].x(),geometry[i].y()));
+        }
+        shared_ptr<Polygon> polygon( new Polygon(plygn));
+        polygon->setPen(QPen(Qt::red));
+        out.push_back(polygon);
     }
     return out;
 }
