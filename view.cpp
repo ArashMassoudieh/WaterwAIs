@@ -67,7 +67,7 @@
 #if QT_CONFIG(wheelevent)
 void GraphicsView::wheelEvent(QWheelEvent *e)
 {
-    if (e->modifiers() & Qt::ControlModifier) {
+    /*if (e->modifiers() & Qt::ControlModifier) {
         if (e->angleDelta().y() > 0)
             view->zoomIn(6);
         else
@@ -75,7 +75,7 @@ void GraphicsView::wheelEvent(QWheelEvent *e)
         e->accept();
     } else {
         QGraphicsView::wheelEvent(e);
-    }
+    }*/
 }
 #endif
 

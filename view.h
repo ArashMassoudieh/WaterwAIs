@@ -60,13 +60,13 @@ class QSlider;
 class QToolButton;
 QT_END_NAMESPACE
 
-class View;
+class MapView;
 
 class GraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    GraphicsView(View *v) : QGraphicsView(), view(v) { }
+    GraphicsView(QWidget *v) : QGraphicsView() { }
 
 protected:
 #if QT_CONFIG(wheelevent)
@@ -74,7 +74,7 @@ protected:
 #endif
 
 private:
-    View *view;
+    MapView *view;
 };
 
 class View : public QFrame

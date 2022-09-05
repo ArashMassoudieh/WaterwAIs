@@ -58,6 +58,7 @@
 #include "view.h"
 #include "filedownloader.h"
 #include "mapscene.h"
+#include "mapview.h"
 
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;
@@ -82,7 +83,7 @@ private:
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;
     QVector<Layer> layers;
-    View *view = nullptr;
+    MapView *view = nullptr;
     downloadmode DownloadMode = downloadmode::url;
 
 

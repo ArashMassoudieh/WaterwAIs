@@ -19,6 +19,7 @@ HEADERS += mainwindow.h view.h chip.h \
     graphicsitemcollection.h \
     layer.h \
     mapscene.h \
+    mapview.h \
     polygon.h \
     segment.h
 SOURCES += main.cpp \
@@ -34,6 +35,7 @@ SOURCES += main.cpp \
     graphicsitemcollection.cpp \
     layer.cpp \
     mapscene.cpp \
+    mapview.cpp \
     polygon.cpp \
     segment.cpp
 SOURCES += mainwindow.cpp view.cpp chip.cpp
@@ -53,4 +55,7 @@ target.path = $$[QT_INSTALL_EXAMPLES]/widgets/graphicsview/chip
 INSTALLS += target
 
 DISTFILES +=
+
+FORMS += \
+    mapview.ui
 

@@ -56,6 +56,7 @@
 
 
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
@@ -116,7 +117,7 @@ MainWindow::MainWindow(QWidget *parent)
     vSplitter->addWidget(h1Splitter);
     vSplitter->addWidget(h2Splitter);
 
-    view = new View("Map");
+    view = new MapView(this);
 
     view->view()->setScene(scene);
 
