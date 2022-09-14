@@ -2,7 +2,7 @@
 #define MAPVIEW_H
 
 #include <QWidget>
-#include "view.h"
+#include "graphicsview.h"
 
 namespace Ui {
 class MapView;
@@ -16,6 +16,9 @@ public:
     explicit MapView(QWidget *parent = nullptr);
     ~MapView();
     GraphicsView *view() {return MapViewer;}
+
+protected slots:
+    void on_btnFitToView_clicked();
 
 private:
     Ui::MapView *ui;

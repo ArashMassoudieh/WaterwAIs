@@ -36,6 +36,7 @@ public:
     QJsonDocument JsonDoc;
     MapScene *Scene() {return scene;}
     void SetScene(MapScene *_scene) {scene = _scene;}
+
 private:
     vector<Feature> features;
     _FeatureType FeatureType;
@@ -45,7 +46,6 @@ private:
 
 public slots:
     void OnDownloadFinished();
-
 };
 
 QJsonDocument loadJson(const QString &fileName);

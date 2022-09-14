@@ -6,7 +6,8 @@ Polygon::Polygon()
 
 }
 
-Polygon::Polygon(QPolygonF &plygon):QGraphicsPolygonItem(plygon)
+Polygon::Polygon(QPolygonF &plygon)
+    :QGraphicsPolygonItem(plygon)
 {
 
 }

@@ -12,7 +12,7 @@ Downloader::Downloader(const Downloader &downloader)
 
 Downloader & Downloader::operator=( const Downloader &downloader)
 {
-
+    return *this;
 }
 
 void Downloader::doDownload(const QUrl &url)

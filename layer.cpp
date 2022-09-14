@@ -17,10 +17,12 @@ bool Layer::SetFeatureType(const string &FT)
     else
         return true;
 }
+
 void Layer::SetFeatureType(_FeatureType FT)
 {
     FeatureType = FT;
 }
+
 bool Layer::SetFeatureType(const QString &FT)
 {
     FeatureType = Feature::Feature_Type(FT.toStdString());
@@ -29,10 +31,12 @@ bool Layer::SetFeatureType(const QString &FT)
     else
         return true;
 }
+
 _FeatureType Layer::GetFeatureType()
 {
     return FeatureType;
 }
+
 Layer::Layer(const Layer& L)
 {
     features = L.features;
@@ -41,8 +45,9 @@ Layer::Layer(const Layer& L)
     pen = L.pen;
     scene = L.scene;
     address = L.address;
-    connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
+    connect(&downloader, SIGNAL(downloadfinished()), this, SLOT(OnDownloadFinished()));
 }
+
 Layer& Layer::operator = (const Layer &L)
 {
     features = L.features;
@@ -54,6 +59,7 @@ Layer& Layer::operator = (const Layer &L)
     connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
     return *this;
 }
+
 void Layer::AppendToFeatures(const Feature &feature)
 {
     features.push_back(feature);
@@ -67,14 +73,15 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
         QJsonValue value = JsonObject.value(key);
         qDebug() << "Key = " << key << ", Value = " << value.toString();
     }
+
     QJsonArray Jfeatures = JsonObject.value("features").toArray();
     for (int i=0; i<Jfeatures.count(); i++) {
         QJsonObject value = Jfeatures[i].toObject();
         QJsonObject geometry = value["geometry"].toObject();
-        qDebug()<<"Geometry: " <<geometry;
+        // qDebug()<<"Geometry: " <<geometry;
         QJsonArray coordinates = geometry["coordinates"].toArray();
         QString type = geometry["type"].toString();
-        qDebug() << "Key = " << i << ", Coordinates = " << coordinates << ", Type = " << type;
+        // qDebug() << "Key = " << i << ", Coordinates = " << coordinates << ", Type = " << type;
 
         Feature feature;
         if (type == "MultiLineString")
@@ -133,19 +140,18 @@ QRectF Layer::GetBoundingRect()
 
 Feature *Layer::feature(int i)
 {
-    if (features.size()>i)
+    if (features.size()>i) {
         return &features[i];
-    else
+    } else {
         return nullptr;
+    }
 }
 
 void Layer::OnDownloadFinished()
 {
-    qDebug()<<"Download Finished!";
     JsonDoc = loadJson(downloader.Downloaded);
     GetFromJsonDocument(JsonDoc);
     scene->AppendLayer(this);
-
 }
 
 QJsonDocument loadJson(const QString &fileName) {
@@ -155,7 +161,13 @@ QJsonDocument loadJson(const QString &fileName) {
 };
 
 QJsonDocument loadJson(QNetworkReply* fileName) {
+    if (fileName->error()) {
+        qDebug() << "Error occrured: " << fileName->errorString();
+        Q_ASSERT(false);
+    }
+
     QByteArray data = fileName->readAll();
-    qDebug()<<fileName->header(QNetworkRequest::KnownHeaders());
+
+    qDebug() << fileName->header(QNetworkRequest::KnownHeaders());
     return QJsonDocument().fromJson(data);
 };

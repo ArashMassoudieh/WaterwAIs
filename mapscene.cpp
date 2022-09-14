@@ -4,17 +4,19 @@
 #include "polygon.h"
 
 MapScene::MapScene()
+    : QGraphicsScene()
 {
-
 }
 
-MapScene::MapScene(QObject *qwidget):QGraphicsScene(qwidget)
+MapScene::MapScene(QObject *qwidget)
+    :QGraphicsScene(qwidget)
 {
-
 }
 
 bool MapScene::AppendLayer(Layer *layer)
 {
+    qDebug() << "AppendLayer: " << layer->address;
+
     QVector<QVector<shared_ptr<QGraphicsItem>>> Items = layer->toGraphicItems();
     for (int i = 0; i<Items.size(); i++) {
         layer->feature(i)->ClearGraphicalObjects();
@@ -36,10 +38,18 @@ bool MapScene::AppendLayer(Layer *layer)
             {   Polygon *item = new Polygon(static_cast<Polygon*>(Items[i][j].get()));
                 item->setBrush(QBrush(layer->Pen().color()));
                 item->setPen(QPen(layer->Pen().color()));
-                qDebug()<<item->polygon();
                 addItem(item);
             }
         }
     }
 
+    return true;
+}
+
+void MapScene::addItem(QGraphicsItem *item)
+{
+    qDebug() << "Item: " << item->sceneBoundingRect();
+    qDebug() << "Before: " << sceneRect();
+    QGraphicsScene::addItem(item);
+    qDebug() << "After: " << sceneRect();
 }

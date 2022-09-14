@@ -1,3 +1,8 @@
+#include <climits>
+
+#include <QDebug>
+#include <QGraphicsItem>
+
 #include "mapview.h"
 #include "ui_mapview.h"
 
@@ -12,4 +17,10 @@ MapView::MapView(QWidget *parent) :
 MapView::~MapView()
 {
     delete ui;
+}
+
+void MapView::on_btnFitToView_clicked()
+{
+    MapViewer->zoomToFit();
+    MapViewer->repaint();
 }

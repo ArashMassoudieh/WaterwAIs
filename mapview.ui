@@ -52,7 +52,45 @@
       <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
      </property>
      <widget class="QWidget" name="dockWidgetContents">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QToolButton" name="btnZoom">
+           <property name="text">
+            <string>Zoom</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnPan">
+           <property name="text">
+            <string>Pan</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="btnFitToView">
+           <property name="text">
+            <string>Fit to view</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
        <item>
         <widget class="GraphicsView" name="graphicsView"/>
        </item>
@@ -66,7 +104,7 @@
   <customwidget>
    <class>GraphicsView</class>
    <extends>QGraphicsView</extends>
-   <header>view.h</header>
+   <header>graphicsview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

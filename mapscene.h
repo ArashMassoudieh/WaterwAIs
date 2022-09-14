@@ -10,6 +10,8 @@ public:
     MapScene();
     MapScene(QObject *qwidget);
     bool AppendLayer(Layer *layer);
+
+    void addItem(QGraphicsItem *item);
 };
 
 #endif // MAPSCENE_H

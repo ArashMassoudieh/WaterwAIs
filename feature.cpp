@@ -73,7 +73,8 @@ bool Feature::GetGeometryFromJsonArray(const QJsonArray &array, _FeatureType FT)
 {
     FeatureType = FT;
     if (FeatureType == _FeatureType::MultiLineString)
-    {   for (int i=0; i<array.count(); i++)
+    {
+        for (int i=0; i<array.count(); i++)
         {
             QJsonArray level1 = array[i].toArray();
             for (int j=0; j<level1.size(); j++)
@@ -113,15 +114,16 @@ bool Feature::GetGeometryFromJsonArray(const QJsonArray &array, _FeatureType FT)
             }
         }
     }
+
     return true;
 }
-
 
 QVector<shared_ptr<QGraphicsItem>> Feature::toGraphicItems()
 {
     QVector<shared_ptr<QGraphicsItem>> out;
     if (FeatureType==_FeatureType::MultiLineString)
-    {   for (int i=0; i<geometry.size()-1; i++)
+    {
+        for (int i=0; i<geometry.size()-1; i++)
         {
             if (FeatureType == _FeatureType::MultiLineString)
             {   shared_ptr<Segment> seg( new Segment(geometry[i],geometry[i+1]));
