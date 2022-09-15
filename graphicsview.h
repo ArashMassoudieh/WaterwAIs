@@ -39,7 +39,8 @@ signals:
 private:
     OperationType _type;
     bool _isPressed;
-    QPoint _pressedPoint;
+    QPoint _lastPoint;
+    QPointF _pressedScPoint;
     QGraphicsRectItem *_rect;
 };
 

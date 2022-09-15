@@ -15,8 +15,6 @@ MapScene::MapScene(QObject *qwidget)
 
 bool MapScene::AppendLayer(Layer *layer)
 {
-    qDebug() << "AppendLayer: " << layer->address;
-
     QVector<QVector<shared_ptr<QGraphicsItem>>> Items = layer->toGraphicItems();
     for (int i = 0; i<Items.size(); i++) {
         layer->feature(i)->ClearGraphicalObjects();

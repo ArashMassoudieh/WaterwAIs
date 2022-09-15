@@ -137,7 +137,6 @@ void MainWindow::populateScene()
 void MainWindow::zoomAll()
 {
     view->view()->zoomToFit();
-    view->view()->repaint();
 }
 
 void MainWindow::OnDownloadFinished()

@@ -15,38 +15,48 @@ GraphicsView::GraphicsView(QWidget *parent)
 
 void GraphicsView::setMapScene(QGraphicsScene *scene)
 {
-    qDebug() << "=============== setMapScene";
-
     QGraphicsView::setScene(scene);
-
-    Q_ASSERT(_rect == nullptr);
-    _rect = scene->addRect(QRectF(0, 0, 0, 0), QPen(QColor(100, 100, 100), 1));
-    _rect->setVisible(false);
 }
 
 void GraphicsView::zoomToFit()
 {
-    auto rc = scene()->sceneRect();
+    auto sc = (MapScene *) scene();
+    auto rc = sc->contentBoundingBox();
     fitInView(rc, Qt::KeepAspectRatio);
+    repaint();
 }
 
 void GraphicsView::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() & Qt::LeftButton) {
         _isPressed = true;
-        _pressedPoint = event->pos();
-        qDebug() << "- Pressed";
+        _lastPoint = event->pos();
+        _pressedScPoint = mapToScene(event->pos());
+    } else {
+        QGraphicsView::mousePressEvent(event);
     }
+
+    auto sc = (MapScene *) scene();
 
     switch (_type) {
     case OperationType::Pan:
         setCursor(Qt::ClosedHandCursor);
         break;
 
-    case OperationType::Zoom:
-        _rect->setRect(QRectF(_pressedPoint, QSizeF(0, 0)));
+    case OperationType::Zoom: {
+        auto rc = sc->sceneRect();
+        auto zoomWRatio = qreal(rc.width()) / sc->contentBoundingBox().width();
+        auto zoomHRatio = qreal(rc.height()) / sc->contentBoundingBox().height();
+        auto zoomRatio = min(zoomWRatio, zoomHRatio);
+
+        Q_ASSERT(_rect == nullptr);
+        _rect = sc->addRect(
+                    QRectF(_pressedScPoint, QSizeF(0, 0)),
+                    QPen(QColor(100, 100, 100), zoomRatio));
         _rect->setVisible(true);
+        repaint();
         break;
+    }
 
     default:
         break;
@@ -55,37 +65,75 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
+    QGraphicsView::mouseReleaseEvent(event);
+
     _isPressed = false;
     setCursor(Qt::ArrowCursor);
-}
-
-void GraphicsView::mouseMoveEvent(QMouseEvent *event)
-{
-    if (!_isPressed) {
-        return;
-    }
-
-    auto ps = mapToScene(_pressedPoint);
-    auto ts = mapToScene(event->pos());
-
-    auto dx = ts.x() - ps.x();
-    auto dy = ts.y() - ps.y();
     auto sc = (MapScene *) scene();
-    auto rc = sc->contentBoundingBox();
 
     switch (_type) {
     case OperationType::Pan: {
-        rc.translate(-dx, -dy);
-        setSceneRect(rc);
-        repaint();
         break;
     }
 
     case OperationType::Zoom:
-        _rect->setRect(QRectF(_pressedPoint, QSizeF(dx, dy)));
+        Q_ASSERT(_rect != nullptr);
+        fitInView(_rect->rect(), Qt::KeepAspectRatio);
+        sc->removeItem(_rect);
+        repaint();
+        _rect = nullptr;
         break;
 
     default:
         break;
     }
+}
+
+void GraphicsView::mouseMoveEvent(QMouseEvent *event)
+{
+    QGraphicsView::mouseMoveEvent(event);
+
+    if (!_isPressed) {
+        return;
+    }
+
+    auto sc = (MapScene *) scene();
+
+    switch (_type) {
+    case OperationType::Pan: {
+        static auto lastSceneRect = scene()->sceneRect();
+
+        auto ps = mapToScene(_lastPoint);
+        auto ts = mapToScene(event->pos());
+
+        auto dx = ts.x() - ps.x();
+        auto dy = ts.y() - ps.y();
+        auto rc = lastSceneRect;
+
+        rc.translate(-dx, -dy);
+        lastSceneRect = rc;
+
+        setSceneRect(rc);
+        repaint();
+        break;
+    }
+
+    case OperationType::Zoom: {
+        auto ps = _pressedScPoint;
+        auto ts = mapToScene(event->pos());
+
+        auto dx = ts.x() - ps.x();
+        auto dy = ts.y() - ps.y();
+
+        Q_ASSERT(_rect != nullptr);
+        _rect->setRect(QRectF(_pressedScPoint, QSizeF(dx, dy)));
+        repaint();
+        break;
+    }
+
+    default:
+        break;
+    }
+
+    _lastPoint = event->pos();
 }
