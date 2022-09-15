@@ -54,36 +54,33 @@
 #include <QSplitter>
 #include <QUrl>
 
-
-
-
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
-
     Layer Layer1;
     Layer1.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson";
     Layer1.SetColor(Qt::red);
     Layer1.SetScene(scene);
-    layers<<Layer1;
+    layers << Layer1;
+
     Layer Layer2;
     Layer2.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson";
     Layer2.SetColor(Qt::blue);
     Layer2.SetScene(scene);
-    layers<<Layer2;
+    layers << Layer2;
+
     Layer Layer3;
     Layer3.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/PourPoints.geojson";
     Layer3.SetColor(Qt::green);
     Layer3.SetScene(scene);
-    layers<<Layer3;
+    layers << Layer3;
+
     Layer Layer4;
     Layer4.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/SubWaterSheds.geojson";
     Layer4.SetColor(Qt::yellow);
     Layer4.SetScene(scene);
-    layers<<Layer4;
-
-
+    layers << Layer4;
 
     QPen pen;
     pen.setColor(QColor(255,0,0));
@@ -91,8 +88,10 @@ MainWindow::MainWindow(QWidget *parent)
     pen.setWidth(3);
 
     for (int i=0; i<layers.count(); i++)
-    {   if (DownloadMode == downloadmode::localfile)
-        {   QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
+    {
+        if (DownloadMode == downloadmode::localfile)
+        {
+            QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
             if (layerfile.exists())
             {
                 qDebug()<<"File '"<<layerfile.fileName() << "' exists!";
@@ -105,62 +104,43 @@ MainWindow::MainWindow(QWidget *parent)
             layers[i].JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
             layers[i].GetFromJsonDocument(layers[i].JsonDoc);
             populateScene();
-
         }
         else if (DownloadMode == downloadmode::url)
         {
             layers[i].downloader.doDownload(QUrl(layers[i].address));
         }
     }
+
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
     vSplitter->addWidget(h2Splitter);
 
     view = new MapView(this);
-
-    view->view()->setScene(scene);
-
+    view->view()->setMapScene(scene);
     h1Splitter->addWidget(view);
-
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(vSplitter);
     setLayout(layout);
 
     setWindowTitle(tr("Map viewer"));
-    ZoomAll();
-
-
-
-
 }
 
 void MainWindow::populateScene()
 {
-    // Populate scene
-    for (int i=0; i<layers.count(); i++)
-    scene->AppendLayer(&layers[i]);
+    for (int i=0; i<layers.count(); i++) {
+        scene->AppendLayer(&layers[i]);
+    }
 }
 
-
-
-void MainWindow::ZoomAll()
-{   //QRectF newRect = scene->itemsBoundingRect();
-
-    QRectF newRect = layers[0].GetBoundingRect();
-    float width = float(newRect.width());
-    float height = float(newRect.height());
-
-    if (width>scene->width() || height>scene->sceneRect().height())
-        scene->setSceneRect(newRect);
-    view->view()->fitInView(newRect,Qt::KeepAspectRatio);
-    view->view()->repaint();
+void MainWindow::zoomAll()
+{
+    view->view()->zoomToFit();
 }
 
 void MainWindow::OnDownloadFinished()
 {
-
     populateScene();
-    ZoomAll();
+    zoomAll();
 }

@@ -55,7 +55,6 @@
 #include <QJsonDocument>
 #include <QFile>
 #include "layer.h"
-#include "view.h"
 #include "filedownloader.h"
 #include "mapscene.h"
 #include "mapview.h"
@@ -75,10 +74,11 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     MapScene* Scene() {return scene;}
-private:
 
+private:
     void populateScene();
-    void ZoomAll();
+    void zoomAll();
+
     MapScene *scene;
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;
@@ -86,12 +86,10 @@ private:
     MapView *view = nullptr;
     downloadmode DownloadMode = downloadmode::url;
 
-
 public slots:
     void OnDownloadFinished();
 
 private:
-
 };
 
 

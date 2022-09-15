@@ -2,7 +2,7 @@ RESOURCES += images.qrc
 
 INCLUDEPATH += ../Utilities
 
-HEADERS += mainwindow.h view.h chip.h \
+HEADERS += mainwindow.h \
     ../Utilities/BTC.h \
     ../Utilities/BTC.hpp \
     ../Utilities/BTCSet.h \
@@ -17,7 +17,9 @@ HEADERS += mainwindow.h view.h chip.h \
     filedownloader.h \
     graphicsitem.h \
     graphicsitemcollection.h \
+    graphicsview.h \
     layer.h \
+    logger.h \
     mapscene.h \
     mapview.h \
     polygon.h \
@@ -33,12 +35,14 @@ SOURCES += main.cpp \
     filedownloader.cpp \
     graphicsitem.cpp \
     graphicsitemcollection.cpp \
+    graphicsview.cpp \
     layer.cpp \
+    logger.cpp \
     mapscene.cpp \
     mapview.cpp \
     polygon.cpp \
     segment.cpp
-SOURCES += mainwindow.cpp view.cpp chip.cpp
+SOURCES += mainwindow.cpp
 
 QT += widgets core network
 

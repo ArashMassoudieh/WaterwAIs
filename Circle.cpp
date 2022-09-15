@@ -73,7 +73,7 @@ Circle::Circle(const CPoint &_center , const double &_radious)
 
 QRectF Circle::boundingRect() const
 {
-    return QRectF(center.x()-radious,center.y()-radious,center.x()+radious, center.y()+radious);
+    return QRectF(center.x()-radious, center.y()-radious, radious * 2, radious * 2);
 }
 
 QPainterPath Circle::shape() const
@@ -88,14 +88,14 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     Q_UNUSED(widget);
 
     QColor fillColor = (option->state & QStyle::State_Selected) ? color.darker(150) : color;
-    if (option->state & QStyle::State_MouseOver)
+    if (option->state & QStyle::State_MouseOver) {
         fillColor = fillColor.lighter(125);
+    }
+
     pen.setColor(color);
     painter->setPen(pen);
     painter->setBrush(color);
     painter->drawEllipse(center.x()-radious,center.y()-radious,radious*2, radious*2);
-
-
 }
 
 Circle::Circle(const Circle &seg)
