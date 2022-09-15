@@ -73,7 +73,7 @@ Circle::Circle(const CPoint &_center , const double &_radious)
 
 QRectF Circle::boundingRect() const
 {
-    return QRectF(center.x()-radious,center.y()-radious,center.x()+radious, center.y()+radious);
+    return QRectF(center.x()-radious, center.y()-radious, radious * 2, radious * 2);
 }
 
 QPainterPath Circle::shape() const

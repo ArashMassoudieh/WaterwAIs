@@ -18,6 +18,8 @@ public:
     GraphicsView *view() {return MapViewer;}
 
 protected slots:
+    void on_btnZoom_clicked();
+    void on_btnPan_clicked();
     void on_btnFitToView_clicked();
 
 private:

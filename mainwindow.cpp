@@ -117,7 +117,7 @@ MainWindow::MainWindow(QWidget *parent)
     vSplitter->addWidget(h2Splitter);
 
     view = new MapView(this);
-    view->view()->setScene(scene);
+    view->view()->setMapScene(scene);
     h1Splitter->addWidget(view);
 
     QHBoxLayout *layout = new QHBoxLayout;

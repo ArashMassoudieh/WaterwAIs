@@ -19,6 +19,24 @@ MapView::~MapView()
     delete ui;
 }
 
+void MapView::on_btnZoom_clicked()
+{
+    if (MapViewer->operationType() == GraphicsView::OperationType::Zoom) {
+        MapViewer->setOperationType(GraphicsView::OperationType::None);
+    } else {
+        MapViewer->setOperationType(GraphicsView::OperationType::Zoom);
+    }
+}
+
+void MapView::on_btnPan_clicked()
+{
+    if (MapViewer->operationType() == GraphicsView::OperationType::Pan) {
+        MapViewer->setOperationType(GraphicsView::OperationType::None);
+    } else {
+        MapViewer->setOperationType(GraphicsView::OperationType::Pan);
+    }
+}
+
 void MapView::on_btnFitToView_clicked()
 {
     MapViewer->zoomToFit();

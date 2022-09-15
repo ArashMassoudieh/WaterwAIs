@@ -75,7 +75,9 @@ Segment::Segment(const CPoint &s_point , const CPoint &e_point)
 
 QRectF Segment::boundingRect() const
 {
-    return QRectF(start_point.x(),start_point.y(),end_point.x()-start_point.x(), end_point.y()-start_point.y());
+    qreal dx = end_point.x() - start_point.x();
+    qreal dy = end_point.y() - start_point.y();
+    return QRectF(start_point.x(), start_point.y(), dx, dy);
 }
 
 QPainterPath Segment::shape() const
