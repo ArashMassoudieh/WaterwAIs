@@ -23,7 +23,8 @@ HEADERS += mainwindow.h \
     mapscene.h \
     mapview.h \
     polygon.h \
-    segment.h
+    segment.h \
+    variable.h
 SOURCES += main.cpp \
     ../Utilities/Matrix.cpp \
     ../Utilities/QuickSort.cpp \
@@ -41,7 +42,8 @@ SOURCES += main.cpp \
     mapscene.cpp \
     mapview.cpp \
     polygon.cpp \
-    segment.cpp
+    segment.cpp \
+    variable.cpp
 SOURCES += mainwindow.cpp
 
 QT += widgets core network
