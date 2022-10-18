@@ -16,8 +16,8 @@ public:
     Variable(QJsonObject& qjobject);
     QString GetValue();
 private:
-    variable_type Type;
-    double numeric_value;
+    variable_type Type = variable_type::not_assigned;
+    double numeric_value = 0;
     CTimeSeries<double> time_series;
     QString string_value;
 
