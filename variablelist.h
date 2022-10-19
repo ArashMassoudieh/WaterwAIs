@@ -12,7 +12,7 @@ public:
     VariableList& operator=(const VariableList& other);
     virtual ~VariableList();
     VariableList(const VariableList& other);
-    VariableList(QJsonObject& qjobject);
+    VariableList(const QJsonObject& qjobject);
 };
 
 #endif // VARIABLELIST_H

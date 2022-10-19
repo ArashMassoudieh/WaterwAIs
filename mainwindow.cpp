@@ -53,11 +53,16 @@
 #include <QHBoxLayout>
 #include <QSplitter>
 #include <QUrl>
+#include "metamodel.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
+
+    QJsonDocument jsondoc = loadJson(QString("/home/arash/Projects/QMapViewer/meta_model.json"));
+    MetaModel meta_model(jsondoc);
+
     Layer Layer1;
     Layer1.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson";
     Layer1.SetColor(Qt::red);

@@ -1,0 +1,21 @@
+{
+	"sub-catchment": {
+		"area": {
+			"type": "value"
+		},
+		"elevation": {
+			"type": "value"
+		},
+		"slope": {
+			"type": "value"
+		}
+	},
+	"catch basin": {
+		"area": {
+			"type": "value"
+		},
+		"elevation": {
+			"type": "value"
+		}
+	}
+}
