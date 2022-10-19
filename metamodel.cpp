@@ -7,7 +7,8 @@ MetaModel::MetaModel():QMap<QString,VariableList>()
 
 MetaModel& MetaModel::operator=(const MetaModel& other)
 {
-
+    QMap<QString,VariableList>::operator=(other);
+    return *this;
 }
 
 MetaModel::~MetaModel()

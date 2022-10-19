@@ -13,6 +13,10 @@ public:
     virtual ~VariableList();
     VariableList(const VariableList& other);
     VariableList(const QJsonObject& qjobject);
+    QString IconFileName() {return iconfilename;}
+    void SetIconFileName(const QString &icn ) {iconfilename = icn;}
+private:
+    QString iconfilename;
 };
 
 #endif // VARIABLELIST_H

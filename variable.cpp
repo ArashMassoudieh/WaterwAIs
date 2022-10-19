@@ -45,6 +45,17 @@ Variable::Variable(const QJsonObject& qjobject)
     {
         Type = variable_type::string;
     }
+    QString RoleString = qjobject.value("role").toString();
+    if (RoleString == "input")
+    {
+        Role = role::input;
+    }
+    else if (RoleString == "output")
+    {
+        Role = role::output;
+    }
+
+
 }
 QString Variable::GetValue()
 {

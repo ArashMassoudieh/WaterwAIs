@@ -5,7 +5,7 @@
 
 
 enum class variable_type {constant, value, timeseries, prec_timeseries, string, not_assigned};
-
+enum class role {output, input, none};
 class Variable
 {
 public:
@@ -21,6 +21,7 @@ private:
     CTimeSeries<double> time_series;
     QString timeseries_filename;
     QString string_value;
+    role Role = role::none;
 
 };
 
