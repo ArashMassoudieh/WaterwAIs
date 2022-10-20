@@ -19,5 +19,14 @@
 		"elevation": {
 			"type": "value"
 		}
+	},
+	"sewer pipe": {
+		"type": "link",
+		"diameter": {
+			"type": "value"
+		},
+		"length": {
+			"type": "value"
+		}
 	}
 }

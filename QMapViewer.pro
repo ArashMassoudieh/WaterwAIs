@@ -23,6 +23,7 @@ HEADERS += mainwindow.h \
     mapscene.h \
     mapview.h \
     metamodel.h \
+    node.h \
     object.h \
     polygon.h \
     segment.h \
@@ -45,6 +46,7 @@ SOURCES += main.cpp \
     mapscene.cpp \
     mapview.cpp \
     metamodel.cpp \
+    node.cpp \
     object.cpp \
     polygon.cpp \
     segment.cpp \
