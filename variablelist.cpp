@@ -11,6 +11,8 @@ VariableList& VariableList::operator=(const VariableList& other)
 {
     QMap<QString,Variable>::operator=(other);
     iconfilename = other.iconfilename;
+    component_type = other.component_type;
+    Object_Type = other.Object_Type;
     return *this;
 }
 
@@ -20,6 +22,8 @@ VariableList::~VariableList()
 }
 VariableList::VariableList(const VariableList& other):QMap<QString,Variable>(other)
 {
+    component_type = other.component_type;
+    Object_Type = other.Object_Type;
     iconfilename = other.iconfilename;
 }
 VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>()

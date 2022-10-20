@@ -18,9 +18,11 @@ public:
     QString IconFileName() {return iconfilename;}
     void SetIconFileName(const QString &icn ) {iconfilename = icn;}
     object_type ObjectType() {return Object_Type;}
+    QString ComponentType() {return component_type;}
 private:
     QString iconfilename;
     object_type Object_Type;
+    QString component_type;
 };
 
 #endif // VARIABLELIST_H
