@@ -15,6 +15,11 @@ public:
     Variable(const Variable& other);
     Variable(const QJsonObject& qjobject);
     QString GetValue();
+    void SetTimeSeries(const QString &name) {timeseries_filename = name;}
+    void SetRole(const role &rl) {Role = rl;}
+    void SetValue(const QString &value) {string_value = value;}
+    void SetValue(const double &value) {numeric_value = value;}
+    void SetType(const variable_type &type) {Type = type;}
 private:
     variable_type Type = variable_type::not_assigned;
     double numeric_value = 0;

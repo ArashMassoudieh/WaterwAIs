@@ -3,7 +3,6 @@
 
 #include "variablelist.h"
 
-enum class object_type {block, link, entity};
 
 class Object:public VariableList
 {
@@ -12,9 +11,9 @@ public:
     Object& operator=(const Object& other);
     virtual ~Object();
     Object(const Object& other);
-    Object(QJsonDocument& qjobject);
+    Object(QJsonObject& qjobject);
 private:
-    object_type ObjectType;
+
 };
 
 #endif // OBJECT_H

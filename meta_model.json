@@ -1,5 +1,6 @@
 {
 	"sub-catchment": {
+		"type": "node",
 		"area": {
 			"type": "value"
 		},
@@ -11,6 +12,7 @@
 		}
 	},
 	"catch basin": {
+		"type": "node",
 		"area": {
 			"type": "value"
 		},
