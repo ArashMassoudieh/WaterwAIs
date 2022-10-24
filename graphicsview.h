@@ -25,7 +25,7 @@ public:
     }
 
     void setMapScene(QGraphicsScene *scene);
-
+    double FontFactor() const {return fontfactor;};
 public slots:
     void zoomToFit();
 
@@ -42,6 +42,7 @@ private:
     QPoint _lastPoint;
     QPointF _pressedScPoint;
     QGraphicsRectItem *_rect;
+    double fontfactor = 1;
 };
 
 #endif // GRAPHICSVIEW_H

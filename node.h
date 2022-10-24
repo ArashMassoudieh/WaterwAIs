@@ -42,6 +42,7 @@ private:
     int width = 200;
     int height = 200;
     bool bold = false;
+
 };
 
 #endif // NODE_H

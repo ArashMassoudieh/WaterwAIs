@@ -17,7 +17,8 @@ public:
     VariableList(const QJsonObject& qjobject);
     QString IconFileName() {return iconfilename;}
     void SetIconFileName(const QString &icn ) {iconfilename = icn;}
-    object_type ObjectType() {return Object_Type;}
+    object_type ObjectType() const {return Object_Type;}
+    void SetObjectType(object_type ObjType) {Object_Type = ObjType;}
     QString ComponentType() {return component_type;}
 private:
     QString iconfilename;

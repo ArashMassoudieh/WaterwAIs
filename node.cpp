@@ -72,17 +72,13 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     radialGrad.setColorAt(0, QColor(Qt::lightGray).lighter(50));
     radialGrad.setColorAt(1, QColor(Qt::lightGray).lighter(-50));
     QPixmap pixmap;
-    if (!object())
-    {
-        //parent->mainWindow()->RecreateGraphicItemsFromSystem();
-        return;
-    }
 
 
-    if (IconFileName().contains("/"))
+
+    //if (IconFileName().contains("/"))
         pixmap = QPixmap(IconFileName());
-    else
-        pixmap = QPixmap(QString::fromStdString(RESOURCE_DIRECTORY+"/Icons/" + IconFileName()));
+    //else
+        //pixmap = QPixmap(QString::fromStdString(RESOURCE_DIRECTORY+"/Icons/" + IconFileName()));
     QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(), boundingRect().top()*0+iconmargin*boundingRect().width(), boundingRect().width()*(1-iconmargin), boundingRect().height()*(1-iconmargin));
     QRectF source(0, 0, pixmap.size().width(), pixmap.size().height());
     painter->drawPixmap(rect, pixmap, source);
@@ -105,4 +101,29 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     //painter->drawText(10, height - 10, QString("%1: %2").arg(Object::T)).arg(QString::fromStdString(object()->GetName())));
     //qDebug() << "Node Paint Complete!";
 }
+
+void Node::setWidth(const int& _width)
+{
+    width = _width; update();
+}
+void Node::setHeight(const int& _height) {
+    height = _height; update();
+}
+
+void Node::setX(const int& x)
+{
+    QGraphicsItem::setX(x);
+}
+void Node::setY(const int& y)
+{
+    QGraphicsItem::setY(y);
+}
+
+double Node::fontfactor(){
+    if (parent)
+        return parent->FontFactor();
+    else
+        return 1;
+}
+
 
