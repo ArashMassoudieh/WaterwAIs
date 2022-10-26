@@ -2,6 +2,8 @@
 #define MAPVIEW_H
 
 #include <QWidget>
+#include <QStringListModel>
+
 #include "graphicsview.h"
 
 namespace Ui {
@@ -15,7 +17,8 @@ class MapView : public QWidget
 public:
     explicit MapView(QWidget *parent = nullptr);
     ~MapView();
-    GraphicsView *view() {return MapViewer;}
+    GraphicsView *view() { return MapViewer; }
+    void setLayerListModel(QAbstractListModel *names);
 
 protected slots:
     void on_btnZoom_clicked();

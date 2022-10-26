@@ -7,6 +7,7 @@ Layer::Layer(QObject *parent):
     QObject(parent)
 {
     connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
+    pen.setStyle(Qt::SolidLine);
 }
 
 bool Layer::SetFeatureType(const string &FT)
@@ -45,6 +46,7 @@ Layer::Layer(const Layer& L)
     pen = L.pen;
     scene = L.scene;
     address = L.address;
+    _name = L._name;
     connect(&downloader, SIGNAL(downloadfinished()), this, SLOT(OnDownloadFinished()));
 }
 
@@ -56,6 +58,7 @@ Layer& Layer::operator = (const Layer &L)
     pen = L.pen;
     scene = L.scene;
     address = L.address;
+    _name = L._name;
     connect(&downloader,SIGNAL(downloadfinished()),this,SLOT(OnDownloadFinished()));
     return *this;
 }
@@ -72,6 +75,16 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
     foreach(const QString& key, JsonObject.keys()) {
         QJsonValue value = JsonObject.value(key);
         qDebug() << "Key = " << key << ", Value = " << value.toString();
+    }
+
+    if (JsonObject.contains("name")) {
+        auto name = JsonObject.value("name").toString();
+        this->setLayerName(name);
+    }
+
+    if (JsonObject.contains("icon")) {
+        auto iconUrl = JsonObject.value("icon").toString();
+        this->setLayerIconUrl(iconUrl);
     }
 
     QJsonArray Jfeatures = JsonObject.value("features").toArray();
@@ -106,7 +119,7 @@ bool Layer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
 QVector<QVector<shared_ptr<QGraphicsItem>>> Layer::toGraphicItems()
 {
     QVector<QVector<shared_ptr<QGraphicsItem>>> out;
-    for (int i=0; i<features.size(); i++)
+    for (size_t i=0; i<features.size(); i++)
     {
         out.push_back(features[i].toGraphicItems());
     }
@@ -118,7 +131,7 @@ double Layer::GetRange(range rng, dir dr)
     if (features.size()==0)
         return 0;
     double extreme = features[0].GetRange(rng,dr);
-    for (int i=1; i<features.size(); i++)
+    for (size_t i=1; i<features.size(); i++)
     {
         if (rng==range::max)
         {
@@ -138,7 +151,7 @@ QRectF Layer::GetBoundingRect()
     return QRectF(GetRange(range::min,dir::x),GetRange(range::min,dir::y),GetRange(range::max,dir::x)-GetRange(range::min,dir::x),GetRange(range::max,dir::y)-GetRange(range::min,dir::y));
 }
 
-Feature *Layer::feature(int i)
+Feature *Layer::feature(size_t i)
 {
     if (features.size()>i) {
         return &features[i];

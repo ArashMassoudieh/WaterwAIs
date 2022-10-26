@@ -13,22 +13,20 @@ HEADERS += mainwindow.h \
     ../Utilities/Vector.h \
     ../Utilities/cpoint.h \
     Circle.h \
+    dlglayerproperties.h \
     feature.h \
     filedownloader.h \
     graphicsitem.h \
     graphicsitemcollection.h \
     graphicsview.h \
     layer.h \
+    layeritemdelegate.h \
+    layeritemmodel.h \
     logger.h \
     mapscene.h \
     mapview.h \
-    metamodel.h \
-    node.h \
-    object.h \
     polygon.h \
-    segment.h \
-    variable.h \
-    variablelist.h
+    segment.h
 SOURCES += main.cpp \
     ../Utilities/Matrix.cpp \
     ../Utilities/QuickSort.cpp \
@@ -36,25 +34,21 @@ SOURCES += main.cpp \
     ../Utilities/Vector.cpp \
     ../Utilities/cpoint.cpp \
     Circle.cpp \
+    dlglayerproperties.cpp \
     feature.cpp \
     filedownloader.cpp \
     graphicsitem.cpp \
     graphicsitemcollection.cpp \
     graphicsview.cpp \
     layer.cpp \
+    layeritemdelegate.cpp \
+    layeritemmodel.cpp \
     logger.cpp \
     mapscene.cpp \
     mapview.cpp \
-    metamodel.cpp \
-    node.cpp \
-    object.cpp \
     polygon.cpp \
-    segment.cpp \
-    variable.cpp \
-    variablelist.cpp
+    segment.cpp
 SOURCES += mainwindow.cpp
-
-DEFINES = _NO_GSL
 
 QT += widgets core network
 
@@ -73,5 +67,6 @@ INSTALLS += target
 DISTFILES +=
 
 FORMS += \
+    dlglayerproperties.ui \
     mapview.ui
 
