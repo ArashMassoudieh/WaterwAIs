@@ -10,7 +10,7 @@
 
 class Layer;
 
-enum class _FeatureType {MultiLineString, Point, MultiPolygon, Unknown};
+enum class _FeatureType {MultiLineString, Point, MultiPolygon, Model, Unknown};
 
 using namespace std;
 

@@ -20,6 +20,7 @@ class Node:public QGraphicsItem, Object
 public:
     Node();
     Node(GraphicsView *parent);
+    Node(const QJsonObject &jsonobject, GraphicsView *parent);
     Node(const Node &);
     objectColor color;
     Node operator=(const Node &);

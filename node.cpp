@@ -20,6 +20,20 @@ Node::Node(GraphicsView *_parent):Object()
     parent->scene()->addItem(this);
 }
 
+Node::Node(const QJsonObject &jsonobject, GraphicsView *_parent):Object(jsonobject)
+{
+    parent = _parent;
+    setFlag(ItemIsSelectable);
+    setAcceptHoverEvents(true);
+    setCacheMode(DeviceCoordinateCache);
+    setZValue(1);
+    setX(1000-width/2);
+    setY(1000-height/2);
+    parent->scene()->addItem(this);
+
+
+}
+
 Node::Node(const Node &E):Object(E)
 {
     setFlags(E.flags());

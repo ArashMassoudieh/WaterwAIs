@@ -19,7 +19,7 @@ public:
     bool SetFeatureType(const string &FT);
     void SetFeatureType(_FeatureType FT);
     bool SetFeatureType(const QString &FT);
-    bool GetFromJsonDocument(const QJsonDocument &JsonDoc);
+    virtual bool GetFromJsonDocument(const QJsonDocument &JsonDoc);
     _FeatureType GetFeatureType();
     Layer(const Layer&);
     Layer& operator = (const Layer &C);

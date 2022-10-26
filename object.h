@@ -11,7 +11,7 @@ public:
     Object& operator=(const Object& other);
     virtual ~Object();
     Object(const Object& other);
-    Object(QJsonObject& qjobject);
+    Object(const QJsonObject& qjobject);
 private:
 
 };

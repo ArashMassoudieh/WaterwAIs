@@ -19,7 +19,7 @@ Object::Object(const Object& other):VariableList(other)
 {
     SetObjectType(other.ObjectType());
 }
-Object::Object(QJsonObject& qjobject)
+Object::Object(const QJsonObject& qjobject)
 {
 
 }
