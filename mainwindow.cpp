@@ -53,46 +53,47 @@
 #include <QHBoxLayout>
 #include <QSplitter>
 #include <QUrl>
-#include "metamodel.h"
+
+#if defined(QT_DEBUG)
+#define HOST_PATH "http://localhost:30000"
+#else
+#define HOST_PATH "http://20.244.11.239/json"
+#endif
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
+    auto Layer1 = std::make_shared<Layer>();
+    Layer1->address=HOST_PATH "/Centroids.geojson";
+    Layer1->SetColor(Qt::red);
+    Layer1->SetScene(scene);
+    layers.addRow(Layer1);
 
-    QJsonDocument jsondoc = loadJson(QString("/home/arash/Projects/QMapViewer/meta_model.json"));
-    MetaModel meta_model(jsondoc);
+    auto Layer2 = std::make_shared<Layer>();
+    Layer2->address=HOST_PATH "/HickeyRunSewer.geojson";
+    Layer2->SetColor(Qt::blue);
+    Layer2->SetScene(scene);
+    layers.addRow(Layer2);
 
-    Layer Layer1;
-    Layer1.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/Centroids.geojson";
-    Layer1.SetColor(Qt::red);
-    Layer1.SetScene(scene);
-    layers << Layer1;
+    auto Layer3 = std::make_shared<Layer>();
+    Layer3->address=HOST_PATH "/PourPoints.geojson";
+    Layer3->SetColor(Qt::green);
+    Layer3->SetScene(scene);
+    layers.addRow(Layer3);
 
-    Layer Layer2;
-    Layer2.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/HickeyRunSewer.geojson";
-    Layer2.SetColor(Qt::blue);
-    Layer2.SetScene(scene);
-    layers << Layer2;
-
-    Layer Layer3;
-    Layer3.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/PourPoints.geojson";
-    Layer3.SetColor(Qt::green);
-    Layer3.SetScene(scene);
-    layers << Layer3;
-
-    Layer Layer4;
-    Layer4.address="http://ec2-54-189-78-100.us-west-2.compute.amazonaws.com/files/SubWaterSheds.geojson";
-    Layer4.SetColor(Qt::yellow);
-    Layer4.SetScene(scene);
-    layers << Layer4;
+    auto Layer4 = std::make_shared<Layer>();
+    Layer4->address=HOST_PATH "/SubWaterSheds.geojson";
+    Layer4->SetColor(Qt::yellow);
+    Layer4->SetScene(scene);
+    layers.addRow(Layer4);
 
     QPen pen;
     pen.setColor(QColor(255,0,0));
     qDebug()<<pen.color();
     pen.setWidth(3);
 
-    for (int i=0; i<layers.count(); i++)
+    for (size_t i=0; i<layers.getCount(); i++)
     {
         if (DownloadMode == downloadmode::localfile)
         {
@@ -106,13 +107,13 @@ MainWindow::MainWindow(QWidget *parent)
                 QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
                 qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
             }
-            layers[i].JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
-            layers[i].GetFromJsonDocument(layers[i].JsonDoc);
+            layers[i]->JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
+            layers[i]->GetFromJsonDocument(layers[i]->JsonDoc);
             populateScene();
         }
         else if (DownloadMode == downloadmode::url)
         {
-            layers[i].downloader.doDownload(QUrl(layers[i].address));
+            layers[i]->downloader.doDownload(QUrl(layers[i]->address));
         }
     }
 
@@ -122,6 +123,8 @@ MainWindow::MainWindow(QWidget *parent)
     vSplitter->addWidget(h2Splitter);
 
     view = new MapView(this);
+
+    view->setLayerListModel(&layers);
     view->view()->setMapScene(scene);
     h1Splitter->addWidget(view);
 
@@ -134,8 +137,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::populateScene()
 {
-    for (int i=0; i<layers.count(); i++) {
-        scene->AppendLayer(&layers[i]);
+    for (size_t i=0; i<layers.getCount(); i++) {
+        scene->AppendLayer(layers[i].get());
     }
 }
 

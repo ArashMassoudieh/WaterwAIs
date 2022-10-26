@@ -17,7 +17,7 @@ Downloader & Downloader::operator=( const Downloader &downloader)
 
 void Downloader::doDownload(const QUrl &url)
 {
-    qDebug()<< "Trying to access the file...";
+    qDebug()<< "Trying to access the file..."<< url;
 
     manager = new QNetworkAccessManager(this);
 

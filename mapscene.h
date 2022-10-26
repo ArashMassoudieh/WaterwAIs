@@ -6,6 +6,8 @@
 
 class MapScene : public QGraphicsScene
 {
+    Q_OBJECT
+
 public:
     MapScene();
     MapScene(QObject *qwidget);
@@ -16,6 +18,9 @@ public:
     QRectF contentBoundingBox() const {
         return _rc;
     }
+
+signals:
+    void requestRepaint();
 
 private:
     QRectF _rc;

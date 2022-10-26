@@ -29,7 +29,7 @@ VariableList::VariableList(const VariableList& other):QMap<QString,Variable>(oth
 VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>()
 {
 
-    component_type = qjobject.keys();
+    //component_type = qjobject.keys();
     foreach(const QString& key, qjobject.keys()) {
         if (key=="icon")
             iconfilename = qjobject.value(key).toString();

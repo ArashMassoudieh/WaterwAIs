@@ -13,12 +13,15 @@ HEADERS += mainwindow.h \
     ../Utilities/Vector.h \
     ../Utilities/cpoint.h \
     Circle.h \
+    dlglayerproperties.h \
     feature.h \
     filedownloader.h \
     graphicsitem.h \
     graphicsitemcollection.h \
     graphicsview.h \
     layer.h \
+    layeritemdelegate.h \
+    layeritemmodel.h \
     logger.h \
     mapscene.h \
     mapview.h \
@@ -37,12 +40,15 @@ SOURCES += main.cpp \
     ../Utilities/Vector.cpp \
     ../Utilities/cpoint.cpp \
     Circle.cpp \
+    dlglayerproperties.cpp \
     feature.cpp \
     filedownloader.cpp \
     graphicsitem.cpp \
     graphicsitemcollection.cpp \
     graphicsview.cpp \
     layer.cpp \
+    layeritemdelegate.cpp \
+    layeritemmodel.cpp \
     logger.cpp \
     mapscene.cpp \
     mapview.cpp \
@@ -56,7 +62,7 @@ SOURCES += main.cpp \
     variablelist.cpp
 SOURCES += mainwindow.cpp
 
-DEFINES = _NO_GSL
+DEFINES += QT_NO_DEBUG
 
 QT += widgets core network
 
@@ -72,8 +78,16 @@ build_all:!build_pass {
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/graphicsview/chip
 INSTALLS += target
 
-DISTFILES +=
+DISTFILES += json/Centroids.geojson \
+    json/HickeyRunSewer.geojson \
+    json/PourPoints.geojson \
+    json/SubWaterSheds.geojson \
+    json/1.png \
+    json/2.png \
+    json/3.png \
+    json/4.png
 
 FORMS += \
+    dlglayerproperties.ui \
     mapview.ui
 
