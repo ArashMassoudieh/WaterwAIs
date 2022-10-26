@@ -35,11 +35,16 @@ DlgLayerProperties::~DlgLayerProperties()
 
 void DlgLayerProperties::on_btnColor_clicked()
 {
-    auto color = QColorDialog::getColor();
-    if (color.isValid()) {
-        layer->SetColor(color);
-        updateBtnColor();
-    }
+    auto dlg = new QColorDialog();
+    connect(dlg, &QColorDialog::colorSelected, this, [this, dlg](const QColor &color) {
+        if (color.isValid()) {
+            layer->SetColor(color);
+            updateBtnColor();
+        }
+
+        dlg->deleteLater();
+    });
+    dlg->open();
 }
 
 void DlgLayerProperties::on_sldTransparency_valueChanged(int val)

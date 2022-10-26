@@ -24,6 +24,8 @@ public:
         return layers[index];
     }
 
+    void moveItem(int from, int to);
+
 signals:
 
 public:

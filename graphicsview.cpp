@@ -15,6 +15,10 @@ GraphicsView::GraphicsView(QWidget *parent)
 
 void GraphicsView::setMapScene(QGraphicsScene *scene)
 {
+    auto s = (MapScene *) scene;
+    connect (s, &MapScene::requestRepaint, this, [this]() {
+        repaint();
+    });
     QGraphicsView::setScene(scene);
 }
 

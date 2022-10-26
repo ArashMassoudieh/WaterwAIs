@@ -29,31 +29,31 @@ bool MapScene::AppendLayer(Layer *layer)
                 item->SetPen(layer->Pen());
                 connect(layer, &Layer::penChanged, this, [=]() {
                     item->SetPen(layer->Pen());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->SetColor(layer->layerColor());
                 connect(layer, &Layer::colorChanged, this, [=]() {
                     item->SetColor(layer->layerColor());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setVisible(layer->visible());
                 connect(layer, &Layer::visibleChanged, this, [=]() {
                     item->setVisible(layer->visible());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setOpacity(layer->layerOpacity());
                 connect(layer, &Layer::opacityChanged, this, [=]() {
                     item->setOpacity(layer->layerOpacity());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setZValue(layer->layerZ());
                 connect(layer, &Layer::zChanged, this, [=]() {
                     item->setZValue(layer->layerZ());
-                    item->update();
+                    emit requestRepaint();
                 });
                 addItem(item);
             }
@@ -66,31 +66,31 @@ bool MapScene::AppendLayer(Layer *layer)
                 item->SetPen(layer->Pen());
                 connect(layer, &Layer::penChanged, this, [=]() {
                     item->SetPen(layer->Pen());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->SetColor(layer->layerColor());
                 connect(layer, &Layer::colorChanged, this, [=]() {
                     item->SetColor(layer->layerColor());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setVisible(layer->visible());
                 connect(layer, &Layer::visibleChanged, this, [=]() {
                     item->setVisible(layer->visible());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setOpacity(layer->layerOpacity());
                 connect(layer, &Layer::opacityChanged, this, [=]() {
                     item->setOpacity(layer->layerOpacity());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setZValue(layer->layerZ());
                 connect(layer, &Layer::zChanged, this, [=]() {
                     item->setZValue(layer->layerZ());
-                    item->update();
+                    emit requestRepaint();
                 });
                 addItem(item);
             }
@@ -105,25 +105,25 @@ bool MapScene::AppendLayer(Layer *layer)
                 connect(layer, &Layer::penChanged, this, [=]() {
                     item->setPen(layer->Pen());
                     item->setBrush(QBrush(layer->layerColor()));
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setVisible(layer->visible());
                 connect(layer, &Layer::visibleChanged, this, [=]() {
                     item->setVisible(layer->visible());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setOpacity(layer->layerOpacity());
                 connect(layer, &Layer::opacityChanged, this, [=]() {
                     item->setOpacity(layer->layerOpacity());
-                    item->update();
+                    emit requestRepaint();
                 });
 
                 item->setZValue(layer->layerZ());
                 connect(layer, &Layer::zChanged, this, [=]() {
                     item->setZValue(layer->layerZ());
-                    item->update();
+                    emit requestRepaint();
                 });
                 addItem(item);
             }

@@ -64,7 +64,14 @@ build_all:!build_pass {
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/graphicsview/chip
 INSTALLS += target
 
-DISTFILES +=
+DISTFILES += json/Centroids.geojson \
+    json/HickeyRunSewer.geojson \
+    json/PourPoints.geojson \
+    json/SubWaterSheds.geojson \
+    json/1.png \
+    json/2.png \
+    json/3.png \
+    json/4.png
 
 FORMS += \
     dlglayerproperties.ui \

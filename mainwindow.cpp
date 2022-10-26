@@ -54,8 +54,8 @@
 #include <QSplitter>
 #include <QUrl>
 
-#if defined(Q_DEBUG)
-#define HOST_PATH "http://127.0.0.1:8000"
+#if defined(QT_DEBUG)
+#define HOST_PATH "http://localhost:30000"
 #else
 #define HOST_PATH "http://20.244.11.239/json"
 #endif

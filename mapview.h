@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QStringListModel>
+#include <QMenu>
 
 #include "graphicsview.h"
 
@@ -25,9 +26,14 @@ protected slots:
     void on_btnPan_clicked();
     void on_btnFitToView_clicked();
 
+    void on_btnMoveUp_clicked();
+    void on_btnMoveDown_clicked();
+
 private:
     Ui::MapView *ui;
     GraphicsView* MapViewer;
+    QMenu submenu;
+    int selectedItem;
 };
 
 #endif // MAPVIEW_H

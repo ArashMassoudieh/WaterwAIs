@@ -1,7 +1,7 @@
 {
 "type": "FeatureCollection",
 "name": "PourPoints",
-"icon": "http://127.0.0.1:8000/3.png",
+"icon": "http://localhost:30000/3.png",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::26918" } },
 "features": [
 { "type": "Feature", "properties": { "pkuid": 1.0, "x": 328441.2862, "Y": 4310389.789, "SAMPLE_1": 37.141185760498047 }, "geometry": { "type": "Point", "coordinates": [ 328441.286216231063008, 4310389.789619175717235, 0.0 ] } },

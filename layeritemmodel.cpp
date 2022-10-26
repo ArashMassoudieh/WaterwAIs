@@ -26,6 +26,16 @@ void LayerItemModel::addRow(std::shared_ptr<Layer> layer)
     endInsertRows();
 }
 
+void LayerItemModel::moveItem(int srcIndx, int dstIndx)
+{
+    beginResetModel();
+    layers.move(srcIndx, dstIndx);
+    for (size_t i=0; i<layers.size(); i++) {
+        layers[i]->setZ(9000 - i);
+    }
+    endResetModel();
+}
+
 int LayerItemModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
@@ -115,7 +125,7 @@ bool LayerItemModel::dropMimeData(const QMimeData *data, Qt::DropAction action, 
     int rows = 0;
     int srcIndx = 0;
 
-    while (!stream.atEnd()) {
+    if (!stream.atEnd()) {
         stream >> srcIndx;
         ++rows;
     }
@@ -124,12 +134,7 @@ bool LayerItemModel::dropMimeData(const QMimeData *data, Qt::DropAction action, 
         dstIndx = layers.size() - 1;
     }
     QMetaObject::invokeMethod(this, [this, dstIndx, srcIndx]() {
-        beginResetModel();
-        layers.move(srcIndx, dstIndx);
-        for (size_t i=0; i<layers.size(); i++) {
-            layers[i]->setZ(9000 - i);
-        }
-        endResetModel();
+        moveItem(srcIndx, dstIndx);
     }, Qt::QueuedConnection);
 
     return true;
