@@ -74,6 +74,10 @@ build_all:!build_pass {
     CONFIG += release
 }
 
+wasm {
+    QMAKE_LFLAGS += -sASYNCIFY -Os
+}
+
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/graphicsview/chip
 INSTALLS += target
