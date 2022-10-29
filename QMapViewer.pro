@@ -62,7 +62,7 @@ SOURCES += main.cpp \
     variablelist.cpp
 SOURCES += mainwindow.cpp
 
-DEFINES += QT_NO_DEBUG
+DEFINES += QT_NO_DEBUG _NO_GSL
 
 QT += widgets core network
 
