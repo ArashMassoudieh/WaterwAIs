@@ -63,6 +63,7 @@
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;
 class QSplitter;
+class ModelLayer;
 QT_END_NAMESPACE
 
 enum class downloadmode {localfile, url};
@@ -86,7 +87,7 @@ private:
     LayerItemModel layers;
     MapView *view = nullptr;
     downloadmode DownloadMode = downloadmode::url;
-
+    ModelLayer *Model;
 public slots:
     void OnDownloadFinished();
 };

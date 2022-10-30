@@ -53,6 +53,8 @@
 #include <QHBoxLayout>
 #include <QSplitter>
 #include <QUrl>
+#include "modellayer.h"
+
 
 #if defined(QT_DEBUG)
 #define HOST_PATH "http://localhost:30000"
@@ -87,6 +89,8 @@ MainWindow::MainWindow(QWidget *parent)
     Layer4->SetColor(Qt::yellow);
     Layer4->SetScene(scene);
     layers.addRow(Layer4);
+
+    Model->GetMetaModelFromJsonDocument("/mnt/3rd900/Projects/QMapViewer/resources/meta_model.json");
 
     QPen pen;
     pen.setColor(QColor(255,0,0));
