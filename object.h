@@ -2,7 +2,7 @@
 #define OBJECT_H
 
 #include "variablelist.h"
-
+#include <QJsonObject>
 
 class Object:public VariableList
 {

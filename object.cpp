@@ -1,4 +1,5 @@
 #include "object.h"
+#include "QtCore/qjsonobject.h"
 
 Object::Object():VariableList()
 {
@@ -19,7 +20,7 @@ Object::Object(const Object& other):VariableList(other)
 {
     SetObjectType(other.ObjectType());
 }
-Object::Object(const QJsonObject& qjobject)
+Object::Object(const QJsonObject& qjobject):VariableList(qjobject)
 {
 
 }

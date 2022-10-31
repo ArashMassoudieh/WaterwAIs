@@ -90,7 +90,9 @@ MainWindow::MainWindow(QWidget *parent)
     Layer4->SetScene(scene);
     layers.addRow(Layer4);
 
-    Model->GetMetaModelFromJsonDocument("/mnt/3rd900/Projects/QMapViewer/resources/meta_model.json");
+
+    QJsonDocument ModelJsonDoc = loadJson("/Users/arash/Projects/QMapViewer/resources/Example_input.json");
+    Model->GetFromJsonDocument(ModelJsonDoc);
 
     QPen pen;
     pen.setColor(QColor(255,0,0));
