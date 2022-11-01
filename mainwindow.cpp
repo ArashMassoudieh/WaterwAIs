@@ -91,8 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
     layers.addRow(Layer4);
 
 
-    QJsonDocument ModelJsonDoc = loadJson("/Users/arash/Projects/QMapViewer/resources/Example_input.json");
-    Model->GetFromJsonDocument(ModelJsonDoc);
+    //QJsonDocument ModelJsonDoc = loadJson("/Users/arash/Projects/QMapViewer/resources/Example_input.json");
+    //Model->GetFromJsonDocument(ModelJsonDoc);
 
     QPen pen;
     pen.setColor(QColor(255,0,0));
