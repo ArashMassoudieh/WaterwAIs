@@ -3,6 +3,8 @@
 
 #include <QGraphicsView>
 
+class MapView;
+
 class GraphicsView : public QGraphicsView
 {
     Q_OBJECT
@@ -15,7 +17,7 @@ public:
     Q_ENUM(OperationType);
 
     explicit GraphicsView(QWidget *parent = nullptr);
-
+    MapView *mainWindow();
     OperationType operationType() const {
         return _type;
     }
@@ -26,6 +28,8 @@ public:
 
     void setMapScene(QGraphicsScene *scene);
     double FontFactor() const {return fontfactor;};
+    void SetMapView(MapView* map) {mapview = map;}
+
 public slots:
     void zoomToFit();
 
@@ -43,6 +47,7 @@ private:
     QPointF _pressedScPoint;
     QGraphicsRectItem *_rect;
     double fontfactor = 1;
+    MapView* mapview = nullptr;
 };
 
 #endif // GRAPHICSVIEW_H

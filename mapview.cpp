@@ -47,7 +47,10 @@ MapView::MapView(QWidget *parent) :
         submenu.popup(gloPos);
     });
 
+    statusbar = new QLabel(this);
+    ui->verticalLayout->addWidget(statusbar);
     MapViewer = ui->graphicsView;
+    ui->graphicsView->SetMapView(this);
 }
 
 MapView::~MapView()

@@ -6,6 +6,7 @@
 #include <QMenu>
 
 #include "graphicsview.h"
+#include <QLabel>
 
 namespace Ui {
 class MapView;
@@ -20,6 +21,7 @@ public:
     ~MapView();
     GraphicsView *view() { return MapViewer; }
     void setLayerListModel(QAbstractListModel *names);
+    QLabel *StatusBar() {return statusbar;}
 
 protected slots:
     void on_btnZoom_clicked();
@@ -34,6 +36,7 @@ private:
     GraphicsView* MapViewer;
     QMenu submenu;
     int selectedItem;
+    QLabel *statusbar;
 };
 
 #endif // MAPVIEW_H

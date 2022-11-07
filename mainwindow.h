@@ -59,6 +59,9 @@
 #include "mapscene.h"
 #include "mapview.h"
 #include "layeritemmodel.h"
+#include <QStatusBar>
+#include <QMainWindow>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;
@@ -88,6 +91,8 @@ private:
     MapView *view = nullptr;
     downloadmode DownloadMode = downloadmode::url;
     ModelLayer *Model;
+
+
 public slots:
     void OnDownloadFinished();
 };

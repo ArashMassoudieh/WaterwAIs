@@ -60,6 +60,7 @@ class Circle : public GraphicsItem
 {
 public:
     Circle(const QColor &color, const CPoint &center, const double &radius);
+    Circle();
     Circle(const CPoint &center, const double &radius);
     Circle(const Circle &circle);
     Circle(Circle *seg);
@@ -71,6 +72,10 @@ public:
     vector<double> bounds();
     void SetColor(const QColor &c) {color = c;}
     void SetPen(const QPen &p) {pen = p; pen.setColor(color);}
+    QPen Pen() {return pen;}
+    QColor Color() {return color;}
+    double x() const {return center.x();}
+    double y() const {return center.y();}
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

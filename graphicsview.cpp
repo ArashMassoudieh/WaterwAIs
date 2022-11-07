@@ -5,6 +5,7 @@
 
 #include "graphicsview.h"
 #include "mapscene.h"
+#include "mainwindow.h"
 
 GraphicsView::GraphicsView(QWidget *parent)
     : QGraphicsView{parent}
@@ -93,9 +94,18 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
+MapView *GraphicsView::mainWindow()
+{
+    return mapview;
+}
+
 void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseMoveEvent(event);
+
+    int _x = mapToScene(event->pos()).x();
+    int _y = mapToScene(event->pos()).y();
+    mainWindow()->StatusBar()->setText(QString::number(_x)+"," + QString::number(_y));
 
     if (!_isPressed) {
         return;

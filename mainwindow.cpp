@@ -54,6 +54,7 @@
 #include <QSplitter>
 #include <QUrl>
 #include "modellayer.h"
+#include "node.h"
 
 
 #if defined(QT_DEBUG)
@@ -66,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
 {
+
     auto Layer1 = std::make_shared<Layer>();
     Layer1->address=HOST_PATH "/Centroids.geojson";
     Layer1->SetColor(Qt::red);
@@ -133,11 +135,17 @@ MainWindow::MainWindow(QWidget *parent)
     view->setLayerListModel(&layers);
     view->view()->setMapScene(scene);
     h1Splitter->addWidget(view);
-
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(vSplitter);
+
     setLayout(layout);
 
+    Node *node = new Node(view->view());
+    node->setX(327946.519);
+    node->setY(4309540.126);
+    node->setWidth(200);
+    node->setHeight(200);
+    scene->addItem(node);
     setWindowTitle(tr("Map viewer"));
 }
 

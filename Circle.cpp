@@ -59,7 +59,11 @@ Circle::Circle(const QColor &color, const CPoint &_center , const double &_radio
 {
     Circle(_center,_radious);
     this->color = color;
+}
 
+Circle::Circle()
+{
+    Circle(Qt::black,CPoint(0,0),1);
 }
 
 Circle::Circle(const CPoint &_center , const double &_radious)
@@ -95,6 +99,8 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     pen.setColor(color);
     painter->setPen(pen);
     painter->setBrush(color);
+    qDebug()<<x()<<","<<y();
+    qDebug()<<center.x()<<","<<center.y();
     painter->drawEllipse(center.x()-radious,center.y()-radious,radious*2, radious*2);
 }
 
