@@ -2,7 +2,7 @@
 #define MODELLAYER_H
 
 #include "layer.h"
-#include "object.h"
+#include "node.h"
 #include "metamodel.h"
 
 class ModelLayer: public Layer
@@ -16,7 +16,7 @@ public:
     bool GetMetalModelFromJasonDocument(const QJsonDocument &JsonDoc);
     void SetMetaModel (const MetaModel &meta_model) {metamodel=meta_model;}
 private:
-    QMap<QString,Object> objects;
+    QMap<QString,Node> nodes;
     MetaModel metamodel;
 
 };

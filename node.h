@@ -19,10 +19,12 @@ class Node:public Circle, Object
 {
 public:
     Node();
-    Node(GraphicsView *parent);
+    Node(GraphicsView *parent); // needs to be implemented
+    Node(const Object &obj);
     Node(const QJsonObject &jsonobject, GraphicsView *parent);
     Node(const Node &);
     Node operator=(const Node &);
+    Node operator=(const Object &); //needs to be implemented
     int type() const Q_DECL_OVERRIDE { return Type; }
     QRectF boundingRect() const override;
     QPainterPath shape() const override;

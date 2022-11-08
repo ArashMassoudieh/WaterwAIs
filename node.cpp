@@ -83,6 +83,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     SetColor(Qt::black);
     painter->setPen(Pen());
+
     painter->setBrush(Qt::black);
     qDebug() << x() << "," << y();
     painter->drawEllipse(x()-width/2,y()-height/2,width, height);
