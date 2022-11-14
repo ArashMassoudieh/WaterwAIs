@@ -15,7 +15,7 @@ Node::Node(GraphicsView *_parent):Object()
     setFlag(ItemIsSelectable);
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
-    setZValue(1);
+    setZValue(this->zValue());
     parent->scene()->addItem(this);
 }
 
@@ -25,7 +25,7 @@ Node::Node(const QJsonObject &jsonobject, GraphicsView *_parent):Object(jsonobje
     setFlag(ItemIsSelectable);
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
-    setZValue(1);
+    setZValue(this->zValue());
     parent->scene()->addItem(this);
 
 
@@ -58,6 +58,15 @@ Node Node::operator=(const Node &E)
     width = E.Width();
     height = E.Height();
     parent = E.parent;
+    return *this;
+}
+
+Node Node::operator=(const Object &E)
+{
+    Object::operator=(E);
+    setAcceptHoverEvents(true);
+    setCacheMode(DeviceCoordinateCache);
+    setFlag(ItemSendsGeometryChanges);
     return *this;
 }
 

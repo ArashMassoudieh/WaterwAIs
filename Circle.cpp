@@ -63,7 +63,7 @@ Circle::Circle(const QColor &color, const CPoint &_center , const double &_radio
 
 Circle::Circle()
 {
-    Circle(Qt::black,CPoint(0,0),1);
+   // Circle(Qt::black,CPoint(0,0),1);
 }
 
 Circle::Circle(const CPoint &_center , const double &_radious)

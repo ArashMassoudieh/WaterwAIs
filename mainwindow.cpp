@@ -55,6 +55,7 @@
 #include <QUrl>
 #include "modellayer.h"
 #include "node.h"
+#include <QDebug>
 
 
 #if defined(QT_DEBUG)
@@ -145,6 +146,7 @@ MainWindow::MainWindow(QWidget *parent)
     node->setY(4309540.126);
     node->setWidth(200);
     node->setHeight(200);
+    node->setZValue(9000);
     scene->addItem(node);
     setWindowTitle(tr("Map viewer"));
 }
