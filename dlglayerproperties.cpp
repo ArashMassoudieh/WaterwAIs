@@ -25,7 +25,7 @@ DlgLayerProperties::DlgLayerProperties(Layer *layer, QWidget *parent) :
     ui->sldTransparency->setValue(layer->layerOpacity() * 100);
     ui->sbSymbolSize->setValue(layer->Pen().width());
 
-    connect(ui->cbLineType, &QComboBox::currentIndexChanged, this, &DlgLayerProperties::onCbLineTypeCurrentIndexChanged);
+    connect(ui->cbLineType, SIGNAL(currentIndexChanged()), this, SLOT(onCbLineTypeCurrentIndexChanged()));
 }
 
 DlgLayerProperties::~DlgLayerProperties()

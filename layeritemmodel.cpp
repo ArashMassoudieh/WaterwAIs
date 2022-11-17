@@ -21,7 +21,7 @@ void LayerItemModel::addRow(std::shared_ptr<Layer> layer)
     beginInsertRows(QModelIndex(), c, c);
     layers.append(layer);
     connect(layer.get(), &Layer::iconChanged, this, [this, c]() {
-        emit dataChanged(index(c), index(c), QList<int>{ Qt::DecorationRole });
+        emit dataChanged(index(c), index(c), QVector<int>{ Qt::DecorationRole });
     });
     endInsertRows();
 }
