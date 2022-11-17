@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <QStringListModel>
+#include <QNetworkAccessManager>
 #include <QMenu>
+#include <QTimer>
 
 #include "graphicsview.h"
 
@@ -28,12 +30,19 @@ protected slots:
 
     void on_btnMoveUp_clicked();
     void on_btnMoveDown_clicked();
+    void on_btnOpen_clicked();
 
 private:
     Ui::MapView *ui;
     GraphicsView* MapViewer;
     QMenu submenu;
     int selectedItem;
+    QNetworkAccessManager nam;
+    QString taskId;
+    QTimer timer;
+
+    void getFile10LinesContent(QString fileId);
+    void getFileContent(QString fileId);
 };
 
 #endif // MAPVIEW_H

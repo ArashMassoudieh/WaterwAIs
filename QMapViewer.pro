@@ -13,6 +13,7 @@ HEADERS += mainwindow.h \
     ../Utilities/Vector.h \
     ../Utilities/cpoint.h \
     Circle.h \
+    Common.h \
     dlglayerproperties.h \
     feature.h \
     filedownloader.h \
