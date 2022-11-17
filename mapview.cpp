@@ -4,12 +4,19 @@
 #include <QGraphicsItem>
 #include <QMenu>
 #include <QScreen>
+#include <QFileDialog>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QMessageBox>
+
 
 #include "layeritemmodel.h"
 #include "layeritemdelegate.h"
 #include "mapview.h"
 #include "ui_mapview.h"
 #include "dlglayerproperties.h"
+
+#include "Common.h"
 
 MapView::MapView(QWidget *parent) :
     QWidget(parent),
@@ -51,6 +58,40 @@ MapView::MapView(QWidget *parent) :
     ui->verticalLayout->addWidget(statusbar);
     MapViewer = ui->graphicsView;
     ui->graphicsView->SetMapView(this);
+
+    timer.setInterval(1000);
+    connect(&timer, &QTimer::timeout, this, [this]() {
+        QNetworkRequest req(QString(SERVER_PATH) + "/tasks/" + taskId);
+        auto reply = nam.get(req);
+        connect(reply, &QNetworkReply::finished, [this, reply]() {
+            if (reply->error() == QNetworkReply::NetworkError::NoError) {
+                QJsonParseError err;
+                auto data = reply->readAll();
+                auto doc = QJsonDocument::fromJson(data, &err);
+                if (err.error != QJsonParseError::ParseError::NoError) {
+                    qDebug() << "ERR, body: " << data;
+                    timer.stop();
+                    return;
+                }
+                auto rootObj = doc.object();
+                if (rootObj["task_status"] == "SUCCESS") {
+                    timer.stop();
+
+                    QString fileId = rootObj["task_result"].toString();
+
+                    qDebug() << "Finished, fileId: " << fileId;
+                    getFile10LinesContent(fileId);
+                } else {
+                    qDebug() << "Still processing ...";
+                }
+
+                reply->deleteLater();
+            } else {
+                qDebug() << "Error occured";
+                timer.stop();
+            }
+        });
+    });
 }
 
 MapView::~MapView()
@@ -127,4 +168,61 @@ void MapView::on_btnMoveDown_clicked()
     if (r < layers->getCount() - 1) {
         layers->moveItem(r+1, r);
     }
+}
+
+void MapView::on_btnOpen_clicked()
+{
+    auto fileContentReady = [this](const QString &fileName, const QByteArray &fileContent) {
+        if (fileName.isEmpty()) {
+            // No file was selected
+        } else {
+            if (!fileName.toLower().endsWith(".ohq")) {
+                QMessageBox::critical(this, "Error", "Only accept ohq file extension!");
+                return;
+            }
+
+            timer.stop();
+            QNetworkRequest req(QString(SERVER_PATH) + "/process");
+            req.setHeader(QNetworkRequest::ContentTypeHeader, QString("text/plain"));
+            auto reply = nam.post(req, fileContent);
+
+            connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+                if (reply->error() == QNetworkReply::NetworkError::NoError) {
+                    auto data = reply->readAll();
+                    taskId = data;
+                    timer.start();
+                    reply->deleteLater();
+                }
+            });
+        }
+    };
+    QFileDialog::getOpenFileContent("OHQ Files (*.ohq)",  fileContentReady);
+}
+
+void MapView::getFile10LinesContent(QString fileId)
+{
+    QNetworkRequest req(QString(SERVER_PATH) + "/file_10_lines/" + fileId);
+    auto reply = nam.get(req);
+
+    connect(reply, &QNetworkReply::finished, this, [reply]() {
+        if (reply->error() == QNetworkReply::NetworkError::NoError) {
+            qDebug() << "File content (first 10 lines):";
+            qDebug() << reply->readAll();
+            reply->deleteLater();
+        }
+    });
+}
+
+void MapView::getFileContent(QString fileId)
+{
+    QNetworkRequest req(QString(SERVER_PATH) + "/files/" + fileId);
+    auto reply = nam.get(req);
+
+    connect(reply, &QNetworkReply::finished, this, [reply]() {
+        if (reply->error() == QNetworkReply::NetworkError::NoError) {
+            qDebug() << "File content:";
+            qDebug() << reply->readAll();
+            reply->deleteLater();
+        }
+    });
 }

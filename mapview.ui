@@ -24,7 +24,7 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>118</width>
+       <width>166</width>
        <height>154</height>
       </size>
      </property>
@@ -47,6 +47,13 @@
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnOpen">
+           <property name="text">
+            <string>Open</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QToolButton" name="btnMoveUp">

@@ -58,11 +58,7 @@
 #include <QDebug>
 
 
-#if defined(QT_DEBUG)
-#define HOST_PATH "http://localhost:30000"
-#else
-#define HOST_PATH "http://20.244.11.239/json"
-#endif
+#include "Common.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
