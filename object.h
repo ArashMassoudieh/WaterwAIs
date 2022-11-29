@@ -12,7 +12,10 @@ public:
     virtual ~Object();
     Object(const Object& other);
     Object(const QJsonObject& qjobject);
+    void SetName(const QString &_name) {name=_name;}
+    QString Name() {return name;}
 private:
+    QString name;
 
 };
 

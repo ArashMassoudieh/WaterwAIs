@@ -3,6 +3,7 @@
 
 #include <Circle.h>
 #include <object.h>
+#include <layer.h>
 
 struct objectColor
 {
@@ -15,7 +16,7 @@ enum edgesides{ noside, topside, leftside, bottomside, rightside };
 
 class GraphicsView;
 
-class Node:public Circle, Object
+class Node:public Object, public Circle
 {
 public:
     Node();
@@ -44,6 +45,7 @@ private:
     int width = 200;
     int height = 200;
     bool bold = false;
+
 
 };
 

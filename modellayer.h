@@ -4,6 +4,10 @@
 #include "layer.h"
 #include "node.h"
 #include "metamodel.h"
+#include "graphicsview.h"
+#include "mainwindow.h"
+
+class QGraphicsScene;
 
 class ModelLayer: public Layer
 {
@@ -15,6 +19,11 @@ public:
     bool GetFromJsonDocument(const QJsonDocument &JsonDoc) override;
     bool GetMetalModelFromJasonDocument(const QJsonDocument &JsonDoc);
     void SetMetaModel (const MetaModel &meta_model) {metamodel=meta_model;}
+    QJsonDocument loadJson(const QString &fileName);
+    QJsonDocument loadJson(QNetworkReply *fileName);
+    QJsonDocument loadJson(QUrl fileName);
+    bool prepareNodes(const QString &fileName);
+    bool AddToScene(QGraphicsScene *scene);
 private:
     QMap<QString,Node> nodes;
     MetaModel metamodel;
