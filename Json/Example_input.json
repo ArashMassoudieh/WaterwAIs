@@ -1,17 +1,21 @@
 {
-	"subcatchment1":
-	{
-		"type": "sub-catchment",
-		"area": "1000",
-		"slope": "0.01",
-		"x": 327946.519,
-		"y": 4309540.126
-	},
-	"subcatchment2": {
-		"type": "sub-catchment",
-		"area": "1000",
-		"slope": "0.01",
-		"x": 328726.186500648036599,
-		"y": 4309256.332427557557821
-	}
-} 
+"type": "FeatureCollection",
+"name": "PourPoints",
+"features": [
+    {
+        "type": "sub-catchment",
+        "area": "1000",
+        "slope": "0.01",
+        "x": 327946.519,
+        "y": 4309540.126
+
+       },
+    {
+        "type": "sub-catchment",
+        "area": "1000",
+        "slope": "0.01",
+        "x": 328726.186500648036599,
+        "y": 4309256.332427557557821
+    }
+]
+}

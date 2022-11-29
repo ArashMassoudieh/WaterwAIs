@@ -49,8 +49,6 @@ bool ModelLayer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
 
 bool ModelLayer :: prepareNodes(const QString &fileName)
 {
-
-    //QJsonDocument ModelJsonDoc1 = loadJson(QString(fileName));
     QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
     QJsonDocument ModelJsonDoc1 = QJsonDocument().fromJson(jsonFile.readAll());
@@ -71,9 +69,6 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
                 node.setHeight(200);
                 node.setZValue(9000);
                 nodes[it.key()] =node;
-                //scene->addItem(node);
-                //setWindowTitle(tr("Map viewer"));
-
         }
         return true;
 }

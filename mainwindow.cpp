@@ -153,31 +153,6 @@ MainWindow::MainWindow(QWidget *parent)
         Model->AddToScene(scene);
 
     }
-//        scene->addItem(val);
-//        setWindowTitle(tr("Map viewer"));
-
-    //QJsonDocument ModelJsonDoc = loadJson(QString("/Users/venkateshputta/Example_input.json"));
-//    QJsonObject pointvalArray = ModelJsonDoc.object();
-
-//    for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
-//    {
-
-//            qDebug()<<"File '"<<it.key() << "' exists!";
-//            double xCoordinate = it.value().toObject().value("x").toDouble();
-//            double yCoordinate = it.value().toObject().value("y").toDouble();
-
-//                Node *node = new Node(view->view());
-//                node->SetName(it.key());
-//                node->setX(xCoordinate);
-//                node->setY(yCoordinate);
-//                node->setWidth(200);
-//                node->setHeight(200);
-//                node->setZValue(9000);
-//                scene->addItem(node);
-//                setWindowTitle(tr("Map viewer"));
-
-//        }
-
 
 }
 
