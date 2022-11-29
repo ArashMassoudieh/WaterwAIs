@@ -58,10 +58,16 @@
 #include <QDebug>
 
 
+//#if defined(QT_DEBUG)
+//#define HOST_PATH "http://localhost:30000"
+//#else
+//#define HOST_PATH "http://20.244.11.239/json"
+//#endif
+
 #if defined(QT_DEBUG)
 #define HOST_PATH "http://localhost:30000"
 #else
-#define HOST_PATH "http://20.244.11.239/json"
+#define HOST_PATH "http://3.215.9.75:3000/public"
 #endif
 
 MainWindow::MainWindow(QWidget *parent)
@@ -106,7 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         if (DownloadMode == downloadmode::localfile)
         {
-            QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson");
+            QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer_geo.json");
             if (layerfile.exists())
             {
                 qDebug()<<"File '"<<layerfile.fileName() << "' exists!";
@@ -116,7 +122,7 @@ MainWindow::MainWindow(QWidget *parent)
                 QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
                 qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
             }
-            layers[i]->JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer.geojson"));
+            layers[i]->JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer_geo.json"));
             layers[i]->GetFromJsonDocument(layers[i]->JsonDoc);
             populateScene();
         }
@@ -141,14 +147,37 @@ MainWindow::MainWindow(QWidget *parent)
 
     setLayout(layout);
 
-    Node *node = new Node(view->view());
-    node->setX(327946.519);
-    node->setY(4309540.126);
-    node->setWidth(200);
-    node->setHeight(200);
-    node->setZValue(9000);
-    scene->addItem(node);
-    setWindowTitle(tr("Map viewer"));
+    if( Model->prepareNodes("/Users/venkateshputta/Example_input.json"))
+    {
+        Model->AddToScene(scene);
+
+    }
+//        scene->addItem(val);
+//        setWindowTitle(tr("Map viewer"));
+
+    QJsonDocument ModelJsonDoc = loadJson(QString("/Users/venkateshputta/Example_input.json"));
+//    QJsonObject pointvalArray = ModelJsonDoc.object();
+
+//    for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
+//    {
+
+//            qDebug()<<"File '"<<it.key() << "' exists!";
+//            double xCoordinate = it.value().toObject().value("x").toDouble();
+//            double yCoordinate = it.value().toObject().value("y").toDouble();
+
+//                Node *node = new Node(view->view());
+//                node->SetName(it.key());
+//                node->setX(xCoordinate);
+//                node->setY(yCoordinate);
+//                node->setWidth(200);
+//                node->setHeight(200);
+//                node->setZValue(9000);
+//                scene->addItem(node);
+//                setWindowTitle(tr("Map viewer"));
+
+//        }
+
+
 }
 
 void MainWindow::populateScene()

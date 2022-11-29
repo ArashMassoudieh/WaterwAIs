@@ -88,7 +88,6 @@ DISTFILES += json/Centroids.geojson \
     json/SubWaterSheds.geojson \
     json/1.png \
     json/2.png \
-    json/3.png \
     json/4.png
 
 FORMS += \
