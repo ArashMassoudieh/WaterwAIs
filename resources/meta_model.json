@@ -9,7 +9,8 @@
 		},
 		"slope": {
 			"type": "value"
-		}
+		},
+		"icon": "/icons/subcatchment.png"
 	},
 	"catch basin": {
 		"type": "node",

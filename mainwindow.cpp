@@ -147,8 +147,8 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(vSplitter);
 
     setLayout(layout);
-
-    if( Model->prepareNodes("/Users/venkateshputta/Example_input.json"))
+    Model = new ModelLayer();
+    if( Model->prepareNodes("/home/arash/Projects/QMapViewer/Json/Example_input.json"))
     {
         Model->AddToScene(scene);
 
@@ -156,7 +156,7 @@ MainWindow::MainWindow(QWidget *parent)
 //        scene->addItem(val);
 //        setWindowTitle(tr("Map viewer"));
 
-    QJsonDocument ModelJsonDoc = loadJson(QString("/Users/venkateshputta/Example_input.json"));
+    //QJsonDocument ModelJsonDoc = loadJson(QString("/Users/venkateshputta/Example_input.json"));
 //    QJsonObject pointvalArray = ModelJsonDoc.object();
 
 //    for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
