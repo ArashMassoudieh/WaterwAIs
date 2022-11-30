@@ -27,3 +27,23 @@ MetaModel::MetaModel(QJsonDocument& qjdoc):QMap<QString,VariableList>()
         operator[](key) = varlist;
     }
 }
+
+bool MetaModel::getloadIcon(const QJsonDocument &JsonDoc){
+    QJsonObject JsonObject = JsonDoc.object();
+    foreach(const QString& key, JsonObject.keys()) {
+        QJsonValue value = JsonObject.value(key);
+        qDebug() << "Key = " << key << ", Value = " << value.toString();
+    }
+
+    if (JsonObject.contains("name")) {
+        auto name = JsonObject.value("name").toString();
+       this->setLayerName(name);
+    }
+
+    if (JsonObject.contains("icon")) {
+        auto iconUrl = JsonObject.value("icon").toString();
+        this->downloadIcon(iconUrl);
+    }
+
+    return true;
+}
