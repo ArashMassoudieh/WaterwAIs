@@ -1,0 +1,34 @@
+{
+    "sub-catchment": {
+        "type": "node",
+        "area": {
+            "type": "value"
+        },
+        "elevation": {
+            "type": "value"
+        },
+        "slope": {
+            "type": "value"
+        },
+        "icon": "http://localhost:30000/5.png",
+        "name": "Sub-Catchment"
+    },
+    "catch basin": {
+        "type": "node",
+        "area": {
+            "type": "value"
+        },
+        "elevation": {
+            "type": "value"
+        }
+    },
+    "sewer pipe": {
+        "type": "link",
+        "diameter": {
+            "type": "value"
+        },
+        "length": {
+            "type": "value"
+        }
+    }
+}

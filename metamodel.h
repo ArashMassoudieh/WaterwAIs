@@ -29,7 +29,7 @@ public:
     virtual ~MetaModel();
     MetaModel(const MetaModel& other);
     MetaModel(QJsonDocument& qjobject);
-    virtual bool getloadIcon(const QJsonDocument &JsonDoc);
+    virtual bool getloadIcon(const QString &fileName);
 
     QString layerName() const {
         return _name;

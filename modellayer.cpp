@@ -68,6 +68,7 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
                 node.setWidth(200);
                 node.setHeight(200);
                 node.setZValue(9000);
+                node.toolTip();
                 nodes[it.key()] =node;
         }
         return true;

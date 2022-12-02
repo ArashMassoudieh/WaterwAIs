@@ -99,11 +99,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     setLayout(layout);
     Model = new ModelLayer();
-    if( Model->prepareNodes("/home/arash/Projects/QMapViewer/Json/Example_input.json"))
+    if( Model->prepareNodes("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/Example_input.json"))
     {
         Model->AddToScene(scene);
 
     }
+
 
 }
 

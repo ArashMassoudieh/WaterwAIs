@@ -28,21 +28,20 @@ MetaModel::MetaModel(QJsonDocument& qjdoc):QMap<QString,VariableList>()
     }
 }
 
-bool MetaModel::getloadIcon(const QJsonDocument &JsonDoc){
+bool MetaModel::getloadIcon(const QString &fileName){
+    QFile jsonFile(fileName);
+    jsonFile.open(QFile::ReadOnly);
+    QJsonDocument JsonDoc = QJsonDocument().fromJson(jsonFile.readAll());
+    qDebug()<<"ModelJsonDoc2000 '"<<JsonDoc << "' 00000000";
     QJsonObject JsonObject = JsonDoc.object();
     foreach(const QString& key, JsonObject.keys()) {
         QJsonValue value = JsonObject.value(key);
         qDebug() << "Key = " << key << ", Value = " << value.toString();
-    }
-
-    if (JsonObject.contains("name")) {
-        auto name = JsonObject.value("name").toString();
-       this->setLayerName(name);
-    }
-
-    if (JsonObject.contains("icon")) {
-        auto iconUrl = JsonObject.value("icon").toString();
-        this->downloadIcon(iconUrl);
+        if(key == "sub-catchment"){
+            auto iconUrl =  value.toObject().value("icon").toString();
+            auto name =  value.toObject().value("name").toString();
+             this->downloadIcon(iconUrl);
+        }
     }
 
     return true;
