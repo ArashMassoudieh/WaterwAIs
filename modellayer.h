@@ -4,8 +4,6 @@
 #include "layer.h"
 #include "node.h"
 #include "metamodel.h"
-#include "graphicsview.h"
-#include "mainwindow.h"
 
 class QGraphicsScene;
 

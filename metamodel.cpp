@@ -1,5 +1,6 @@
 #include "metamodel.h"
 #include <QJsonObject>
+#include "layer.h"
 MetaModel::MetaModel():QMap<QString,VariableList>()
 {
 
@@ -40,7 +41,7 @@ bool MetaModel::getloadIcon(const QString &fileName){
         if(key == "sub-catchment"){
             auto iconUrl =  value.toObject().value("icon").toString();
             auto name =  value.toObject().value("name").toString();
-             this->downloadIcon(iconUrl);
+               this->setLayerName(name);
         }
     }
 

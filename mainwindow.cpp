@@ -5,7 +5,6 @@
 #include <QSplitter>
 #include <QUrl>
 #include "modellayer.h"
-#include "node.h"
 #include <QDebug>
 
 
@@ -105,6 +104,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     }
 
+    metaModel = new MetaModel();
+    metaModel->getloadIcon("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/meta_model.json");
 
 }
 

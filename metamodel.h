@@ -7,13 +7,10 @@
 #include <QNetworkReply>
 #include <QString>
 #include <variablelist.h>
-#include "feature.h"
 #include "QJsonDocument"
 #include "QRectF"
 #include "QColor"
 #include "QPen"
-#include "filedownloader.h"
-#include "object.h"
 #include "mainwindow.h"
 
 //This class contains the information about all types of nodes and links that can be used in the model
