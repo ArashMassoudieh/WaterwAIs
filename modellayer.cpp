@@ -25,6 +25,7 @@ ModelLayer& ModelLayer::operator=(const ModelLayer& other)
 {
     Layer::operator=(other);
     nodes = other.nodes;
+
     return *this;
 }
 ModelLayer::~ModelLayer()
@@ -41,7 +42,7 @@ bool ModelLayer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
     QJsonObject JsonObject = JsonDoc.object();
     foreach(const QString& key, JsonObject.keys()) {
         QJsonValue value = JsonObject.value(key);
-        Object obj(value.toObject());
+        Object obj(key, value.toObject());
         nodes[key] = obj;
     }
     return true;
@@ -61,7 +62,7 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
             double xCoordinate = it.value().toObject().value("x").toDouble();
             double yCoordinate = it.value().toObject().value("y").toDouble();
 
-                Node node;
+                Node node(it.key(),it.value().toObject());
                 node.SetName(it.key());
                 node.setX(xCoordinate);
                 node.setY(yCoordinate);
@@ -69,6 +70,7 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
                 node.setHeight(200);
                 node.setZValue(9000);
                 node.toolTip();
+                node.SetMetaModel(metamodel);
                 nodes[it.key()] =node;
         }
         return true;

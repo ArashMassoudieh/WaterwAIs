@@ -98,14 +98,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     setLayout(layout);
     Model = new ModelLayer();
+
+#ifdef Arash
+    QJsonDocument metamodeljason = loadJson(QString("/home/arash/Projects/QMapViewer/Json/meta_model.json"));
+#else
+    QJsonDocument metamodeljason = loadJson(QString("/home/arash/Projects/QMapViewer/Json/meta_model.json"));
+#endif
+
+    MetaModel *metaModel = new MetaModel(metamodeljason);
+    Model->SetMetaModel(metaModel);
+#ifdef Arash
+    if( Model->prepareNodes("/home/arash/Projects/QMapViewer/Json/Example_input.json"))
+#else
     if( Model->prepareNodes("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/Example_input.json"))
-    {
+#endif
         Model->AddToScene(scene);
 
-    }
 
-    metaModel = new MetaModel();
-    metaModel->getloadIcon("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/meta_model.json");
 
 }
 

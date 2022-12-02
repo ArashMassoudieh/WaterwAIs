@@ -11,7 +11,7 @@ public:
     Object& operator=(const Object& other);
     virtual ~Object();
     Object(const Object& other);
-    Object(const QJsonObject& qjobject);
+    Object(const QString &ObjectType, const QJsonObject& qjobject);
     void SetName(const QString &_name) {name=_name;}
     QString Name() {return name;}
 private:

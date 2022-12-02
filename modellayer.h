@@ -16,7 +16,7 @@ public:
     ModelLayer(const ModelLayer& other);
     bool GetFromJsonDocument(const QJsonDocument &JsonDoc) override;
     bool GetMetalModelFromJasonDocument(const QJsonDocument &JsonDoc);
-    void SetMetaModel (const MetaModel &meta_model) {metamodel=meta_model;}
+    void SetMetaModel (MetaModel *meta_model) {metamodel=meta_model;}
     QJsonDocument loadJson(const QString &fileName);
     QJsonDocument loadJson(QNetworkReply *fileName);
     QJsonDocument loadJson(QUrl fileName);
@@ -24,7 +24,7 @@ public:
     bool AddToScene(QGraphicsScene *scene);
 private:
     QMap<QString,Node> nodes;
-    MetaModel metamodel;
+    MetaModel *metamodel = nullptr;
 
 };
 

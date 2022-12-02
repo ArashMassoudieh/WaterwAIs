@@ -14,6 +14,7 @@ public:
     VariableList& operator=(const VariableList& other);
     virtual ~VariableList();
     VariableList(const VariableList& other);
+    VariableList(const QString &objectType, const QJsonObject& qjobject);
     VariableList(const QJsonObject& qjobject);
     QString IconFileName() {return iconfilename;}
     void SetIconFileName(const QString &icn ) {iconfilename = icn;}

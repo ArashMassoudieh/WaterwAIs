@@ -65,6 +65,8 @@ SOURCES += mainwindow.cpp
 
 DEFINES += QT_NO_DEBUG _NO_GSL
 
+DEFINES += Arash
+
 QT += widgets core network
 
 qtHaveModule(printsupport): QT += printsupport

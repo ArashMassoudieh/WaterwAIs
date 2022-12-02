@@ -15,6 +15,7 @@ enum edgesides{ noside, topside, leftside, bottomside, rightside };
 
 
 class GraphicsView;
+class MetaModel;
 
 class Node:public Object, public Circle
 {
@@ -22,7 +23,7 @@ public:
     Node();
     Node(GraphicsView *parent); // needs to be implemented
     Node(const Object &obj);
-    Node(const QJsonObject &jsonobject, GraphicsView *parent);
+    Node(const QString &objecttype, const QJsonObject &jsonobject, GraphicsView *parent=nullptr);
     Node(const Node &);
     Node operator=(const Node &);
     Node operator=(const Object &); //needs to be implemented
@@ -39,12 +40,15 @@ public:
     void setHeight(const int& Height);
     double fontfactor();
     vector<double> bounds();
+    void SetMetaModel(MetaModel*);
+    QPixmap GetIcon(const QString &type);
 
 private:
-    GraphicsView *parent;
+    GraphicsView *parent = nullptr;
     int width = 200;
     int height = 200;
     bool bold = false;
+    MetaModel *meta;
 
 
 };

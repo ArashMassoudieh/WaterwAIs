@@ -24,7 +24,7 @@ MetaModel::MetaModel(QJsonDocument& qjdoc):QMap<QString,VariableList>()
 {
     QJsonObject qjobject = qjdoc.object();
     foreach(const QString& key, qjobject.keys()) {
-        VariableList varlist = VariableList(qjobject.value(key).toObject());
+        VariableList varlist = VariableList(key, qjobject.value(key).toObject());
         operator[](key) = varlist;
     }
 }

@@ -1,7 +1,7 @@
 #include "node.h"
 #include "graphicsview.h"
 #include <QStyleOptionGraphicsItem>
-
+#include "metamodel.h"
 
 Node::Node():Circle()
 {
@@ -19,14 +19,15 @@ Node::Node(GraphicsView *_parent):Object()
     parent->scene()->addItem(this);
 }
 
-Node::Node(const QJsonObject &jsonobject, GraphicsView *_parent):Object(jsonobject)
+Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsView *_parent):Object(objectType, jsonobject)
 {
     parent = _parent;
     setFlag(ItemIsSelectable);
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
     setZValue(this->zValue());
-    parent->scene()->addItem(this);
+    if (parent)
+        parent->scene()->addItem(this);
 
 
 }
@@ -40,6 +41,7 @@ Node::Node(const Node &E):Object(E)
     setPos(E.pos());
     setFlag(ItemSendsGeometryChanges);
     width = E.Width();
+    meta = E.meta;
     height = E.Height();
     parent = E.parent;
 
@@ -55,6 +57,7 @@ Node Node::operator=(const Node &E)
     setZValue(E.zValue());
     setPos(E.pos());
     setFlag(ItemSendsGeometryChanges);
+    meta = E.meta;
     width = E.Width();
     height = E.Height();
     parent = E.parent;
@@ -93,6 +96,14 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     SetColor(Qt::black);
     painter->setPen(Pen());
 
+    QPixmap pixmap = GetIcon(ComponentType());
+    double iconmargin = 0;
+    QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(), boundingRect().top()*0+iconmargin*boundingRect().width(), boundingRect().width()*(1-iconmargin), boundingRect().height()*(1-iconmargin));
+    QRectF source(0, 0, pixmap.size().width(), pixmap.size().height());
+
+
+    painter->drawPixmap(rect, pixmap, source);
+
     painter->setBrush(Qt::black);
     qDebug() << x() << "," << y();
     painter->drawEllipse(x()-width/2,y()-height/2,width, height);
@@ -124,3 +135,14 @@ vector<double> Node::bounds()
     return out;
 }
 
+void Node::SetMetaModel(MetaModel *_meta)
+{
+    meta = _meta;
+}
+
+QPixmap Node::GetIcon(const QString &type)
+{
+    QString Iconfilename = meta->operator[](type).IconFileName();
+    QString ObjectType = type;
+    return QPixmap(meta->operator[](type).IconFileName());
+}

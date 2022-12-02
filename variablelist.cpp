@@ -26,10 +26,10 @@ VariableList::VariableList(const VariableList& other):QMap<QString,Variable>(oth
     Object_Type = other.Object_Type;
     iconfilename = other.iconfilename;
 }
-VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>()
+VariableList::VariableList(const QString& objectType, const QJsonObject& qjobject):QMap<QString,Variable>() //for meta model
 {
 
-    //component_type = qjobject.keys();
+    component_type = objectType;
     foreach(const QString& key, qjobject.keys()) {
         if (key=="icon")
             iconfilename = qjobject.value(key).toString();
@@ -39,6 +39,35 @@ VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>()
                 Object_Type = object_type::node;
             if(qjobject.value(key).toString() == "link")
                 Object_Type = object_type::link;
+        }
+        else
+        {   Variable var = Variable(qjobject.value(key).toObject());
+            operator[](key) = var;
+        }
+    }
+    Variable var;
+    var.SetType(variable_type::string);
+    operator[]("name") = var;
+    if (ObjectType()==object_type::node)
+    {
+        Variable varxy;
+        varxy.SetType(variable_type::value);
+        operator[]("x") = varxy;
+        operator[]("y") = varxy;
+    }
+
+}
+
+VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>() //for instances
+{
+
+
+    foreach(const QString& key, qjobject.keys()) {
+        if (key=="icon")
+            iconfilename = qjobject.value(key).toString();
+        if (key=="type")
+        {
+            component_type = qjobject.value(key).toString();
         }
         else
         {   Variable var = Variable(qjobject.value(key).toObject());

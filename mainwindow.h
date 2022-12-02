@@ -92,8 +92,6 @@ private:
     MapView *view = nullptr;
     downloadmode DownloadMode = downloadmode::url;
     ModelLayer *Model;
-    MetaModel *metaModel;
-
 
 public slots:
     void OnDownloadFinished();
