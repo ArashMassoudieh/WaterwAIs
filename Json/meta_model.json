@@ -10,7 +10,7 @@
         "slope": {
             "type": "value"
         },
-        "icon": "http://localhost:30000/5.png",
+        "icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png",
         "name": "Sub-Catchment"
     },
     "catch basin": {
@@ -20,7 +20,8 @@
         },
         "elevation": {
             "type": "value"
-        }
+        },
+        "icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png",
     },
     "sewer pipe": {
         "type": "link",
@@ -29,6 +30,7 @@
         },
         "length": {
             "type": "value"
-        }
+        },
+        "icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png",
     }
 }

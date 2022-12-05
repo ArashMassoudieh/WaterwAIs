@@ -5,13 +5,15 @@
             "area": "1000",
             "slope": "0.01",
             "x": 327946.519,
-            "y": 4309540.126
+            "y": 4309540.126,
+            "icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png"
            },
     "subcatchment2": {
             "type": "sub-catchment",
             "area": "1000",
             "slope": "0.01",
             "x": 328726.186500648036599,
-            "y": 4309256.332427557557821
+            "y": 4309256.332427557557821,
+            "icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png"
         }
 }

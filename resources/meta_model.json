@@ -1,4 +1,7 @@
 {
+    "type": "FeatureCollection",
+    "name": "sub-catchment",
+    "icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png",
 	"sub-catchment": {
 		"type": "node",
 		"area": {
@@ -10,7 +13,7 @@
 		"slope": {
 			"type": "value"
 		},
-		"icon": "/icons/subcatchment.png"
+		"icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png"
 	},
 	"catch basin": {
 		"type": "node",

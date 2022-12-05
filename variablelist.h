@@ -20,7 +20,7 @@ public:
     void SetIconFileName(const QString &icn ) {iconfilename = icn;}
     object_type ObjectType() const {return Object_Type;}
     void SetObjectType(object_type ObjType) {Object_Type = ObjType;}
-    QString ComponentType() {return component_type;}
+    QString ComponentType() {return iconfilename;}
 private:
     QString iconfilename;
     object_type Object_Type;

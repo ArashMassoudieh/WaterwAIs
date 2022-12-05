@@ -54,25 +54,24 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
     jsonFile.open(QFile::ReadOnly);
     QJsonDocument ModelJsonDoc1 = QJsonDocument().fromJson(jsonFile.readAll());
     QJsonObject pointvalArray = ModelJsonDoc1.object();
-    for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
-    {
+        for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
+        {
 
-            qDebug()<<"File '"<<it.key() << "' exists!";
-            qDebug()<<it.value();
-            double xCoordinate = it.value().toObject().value("x").toDouble();
-            double yCoordinate = it.value().toObject().value("y").toDouble();
+                qDebug()<<"File '"<<it.key() << "' exists!";
+                qDebug()<<it.value();
+                double xCoordinate = it.value().toObject().value("x").toDouble();
+                double yCoordinate = it.value().toObject().value("y").toDouble();
 
-                Node node(it.key(),it.value().toObject());
-                node.SetName(it.key());
-                node.setX(xCoordinate);
-                node.setY(yCoordinate);
-                node.setWidth(200);
-                node.setHeight(200);
-                node.setZValue(9000);
-                node.toolTip();
-                node.SetMetaModel(metamodel);
-                nodes[it.key()] =node;
-        }
+                    Node node(it.key(),it.value().toObject());
+                    node.SetName(it.key());
+                    node.setX(xCoordinate);
+                    node.setY(yCoordinate);
+                    node.setWidth(200);
+                    node.setHeight(200);
+                    node.setZValue(9000);
+                    //node.SetMetaModel(metamodel);
+                   nodes[it.key()] =node;
+            }
         return true;
 }
 

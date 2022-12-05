@@ -50,6 +50,12 @@ MainWindow::MainWindow(QWidget *parent)
     Layer4->SetScene(scene);
     layers.addRow(Layer4);
 
+    auto Layer5 = std::make_shared<Layer>();
+    Layer5->address="/Users/venkateshputta/Example_input2.geojson";
+    Layer5->SetColor(Qt::yellow);
+    Layer5->SetScene(scene);
+    layers.addRow(Layer5);
+
 
     //QJsonDocument ModelJsonDoc = loadJson("/Users/arash/Projects/QMapViewer/resources/Example_input.json");
     //Model->GetFromJsonDocument(ModelJsonDoc);
@@ -102,19 +108,18 @@ MainWindow::MainWindow(QWidget *parent)
 #ifdef Arash
     QJsonDocument metamodeljason = loadJson(QString("/home/arash/Projects/QMapViewer/Json/meta_model.json"));
 #else
-    QJsonDocument metamodeljason = loadJson(QString("/home/arash/Projects/QMapViewer/Json/meta_model.json"));
+    QJsonDocument metamodeljason = loadJson(QString("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/meta_model.json"));
 #endif
 
     MetaModel *metaModel = new MetaModel(metamodeljason);
     Model->SetMetaModel(metaModel);
+
 #ifdef Arash
     if( Model->prepareNodes("/home/arash/Projects/QMapViewer/Json/Example_input.json"))
 #else
     if( Model->prepareNodes("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/Example_input.json"))
 #endif
         Model->AddToScene(scene);
-
-
 
 }
 

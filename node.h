@@ -42,6 +42,7 @@ public:
     vector<double> bounds();
     void SetMetaModel(MetaModel*);
     QPixmap GetIcon(const QString &type);
+//    QString GetIcon(const QString &type);
 
 private:
     GraphicsView *parent = nullptr;

@@ -96,7 +96,8 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     SetColor(Qt::black);
     painter->setPen(Pen());
 
-    QPixmap pixmap = GetIcon(ComponentType());
+    QPixmap pixmap = QPixmap(IconFileName());
+    //QPixmap pixmap = GetIcon(ComponentType());
     double iconmargin = 0;
     QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(), boundingRect().top()*0+iconmargin*boundingRect().width(), boundingRect().width()*(1-iconmargin), boundingRect().height()*(1-iconmargin));
     QRectF source(0, 0, pixmap.size().width(), pixmap.size().height());
@@ -142,7 +143,10 @@ void Node::SetMetaModel(MetaModel *_meta)
 
 QPixmap Node::GetIcon(const QString &type)
 {
-    QString Iconfilename = meta->operator[](type).IconFileName();
-    QString ObjectType = type;
-    return QPixmap(meta->operator[](type).IconFileName());
+//    qDebug() << type << ",";
+//    QString iconurl = meta->layerIconUrl();
+//    return type;
+//    QString Iconfilename = meta->operator[](type).IconFileName();
+//    QString ObjectType = type;
+    return QPixmap(type);
 }
