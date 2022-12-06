@@ -99,15 +99,19 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QPixmap pixmap = QPixmap(IconFileName());
     //QPixmap pixmap = GetIcon(ComponentType());
     double iconmargin = 0;
-    QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(), boundingRect().top()*0+iconmargin*boundingRect().width(), boundingRect().width()*(1-iconmargin), boundingRect().height()*(1-iconmargin));
-    QRectF source(0, 0, pixmap.size().width(), pixmap.size().height());
+    QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(),
+                         boundingRect().top()*0+iconmargin*boundingRect().width(),
+                         boundingRect().width()*(1-iconmargin)-100,
+                         boundingRect().height()*(1-iconmargin)-100);
+    QRectF source(0, 0, pixmap.size().width()+100, pixmap.size().height());
+
 
 
     painter->drawPixmap(rect, pixmap, source);
 
     painter->setBrush(Qt::black);
     qDebug() << x() << "," << y();
-    painter->drawEllipse(x()-width/2,y()-height/2,width, height);
+    //painter->drawEllipse(x()-width/2,y()-height/2,width, height);
 }
 
 void Node::setWidth(const int& _width)

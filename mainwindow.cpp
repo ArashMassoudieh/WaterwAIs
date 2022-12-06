@@ -51,8 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     layers.addRow(Layer4);
 
     auto Layer5 = std::make_shared<Layer>();
-    Layer5->address="/Users/venkateshputta/Example_input2.geojson";
-    Layer5->SetColor(Qt::yellow);
+    Layer5->address=HOST_PATH "/Example_input2.geojson";
+    Layer5->SetColor(Qt::red);
     Layer5->SetScene(scene);
     layers.addRow(Layer5);
 
