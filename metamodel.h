@@ -27,6 +27,7 @@ public:
     MetaModel(const MetaModel& other);
     MetaModel(QJsonDocument& qjobject);
     virtual bool getloadIcon(const QString &fileName);
+    QString address;
 
     QString layerName() const {
         return _name;

@@ -2,6 +2,7 @@
 #include "graphicsview.h"
 #include <QStyleOptionGraphicsItem>
 #include "metamodel.h"
+#include "Common.h"
 
 Node::Node():Circle()
 {
@@ -149,8 +150,8 @@ QPixmap* Node::GetIcon(const QString &type)
 {
     if (icon!=nullptr) return icon;
     qDebug() << type << ",";
-    //QString iconurl = meta->layerIconUrl();
-    QString Iconfilename = meta->operator[](type).IconFileName();
+    QString iconurl = HOST_PATH + meta->layerIconUrl();
+    QString Iconfilename = HOST_PATH + meta->operator[](type).IconFileName();
     QString ObjectType = type;
     icon = new QPixmap(Iconfilename);
     return icon;

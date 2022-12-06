@@ -6,19 +6,6 @@
 #include <QUrl>
 #include "modellayer.h"
 #include <QDebug>
-
-
-//#if defined(QT_DEBUG)
-//#define HOST_PATH "http://localhost:30000"
-//#else
-//#define HOST_PATH "http://20.244.11.239/json"
-//#endif
-
-#if defined(QT_DEBUG)
-#define HOST_PATH "http://localhost:30000"
-#else
-#define HOST_PATH "http://3.215.9.75:3000/public"
-#endif
 #include "Common.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -50,11 +37,11 @@ MainWindow::MainWindow(QWidget *parent)
     Layer4->SetScene(scene);
     layers.addRow(Layer4);
 
-    auto Layer5 = std::make_shared<Layer>();
-    Layer5->address=HOST_PATH "/Example_input2.geojson";
-    Layer5->SetColor(Qt::red);
-    Layer5->SetScene(scene);
-    layers.addRow(Layer5);
+    auto Layer5 = std::make_shared<MetaModel>();
+    Layer5->address=HOST_PATH "/meta_model.json";
+    //Layer5->SetColor(Qt::red);
+    //Layer5->SetScene(scene);
+    //layers.addRow(Layer5);
 
 
     //QJsonDocument ModelJsonDoc = loadJson("/Users/arash/Projects/QMapViewer/resources/Example_input.json");
@@ -69,19 +56,20 @@ MainWindow::MainWindow(QWidget *parent)
     {
         if (DownloadMode == downloadmode::localfile)
         {
-            QFile layerfile("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer_geo.json");
+            QString  Filename = layers[i]->address;
+            QFile layerfile(Filename);
             if (layerfile.exists())
             {
                 qDebug()<<"File '"<<layerfile.fileName() << "' exists!";
+                layers[i]->JsonDoc = loadJson(QString(Filename));
+                layers[i]->GetFromJsonDocument(layers[i]->JsonDoc);
+                populateScene();
             }
             else
             {
                 QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
                 qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
             }
-            layers[i]->JsonDoc = loadJson(QString("/mnt/3rd900/Projects/QMapViewer/HickeyRunSewer_geo.json"));
-            layers[i]->GetFromJsonDocument(layers[i]->JsonDoc);
-            populateScene();
         }
         else if (DownloadMode == downloadmode::url)
         {

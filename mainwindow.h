@@ -90,7 +90,7 @@ private:
     QSplitter *h2Splitter;
     LayerItemModel layers;
     MapView *view = nullptr;
-    downloadmode DownloadMode = downloadmode::url;
+    downloadmode DownloadMode = downloadmode::localfile;
     ModelLayer *Model;
 
 public slots:

@@ -41,7 +41,7 @@ public:
     double fontfactor();
     vector<double> bounds();
     void SetMetaModel(MetaModel*);
-    QPixmap* GetIcon(const QString &type);
+    QPixmap*GetIcon(const QString &type);
 
 //    QString GetIcon(const QString &type);
 

@@ -5,7 +5,7 @@
 #define HOST_PATH "http://localhost:30000"
 #define SERVER_PATH "http://192.168.1.2:5004"
 #else
-#define HOST_PATH "http://20.244.11.239/json"
+#define HOST_PATH "/Users/venkateshputta/WWTP-Project/QMapViewer/Json"
 #define SERVER_PATH "http://20.244.11.239/api"
 #endif
 
