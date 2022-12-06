@@ -169,7 +169,12 @@ void Layer::OnDownloadFinished()
 
 QJsonDocument loadJson(const QString &fileName) {
     QFile jsonFile(fileName);
-    jsonFile.open(QFile::ReadOnly);
+
+    if (!jsonFile.open(QFile::ReadWrite))
+    {
+        qDebug()<<"The file '" + fileName + "' was not found!";
+    }
+
     return QJsonDocument().fromJson(jsonFile.readAll());
 };
 

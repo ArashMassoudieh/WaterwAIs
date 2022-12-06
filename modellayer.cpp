@@ -62,15 +62,16 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
                 double xCoordinate = it.value().toObject().value("x").toDouble();
                 double yCoordinate = it.value().toObject().value("y").toDouble();
 
-                    Node node(it.key(),it.value().toObject());
-                    node.SetName(it.key());
-                    node.setX(xCoordinate);
-                    node.setY(yCoordinate);
-                    node.setWidth(200);
-                    node.setHeight(200);
-                    node.setZValue(9000);
-                    //node.SetMetaModel(metamodel);
-                   nodes[it.key()] =node;
+                Node node(it.key(),it.value().toObject());
+                node.SetName(it.key());
+                node.SetComponentType(it.value().toObject().value("type").toString());
+                node.setX(xCoordinate);
+                node.setY(yCoordinate);
+                node.setWidth(200);
+                node.setHeight(200);
+                node.setZValue(9000);
+                node.SetMetaModel(metamodel);
+               nodes[it.key()] =node;
             }
         return true;
 }

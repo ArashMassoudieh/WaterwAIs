@@ -96,18 +96,18 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     SetColor(Qt::black);
     painter->setPen(Pen());
 
-    QPixmap pixmap = QPixmap(IconFileName());
-    //QPixmap pixmap = GetIcon(ComponentType());
+
+    QPixmap *pixmap = GetIcon(ComponentType());
     double iconmargin = 0;
     QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(),
                          boundingRect().top()*0+iconmargin*boundingRect().width(),
                          boundingRect().width()*(1-iconmargin)-100,
                          boundingRect().height()*(1-iconmargin)-100);
-    QRectF source(0, 0, pixmap.size().width()+100, pixmap.size().height());
+    QRectF source(0, 0, pixmap->size().width()+100, pixmap->size().height());
 
 
 
-    painter->drawPixmap(rect, pixmap, source);
+    painter->drawPixmap(rect, *pixmap, source);
 
     painter->setBrush(Qt::black);
     qDebug() << x() << "," << y();
@@ -145,12 +145,13 @@ void Node::SetMetaModel(MetaModel *_meta)
     meta = _meta;
 }
 
-QPixmap Node::GetIcon(const QString &type)
+QPixmap* Node::GetIcon(const QString &type)
 {
-//    qDebug() << type << ",";
-//    QString iconurl = meta->layerIconUrl();
-//    return type;
-//    QString Iconfilename = meta->operator[](type).IconFileName();
-//    QString ObjectType = type;
-    return QPixmap(type);
+    if (icon!=nullptr) return icon;
+    qDebug() << type << ",";
+    //QString iconurl = meta->layerIconUrl();
+    QString Iconfilename = meta->operator[](type).IconFileName();
+    QString ObjectType = type;
+    icon = new QPixmap(Iconfilename);
+    return icon;
 }

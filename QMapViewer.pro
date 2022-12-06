@@ -65,7 +65,7 @@ SOURCES += mainwindow.cpp
 
 DEFINES += QT_NO_DEBUG _NO_GSL
 
-DEFINES += Venkatesh
+DEFINES += Arash
 
 QT += widgets core network
 

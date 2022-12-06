@@ -15,7 +15,7 @@ public:
     virtual ~ModelLayer();
     ModelLayer(const ModelLayer& other);
     bool GetFromJsonDocument(const QJsonDocument &JsonDoc) override;
-    bool GetMetalModelFromJasonDocument(const QJsonDocument &JsonDoc);
+    bool GetMetalModelFromJsonDocument(const QJsonDocument &JsonDoc);
     void SetMetaModel (MetaModel *meta_model) {metamodel=meta_model;}
     QJsonDocument loadJson(const QString &fileName);
     QJsonDocument loadJson(QNetworkReply *fileName);
