@@ -7,12 +7,17 @@
 #include "modellayer.h"
 #include <QDebug>
 #include "Common.h"
+#include <QTreeView>
+#include <QStandardItemModel>
+#include <QItemSelectionModel>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QFileSystemModel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new MapScene(this))
     , h1Splitter(new QSplitter(this)), h2Splitter(new QSplitter(this))
-{
-
+{   
     auto Layer1 = std::make_shared<Layer>();
     Layer1->address=HOST_PATH "/Centroids.geojson";
     Layer1->SetColor(Qt::red);
@@ -37,15 +42,11 @@ MainWindow::MainWindow(QWidget *parent)
     Layer4->SetScene(scene);
     layers.addRow(Layer4);
 
-    auto Layer5 = std::make_shared<MetaModel>();
+    auto Layer5 = std::make_shared<Layer>();
     Layer5->address=HOST_PATH "/meta_model.json";
-    //Layer5->SetColor(Qt::red);
-    //Layer5->SetScene(scene);
-    //layers.addRow(Layer5);
-
-
-    //QJsonDocument ModelJsonDoc = loadJson("/Users/arash/Projects/QMapViewer/resources/Example_input.json");
-    //Model->GetFromJsonDocument(ModelJsonDoc);
+    Layer5->SetColor(Qt::red);
+    Layer5->SetScene(scene);
+    layers.addRow(Layer5);
 
     QPen pen;
     pen.setColor(QColor(255,0,0));

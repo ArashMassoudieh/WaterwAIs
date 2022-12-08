@@ -17,6 +17,7 @@ public:
     bool GetFromJsonDocument(const QJsonDocument &JsonDoc) override;
     bool GetMetalModelFromJsonDocument(const QJsonDocument &JsonDoc);
     void SetMetaModel (MetaModel *meta_model) {metamodel=meta_model;}
+    void clickeme();
     QJsonDocument loadJson(const QString &fileName);
     QJsonDocument loadJson(QNetworkReply *fileName);
     QJsonDocument loadJson(QUrl fileName);

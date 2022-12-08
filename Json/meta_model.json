@@ -1,4 +1,7 @@
 {
+"type": "FeatureCollection",
+"name": "Meta-Model",
+"icon": "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/5.png",
     "sub-catchment": {
         "type": "node",
         "area": {

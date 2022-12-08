@@ -14,6 +14,7 @@ HEADERS += mainwindow.h \
     ../Utilities/cpoint.h \
     Circle.h \
     Common.h \
+    about.h \
     dlglayerproperties.h \
     feature.h \
     filedownloader.h \
@@ -28,6 +29,7 @@ HEADERS += mainwindow.h \
     mapview.h \
     metamodel.h \
     modellayer.h \
+    mymodel.h \
     node.h \
     object.h \
     polygon.h \
@@ -41,6 +43,7 @@ SOURCES += main.cpp \
     ../Utilities/Vector.cpp \
     ../Utilities/cpoint.cpp \
     Circle.cpp \
+    about.cpp \
     dlglayerproperties.cpp \
     feature.cpp \
     filedownloader.cpp \
@@ -55,6 +58,7 @@ SOURCES += main.cpp \
     mapview.cpp \
     metamodel.cpp \
     modellayer.cpp \
+    mymodel.cpp \
     node.cpp \
     object.cpp \
     polygon.cpp \
@@ -94,6 +98,7 @@ DISTFILES += json/Centroids.geojson \
     json/4.png
 
 FORMS += \
+    dialog.ui \
     dlglayerproperties.ui \
     mapview.ui
 

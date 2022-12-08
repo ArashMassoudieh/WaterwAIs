@@ -3,6 +3,9 @@
 #include <QStyleOptionGraphicsItem>
 #include "metamodel.h"
 #include "Common.h"
+#include <QDialog>
+#include "about.h"
+
 
 Node::Node():Circle()
 {
@@ -85,6 +88,7 @@ QPainterPath Node::shape() const
     path.addRect(14, 14, 82, 42);
     return path;
 }
+
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
@@ -92,6 +96,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QColor fillColor = (option->state & QStyle::State_Selected) ? Color().darker(150) : Color();
     if (option->state & QStyle::State_MouseOver) {
         fillColor = fillColor.lighter(125);
+         about *myModel = new about();
+         myModel->setWindowTitle("Node");
+            myModel->show();
     }
 
     SetColor(Qt::black);

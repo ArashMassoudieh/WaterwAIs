@@ -63,6 +63,7 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
                 double yCoordinate = it.value().toObject().value("y").toDouble();
 
                 Node node(it.key(),it.value().toObject());
+                //node.setCursor(QCursor(clickeme()));
                 node.SetName(it.key());
                 node.SetComponentType(it.value().toObject().value("type").toString());
                 node.setX(xCoordinate);
@@ -74,6 +75,11 @@ bool ModelLayer :: prepareNodes(const QString &fileName)
                nodes[it.key()] =node;
             }
         return true;
+}
+
+void ModelLayer :: clickeme(){
+
+
 }
 
 bool ModelLayer :: AddToScene(QGraphicsScene *scene)
