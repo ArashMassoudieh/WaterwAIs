@@ -27,7 +27,8 @@ public:
     MetaModel(const MetaModel& other);
     MetaModel(QJsonDocument& qjobject);
     virtual bool getloadIcon(const QString &fileName);
-    QString address;
+    void SetAddress(const QString &adrs) {address = adrs;}
+    QString Address() {return address; }
 
     QString layerName() const {
         return _name;
@@ -56,6 +57,7 @@ private:
     QPixmap _icon;
     QNetworkAccessManager nam;
     QString _iconUrl;
+    QString address; // The address of the json file containing the model
 
 signals:
     void iconChanged();

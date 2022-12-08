@@ -42,6 +42,8 @@ public:
     vector<double> bounds();
     void SetMetaModel(MetaModel*);
     QPixmap*GetIcon(const QString &type);
+    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    //void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 
 //    QString GetIcon(const QString &type);
 

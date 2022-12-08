@@ -69,7 +69,7 @@ SOURCES += mainwindow.cpp
 
 DEFINES += QT_NO_DEBUG _NO_GSL
 
-DEFINES += Arash1
+DEFINES += Arash
 
 QT += widgets core network
 

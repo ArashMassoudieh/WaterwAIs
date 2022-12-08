@@ -2,7 +2,7 @@
 #include <QMouseEvent>
 #include <QPen>
 #include <QColor>
-
+#include "node.h"
 #include "graphicsview.h"
 #include "mapscene.h"
 #include "mainwindow.h"
@@ -90,6 +90,12 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
         break;
 
     default:
+        QList<QGraphicsItem*> selecteditems = items(event->pos());
+        QList<Node*> nodes;
+        for (int i=0; i<selecteditems.size(); i++) {
+            if(selecteditems[i]->data(1000).toString()=="Node")
+                nodes.append(static_cast<Node*>(selecteditems[i]));
+        }
         break;
     }
 }

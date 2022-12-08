@@ -9,7 +9,7 @@
 
 Node::Node():Circle()
 {
-
+    setData(1000,"Node");
 }
 
 Node::Node(GraphicsView *_parent):Object()
@@ -21,6 +21,7 @@ Node::Node(GraphicsView *_parent):Object()
     setCacheMode(DeviceCoordinateCache);
     setZValue(this->zValue());
     parent->scene()->addItem(this);
+    setData(1000,"Node");
 }
 
 Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsView *_parent):Object(objectType, jsonobject)
@@ -33,7 +34,7 @@ Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsVie
     if (parent)
         parent->scene()->addItem(this);
 
-
+    setData(1000,"Node");
 }
 
 Node::Node(const Node &E):Object(E)
@@ -48,6 +49,7 @@ Node::Node(const Node &E):Object(E)
     meta = E.meta;
     height = E.Height();
     parent = E.parent;
+    setData(1000,"Node");
 
 }
 
@@ -94,12 +96,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(widget);
 
     QColor fillColor = (option->state & QStyle::State_Selected) ? Color().darker(150) : Color();
-    if (option->state & QStyle::State_MouseOver) {
-        fillColor = fillColor.lighter(125);
-         about *myModel = new about();
-         myModel->setWindowTitle("Node");
-            myModel->show();
-    }
+
 
     SetColor(Qt::black);
     painter->setPen(Pen());
@@ -163,3 +160,25 @@ QPixmap* Node::GetIcon(const QString &type)
     icon = new QPixmap(Iconfilename);
     return icon;
 }
+
+/*
+void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    about *myModel = new about();
+    myModel->setWindowTitle("Node");
+        myModel->show();
+
+    QGraphicsItem::mouseReleaseEvent(event);
+
+}
+
+void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    about *myModel = new about();
+    myModel->setWindowTitle("Node");
+        myModel->show();
+
+    QGraphicsItem::mouseMoveEvent(event);
+
+}
+*/
