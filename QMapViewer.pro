@@ -1,3 +1,14 @@
+
+CONFIG += c++14
+
+DEFINES += QT_NO_DEBUG _NO_GSL
+
+QT += widgets core network
+
+qtHaveModule(printsupport): QT += printsupport
+qtHaveModule(opengl): QT += opengl
+
+
 RESOURCES += images.qrc
 
 INCLUDEPATH += ../Utilities
@@ -36,6 +47,8 @@ HEADERS += mainwindow.h \
     segment.h \
     variable.h \
     variablelist.h
+
+
 SOURCES += main.cpp \
     ../Utilities/Matrix.cpp \
     ../Utilities/QuickSort.cpp \
@@ -67,7 +80,6 @@ SOURCES += main.cpp \
     variablelist.cpp
 SOURCES += mainwindow.cpp
 
-DEFINES += QT_NO_DEBUG _NO_GSL
 
 DEFINES += Arash
 
