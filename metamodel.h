@@ -25,7 +25,7 @@ public:
     MetaModel& operator=(const MetaModel& other);
     virtual ~MetaModel();
     MetaModel(const MetaModel& other);
-    MetaModel(QJsonDocument& qjobject);
+    MetaModel(const QJsonDocument& qjobject);
     virtual bool getloadIcon(const QString &fileName);
     void SetAddress(const QString &adrs) {address = adrs;}
     QString Address() {return address; }

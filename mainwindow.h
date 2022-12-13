@@ -80,7 +80,7 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     MapScene* Scene() {return scene;}
-
+    GraphicsView* GetGraphicsView() {return view->view();}
 private:
     void populateScene();
     void zoomAll();

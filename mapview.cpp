@@ -233,3 +233,8 @@ void MapView::getFileContent(QString fileId)
         }
     });
 }
+
+QListView* MapView::LayersList()
+{
+    return ui->lstLayers;
+}

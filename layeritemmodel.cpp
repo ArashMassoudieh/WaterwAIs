@@ -26,6 +26,7 @@ void LayerItemModel::addRow(std::shared_ptr<Layer> layer)
     endInsertRows();
 }
 
+
 void LayerItemModel::moveItem(int srcIndx, int dstIndx)
 {
     beginResetModel();

@@ -12,6 +12,9 @@
 #include <QStandardItemModel>
 #include "propmodel.h"
 
+
+class QListView;
+
 namespace Ui {
 class MapView;
 }
@@ -27,7 +30,7 @@ public:
     void setLayerListModel(QAbstractListModel *names);
     void setTableModel(QStandardItemModel *names);
     QLabel *StatusBar() {return statusbar;}
-
+    QListView* LayersList();
 protected slots:
     void on_btnZoom_clicked();
     void on_btnPan_clicked();

@@ -16,6 +16,7 @@ public:
     explicit LayerItemModel(QObject *parent = nullptr);
     void addRow(std::shared_ptr<Layer> layer);
 
+
     size_t getCount() const {
         return layers.size();
     }

@@ -48,11 +48,8 @@ bool ModelLayer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
     return true;
 }
 
-bool ModelLayer :: prepareNodes(const QString &fileName)
+bool ModelLayer :: prepareNodes(const QJsonDocument &ModelJsonDoc1)
 {
-    QFile jsonFile(fileName);
-    jsonFile.open(QFile::ReadOnly);
-    QJsonDocument ModelJsonDoc1 = QJsonDocument().fromJson(jsonFile.readAll());
     QJsonObject pointvalArray = ModelJsonDoc1.object();
         for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
         {
@@ -84,6 +81,7 @@ void ModelLayer :: clickeme(){
 
 bool ModelLayer :: AddToScene(QGraphicsScene *scene)
 {
+    SetScene(static_cast<MapScene*>(scene));
     for (QMap<QString,Node>::Iterator it=nodes.begin(); it!=nodes.end(); it++)
         scene->addItem(&it.value());
 

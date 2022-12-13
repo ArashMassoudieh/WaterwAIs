@@ -81,7 +81,7 @@ SOURCES += main.cpp \
 SOURCES += mainwindow.cpp
 
 
-DEFINES += Arash1
+DEFINES += Arash
 
 QT += widgets core network
 

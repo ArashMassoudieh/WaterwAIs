@@ -21,7 +21,7 @@ public:
     QJsonDocument loadJson(const QString &fileName);
     QJsonDocument loadJson(QNetworkReply *fileName);
     QJsonDocument loadJson(QUrl fileName);
-    bool prepareNodes(const QString &fileName);
+    bool prepareNodes(const QJsonDocument &JsonDoc);
     bool AddToScene(QGraphicsScene *scene);
 private:
     QMap<QString,Node> nodes;

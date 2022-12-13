@@ -20,7 +20,7 @@ MetaModel::MetaModel(const MetaModel& other):QMap<QString,VariableList>(other)
 {
 
 }
-MetaModel::MetaModel(QJsonDocument& qjdoc):QMap<QString,VariableList>()
+MetaModel::MetaModel(const QJsonDocument& qjdoc):QMap<QString,VariableList>()
 {
     QJsonObject qjobject = qjdoc.object();
     foreach(const QString& key, qjobject.keys()) {

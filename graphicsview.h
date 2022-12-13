@@ -4,7 +4,11 @@
 #include <QGraphicsView>
 //#include "modellayer.h"
 
+
 class MapView;
+class ModelLayer;
+class MetaModel;
+class LayerItemModel;
 
 class GraphicsView : public QGraphicsView
 {
@@ -30,7 +34,7 @@ public:
     void setMapScene(QGraphicsScene *scene);
     double FontFactor() const {return fontfactor;};
     void SetMapView(MapView* map) {mapview = map;}
-    //ModelLayer *Model;
+    bool SetModelLayer(const QJsonDocument &ModelLayerJsonDoc, const QJsonDocument &MetaModelJsonDoc, LayerItemModel *layeritemmodel) ;
 
 public slots:
     void zoomToFit();
@@ -50,6 +54,8 @@ private:
     QGraphicsRectItem *_rect;
     double fontfactor = 1;
     MapView* mapview = nullptr;
+    std::shared_ptr<ModelLayer> modelLayer;
+    MetaModel *metamodel = nullptr;
 };
 
 #endif // GRAPHICSVIEW_H
