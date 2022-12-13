@@ -2,6 +2,7 @@
 #define GRAPHICSVIEW_H
 
 #include <QGraphicsView>
+//#include "modellayer.h"
 
 class MapView;
 
@@ -29,6 +30,7 @@ public:
     void setMapScene(QGraphicsScene *scene);
     double FontFactor() const {return fontfactor;};
     void SetMapView(MapView* map) {mapview = map;}
+    //ModelLayer *Model;
 
 public slots:
     void zoomToFit();

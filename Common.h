@@ -6,6 +6,8 @@
 #define SERVER_PATH "http://192.168.1.2:5004"
 #else
 #ifndef Arash
+//#define HOST_PATH "http://20.244.11.239/json"
+//#else
 #define HOST_PATH "/Users/venkateshputta/WWTP-Project/QMapViewer/Json"
 #else
 #define HOST_PATH "/home/arash/Projects/QMapViewer/Json"

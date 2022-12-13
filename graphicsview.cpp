@@ -7,6 +7,7 @@
 #include "mapscene.h"
 #include "mainwindow.h"
 
+
 GraphicsView::GraphicsView(QWidget *parent)
     : QGraphicsView{parent}
 {
@@ -92,9 +93,47 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     default:
         QList<QGraphicsItem*> selecteditems = items(event->pos());
         QList<Node*> nodes;
-        for (int i=0; i<selecteditems.size(); i++) {
-            if(selecteditems[i]->data(1000).toString()=="Node")
+        auto t = selecteditems.first();
+         Node *first = dynamic_cast<Node *>(selecteditems.first());
+        int _x = mapToScene(event->pos()).x();
+        int _y = mapToScene(event->pos()).y();
+         for (int i=0; i<selecteditems.size(); i++) {
+            if(selecteditems[i]->data(1000).toString()=="Node"){
+                QString fileName = "/Users/venkateshputta/WWTP-Project/QMapViewer/Json/Example_input.json";
+                QFile jsonFile(fileName);
+                jsonFile.open(QFile::ReadOnly);
+                QJsonDocument ModelJsonDoc1 = QJsonDocument().fromJson(jsonFile.readAll());
+                QJsonObject pointvalArray = ModelJsonDoc1.object();
                 nodes.append(static_cast<Node*>(selecteditems[i]));
+                 QString s = QString::number(_x);
+                 QString s1 = QString::number(_y);
+                   QString s3 = s.left(4);
+
+                   QList<QStandardItem *> fn;
+
+                   for (QJsonObject::Iterator it= pointvalArray.begin();it!=pointvalArray.end(); it++)
+                   {
+
+                           qDebug()<<it.value();
+                           QJsonObject r = it.value().toObject();
+                           int xCoordinate = it.value().toObject().value("x").toDouble();
+                           int yCoordinate = it.value().toObject().value("y").toDouble();
+                           QString s5 = QString::number(xCoordinate);
+                           //if(s5.left(4) == s3){
+                           if(s5.contains(s3)){
+                               QString name = it.value().toObject().value("name").toString();
+                                QString mail = it.value().toObject().value("mail").toString();
+                               fn.append(new QStandardItem(name));
+                               fn.append(new QStandardItem(mail));
+                           }
+                   }
+                   QStandardItemModel* model1 = new QStandardItemModel(this);
+                    model1->setColumnCount(2);
+                    model1->appendRow(fn);
+                    model1->setHeaderData(0, Qt::Horizontal, tr("Name"));
+                    model1->setHeaderData(1, Qt::Horizontal, tr("Email"));
+                  mapview->setTableModel(model1);
+            }
         }
         break;
     }
@@ -152,6 +191,7 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
     }
 
     default:
+
         break;
     }
 

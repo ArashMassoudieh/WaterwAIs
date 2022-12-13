@@ -1,7 +1,7 @@
 {
 "type": "FeatureCollection",
 "name": "Centroids",
-"icon": "http://localhost:30000/1.png",
+"icon": "/1.png",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::26918" } },
 "features": [
 { "type": "Feature", "properties": { "ID": 6, "x": 327946.519, "y": 4309540.126, "SAMPLE_1": 31.424226760864258 }, "geometry": { "type": "Point", "coordinates": [ 327946.518581721466035, 4309540.126177182421088 ] } },

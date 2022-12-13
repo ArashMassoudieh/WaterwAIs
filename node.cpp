@@ -160,25 +160,3 @@ QPixmap* Node::GetIcon(const QString &type)
     icon = new QPixmap(Iconfilename);
     return icon;
 }
-
-/*
-void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    about *myModel = new about();
-    myModel->setWindowTitle("Node");
-        myModel->show();
-
-    QGraphicsItem::mouseReleaseEvent(event);
-
-}
-
-void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    about *myModel = new about();
-    myModel->setWindowTitle("Node");
-        myModel->show();
-
-    QGraphicsItem::mouseMoveEvent(event);
-
-}
-*/

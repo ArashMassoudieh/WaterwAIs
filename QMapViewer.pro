@@ -40,10 +40,10 @@ HEADERS += mainwindow.h \
     mapview.h \
     metamodel.h \
     modellayer.h \
-    mymodel.h \
     node.h \
     object.h \
     polygon.h \
+    propmodel.h \
     segment.h \
     variable.h \
     variablelist.h
@@ -71,17 +71,17 @@ SOURCES += main.cpp \
     mapview.cpp \
     metamodel.cpp \
     modellayer.cpp \
-    mymodel.cpp \
     node.cpp \
     object.cpp \
     polygon.cpp \
+    propmodel.cpp \
     segment.cpp \
     variable.cpp \
     variablelist.cpp
 SOURCES += mainwindow.cpp
 
 
-DEFINES += Arash
+DEFINES += Arash1
 
 QT += widgets core network
 

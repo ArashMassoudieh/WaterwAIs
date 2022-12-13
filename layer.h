@@ -12,6 +12,7 @@
 #include "QColor"
 #include "QPen"
 #include "filedownloader.h"
+#include "Common.h"
 
 class MapScene;
 
@@ -20,6 +21,7 @@ class Layer : public QObject
 Q_OBJECT
 
 public:
+    enum class downloadmode {localfile, url};
     explicit Layer(QObject *parent = 0);
     bool SetFeatureType(const string &FT);
     void SetFeatureType(_FeatureType FT);
@@ -67,12 +69,18 @@ public:
         _iconUrl = url;
         auto reply = nam.get(QNetworkRequest(url));
 
-        connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-            auto reader = new QImageReader(reply);
+
+        if (DownloadMode == downloadmode::url){ connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+                auto reader = new QImageReader(reply);
+                _icon = QPixmap::fromImageReader(reader).scaled(QSize(24, 24));
+                emit iconChanged();
+                reply->deleteLater();
+            });
+        }
+        else{
+            auto reader = new QImageReader(HOST_PATH+ _iconUrl);
             _icon = QPixmap::fromImageReader(reader).scaled(QSize(24, 24));
-            emit iconChanged();
-            reply->deleteLater();
-        });
+        }
     }
 
     QPixmap layerIcon() const {
@@ -129,6 +137,7 @@ private:
     bool _visible = true;
     qreal _opacity = 1;
     int _z;
+    downloadmode DownloadMode = downloadmode::localfile;
 
 public slots:
     void OnDownloadFinished();

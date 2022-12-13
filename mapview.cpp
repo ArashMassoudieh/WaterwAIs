@@ -127,6 +127,13 @@ void MapView::setLayerListModel(QAbstractListModel *names)
     });
 }
 
+void MapView::setTableModel(QStandardItemModel *names)
+{
+
+       ui->tableView->setModel(names);
+
+}
+
 void MapView::on_btnZoom_clicked()
 {
     MapViewer->setOperationType(GraphicsView::OperationType::Zoom);

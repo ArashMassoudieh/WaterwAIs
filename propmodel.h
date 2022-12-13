@@ -1,15 +1,15 @@
-#ifndef MYMODEL_H
-#define MYMODEL_H
+#ifndef PROPMODEL_H
+#define PROPMODEL_H
 
 #include <QAbstractItemModel>
 #include <QDialog>
 
-class MyModel : public QAbstractItemModel
+class propmodel : public QAbstractItemModel
 {
     Q_OBJECT
 
 public:
-    explicit MyModel(QObject *parent = nullptr);
+    explicit propmodel(QObject *parent = nullptr);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -27,4 +27,4 @@ public:
 private:
 };
 
-#endif // MYMODEL_H
+#endif // PROPMODEL_H

@@ -6,7 +6,6 @@
 #include <QUrl>
 #include "modellayer.h"
 #include <QDebug>
-#include "Common.h"
 #include <QTreeView>
 #include <QStandardItemModel>
 #include <QItemSelectionModel>
@@ -92,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(vSplitter);
 
     setLayout(layout);
+
     Model = new ModelLayer();
 
 #ifdef Arash
