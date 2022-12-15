@@ -67,7 +67,7 @@ bool ModelLayer :: prepareNodes(const QJsonDocument &ModelJsonDoc1)
                 node.setY(yCoordinate);
                 node.setWidth(200);
                 node.setHeight(200);
-                node.setZValue(9000);
+                node.setZValue(20000);
                 node.SetMetaModel(metamodel);
                nodes[it.key()] =node;
             }

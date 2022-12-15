@@ -88,17 +88,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     setLayout(layout);
 
-#ifdef Arash
-    QJsonDocument metamodeljason = loadJson(QString("/home/arash/Projects/QMapViewer/Json/meta_model.json"));
-#else
-    QJsonDocument metamodeljason = loadJson(QString("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/meta_model.json"));
-#endif
+    QJsonDocument metamodeljason = loadJson(QString(HOST_PATH "/meta_model.json"));
 
-#ifdef Arash
-    QJsonDocument modeljason = loadJson(QString("/home/arash/Projects/QMapViewer/Json/Example_input.json"));
-#else
-    QJsonDocument modeljason = loadJson(QString("/Users/venkateshputta/WWTP-Project/QMapViewer/Json/Example_input.json"));
-#endif
+    QJsonDocument modeljason = loadJson(QString(HOST_PATH "/Example_input.json"));
 
     GetGraphicsView()->SetModelLayer(modeljason,metamodeljason,&layers);
 

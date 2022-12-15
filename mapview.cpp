@@ -127,7 +127,7 @@ void MapView::setLayerListModel(QAbstractListModel *names)
     });
 }
 
-void MapView::setTableModel(QStandardItemModel *names)
+void MapView::setTableModel(propmodel *names)
 {
 
        ui->tableView->setModel(names);

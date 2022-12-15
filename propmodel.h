@@ -1,30 +1,22 @@
 #ifndef PROPMODEL_H
 #define PROPMODEL_H
 
-#include <QAbstractItemModel>
-#include <QDialog>
+#include <QAbstractTableModel>
+#include <QMap>
 
-class propmodel : public QAbstractItemModel
+class propmodel : public QAbstractTableModel
 {
     Q_OBJECT
-
 public:
-    explicit propmodel(QObject *parent = nullptr);
 
-    // Header:
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    explicit propmodel(QObject *parent = 0);
+    int rowCount(const QModelIndex& parent = QModelIndex()) const;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
-    // Basic functionality:
-    QModelIndex index(int row, int column,
-                      const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    void setTable(QMap<QString, QString> * tableView);
 
 private:
+    QMap<QString, QString>* _tableView;
 };
-
 #endif // PROPMODEL_H

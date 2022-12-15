@@ -1,49 +1,41 @@
 #include "propmodel.h"
-#include <QTableWidget>
-#include <QTableWidgetItem>
 
-propmodel::propmodel(QObject *parent)
-    : QAbstractItemModel(parent)
+propmodel::propmodel(QObject *parent) :
+    QAbstractTableModel(parent), _tableView(nullptr)
+{}
+
+void propmodel::setTable(QMap<QString, QString>* tableView)
 {
-    //setupUi(this);
+//    beginModelReset();
+    _tableView = tableView;
+//    endModelReset();
 }
 
-QVariant propmodel::headerData(int section, Qt::Orientation orientation, int role) const
+int propmodel::rowCount(const QModelIndex& parent) const
 {
-    // FIXME: Implement me!
+    if (_tableView)
+        return _tableView->count();
+    return 0;
 }
 
-QModelIndex propmodel::index(int row, int column, const QModelIndex &parent) const
+int propmodel::columnCount(const QModelIndex & parent) const
 {
-    // FIXME: Implement me!
+    return 2;
 }
 
-QModelIndex propmodel::parent(const QModelIndex &index) const
+QVariant propmodel::data(const QModelIndex& index, int role) const
 {
-    // FIXME: Implement me!
-}
+//    if (!_map || !index.isValid() || index.row() >= _map->count() || role != Qt::DisplayRole)
+//        return QVariant();
 
-int propmodel::rowCount(const QModelIndex &parent) const
-{
-    if (!parent.isValid())
-        return 0;
+    auto it = _tableView->cbegin();
+    it += index.row();
 
-    // FIXME: Implement me!
-}
+    if (index.column() == 0)
+        return it.key();
+    if (index.column() == 1)
+        return it.value();
 
-int propmodel::columnCount(const QModelIndex &parent) const
-{
-    if (!parent.isValid())
-        return 0;
-
-    // FIXME: Implement me!
-}
-
-QVariant propmodel::data(const QModelIndex &index, int role) const
-{
-    if (!index.isValid())
-        return QVariant();
-
-    // FIXME: Implement me!
     return QVariant();
 }
+
