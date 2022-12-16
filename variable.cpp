@@ -95,3 +95,23 @@ QString Variable::GetValue()
         return "";
     }
 }
+
+void Variable::SetValue(const QString &value)
+{
+    if (Type==variable_type::value || Type==variable_type::constant)
+    {
+        numeric_value=value.toDouble();
+    }
+    else if (Type==variable_type::timeseries || Type==variable_type::prec_timeseries)
+    {
+        timeseries_filename = value;
+    }
+    else if (Type==variable_type::string)
+    {
+        string_value = value;
+    }
+    else
+    {
+        string_value = value;
+    }
+}

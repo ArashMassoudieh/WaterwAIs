@@ -222,7 +222,7 @@ bool GraphicsView::SetModelLayer(const QJsonDocument &ModelLayerJsonDoc, const Q
 
     layeritemmodel->addRow(modelLayer);
 
-    modelLayer->prepareNodes(ModelLayerJsonDoc);
+    //modelLayer->prepareNodes(ModelLayerJsonDoc);
 
     modelLayer->AddToScene(scene());
 

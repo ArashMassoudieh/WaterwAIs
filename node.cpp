@@ -10,6 +10,16 @@
 Node::Node():Circle()
 {
     setData(1000,"Node");
+    Variable var;
+    var.SetType(variable_type::string);
+    operator[]("name") = var;
+    if (ObjectType()==object_type::node)
+    {
+        Variable varxy;
+        varxy.SetType(variable_type::value);
+        operator[]("x") = varxy;
+        operator[]("y") = varxy;
+    }
 }
 
 Node::Node(GraphicsView *_parent):Object()
@@ -22,6 +32,7 @@ Node::Node(GraphicsView *_parent):Object()
     setZValue(this->zValue());
     parent->scene()->addItem(this);
     setData(1000,"Node");
+    AddXYNameVariables();
 }
 
 Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsView *_parent):Object(objectType, jsonobject)
@@ -35,6 +46,7 @@ Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsVie
         parent->scene()->addItem(this);
 
     setData(1000,"Node");
+    AddXYNameVariables();
 }
 
 Node::Node(const Node &E):Object(E)
@@ -49,12 +61,13 @@ Node::Node(const Node &E):Object(E)
     meta = E.meta;
     height = E.Height();
     parent = E.parent;
+    AddXYNameVariables();
     setData(1000,"Node");
 
 }
 
 
-Node Node::operator=(const Node &E)
+Node& Node::operator=(const Node &E)
 {
     Object::operator=(E);
     setFlags(E.flags());
@@ -67,15 +80,17 @@ Node Node::operator=(const Node &E)
     width = E.Width();
     height = E.Height();
     parent = E.parent;
+    AddXYNameVariables();
     return *this;
 }
 
-Node Node::operator=(const Object &E)
+Node& Node::operator=(const Object &E)
 {
     Object::operator=(E);
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
     setFlag(ItemSendsGeometryChanges);
+    AddXYNameVariables();
     return *this;
 }
 

@@ -62,9 +62,6 @@ private:
     void fillMetaModelDataIntoMap(const QJsonDocument& qjdoc);
 
 
-public:
-    QMap<QString,QString> metaDataMap;
-
 signals:
     void iconChanged();
     void visibleChanged();

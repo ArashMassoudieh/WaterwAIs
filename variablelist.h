@@ -23,6 +23,9 @@ public:
     QString ComponentType() {return component_type;}
     void SetComponentType(const QString &componentType) {component_type = componentType;}
     QMap<QString,Variable> varMap;
+    bool SetValue(const QString &VariableName, const QString &Value);
+    bool AddXYNameVariables();
+    bool AddNameVariable();
 private:
     QString iconfilename;
     object_type Object_Type;

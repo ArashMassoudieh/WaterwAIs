@@ -43,16 +43,37 @@ bool ModelLayer::GetFromJsonDocument(const QJsonDocument &JsonDoc)
 
     QJsonObject JsonObject = JsonDoc.object();
     foreach(const QString& key, JsonObject.keys()) {
+        QString ComponentType = JsonObject.value(key).toObject()["type"].toString();
+        VariableList variables = metamodel->operator[](ComponentType);
         QJsonValue value = JsonObject.value(key);
+        Object obj(key, ComponentType, variables);
 
-        VariableList varlist = VariableList(value.toObject());
-        metamodel->operator[](key) = varlist;
-        Object obj(key, value.toObject());
+        object_type objtype = metamodel->operator[](ComponentType).ObjectType();
+        if (objtype==object_type::node)
+            obj.AddXYNameVariables();
+        else if (objtype==object_type::link)
+            obj.AddNameVariable();
+        double xCoordinate = JsonObject.value(key).toObject().value("x").toString().toDouble();
+        double yCoordinate = JsonObject.value(key).toObject().value("y").toString().toDouble();
+
+        foreach (const QString& variablekey, JsonObject.value(key).toObject().keys())
+        {
+            qDebug()<<JsonObject.value(key).toObject().value(variablekey);
+            obj.SetValue(variablekey,JsonObject.value(key).toObject().value(variablekey).toString());
+        }
         nodes[key] = obj;
+        nodes[key].setX(xCoordinate);
+        nodes[key].setY(yCoordinate);
+        nodes[key].SetName(key);
+        nodes[key].setWidth(200);
+        nodes[key].setHeight(200);
+        nodes[key].setZValue(40000);
+        nodes[key].SetMetaModel(metamodel);
     }
     return true;
 }
 
+/*
 bool ModelLayer :: prepareNodes(const QJsonDocument &ModelJsonDoc1)
 {
     QJsonObject pointvalArray = ModelJsonDoc1.object();
@@ -78,6 +99,7 @@ bool ModelLayer :: prepareNodes(const QJsonDocument &ModelJsonDoc1)
             }
         return true;
 }
+*/
 
 void ModelLayer :: clickeme(){
 
@@ -93,46 +115,4 @@ bool ModelLayer :: AddToScene(QGraphicsScene *scene)
     return true;
 }
 
-bool ModelLayer :: parsingMetaModelData(const QJsonDocument &JsonDoc)
-{
-    //This is comparision logic between metamodel data and model layer data, still going on
-    MetaModel* metaModelJSonData = metamodel;
-    if(metaModelJSonData != nullptr)
-    {
-        QJsonObject JsonObject = JsonDoc.object();
-        foreach(const QString& key, JsonObject.keys())
-        {
-            QJsonValue subValues = JsonObject.value(key);
 
-            VariableList varlist = VariableList(subValues.toObject());
-            metamodel->operator[](key) = varlist;
-
-            foreach(const QString& k, subValues.toObject().keys())
-            {
-                QString values = subValues[k].toString();
-                //need to check type of values as we are not getting x and y values into map
-                modelDataMap.insert(k, values);
-            }
-
-        }
-
-        QMap<QString, QString> metaData = metamodel->metaDataMap;
-        QMap<QString,QString> modelData = modelDataMap;
-
-        for(const auto& k: modelData.keys())
-        {
-            for(const auto& mkey: metaData.keys())
-            {
-                if(k.contains(mkey)){
-                    QString val = modelData[k];
-                    sortedNodeDataMap.insert(k, val);
-//                    qDebug()<<"-----------------------------";
-//                    qDebug()<<"Key = "<<k<<"Value = "<<val;
-//                    qDebug()<<"-----------------------------";
-                }
-            }
-        }
-    }
-
-    return true;
-}

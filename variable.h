@@ -18,7 +18,7 @@ public:
     QString GetValue();
     void SetTimeSeries(const QString &name) {timeseries_filename = name;}
     void SetRole(const role &rl) {Role = rl;}
-    void SetValue(const QString &value) {string_value = value;}
+    void SetValue(const QString &value);
     void SetValue(const double &value) {numeric_value = value;}
     void SetType(const variable_type &type) {Type = type;}
 private:

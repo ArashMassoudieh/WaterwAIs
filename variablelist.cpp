@@ -58,6 +58,17 @@ VariableList::VariableList(const QString& objectType, const QJsonObject& qjobjec
 
 }
 
+bool VariableList::SetValue(const QString &VariableName, const QString &Value)
+{
+    if (count(VariableName)!=0)
+    {
+        operator[](VariableName).SetValue(Value);
+        return true;
+    }
+    else
+        return false;
+}
+
 //VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>() //for instances
 //{
 
@@ -113,4 +124,30 @@ VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>()
             varMap.insert(key, var);
         }
     }
+}
+
+bool VariableList::AddXYNameVariables()
+{
+    if (count("name")==0)
+    {   Variable var;
+        var.SetType(variable_type::string);
+        operator[]("name") = var;
+    }
+    if (ObjectType()==object_type::node && count("x")==0)
+    {
+        Variable varxy;
+        varxy.SetType(variable_type::value);
+        operator[]("x") = varxy;
+        operator[]("y") = varxy;
+    }
+    return true;
+}
+bool VariableList::AddNameVariable()
+{
+    if (count("name")==0)
+    {   Variable var;
+        var.SetType(variable_type::string);
+        operator[]("name") = var;
+    }
+    return true;
 }

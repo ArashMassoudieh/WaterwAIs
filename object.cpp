@@ -24,3 +24,9 @@ Object::Object(const QString &objectType, const QJsonObject& qjobject):VariableL
 {
 
 }
+
+Object::Object(const QString &Name, const QString &ComponentType, const VariableList& variables):VariableList(variables)
+{
+    SetComponentType(ComponentType);
+    name = Name;
+}

@@ -25,8 +25,8 @@ public:
     Node(const Object &obj);
     Node(const QString &objecttype, const QJsonObject &jsonobject, GraphicsView *parent=nullptr);
     Node(const Node &);
-    Node operator=(const Node &);
-    Node operator=(const Object &); //needs to be implemented
+    Node& operator=(const Node &);
+    Node& operator=(const Object &); //needs to be implemented
     int type() const Q_DECL_OVERRIDE { return Type; }
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
