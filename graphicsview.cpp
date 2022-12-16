@@ -69,7 +69,7 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
     }
 
     default:
-         break;
+        break;
     }
 }
 
@@ -97,26 +97,60 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     default:
         QList<QGraphicsItem*> selecteditems = items(event->pos());
         QList<Node*> nodes;
-        QMap<QString, QString> tableView;
 
-         for (int i=0; i<selecteditems.size(); i++) {
-            if(selecteditems[i]->data(1000).toString()=="Node"){
+        for (int i=0; i<selecteditems.size(); i++) {
+            if(selecteditems[i]->data(1000).toString()=="Node")
+            {
                 nodes.append(static_cast<Node*>(selecteditems[i]));
-
-                for (QMap<QString,Variable>::Iterator prop = nodes[0]->begin(); prop != nodes[0]->end(); prop++)
-                {
-                    //prop.value().GetValue()); error for that removed line
-                    tableView.insert(prop.key(), prop.value().GetValue());
-                }
             }
-         }
-         if(tableView.size()>0){
-          propmodel PropModel;
-          PropModel.setTable(&tableView);
-          mapview->setTableModel(&PropModel);
-          }
-       break;
         }
+
+        if (nodes.size()>0){
+            QStandardItemModel* model1 = new QStandardItemModel(this);
+            model1->setColumnCount(2);
+            model1->setHeaderData(0, Qt::Horizontal, tr("Property"));
+            model1->setHeaderData(1, Qt::Horizontal, tr("Value"));
+            for (QMap<QString,Variable>::Iterator prop = nodes[0]->begin(); prop != nodes[0]->end(); prop++)
+            {
+                QList<QStandardItem*> row;
+                row.append(new QStandardItem(prop.key()));
+                row.append(new QStandardItem(prop.value().GetValue())); //Still not getting value in prop.value() even after filling in variable list. Need to check
+                model1->appendRow(row);
+            }
+
+            mapview->setTableModel(model1);
+        }
+
+
+          //I am working on this code, as get value function is not working, I am collecting in some QMap and working on it.
+//        if(modelLayer != nullptr)
+//        {
+//            QMap<QString,QString> modelDataMap = modelLayer->getSortedNodeData();
+
+//            QStandardItemModel* model1 = new QStandardItemModel(this);
+//            model1->setColumnCount(2);
+//            model1->setHeaderData(0, Qt::Horizontal, tr("Property"));
+//            model1->setHeaderData(1, Qt::Horizontal, tr("Value"));
+
+//            for (QMap<QString,Variable>::Iterator prop = nodes[0]->begin(); prop != nodes[0]->end(); prop++)
+//            {
+
+//            }
+
+//            for(const auto& mkey: modelDataMap.keys())
+//            {
+//                QList<QStandardItem*> row;
+//                QString key = mkey;
+//                QString value = modelDataMap[mkey];
+//                row.append(new QStandardItem(mkey));
+//                row.append(new QStandardItem(value));
+//                //row.append(new QStandardItem(prop.value().GetValue()));
+//                model1->appendRow(row);
+//            }
+
+//            mapview->setTableModel(model1);
+//        }
+    }
 
 }
 
@@ -185,6 +219,7 @@ bool GraphicsView::SetModelLayer(const QJsonDocument &ModelLayerJsonDoc, const Q
     metamodel = new MetaModel(MetaModelJsonDoc);
     modelLayer->SetMetaModel(metamodel);
     modelLayer->GetFromJsonDocument(ModelLayerJsonDoc);
+
     layeritemmodel->addRow(modelLayer);
 
     modelLayer->prepareNodes(ModelLayerJsonDoc);

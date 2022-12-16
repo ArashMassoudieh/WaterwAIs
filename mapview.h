@@ -28,7 +28,7 @@ public:
     ~MapView();
     GraphicsView *view() { return MapViewer; }
     void setLayerListModel(QAbstractListModel *names);
-    void setTableModel(propmodel *names);
+    void setTableModel(QStandardItemModel *names);
     QLabel *StatusBar() {return statusbar;}
     QListView* LayersList();
 protected slots:

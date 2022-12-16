@@ -22,8 +22,13 @@ MetaModel::MetaModel(const MetaModel& other):QMap<QString,VariableList>(other)
 }
 MetaModel::MetaModel(const QJsonDocument& qjdoc):QMap<QString,VariableList>()
 {
+    //fillMetaModelDataIntoMap(qjdoc); //This function is for collecting meta data and comparing with model layer data, still working on it.
+
     QJsonObject qjobject = qjdoc.object();
     foreach(const QString& key, qjobject.keys()) {
+        QJsonValue subValues = qjobject.value(key);
+
+        metaDataMap.insert(key, subValues.toString());
         VariableList varlist = VariableList(key, qjobject.value(key).toObject());
         operator[](key) = varlist;
     }
@@ -46,4 +51,21 @@ bool MetaModel::getloadIcon(const QString &fileName){
     }
 
     return true;
+}
+
+//This function is for collecting meta data and comparing with model layer data, still working on it.
+void MetaModel::fillMetaModelDataIntoMap(const QJsonDocument& qjdoc)
+{
+    QJsonObject qjobject = qjdoc.object();
+    foreach(const QString& key, qjobject.keys()) {
+        QJsonValue subValues = qjobject.value(key);
+        foreach(const QString& k, subValues.toObject().keys())
+        {
+            QString type = subValues[k]["type"].toString();
+            if(!type.isEmpty())
+            {
+                metaDataMap.insert(k, type);
+            }
+        }
+    }
 }

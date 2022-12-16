@@ -14,6 +14,7 @@ public:
     virtual ~Variable();
     Variable(const Variable& other);
     Variable(const QJsonObject& qjobject);
+    Variable(const QString &objectType, const QJsonObject& qjobject);
     QString GetValue();
     void SetTimeSeries(const QString &name) {timeseries_filename = name;}
     void SetRole(const role &rl) {Role = rl;}

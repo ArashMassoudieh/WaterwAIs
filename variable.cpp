@@ -54,9 +54,28 @@ Variable::Variable(const QJsonObject& qjobject)
     {
         Role = role::output;
     }
-
-
 }
+
+//This is for model layer data
+Variable::Variable(const QString &objectType, const QJsonObject& qjobject)
+{
+    //QString TypeString = qjobject.value(objectType).toString();
+    QString TypeString = objectType;
+    if (TypeString == "x" || TypeString == "y")
+    {
+        Type = variable_type::value;
+    }
+    else if (TypeString == "timeseries")
+    {
+        Type = variable_type::timeseries;
+    }
+    else if (TypeString == "area" || TypeString == "name" || TypeString == "mail" || TypeString == "slope")
+    {
+        Type = variable_type::string;
+    }
+}
+
+
 QString Variable::GetValue()
 {
     if (Type==variable_type::value)
@@ -70,5 +89,9 @@ QString Variable::GetValue()
     else if (Type==variable_type::string)
     {
         return string_value;
+    }
+    else
+    {
+        return "";
     }
 }

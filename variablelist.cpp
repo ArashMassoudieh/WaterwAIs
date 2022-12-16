@@ -58,31 +58,59 @@ VariableList::VariableList(const QString& objectType, const QJsonObject& qjobjec
 
 }
 
-VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>() //for instances
+//VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>() //for instances
+//{
+
+
+//    foreach(const QString& key, qjobject.keys()) {
+//        if (key=="icon")
+//            iconfilename = qjobject.value(key).toString();
+//        if (key=="type")
+//        {
+//            component_type = qjobject.value(key).toString();
+//        }
+//        else
+//        {   Variable var = Variable(qjobject.value(key).toObject());
+//            operator[](key) = var;
+//        }
+//    }
+//    Variable var;
+//    var.SetType(variable_type::string);
+//    operator[]("name") = var;
+//    if (ObjectType()==object_type::node)
+//    {
+//        Variable varxy;
+//        varxy.SetType(variable_type::value);
+//        operator[]("x") = varxy;
+//        operator[]("y") = varxy;
+//    }
+
+//}
+
+//This function for model layer json data types
+VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>() //for modellayer data instances
 {
-
-
     foreach(const QString& key, qjobject.keys()) {
-        if (key=="icon")
-            iconfilename = qjobject.value(key).toString();
-        if (key=="type")
+        if (key=="x")
         {
-            component_type = qjobject.value(key).toString();
+            Variable varx;
+            varx.SetType(variable_type::value);
+            operator[]("x") = varx;
+            varMap.insert(key, varx);
+        }
+        else if (key=="y")
+        {
+            Variable vary;
+            vary.SetType(variable_type::value);
+            operator[]("y") = vary;
+            varMap.insert(key, vary);
         }
         else
-        {   Variable var = Variable(qjobject.value(key).toObject());
+        {   //Variable var = Variable(key, qjobject.value(key).toObject());
+            Variable var;
+            var.SetType(variable_type::string);
             operator[](key) = var;
+            varMap.insert(key, var);
         }
     }
-    Variable var;
-    var.SetType(variable_type::string);
-    operator[]("name") = var;
-    if (ObjectType()==object_type::node)
-    {
-        Variable varxy;
-        varxy.SetType(variable_type::value);
-        operator[]("x") = varxy;
-        operator[]("y") = varxy;
-    }
-
 }

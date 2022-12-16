@@ -59,6 +59,12 @@ private:
     QString _iconUrl;
     QString address; // The address of the json file containing the model
 
+    void fillMetaModelDataIntoMap(const QJsonDocument& qjdoc);
+
+
+public:
+    QMap<QString,QString> metaDataMap;
+
 signals:
     void iconChanged();
     void visibleChanged();
