@@ -44,3 +44,5 @@ QMapViewer.pro.user.5afcbe3
 build/release/
 
 build/debug/
+
+*.autosave

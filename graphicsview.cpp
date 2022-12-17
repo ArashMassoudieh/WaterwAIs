@@ -120,6 +120,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 
             mapview->setTableModel(model1);
         }
+    }
 
 
           //I am working on this code, as get value function is not working, I am collecting in some QMap and working on it.
