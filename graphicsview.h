@@ -3,12 +3,13 @@
 
 #include <QGraphicsView>
 //#include "modellayer.h"
-
+#include "propmodel.h"
 
 class MapView;
 class ModelLayer;
 class MetaModel;
 class LayerItemModel;
+
 
 class GraphicsView : public QGraphicsView
 {
@@ -56,6 +57,7 @@ private:
     MapView* mapview = nullptr;
     std::shared_ptr<ModelLayer> modelLayer;
     MetaModel *metamodel = nullptr;
+    PropModel* propmodel = nullptr;
 };
 
 #endif // GRAPHICSVIEW_H

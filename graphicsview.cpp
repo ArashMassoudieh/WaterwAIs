@@ -17,6 +17,7 @@ GraphicsView::GraphicsView(QWidget *parent)
 {
     _type = OperationType::None;
     _rect = nullptr;
+
 }
 
 void GraphicsView::setMapScene(QGraphicsScene *scene)
@@ -106,19 +107,13 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
         }
 
         if (nodes.size()>0){
-            QStandardItemModel* model1 = new QStandardItemModel(this);
-            model1->setColumnCount(2);
-            model1->setHeaderData(0, Qt::Horizontal, tr("Property"));
-            model1->setHeaderData(1, Qt::Horizontal, tr("Value"));
-            for (QMap<QString,Variable>::Iterator prop = nodes[0]->begin(); prop != nodes[0]->end(); prop++)
-            {
-                QList<QStandardItem*> row;
-                row.append(new QStandardItem(prop.key()));
-                row.append(new QStandardItem(prop.value().GetValue())); //Still not getting value in prop.value() even after filling in variable list. Need to check
-                model1->appendRow(row);
-            }
 
-            mapview->setTableModel(model1);
+            if (propmodel != nullptr)
+                delete propmodel;
+
+            propmodel = new PropModel(nodes[0],this);
+
+            mapview->setTableModel(propmodel);
         }
     }
 
@@ -151,9 +146,9 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 
 //            mapview->setTableModel(model1);
 //        }
-    }
-
 }
+
+
 
 MapView *GraphicsView::mainWindow()
 {

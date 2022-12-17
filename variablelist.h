@@ -7,6 +7,12 @@
 
 enum class object_type {node, link, entity};
 
+struct NameValuePair
+{
+    QString Name;
+    Variable *Var = nullptr;
+};
+
 class VariableList: public QMap<QString, Variable>
 {
 public:
@@ -22,10 +28,11 @@ public:
     void SetObjectType(object_type ObjType) {Object_Type = ObjType;}
     QString ComponentType() {return component_type;}
     void SetComponentType(const QString &componentType) {component_type = componentType;}
-    QMap<QString,Variable> varMap;
     bool SetValue(const QString &VariableName, const QString &Value);
     bool AddXYNameVariables();
     bool AddNameVariable();
+    NameValuePair operator[](int i);
+    Variable& operator[](const QString name);
 private:
     QString iconfilename;
     object_type Object_Type;

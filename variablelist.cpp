@@ -69,6 +69,22 @@ bool VariableList::SetValue(const QString &VariableName, const QString &Value)
         return false;
 }
 
+
+Variable& VariableList::operator[](const QString name)
+{
+    return QMap<QString, Variable>::operator[](name);
+}
+
+NameValuePair VariableList::operator[](int i)
+{
+    if (i>count()-1) return NameValuePair();
+    QMap<QString, Variable>::iterator it = begin()+i;
+    NameValuePair out;
+    out.Name = it.key();
+    out.Var = &it.value();
+    return out;
+}
+
 //VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>() //for instances
 //{
 
@@ -107,21 +123,18 @@ VariableList::VariableList(const QJsonObject& qjobject):QMap<QString,Variable>()
             Variable varx;
             varx.SetType(variable_type::value);
             operator[]("x") = varx;
-            varMap.insert(key, varx);
         }
         else if (key=="y")
         {
             Variable vary;
             vary.SetType(variable_type::value);
             operator[]("y") = vary;
-            varMap.insert(key, vary);
         }
         else
         {   //Variable var = Variable(key, qjobject.value(key).toObject());
             Variable var;
             var.SetType(variable_type::string);
             operator[](key) = var;
-            varMap.insert(key, var);
         }
     }
 }

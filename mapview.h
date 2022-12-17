@@ -28,7 +28,7 @@ public:
     ~MapView();
     GraphicsView *view() { return MapViewer; }
     void setLayerListModel(QAbstractListModel *names);
-    void setTableModel(QStandardItemModel *names);
+    void setTableModel(PropModel *propmodel);
     QLabel *StatusBar() {return statusbar;}
     QListView* LayersList();
 protected slots:
@@ -48,7 +48,7 @@ private:
     QNetworkAccessManager nam;
     QString taskId;
     QTimer timer;
-    propmodel *propModel;
+    PropModel *propModel;
     void getFile10LinesContent(QString fileId);
     void getFileContent(QString fileId);
     QLabel *statusbar;

@@ -1,22 +1,23 @@
-#ifndef PROPMODEL_H
-#define PROPMODEL_H
+#ifndef PropModel_H
+#define PropModel_H
 
 #include <QAbstractTableModel>
 #include <QMap>
+#include <variablelist.h>
 
-class propmodel : public QAbstractTableModel
+class PropModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
 
-    explicit propmodel(QObject *parent = 0);
+    explicit PropModel(VariableList *variable_list = nullptr, QObject *parent = 0);
     int rowCount(const QModelIndex& parent = QModelIndex()) const;
     int columnCount(const QModelIndex& parent = QModelIndex()) const;
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-
-    void setTable(QMap<QString, QString> * tableView);
-
+    void SetVariableList(VariableList *varlist) {variable_list = varlist;}
+    VariableList * GetVariableList() {return variable_list;}
 private:
-    QMap<QString, QString>* _tableView;
+    VariableList *variable_list = nullptr;
+
 };
-#endif // PROPMODEL_H
+#endif // PropModel_H

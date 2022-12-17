@@ -1,40 +1,33 @@
 #include "propmodel.h"
 
-propmodel::propmodel(QObject *parent) :
-    QAbstractTableModel(parent), _tableView(nullptr)
-{}
-
-void propmodel::setTable(QMap<QString, QString>* tableView)
+PropModel::PropModel(VariableList* varlist, QObject *parent) :
+    QAbstractTableModel(parent)
 {
-//    beginModelReset();
-    _tableView = tableView;
-//    endModelReset();
+    variable_list = varlist;
+    setHeaderData(0, Qt::Horizontal, tr("Property"));
+    setHeaderData(1, Qt::Horizontal, tr("Value"));
 }
 
-int propmodel::rowCount(const QModelIndex& parent) const
+
+int PropModel::rowCount(const QModelIndex& parent) const
 {
-    if (_tableView)
-        return _tableView->count();
-    return 0;
+    return variable_list->count();
 }
 
-int propmodel::columnCount(const QModelIndex & parent) const
+int PropModel::columnCount(const QModelIndex & parent) const
 {
     return 2;
 }
 
-QVariant propmodel::data(const QModelIndex& index, int role) const
+QVariant PropModel::data(const QModelIndex& index, int role) const
 {
-//    if (!_map || !index.isValid() || index.row() >= _map->count() || role != Qt::DisplayRole)
-//        return QVariant();
 
-    auto it = _tableView->cbegin();
-    it += index.row();
-
-    if (index.column() == 0)
-        return it.key();
-    if (index.column() == 1)
-        return it.value();
+    if (role == Qt::DisplayRole)
+    {   if (index.column() == 0)
+            return variable_list->operator[](index.row()).Name;
+        if (index.column() == 1)
+            return variable_list->operator[](index.row()).Var->GetValue();
+    }
 
     return QVariant();
 }

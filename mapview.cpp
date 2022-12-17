@@ -127,11 +127,11 @@ void MapView::setLayerListModel(QAbstractListModel *names)
     });
 }
 
-void MapView::setTableModel(QStandardItemModel *names)
+void MapView::setTableModel(PropModel *propmodel)
 {
 
-       ui->tableView->setModel(names);
-
+    qDebug() << ui->tableView->objectName();
+    ui->tableView->setModel(propmodel);
 }
 
 void MapView::on_btnZoom_clicked()
