@@ -33,6 +33,7 @@ public:
     bool AddNameVariable();
     NameValuePair operator[](int i);
     Variable& operator[](const QString name);
+
 private:
     QString iconfilename;
     object_type Object_Type;

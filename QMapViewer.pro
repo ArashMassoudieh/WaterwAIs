@@ -27,6 +27,7 @@ HEADERS += mainwindow.h \
     Common.h \
     about.h \
     dlglayerproperties.h \
+    edge.h \
     feature.h \
     filedownloader.h \
     graphicsitem.h \
@@ -58,6 +59,7 @@ SOURCES += main.cpp \
     Circle.cpp \
     about.cpp \
     dlglayerproperties.cpp \
+    edge.cpp \
     feature.cpp \
     filedownloader.cpp \
     graphicsitem.cpp \

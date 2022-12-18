@@ -15,7 +15,7 @@ enum edgesides{ noside, topside, leftside, bottomside, rightside };
 
 
 class GraphicsView;
-class MetaModel;
+
 
 class Node:public Object, public Circle
 {
@@ -40,7 +40,6 @@ public:
     void setHeight(const int& Height);
     double fontfactor();
     vector<double> bounds();
-    void SetMetaModel(MetaModel*);
     QPixmap*GetIcon(const QString &type);
     //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     //void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
@@ -52,7 +51,6 @@ private:
     int width = 200;
     int height = 200;
     bool bold = false;
-    MetaModel *meta;
     QPixmap *icon = nullptr;
 
 

@@ -4,6 +4,8 @@
 #include "variablelist.h"
 #include <QJsonObject>
 
+class MetaModel;
+
 class Object:public VariableList
 {
 public:
@@ -15,8 +17,11 @@ public:
     Object(const QString &Name, const QString &Component_Type, const VariableList& variables);
     void SetName(const QString &_name) {name=_name;}
     QString Name() {return name;}
+    void SetMetaModel(MetaModel*);
+    MetaModel *GetMetaModel() {return meta;}
 private:
     QString name;
+    MetaModel *meta;
 
 };
 

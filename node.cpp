@@ -58,7 +58,6 @@ Node::Node(const Node &E):Object(E)
     setPos(E.pos());
     setFlag(ItemSendsGeometryChanges);
     width = E.Width();
-    meta = E.meta;
     height = E.Height();
     parent = E.parent;
     AddXYNameVariables();
@@ -76,7 +75,6 @@ Node& Node::operator=(const Node &E)
     setZValue(E.zValue());
     setPos(E.pos());
     setFlag(ItemSendsGeometryChanges);
-    meta = E.meta;
     width = E.Width();
     height = E.Height();
     parent = E.parent;
@@ -160,17 +158,13 @@ vector<double> Node::bounds()
     return out;
 }
 
-void Node::SetMetaModel(MetaModel *_meta)
-{
-    meta = _meta;
-}
 
 QPixmap* Node::GetIcon(const QString &type)
 {
     if (icon!=nullptr) return icon;
     qDebug() << type << ",";
-    QString iconurl = HOST_PATH + meta->layerIconUrl();
-    QString Iconfilename = HOST_PATH + meta->operator[](type).IconFileName();
+    QString iconurl = HOST_PATH + GetMetaModel()->layerIconUrl();
+    QString Iconfilename = HOST_PATH + GetMetaModel()->operator[](type).IconFileName();
     QString ObjectType = type;
     icon = new QPixmap(Iconfilename);
     return icon;
