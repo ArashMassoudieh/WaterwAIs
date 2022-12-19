@@ -6,46 +6,41 @@
 #include "string"
 
 
-class Node;
+class DTNode;
 class GraphicsView;
 
+enum class connected {to, from};
 
 using namespace std;
 
-class Edge : public QGraphicsItem
+class DTEdge : public Object, public QGraphicsLineItem
 {
 public:
-    Edge(GraphicsView *parent);
-    Edge(Node *sourceNode, Node *destNode, const QString &edgeType, GraphicsView *_parent = nullptr);
-    Edge(Node *sourceNode, Node *destNode, GraphicsView *_parent=nullptr);
-    Edge(Edge &E);
-    void adjust();
-    QPointF sourcePoint;
-    QPointF destPoint;
-    qreal arrowSize = 10;
-    Object_Types itemType = Object_Types::Connector;
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *) override;
-    bool bold = false;
-    void setBold(const bool _Bold = true);
-    objectColor color;
-    bool avoidCrossObjects = true;
-    Object *object();
-    Node* sourceNode() {return source;}
-    Node* destNode() {return dest;}
-    int dist(const QPointF point);
+    DTEdge();
+    DTEdge(GraphicsView *parent);
+    DTEdge(const Object &obj);
+    DTEdge(const QString &objecttype, const QJsonObject &jsonobject, GraphicsView *parent=nullptr);
+    DTEdge(const DTEdge &);
+    DTEdge& operator=(const DTEdge &);
+    DTEdge& operator=(const Object &);
     enum { Type = UserType + 2 };
-    int type() const Q_DECL_OVERRIDE{ return Type; }
+    int type() const Q_DECL_OVERRIDE { return Type; }
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void adjust();
+    void SetConnectedNode(DTNode* node, connected source_dest);
+    DTNode * ConnectedNode(connected source_dest);
 
 private:
     GraphicsView *parent;
-    Node *source;
-    Node *dest;
-    QColor GetColor(const string &clrstring);
+    DTNode *source;
+    DTNode *dest;
+    QPointF sourcePoint;
+    QPointF destPoint;
+    qreal arrowSize = 10;
+
 public slots:
-    void hoverMoveEvent(QGraphicsSceneHoverEvent * event) override;
-    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+
 };
 
 

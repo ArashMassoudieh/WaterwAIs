@@ -3,6 +3,7 @@
 
 #include "layer.h"
 #include "node.h"
+#include "edge.h"
 #include "metamodel.h"
 
 class QGraphicsScene;
@@ -23,13 +24,11 @@ public:
     QJsonDocument loadJson(QUrl fileName);
     bool prepareNodes(const QJsonDocument &JsonDoc);
     bool AddToScene(QGraphicsScene *scene);
-    bool parsingMetaModelData(const QJsonDocument &JsonDoc);
-    QMap<QString,QString> getSortedNodeData(){ return sortedNodeDataMap;};
+
 
 private:
-    QMap<QString,Node> nodes;
-    QMap<QString,QString> modelDataMap;
-    QMap<QString,QString> sortedNodeDataMap;
+    QMap<QString,DTNode> nodes;
+    QMap<QString,DTEdge> edges;
     MetaModel *metamodel = nullptr;
 
 };

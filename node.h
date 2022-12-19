@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef DTNode_H
+#define DTNode_H
 
 #include <Circle.h>
 #include <object.h>
@@ -17,21 +17,20 @@ enum edgesides{ noside, topside, leftside, bottomside, rightside };
 class GraphicsView;
 
 
-class Node:public Object, public Circle
+class DTNode:public Object, public Circle
 {
 public:
-    Node();
-    Node(GraphicsView *parent); // needs to be implemented
-    Node(const Object &obj);
-    Node(const QString &objecttype, const QJsonObject &jsonobject, GraphicsView *parent=nullptr);
-    Node(const Node &);
-    Node& operator=(const Node &);
-    Node& operator=(const Object &); //needs to be implemented
+    DTNode();
+    DTNode(GraphicsView *parent);
+    DTNode(const Object &obj);
+    DTNode(const QString &objecttype, const QJsonObject &jsonobject, GraphicsView *parent=nullptr);
+    DTNode(const DTNode &);
+    DTNode& operator=(const DTNode &);
+    DTNode& operator=(const Object &);
     int type() const Q_DECL_OVERRIDE { return Type; }
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    Object *object();
     int Width() const {return  width;}
     int Height() const {return height;}
     corners corner(const int _x, const int _y);
@@ -41,10 +40,7 @@ public:
     double fontfactor();
     vector<double> bounds();
     QPixmap*GetIcon(const QString &type);
-    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    //void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 
-//    QString GetIcon(const QString &type);
 
 private:
     GraphicsView *parent = nullptr;
@@ -56,4 +52,4 @@ private:
 
 };
 
-#endif // NODE_H
+#endif // DTNode_H

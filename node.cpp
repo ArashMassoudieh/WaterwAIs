@@ -7,22 +7,13 @@
 #include "about.h"
 
 
-Node::Node():Circle()
+DTNode::DTNode()
 {
-    setData(1000,"Node");
-    Variable var;
-    var.SetType(variable_type::string);
-    operator[]("name") = var;
-    if (ObjectType()==object_type::node)
-    {
-        Variable varxy;
-        varxy.SetType(variable_type::value);
-        operator[]("x") = varxy;
-        operator[]("y") = varxy;
-    }
+    setData(1000,"DTNode");
+    AddXYNameVariables();
 }
 
-Node::Node(GraphicsView *_parent):Object()
+DTNode::DTNode(GraphicsView *_parent):Object()
 {
 
     parent = _parent;
@@ -31,11 +22,11 @@ Node::Node(GraphicsView *_parent):Object()
     setCacheMode(DeviceCoordinateCache);
     setZValue(this->zValue());
     parent->scene()->addItem(this);
-    setData(1000,"Node");
+    setData(1000,"DTNode");
     AddXYNameVariables();
 }
 
-Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsView *_parent):Object(objectType, jsonobject)
+DTNode::DTNode(const QString &objectType, const QJsonObject &jsonobject, GraphicsView *_parent):Object(objectType, jsonobject)
 {
     parent = _parent;
     setFlag(ItemIsSelectable);
@@ -45,11 +36,11 @@ Node::Node(const QString &objectType, const QJsonObject &jsonobject, GraphicsVie
     if (parent)
         parent->scene()->addItem(this);
 
-    setData(1000,"Node");
+    setData(1000,"DTNode");
     AddXYNameVariables();
 }
 
-Node::Node(const Node &E):Object(E)
+DTNode::DTNode(const DTNode &E):Object(E)
 {
     setFlags(E.flags());
     setAcceptHoverEvents(true);
@@ -61,12 +52,12 @@ Node::Node(const Node &E):Object(E)
     height = E.Height();
     parent = E.parent;
     AddXYNameVariables();
-    setData(1000,"Node");
+    setData(1000,"DTNode");
 
 }
 
 
-Node& Node::operator=(const Node &E)
+DTNode& DTNode::operator=(const DTNode &E)
 {
     Object::operator=(E);
     setFlags(E.flags());
@@ -82,7 +73,7 @@ Node& Node::operator=(const Node &E)
     return *this;
 }
 
-Node& Node::operator=(const Object &E)
+DTNode& DTNode::operator=(const Object &E)
 {
     Object::operator=(E);
     setAcceptHoverEvents(true);
@@ -92,28 +83,21 @@ Node& Node::operator=(const Object &E)
     return *this;
 }
 
-QRectF Node::boundingRect() const
+QRectF DTNode::boundingRect() const
 {
     return QRectF(x()-width/2, y()-height/2, width, height);
 
 }
-QPainterPath Node::shape() const
+QPainterPath DTNode::shape() const
 {
     QPainterPath path;
     path.addRect(14, 14, 82, 42);
     return path;
 }
 
-void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void DTNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
-
-    QColor fillColor = (option->state & QStyle::State_Selected) ? Color().darker(150) : Color();
-
-
-    SetColor(Qt::black);
-    painter->setPen(Pen());
-
 
     QPixmap *pixmap = GetIcon(ComponentType());
     double iconmargin = 0;
@@ -132,22 +116,22 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     //painter->drawEllipse(x()-width/2,y()-height/2,width, height);
 }
 
-void Node::setWidth(const int& _width)
+void DTNode::setWidth(const int& _width)
 {
     width = _width; update();
 }
-void Node::setHeight(const int& _height) {
+void DTNode::setHeight(const int& _height) {
     height = _height; update();
 }
 
-double Node::fontfactor(){
+double DTNode::fontfactor(){
     if (parent)
         return parent->FontFactor();
     else
         return 1;
 }
 
-vector<double> Node::bounds()
+vector<double> DTNode::bounds()
 {
     vector<double> out;
     out.push_back(x()-width/2 );
@@ -159,7 +143,7 @@ vector<double> Node::bounds()
 }
 
 
-QPixmap* Node::GetIcon(const QString &type)
+QPixmap* DTNode::GetIcon(const QString &type)
 {
     if (icon!=nullptr) return icon;
     qDebug() << type << ",";

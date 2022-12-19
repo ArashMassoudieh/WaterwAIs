@@ -27,7 +27,12 @@ MetaModel::MetaModel(const QJsonDocument& qjdoc):QMap<QString,VariableList>()
     QJsonObject qjobject = qjdoc.object();
     foreach(const QString& key, qjobject.keys()) {
         QJsonValue subValues = qjobject.value(key);
-        VariableList varlist = VariableList(key, qjobject.value(key).toObject());
+        VariableList varlist = VariableList(key, subValues.toObject());
+        QString objecttype = subValues["type"].toString();
+        if (objecttype == "node")
+            varlist.SetObjectType(object_type::node);
+        else if (objecttype == "link")
+            varlist.SetObjectType(object_type::link);
         operator[](key) = varlist;
     }
 }

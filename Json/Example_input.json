@@ -17,5 +17,12 @@
             "slope": "0.01",
             "x": "328767.186500648036599",
             "y": "4309290.332427557557821"
-        }
+        },
+     "pipe" : {
+     	"type": "sewer pipe",
+     	"from": "subcatchment1",
+     	"to": "subcatchment2",
+     	"diameter": "0.1",
+     	"length": "50"
+     }
 }
