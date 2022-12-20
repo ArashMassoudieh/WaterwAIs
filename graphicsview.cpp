@@ -105,6 +105,14 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
                 nodes.append(static_cast<DTNode*>(selecteditems[i]));
             }
         }
+        QList<DTEdge*> edges;
+        for (int i=0; i<selecteditems.size(); i++) {
+            if(selecteditems[i]->data(1000).toString()=="Edge")
+            {
+                edges.append(static_cast<DTEdge*>(selecteditems[i]));
+            }
+        }
+
 
         if (nodes.size()>0){
 
@@ -112,6 +120,14 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
                 delete propmodel;
 
             propmodel = new PropModel(nodes[0],this);
+
+            mapview->setTableModel(propmodel);
+        }
+        else if (edges.size()>0) {
+            if (propmodel != nullptr)
+                delete propmodel;
+
+            propmodel = new PropModel(edges[0],this);
 
             mapview->setTableModel(propmodel);
         }

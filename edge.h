@@ -30,6 +30,7 @@ public:
     void adjust();
     void SetConnectedNode(DTNode* node, connected source_dest);
     DTNode * ConnectedNode(connected source_dest);
+    QPainterPath shape() const override;
 
 private:
     GraphicsView *parent;

@@ -32,3 +32,20 @@ QVariant PropModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
+QVariant PropModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == Qt::DisplayRole)
+    {
+        if (orientation == Qt::Horizontal) {
+            switch (section)
+            {
+            case 0:
+                return QString("Property");
+            case 1:
+                return QString("Value");
+            }
+        }
+    }
+    return QVariant();
+}
+

@@ -22,7 +22,7 @@ DTNode::DTNode(GraphicsView *_parent):Object()
     setCacheMode(DeviceCoordinateCache);
     setZValue(this->zValue());
     parent->scene()->addItem(this);
-    setData(1000,"DTNode");
+    setData(1000,"Node");
     AddXYNameVariables();
 }
 
@@ -36,7 +36,7 @@ DTNode::DTNode(const QString &objectType, const QJsonObject &jsonobject, Graphic
     if (parent)
         parent->scene()->addItem(this);
 
-    setData(1000,"DTNode");
+    setData(1000,"Node");
     AddXYNameVariables();
 }
 
@@ -52,7 +52,7 @@ DTNode::DTNode(const DTNode &E):Object(E)
     height = E.Height();
     parent = E.parent;
     AddXYNameVariables();
-    setData(1000,"DTNode");
+    setData(1000,"Node");
 
 }
 
@@ -70,6 +70,7 @@ DTNode& DTNode::operator=(const DTNode &E)
     height = E.Height();
     parent = E.parent;
     AddXYNameVariables();
+    setData(1000,"Node");
     return *this;
 }
 
@@ -80,6 +81,7 @@ DTNode& DTNode::operator=(const Object &E)
     setCacheMode(DeviceCoordinateCache);
     setFlag(ItemSendsGeometryChanges);
     AddXYNameVariables();
+    setData(1000,"Node");
     return *this;
 }
 
@@ -91,7 +93,7 @@ QRectF DTNode::boundingRect() const
 QPainterPath DTNode::shape() const
 {
     QPainterPath path;
-    path.addRect(14, 14, 82, 42);
+    path.addRect(-width/2, -height/2, width, height);
     return path;
 }
 
@@ -103,17 +105,17 @@ void DTNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     double iconmargin = 0;
     QRectF rect = QRectF(boundingRect().left()*0 + iconmargin*boundingRect().width(),
                          boundingRect().top()*0+iconmargin*boundingRect().width(),
-                         boundingRect().width()*(1-iconmargin)-100,
-                         boundingRect().height()*(1-iconmargin)-100);
-    QRectF source(0, 0, pixmap->size().width()+100, pixmap->size().height());
+                         boundingRect().width()*(1-iconmargin),
+                         boundingRect().height()*(1-iconmargin));
+    QRectF source(0, 0, pixmap->size().width(), pixmap->size().height());
 
 
 
-    painter->drawPixmap(rect, *pixmap, source);
+    painter->drawPixmap(boundingRect(), *pixmap, source);
 
-    painter->setBrush(Qt::black);
+    painter->setPen(Qt::black);
     qDebug() << x() << "," << y();
-    //painter->drawEllipse(x()-width/2,y()-height/2,width, height);
+    painter->drawEllipse(x()-width/2,y()-height/2,width, height);
 }
 
 void DTNode::setWidth(const int& _width)

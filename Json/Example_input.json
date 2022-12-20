@@ -23,6 +23,7 @@
      	"from": "subcatchment1",
      	"to": "subcatchment2",
      	"diameter": "0.1",
-     	"length": "50"
+     	"length": "50",
+     	"name": "the sewer pipe"
      }
 }

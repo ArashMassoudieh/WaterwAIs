@@ -33,7 +33,7 @@ VariableList::VariableList(const QString& objectType, const QJsonObject& qjobjec
     foreach(const QString& key, qjobject.keys()) {
         if (key=="icon")
             iconfilename = qjobject.value(key).toString();
-        if (key=="type")
+        else if (key=="type")
         {
             if(qjobject.value(key).toString() == "node")
                 Object_Type = object_type::node;
