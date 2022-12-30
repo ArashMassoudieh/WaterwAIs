@@ -5,7 +5,9 @@
 #include <QMap>
 #include <variablelist.h>
 
-class PropModel : public QAbstractTableModel
+class VariableList;
+
+class propmodel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
@@ -18,7 +20,6 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     VariableList * GetVariableList() {return variable_list;}
 private:
-    VariableList *variable_list = nullptr;
-
+    VariableList *variables;
 };
 #endif // PropModel_H
