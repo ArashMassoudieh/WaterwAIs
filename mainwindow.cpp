@@ -63,7 +63,9 @@ MainWindow::MainWindow(QWidget *parent)
             }
             else
             {
+#ifndef Q_OS_WASM
                 QMessageBox::about(this,"File not found","File "+layerfile.fileName()+" not found");
+#endif
                 qDebug()<<"File '"<<layerfile.fileName() << "' does not exist!";
             }
         }

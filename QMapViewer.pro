@@ -8,9 +8,6 @@ QT += widgets core network
 qtHaveModule(printsupport): QT += printsupport
 qtHaveModule(opengl): QT += opengl
 
-
-RESOURCES += images.qrc
-
 INCLUDEPATH += ../Utilities
 
 HEADERS += mainwindow.h \
@@ -82,26 +79,12 @@ SOURCES += main.cpp \
     variablelist.cpp
 SOURCES += mainwindow.cpp
 
+FORMS += \
+    dialog.ui \
+    dlglayerproperties.ui \
+    mapview.ui
 
-DEFINES += Arash
-
-QT += widgets core network
-
-qtHaveModule(printsupport): QT += printsupport
-qtHaveModule(opengl): QT += opengl
-
-build_all:!build_pass {
-    CONFIG -= build_all
-    CONFIG += release
-}
-
-wasm {
-    QMAKE_LFLAGS += -sASYNCIFY -Os
-}
-
-# install
-target.path = $$[QT_INSTALL_EXAMPLES]/widgets/graphicsview/chip
-INSTALLS += target
+RESOURCES += images.qrc
 
 DISTFILES += json/Centroids.geojson \
     json/HickeyRunSewer.geojson \
@@ -111,8 +94,52 @@ DISTFILES += json/Centroids.geojson \
     json/2.png \
     json/4.png
 
-FORMS += \
-    dialog.ui \
-    dlglayerproperties.ui \
-    mapview.ui
+OTHER_FILES += \
+    $$PWD\Json\*.*
+
+
+DEFINES += Arash
+
+build_all:!build_pass {
+    CONFIG -= build_all
+    CONFIG += release
+}
+
+
+# copies the given files to the destination directory
+defineTest(copyToDestDir) {
+    files = $$1
+    dir = $$2
+    # replace slashes in destination path for Windows
+    win32:dir ~= s,/,\\,g
+
+    for(file, files) {
+        # replace slashes in source path for Windows
+        win32:file ~= s,/,\\,g
+
+        QMAKE_POST_LINK += $$QMAKE_COPY_DIR $$shell_quote($$file) $$shell_quote($$dir) $$escape_expand(\\n\\t)
+    }
+
+    export(QMAKE_POST_LINK)
+}
+
+# Windows
+win32: copyToDestDir($$OTHER_FILES, $$OUT_PWD/Json/)
+
+#Linux, others: TBD
+
+wasm {
+    QMAKE_LFLAGS += -sASYNCIFY -Os
+
+    # Making WASM to preload Json folder content
+    QMAKE_LFLAGS += --preload-file $$PWD/Json
+    DEFINES += WASM_PRELOAD_DIR=\"'$$PWD/Json'\"
+}
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+
 
