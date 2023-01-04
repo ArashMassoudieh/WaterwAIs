@@ -98,7 +98,7 @@ OTHER_FILES += \
     $$PWD\Json\*.*
 
 
-DEFINES += Arash
+#DEFINES += Arash
 
 build_all:!build_pass {
     CONFIG -= build_all
