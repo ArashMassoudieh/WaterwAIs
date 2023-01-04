@@ -1,7 +1,8 @@
 
-CONFIG += c++14
+# Enable C++20
+CONFIG += c++2a
 
-DEFINES += QT_NO_DEBUG _NO_GSL
+DEFINES += _NO_GSL
 
 QT += widgets core network
 
@@ -105,35 +106,26 @@ build_all:!build_pass {
     CONFIG += release
 }
 
-
-# copies the given files to the destination directory
-defineTest(copyToDestDir) {
-    files = $$1
-    dir = $$2
-    # replace slashes in destination path for Windows
-    win32:dir ~= s,/,\\,g
-
-    for(file, files) {
-        # replace slashes in source path for Windows
-        win32:file ~= s,/,\\,g
-
-        QMAKE_POST_LINK += $$QMAKE_COPY_DIR $$shell_quote($$file) $$shell_quote($$dir) $$escape_expand(\\n\\t)
-    }
-
-    export(QMAKE_POST_LINK)
-}
-
-# Windows
-win32: copyToDestDir($$OTHER_FILES, $$OUT_PWD/Json/)
-
-#Linux, others: TBD
+DATA_DIR = $$PWD/Json
+DEFINES += DATA_DIR=\"$$DATA_DIR\"
 
 wasm {
     QMAKE_LFLAGS += -sASYNCIFY -Os
 
-    # Making WASM to preload Json folder content
-    QMAKE_LFLAGS += --preload-file $$PWD/Json
-    DEFINES += WASM_PRELOAD_DIR=\"'$$PWD/Json'\"
+    # Direct WASM to load local data files whem starting the app.
+    # This is needed to allow to load their content when app
+    # is running inside the WASM and use resources from the local
+    # data files (JSON, layer icons etc).
+    #
+    # Production app should load resources from the Cloud and
+    # thus not need this
+    USE_LOCAL_DATA_FILES = 1
+
+    defined(USE_LOCAL_DATA_FILES, var) {
+        message("WASM will preload data files from $$DATA_DIR.")
+        # Making WASM to preload Data folder content
+        QMAKE_LFLAGS += --preload-file $$DATA_DIR
+    }
 }
 
 # Default rules for deployment.
