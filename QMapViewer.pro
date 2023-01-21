@@ -9,81 +9,114 @@ QT += widgets core network
 qtHaveModule(printsupport): QT += printsupport
 qtHaveModule(opengl): QT += opengl
 
-INCLUDEPATH += ../Utilities
-
-HEADERS += mainwindow.h \
-    ../Utilities/BTC.h \
-    ../Utilities/BTC.hpp \
-    ../Utilities/BTCSet.h \
-    ../Utilities/BTCSet.hpp \
-    ../Utilities/Matrix.h \
-    ../Utilities/QuickSort.h \
-    ../Utilities/Utilities.h \
-    ../Utilities/Vector.h \
-    ../Utilities/cpoint.h \
-    Circle.h \
-    Common.h \
-    about.h \
-    dlglayerproperties.h \
-    edge.h \
-    feature.h \
-    filedownloader.h \
-    graphicsitem.h \
-    graphicsitemcollection.h \
-    graphicsview.h \
-    layer.h \
-    layeritemdelegate.h \
-    layeritemmodel.h \
-    logger.h \
-    mapscene.h \
-    mapview.h \
-    metamodel.h \
-    modellayer.h \
-    node.h \
-    object.h \
-    polygon.h \
-    propmodel.h \
-    segment.h \
-    variable.h \
-    variablelist.h
-
-
-SOURCES += main.cpp \
-    ../Utilities/Matrix.cpp \
-    ../Utilities/QuickSort.cpp \
-    ../Utilities/Utilities.cpp \
-    ../Utilities/Vector.cpp \
-    ../Utilities/cpoint.cpp \
-    Circle.cpp \
-    about.cpp \
-    dlglayerproperties.cpp \
-    edge.cpp \
-    feature.cpp \
-    filedownloader.cpp \
-    graphicsitem.cpp \
-    graphicsitemcollection.cpp \
-    graphicsview.cpp \
-    layer.cpp \
-    layeritemdelegate.cpp \
-    layeritemmodel.cpp \
-    logger.cpp \
-    mapscene.cpp \
-    mapview.cpp \
-    metamodel.cpp \
-    modellayer.cpp \
-    node.cpp \
-    object.cpp \
-    polygon.cpp \
-    propmodel.cpp \
-    segment.cpp \
-    variable.cpp \
-    variablelist.cpp
-SOURCES += mainwindow.cpp
+INCLUDEPATH += \
+	. \
+	.\Common
 
 FORMS += \
-    dialog.ui \
-    dlglayerproperties.ui \
-    mapview.ui
+    Forms/dlglayerproperties.ui \
+    Forms/mainview.ui
+
+HEADERS += \
+	Application/Application.h \
+	Application/Defs.h \
+	Application/FileNameProcessor.h \
+
+HEADERS += \
+	Common/Layer/CircleLayerItem.h \
+	Common/Layer/Layer.h \
+	Common/Layer/LayerGraphicsItem.h \
+	Common/Layer/LayerItemDelegate.h \
+	Common/Layer/LayerListModel.h \
+	Common/Layer/LayerModel.h \
+	Common/Layer/LayerModelItem.h \
+	Common/Layer/LayerSceneInterface.h \
+	Common/Layer/PolygonLayerItem.h \
+	Common/Layer/SegmentLayerItem.h \
+	Common/Downloader.h \
+	Common/Logger.h \
+	Common/qstr_unordered_map.h
+	
+HEADERS += \
+	FeatureLayer/FeatureLayer.h \
+	FeatureLayer/FeatureModelItem.h
+
+HEADERS += \
+	MetaModelLayer/LinkLayerItem.h \
+	MetaModelLayer/MetaComponentItem.h \
+	MetaModelLayer/MetaItemPropertyModel.h \
+	MetaModelLayer/MetaLayerItem.h \
+	MetaModelLayer/MetaLayerModel.h \
+	MetaModelLayer/MetaLayerModelItem.h \
+	MetaModelLayer/MetaModelLayer.h \
+	MetaModelLayer/NodeLayerItem.h \
+	MetaModelLayer/Variable.h
+
+HEADERS += \
+	UI/LayerPropertiesDialog.h \
+	UI/MainView.h \
+	UI/MainWindow.h \
+	UI/MapScene.h \
+	UI/MapView.h \
+
+HEADERS += \
+	Utilities/_BTC.h \
+	Utilities/_BTCSet.h \
+	Utilities/BTC.h \
+	Utilities/cpoint.h \
+	Utilities/Matrix.h \
+	Utilities/NormalDist.h \
+	Utilities/QuickSort.h \
+	Utilities/Utilities.h \
+	Utilities/Vector.h \	
+	Utilities/BTC.hpp \
+	Utilities/BTCSet.hpp
+
+SOURCES += \
+	Application/Application.cpp \
+	Application/FileNameProcessor.cpp
+
+SOURCES += \
+	Common/Logger.cpp \
+	Common/Layer/CircleLayerItem.cpp \
+	Common/Layer/Layer.cpp \
+	Common/Layer/LayerItemDelegate.cpp \
+	Common/Layer/LayerListModel.cpp \
+	Common/Layer/LayerModel.cpp \
+	Common/Layer/PolygonLayerItem.cpp \
+	Common/Layer/SegmentLayerItem.cpp
+
+SOURCES += \
+	FeatureLayer/FeatureLayer.cpp \
+	FeatureLayer/FeatureModelItem.cpp
+
+SOURCES += \
+	MetaModelLayer/LinkLayerItem.cpp \
+	MetaModelLayer/MetaComponentItem.cpp \
+	MetaModelLayer/MetaItemPropertyModel.cpp \
+	MetaModelLayer/MetaLayerItem.cpp \
+	MetaModelLayer/MetaLayerModel.cpp \
+	MetaModelLayer/MetaLayerModelItem.cpp \
+	MetaModelLayer/MetaModelLayer.cpp \
+	MetaModelLayer/NodeLayerItem.cpp \
+	MetaModelLayer/Variable.cpp
+	
+SOURCES += \
+	UI\LayerPropertiesDialog.cpp \
+    UI\MainView.cpp \
+    UI\MainWindow.cpp \
+    UI\MapScene.cpp \
+    UI\MapView.cpp	
+
+SOURCES += \
+	Utilities/cpoint.cpp \
+	Utilities/Matrix.cpp \
+	Utilities/QuickSort.cpp \
+	Utilities/Utilities.cpp \
+	Utilities/Vector.cpp
+
+SOURCES += main.cpp
+
 
 RESOURCES += images.qrc
 
@@ -93,7 +126,9 @@ DISTFILES += json/Centroids.geojson \
     json/SubWaterSheds.geojson \
     json/1.png \
     json/2.png \
-    json/4.png
+	json/3.png \
+    json/4.png \
+	json/5.png
 
 OTHER_FILES += \
     $$PWD\Json\*.*
