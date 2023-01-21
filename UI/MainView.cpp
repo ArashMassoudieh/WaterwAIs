@@ -5,7 +5,7 @@
 #include <QJsonObject>
 
 #include <Layer/LayerListModel.h>
-#include <Layer/layeritemdelegate.h>
+#include <Layer/LayerItemDelegate.h>
 
 #include <Application/FileNameProcessor.h>
 

@@ -122,7 +122,7 @@ public:
 
     // Get functions
     Variable* get(QStringView name) {
-        if (auto found = variable_map_.find(name);
+        if (auto found = variable_map_.find(name.toString());
             found != variable_map_.end()) {
             return &found->second;
         }
@@ -131,7 +131,7 @@ public:
 
     // Constant version
     const Variable* get(QStringView name) const {
-        if (auto found = variable_map_.find(name);
+        if (auto found = variable_map_.find(name.toString());
             found != variable_map_.end()) {       
             return &found->second;
         }

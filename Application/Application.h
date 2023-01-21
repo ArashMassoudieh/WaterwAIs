@@ -2,6 +2,7 @@
 #define APPLICATION_H_8A4B1365A0E60012
 
 #include <QApplication>
+#include <memory>
 
 namespace WaterWays {
 

@@ -11,7 +11,10 @@ qtHaveModule(opengl): QT += opengl
 
 INCLUDEPATH += \
 	. \
-	.\Common
+        Common
+
+
+QMAKE_CXXFLAGS += -fconcepts
 
 FORMS += \
     Forms/dlglayerproperties.ui \
@@ -74,7 +77,8 @@ HEADERS += \
 
 SOURCES += \
 	Application/Application.cpp \
-	Application/FileNameProcessor.cpp
+	Application/FileNameProcessor.cpp \
+
 
 SOURCES += \
 	Common/Logger.cpp \
@@ -102,11 +106,11 @@ SOURCES += \
 	MetaModelLayer/Variable.cpp
 	
 SOURCES += \
-	UI\LayerPropertiesDialog.cpp \
-    UI\MainView.cpp \
-    UI\MainWindow.cpp \
-    UI\MapScene.cpp \
-    UI\MapView.cpp	
+    UI/LayerPropertiesDialog.cpp \
+    UI/MainView.cpp \
+    UI/MainWindow.cpp \
+    UI/MapScene.cpp \
+    UI/MapView.cpp
 
 SOURCES += \
 	Utilities/cpoint.cpp \
@@ -126,9 +130,9 @@ DISTFILES += json/Centroids.geojson \
     json/SubWaterSheds.geojson \
     json/1.png \
     json/2.png \
-	json/3.png \
+    json/3.png \
     json/4.png \
-	json/5.png
+    json/5.png
 
 OTHER_FILES += \
     $$PWD\Json\*.*
