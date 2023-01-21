@@ -1,0 +1,56 @@
+#
+# WaterWays project folder structure
+#
+
+The WaterWays project folder structure matches the project software architecture.
+
+Each folder is dediccated to contain code for some project component or a logical
+group of components.
+
+The current structure is defined as follows:
+
+[Root folder]
+	Contains only the entry point source file (main.cpp).
+	The other code files (header and source) should be placed into corresponding
+	folders (see below).
+	
+	The goal is to keep the root folder as lean as possible, so it stores only a
+	minimal set of code and project build files.
+	
+[Application]
+	Contains application business logic files not related to the UI/presentation.
+	  (main application class, settings etc).
+	  
+	Put general non-UI application-specific code there.
+	
+[Common]
+	Contains some general purpose code files there (i.e. downloader etc.)
+    
+	[Layer]
+		This subfolder contains base general code serving as a boilerplate
+		for implementing map views "layers".
+		
+		The code there provides protototypes for classes implementing layer model,
+		layer model items and layer graphical items.
+		
+[FeatureLayer]		
+	Contains layer implementation for the "feature" layer 
+	(like SubWaterSheds, PourPoints etc).
+	
+[MetaModelLayer]	
+	Contains layer implementation for the "meta model" layer (nodes, links)
+	
+[UI]
+	Contains UI/presentation code - views, dialogs etc.
+	All presentation code should be placed there.
+	
+[Utilities]
+	Contains a subset of Arash's math utilities used by the project.
+	
+[Resources]
+	Contains project resources - image files, icons etc.
+	
+[Forms]
+	Contains Qt UI form files (*.ui)
+	All Qt UI form files should be placed there.
+		
