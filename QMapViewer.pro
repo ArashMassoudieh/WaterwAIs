@@ -13,9 +13,6 @@ INCLUDEPATH += \
 	. \
         Common
 
-
-QMAKE_CXXFLAGS += -fconcepts
-
 FORMS += \
     Forms/dlglayerproperties.ui \
     Forms/mainview.ui
