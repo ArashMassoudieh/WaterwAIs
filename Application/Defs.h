@@ -4,7 +4,7 @@
 #define _STR(x) #x
 #define STRINGIFY(x)  _STR(x)
 
-#define APP_NAME "WaterWays"
+#define APP_NAME "WateraAIs"
 
 //////////////////////////////////////////////////////////////////////////
 // Project location-dependent settings

@@ -4,7 +4,7 @@
 #include <QJsonValue>
 #include <QGraphicsItem>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class LayerGraphicsSettings;
 
@@ -40,7 +40,7 @@ public:
         LayerGraphicsItems& /*items*/) = 0;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 
 //////////////////////////////////////////////////////////////////////////

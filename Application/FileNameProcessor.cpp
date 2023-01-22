@@ -3,7 +3,7 @@
 #include "Application.h"
 #include <QDebug>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class FileNameProcessorImpl: public FileNameProcessor {
 public:
@@ -33,4 +33,4 @@ FileNameProcessor& FileNameProcessor::get() {
 }
 
 
-} // namespace WaterWays
+} // namespace WaterwAIs

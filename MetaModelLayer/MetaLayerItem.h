@@ -4,7 +4,7 @@
 #include <Layer/LayerGraphicsItem.h>
 #include "MetaLayerModelItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // MetaLayerItem
@@ -33,7 +33,7 @@ protected:
 
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYERMETAMODELITEM_H_8ACEBEDC6E080732

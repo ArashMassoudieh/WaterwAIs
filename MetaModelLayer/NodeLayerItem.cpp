@@ -1,7 +1,7 @@
 
 #include "NodeLayerItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace {
     // Default Node parameters    
@@ -72,4 +72,4 @@ void NodeLayerItem::setSize(const QSizeF& size) {
 }
 
 
-} // namespace WaterWays
+} // namespace WaterwAIs

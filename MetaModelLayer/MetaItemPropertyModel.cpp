@@ -1,7 +1,7 @@
 
 #include "MetaItemPropertyModel.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // PropModel
@@ -56,4 +56,4 @@ QVariant MetaItemPropertyModel::headerData(int section, Qt::Orientation orientat
     return QVariant();
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

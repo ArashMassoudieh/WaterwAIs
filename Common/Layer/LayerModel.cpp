@@ -2,7 +2,7 @@
 #include "LayerModel.h"
 #include <Application/FileNameProcessor.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // LayerModel
@@ -60,4 +60,4 @@ void LayerModel::getIcon(QStringView icon_path, QSize icon_size) {
     });
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

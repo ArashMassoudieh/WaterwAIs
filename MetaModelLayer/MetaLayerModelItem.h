@@ -4,7 +4,7 @@
 #include <Layer/LayerModelItem.h>
 #include "MetaComponentItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class MetaLayerModel;
 
@@ -104,7 +104,7 @@ private:
 };
 
 } // namespace MetaLayerModelItems
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // METALAYERMODELITEM_H_8E6BAD7E50C75355

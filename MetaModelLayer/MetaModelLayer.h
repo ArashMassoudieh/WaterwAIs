@@ -3,7 +3,7 @@
 
 #include <Layer/Layer.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // MetaModelLayer
@@ -16,7 +16,7 @@ public:
 private:
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // METAMODELLAYER_H_8DD8274EB9E21362

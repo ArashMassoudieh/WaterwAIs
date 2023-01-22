@@ -18,7 +18,7 @@ namespace Ui {
     class MainView;
 }
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class MapView;
 
@@ -72,7 +72,7 @@ private:
     MetaItemPropertyModel* properties_model_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // MAINVIEW_H_9FF813C52C0F9D5D

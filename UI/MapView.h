@@ -5,7 +5,7 @@
 
 #include <MetaModelLayer/MetaItemPropertyModel.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class MainView;
 class MetaItemPropertyModel;
@@ -66,7 +66,7 @@ private:
     std::unique_ptr<MetaItemPropertyModel> prop_model_;
 };
 
-} // namespace WaterWays {
+} // namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 #endif // MAPVIEW_H_8855E8A18DF92F1F

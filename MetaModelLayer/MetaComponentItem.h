@@ -5,7 +5,7 @@
 #include <QJsonObject>
 #include <QPixmap>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ private:
     std::unique_ptr<IconDownloader> icon_downloader_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // METACOMPONENTITEM_H_B311B90CD98008C4

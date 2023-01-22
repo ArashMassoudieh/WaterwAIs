@@ -5,7 +5,7 @@
 #include "MetaLayerItem.h"
 #include "MetaLayerModelItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class NodeLayerItem;
 
@@ -48,7 +48,7 @@ private:
     qreal          arrow_size_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYERLINKITEM_H_B82CFCE549CBCE96

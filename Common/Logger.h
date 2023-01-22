@@ -3,7 +3,7 @@
 
 #include <QString>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace Logger {
 void trace  (const QString& msg);
@@ -12,6 +12,6 @@ void warning(const QString& msg);
 void error  (const QString& msg);
 }
 
-} // namespace WaterWays {
+} // namespace WaterwAIs {
 
 #endif // LOGGER_H

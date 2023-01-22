@@ -5,7 +5,7 @@
 #include "NodeLayerItem.h"
 #include "LinkLayerItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 namespace MetaLayerModelItems {
 
 namespace {
@@ -197,4 +197,4 @@ void LinkItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
 
 
 } // namespace MetaLayerModelItems
-} // namespace WaterWays
+} // namespace WaterwAIs

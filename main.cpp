@@ -1,7 +1,7 @@
 
 #include <Application/Application.h>
 
-using namespace WaterWays;
+using namespace WaterwAIs;
 
 int main(int argc, char *argv[]) {
     Q_INIT_RESOURCE(images);

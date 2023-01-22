@@ -6,7 +6,7 @@
 #include <Downloader.h>
 #include <deque>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ private:
     QPixmap icon_;    
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif //LAYERMODEL_H_A7E44A83E2B95592

@@ -8,7 +8,7 @@ namespace Ui {
 class DlgLayerProperties;
 }
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 ///////////////////////////////////////////////////////////////////////////
 // LayerPropertiesDialog
@@ -35,6 +35,6 @@ private:
     void updateLineStyle();
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 #endif // DLGLAYERPROPERTIES_H

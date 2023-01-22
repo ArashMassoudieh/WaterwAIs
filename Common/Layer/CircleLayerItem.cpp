@@ -2,7 +2,7 @@
 #include "CircleLayerItem.h"
 #include <QDebug>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // CircleLayerItem
@@ -34,4 +34,4 @@ void CircleLayerItem::paint(QPainter* painter,
         radius_ * 2, radius_ * 2);
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

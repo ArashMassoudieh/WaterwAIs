@@ -4,7 +4,7 @@
 
 #include "LayerGraphicsItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // PolygonLayerItem
@@ -19,7 +19,7 @@ public:
 private:
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYERPOLYGONITEM_H_4D75995A8124A968B62B

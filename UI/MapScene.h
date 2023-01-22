@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 #include <Layer/LayerSceneInterface.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // MapScene
@@ -29,7 +29,7 @@ private:
     QRectF rect_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // MAPSCENE_H_850176E6CC75

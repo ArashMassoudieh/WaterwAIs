@@ -4,7 +4,7 @@
 
 #include <QVector2D>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace {    
     static constexpr auto   link_arrow_size = 10.0;    
@@ -117,4 +117,4 @@ QPainterPath LinkLayerItem::shape() const {
     return path;
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

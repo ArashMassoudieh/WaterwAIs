@@ -5,7 +5,7 @@
 #include "FileNameProcessor.h"
 #include "Defs.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // Application
@@ -42,4 +42,4 @@ void Application::setSettings() {
     paths_.host_path = is_url ? HOST_PATH : "file:" HOST_PATH;
 }
 
-} //namespace WaterWays
+} //namespace WaterwAIs

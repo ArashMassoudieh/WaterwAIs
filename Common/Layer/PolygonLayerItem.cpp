@@ -1,7 +1,7 @@
 
 #include "PolygonLayerItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // PolygonLayerItem
@@ -20,4 +20,4 @@ void PolygonLayerItem::paint(QPainter* painter,
     LayerPolyItem::paint(painter, option);
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

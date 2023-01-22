@@ -2,7 +2,7 @@
 #include "Layer.h"
 #include "LayerSceneInterface.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 ///////////////////////////////////////////////////////////////////////////
 // Layer
@@ -150,4 +150,4 @@ void Layer::settingsChanged() {
         scene_->onLayerChanged(bound_rect_);
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

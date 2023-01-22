@@ -4,7 +4,7 @@
 
 #include <QPainter>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // LayerItemDelegate
@@ -47,4 +47,4 @@ void LayerItemDelegate::paint(QPainter* painter,
     painter->restore();    
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

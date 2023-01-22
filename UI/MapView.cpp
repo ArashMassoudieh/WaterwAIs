@@ -16,7 +16,7 @@
 #include <QColor>
 
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace {
     auto constexpr zoom_color = QColor(100, 100, 100);
@@ -182,4 +182,4 @@ void MapView::resizeEvent(QResizeEvent* event) {
 }
 
 
-} // namespace WaterWays {
+} // namespace WaterwAIs {

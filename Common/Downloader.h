@@ -8,7 +8,7 @@
 #include <QJsonDocument>
 #include <QPixmap>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 template <typename T>
 inline T download_to(const QByteArray& data);
@@ -109,7 +109,7 @@ inline QPixmap download_to(const QByteArray& data) {
     return pixmap;
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // DOWNLOADER_H_BEFAEB97C825D5AD

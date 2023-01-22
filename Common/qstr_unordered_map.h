@@ -6,7 +6,7 @@
 #include <QStringView>
 #include <unordered_map>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 // Helper wrapper around std::unordered_map<QString, T>, allowing to use
 // QStringView in some operations instead of QString which is more efficient.
@@ -47,7 +47,7 @@ template <typename T>
     std::unordered_map<QString, T, qstring_hash, std::equal_to<>>;
 #endif
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif //QSTR_UNORDERED_MAP_H_9D520E82BFD7F6CF

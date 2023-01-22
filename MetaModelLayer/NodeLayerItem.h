@@ -4,7 +4,7 @@
 #include "MetaLayerItem.h"
 #include "MetaLayerModelItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class MetaComponentItem;
 
@@ -49,7 +49,7 @@ private:
     QSizeF    size_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYERNODEITEM_H_A441F580D6914705

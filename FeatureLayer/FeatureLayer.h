@@ -6,7 +6,7 @@
 #include <Layer/LayerModel.h>
 #include "FeatureModelItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // FeatureLayerModel
@@ -45,7 +45,7 @@ private:
 };
 
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // FEATURELAYER_H_A84962A48953B829

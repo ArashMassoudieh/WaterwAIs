@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QStyledItemDelegate>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // LayerItemDelegate
@@ -21,7 +21,7 @@ public:
 signals:
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYERITEMDELEGATE_H_BF8D4FCCFCBEAA37

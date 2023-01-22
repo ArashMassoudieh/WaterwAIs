@@ -5,7 +5,7 @@
 #include <QJsonObject>
 #include <QGraphicsScene>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace {
     constexpr auto meta_layer_z_value = 40000;
@@ -36,4 +36,4 @@ MetaModelLayer::MetaModelLayer(LayerSceneInterface* scene,
     }
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

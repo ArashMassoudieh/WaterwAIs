@@ -8,7 +8,7 @@
 
 #include "Layer.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 #define DRAG_MIME_DATA "application/int"
 
@@ -146,4 +146,4 @@ bool LayerListModel::dropMimeData(const QMimeData* data, Qt::DropAction action,
     return true;
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

@@ -9,7 +9,7 @@
 #include "LayerModel.h"
 #include "LayerGraphicsItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class LayerSceneInterface;
 
@@ -127,7 +127,7 @@ protected:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Layer::Options)
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYER_H_9DB6E72CAD45

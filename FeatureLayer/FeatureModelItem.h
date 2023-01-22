@@ -11,7 +11,7 @@
 #include <vector>
 
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class Layer;
 
@@ -97,7 +97,7 @@ public:
         LayerGraphicsItems& items) override;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 
 //////////////////////////////////////////////////////////////////////////

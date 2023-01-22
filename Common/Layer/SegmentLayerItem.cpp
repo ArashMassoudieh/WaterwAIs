@@ -5,7 +5,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // SegmentLayerItem
@@ -49,4 +49,4 @@ void SegmentLayerItem::onItemMove(const QPointF& pos) {
     points_.emplace_back(pos);
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

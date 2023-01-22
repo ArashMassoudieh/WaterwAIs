@@ -7,7 +7,7 @@
 #include <variant>
 #include <qstr_unordered_map.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // Variable
@@ -156,7 +156,7 @@ private:
 };
 
 
-} //namespace WaterWays
+} //namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // VARIABLE_H_89744759ADDA9F48

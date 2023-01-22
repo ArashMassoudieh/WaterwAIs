@@ -158,7 +158,7 @@
         </layout>
        </item>
        <item>
-        <widget class="WaterWays::MapView" name="mapView"/>
+        <widget class="WaterwAIs::MapView" name="mapView"/>
        </item>
        <item>
         <widget class="QLabel" name="statusbar">
@@ -175,7 +175,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>WaterWays::MapView</class>
+   <class>WaterwAIs::MapView</class>
    <extends>QGraphicsView</extends>
    <header>UI/MapView.h</header>
   </customwidget>

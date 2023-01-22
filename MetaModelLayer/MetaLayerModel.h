@@ -6,7 +6,7 @@
 
 #include <qstr_unordered_map.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class NodeLayerItem;
 
@@ -65,7 +65,7 @@ private:
     QJsonDocument json_doc_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 
 //////////////////////////////////////////////////////////////////////////

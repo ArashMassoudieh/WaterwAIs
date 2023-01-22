@@ -16,7 +16,7 @@
 
 #include <array>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // MainView
@@ -272,4 +272,4 @@ void MainView::getFileContent(QString fileId) {
     });
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

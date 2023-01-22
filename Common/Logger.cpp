@@ -1,7 +1,7 @@
 #include <QDebug>
 #include "Logger.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 void Logger::trace(const QString& msg) {
     qDebug() << "TRACE:" << msg;
@@ -19,4 +19,4 @@ void Logger::error(const QString& msg) {
     qDebug() << "ERROR:" << msg;
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

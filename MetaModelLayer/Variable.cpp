@@ -2,7 +2,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace {
 
@@ -101,4 +101,4 @@ void Variable::fromString(QStringView value) {
     }
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

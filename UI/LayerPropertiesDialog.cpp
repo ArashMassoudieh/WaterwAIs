@@ -3,7 +3,7 @@
 #include "LayerPropertiesDialog.h"
 #include "ui_dlglayerproperties.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 ///////////////////////////////////////////////////////////////////////////
 // LayerPropertiesDialog
@@ -133,4 +133,4 @@ void LayerPropertiesDialog::updateLineStyle() {
 }
 
 
-} // namespace WaterWays
+} // namespace WaterwAIs

@@ -1,7 +1,7 @@
 
 #include "MetaLayerItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 namespace {
 // Default Node parameters
@@ -35,4 +35,4 @@ MetaLayerItem* MetaLayerItem::item_cast(QGraphicsItem* item) {
     return {};
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

@@ -5,7 +5,7 @@
 #include "Variable.h"
 #include <vector>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // PropModel
@@ -33,7 +33,7 @@ private:
     std::vector<std::pair<QString, QString>> properties_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 

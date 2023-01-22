@@ -9,7 +9,7 @@
 
 #include "MainView.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class MapScene;
 class MapView;
@@ -47,7 +47,7 @@ private:
     LayerListModel layers_list_model_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // MAINWINDOW_H_92E2E0638F6927FA

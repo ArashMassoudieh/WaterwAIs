@@ -4,7 +4,7 @@
 
 #include "LayerGraphicsItem.h"
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // CircleLayerItem
@@ -29,7 +29,7 @@ private:
     qreal  radius_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // CIRCLELAYERITEM_H_AD619BE899F15CEA

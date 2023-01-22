@@ -11,7 +11,7 @@
 
 #include <type_traits>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // LayerGraphicsSettings
@@ -103,7 +103,7 @@ using LayerGenericItem = LayerGraphicsItem<QGraphicsItem>;
 using LayerLineItem    = LayerGraphicsItem<QGraphicsLineItem>;
 using LayerPolyItem    = LayerGraphicsItem<QGraphicsPolygonItem>;
 
-} // WaterWays
+} // WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // GRAPHICSITEM_H_BA695EA6F7E1499D

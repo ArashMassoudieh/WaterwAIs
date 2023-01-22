@@ -11,7 +11,7 @@
 #include <array>
 
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // MainWindow
@@ -92,4 +92,4 @@ void MainWindow::zoomAll() {
     main_view_->mapView()->zoomToFit();
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

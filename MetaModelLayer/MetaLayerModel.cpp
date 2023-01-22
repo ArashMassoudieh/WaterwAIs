@@ -9,7 +9,7 @@
 #include <QNetworkReply>
 
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 using namespace MetaLayerModelItems;
 
@@ -134,4 +134,4 @@ const NodeLayerItem* MetaLayerModel::getNode(QStringView node_name) const {
     return {};
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

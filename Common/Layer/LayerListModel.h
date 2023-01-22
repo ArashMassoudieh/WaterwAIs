@@ -5,7 +5,7 @@
 #include <QAbstractListModel>
 #include <memory>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class Layer;
 
@@ -49,6 +49,6 @@ private:
     QList<LayerPtr> layers_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 #endif // LAYERITEMMODEL_H_82BF23B8AEAF7EA1

@@ -4,7 +4,7 @@
 #include <Downloader.h>
 
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // IconDownoader
@@ -111,4 +111,4 @@ QString MetaComponentItem::typeToSting(Type type) {
 }
 
 
-} // namespace WaterWays
+} // namespace WaterwAIs

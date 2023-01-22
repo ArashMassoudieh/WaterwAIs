@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <memory>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class MainWindow;
 
@@ -36,7 +36,7 @@ private:
     static PathSettings paths_;
 };
 
-} //namespace WaterWays
+} //namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // APPLICATION_H_8A4B1365A0E60012

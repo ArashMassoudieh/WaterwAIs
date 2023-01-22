@@ -3,7 +3,7 @@
 
 #include <QString>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // FilePathProcessor
@@ -30,7 +30,7 @@ public:
 #define WW_HOST_PATH(x)   FileNameProcessor::get().path(x, FileNameProcessor::Hint::Host)
 #define WW_SERVER_PATH(x) FileNameProcessor::get().path(x, FileNameProcessor::Hint::Server)
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // FILEPATHPROCESSOR_H_B937935A40D570B5

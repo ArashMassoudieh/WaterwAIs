@@ -6,7 +6,7 @@
 #include "LayerGraphicsItem.h"
 #include <vector>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // SegmentLayerItem
@@ -32,7 +32,7 @@ private:
     std::vector<QPointF> points_;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // SEGMENTLAYERITEM_H_A453AAE93740D71A

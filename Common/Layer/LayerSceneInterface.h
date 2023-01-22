@@ -6,7 +6,7 @@
 
 class QGraphicsItem;
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 class LayerSceneInterface {
 public:
@@ -22,7 +22,7 @@ public:
     virtual void onLayerChanged(const QRectF& bound_rect = QRectF{}) = 0;
 };
 
-} // namespace WaterWays
+} // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////
 #endif // LAYERSCENEINTERFACE_H_987CD0B94018CD8F

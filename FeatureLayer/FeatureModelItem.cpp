@@ -4,7 +4,7 @@
 #include <Layer/CircleLayerItem.h>
 #include <Layer/PolygonLayerItem.h>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // FeatureModelItem
@@ -138,4 +138,4 @@ void MultiPolygonModelItem::addGraphicsItems
     items.addItem(new PolygonLayerItem{gsettings, plygn});
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

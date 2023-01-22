@@ -2,7 +2,7 @@
 #include "MapScene.h"
 #include <QGraphicsItem>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // MapScene
@@ -25,4 +25,4 @@ void MapScene::onLayerChanged(const QRectF& bound_rect) {
     update(bound_rect);
 }
 
-} // namespace WaterWays
+} // namespace WaterwAIs

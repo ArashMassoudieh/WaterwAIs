@@ -47,7 +47,7 @@ public:
     QToolButton *btnPan;
     QToolButton *btnFitToView;
     QSpacerItem *horizontalSpacer;
-    WaterWays::MapView *mapView;
+    WaterwAIs::MapView *mapView;
     QLabel *statusbar;
 
     void setupUi(QWidget *MainView)
@@ -149,7 +149,7 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
-        mapView = new WaterWays::MapView(layoutWidget1);
+        mapView = new WaterwAIs::MapView(layoutWidget1);
         mapView->setObjectName(QString::fromUtf8("mapView"));
 
         verticalLayout_2->addWidget(mapView);

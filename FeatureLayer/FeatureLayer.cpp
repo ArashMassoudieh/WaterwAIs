@@ -2,7 +2,7 @@
 #include "FeatureLayer.h"
 #include <QJsonObject>
 
-namespace WaterWays {
+namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // FeatureLayerModel
@@ -78,4 +78,4 @@ FeatureLayer::FeatureLayer(LayerSceneInterface* scene, const QColor& color,
 }
 
 
-} // namespace WaterWays
+} // namespace WaterwAIs
