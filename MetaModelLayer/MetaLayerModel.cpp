@@ -129,8 +129,13 @@ void MetaLayerModel::getFromJsonDocument(const QJsonDocument& json_doc) {
 }
 
 const NodeLayerItem* MetaLayerModel::getNode(QStringView node_name) const {
+#ifdef Desktop_version
+    if (auto search = node_map_.find(node_name.toString()); search != node_map_.end())
+        return search->second;
+#else
     if (auto search = node_map_.find(node_name); search != node_map_.end())
         return search->second;
+#endif
     return {};
 }
 

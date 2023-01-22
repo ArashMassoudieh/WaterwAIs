@@ -2,12 +2,20 @@
 # Enable C++20
 CONFIG += c++2a
 
-DEFINES += _NO_GSL
+DEFINES += _NO_GSL WASM
+
+#KIT = Desktop
+KIT = WASM
 
 QT += widgets core network
 
 qtHaveModule(printsupport): QT += printsupport
 qtHaveModule(opengl): QT += opengl
+
+contains( KIT, Desktop ) {
+     QMAKE_CXXFLAGS += -fconcepts
+     DEFINES += Desktop_version
+}
 
 INCLUDEPATH += \
 	. \
