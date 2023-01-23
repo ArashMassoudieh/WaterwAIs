@@ -60,9 +60,13 @@ void LinkLayerItem::paint(QPainter* painter,
     auto pen = QPen{color, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     // Draw the line itself
-    if (isSelected())
-        pen.setColor(Qt::green);
+    if (isSelected()) {
+        color = settings_.selected_color;
+        pen.setColor(color);
+        pen.setWidth(settings_.selected_line_width);
+    }
 
+    painter->setPen(pen);
     painter->drawLine(line);    
 
     // Draw the arrows
@@ -78,10 +82,7 @@ void LinkLayerItem::paint(QPainter* painter,
         QPointF{sin(angle - Pi + Pi / 3) * arrow_size_,
                 cos(angle - Pi + Pi / 3) * arrow_size_};
 
-    if (isSelected())
-        painter->setBrush(Qt::green);
-    else
-        painter->setBrush(color);
+    painter->setBrush(color);
 
     painter->drawPolygon(QPolygonF{} << line.p2() <<
         dest_arrow_p1 << dest_arrow_p2);

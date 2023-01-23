@@ -34,8 +34,8 @@ public:
 
     MapView* mapView() { return map_view_; }
 
-    void setLayerListModel(QAbstractListModel* names);
-    void setTableModel(MetaItemPropertyModel* propmodel);
+    void setLayerListModel(QAbstractListModel* names = nullptr);
+    void setTableModel(MetaItemPropertyModel* propmodel = nullptr);
 
     void setStatusText(QStringView text);
 

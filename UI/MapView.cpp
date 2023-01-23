@@ -33,23 +33,48 @@ MapView::MapView(QWidget* parent)
 }
 
 void MapView::zoomToFit() {
-    auto sc = static_cast<MapScene*>(scene());
-    auto rc = sc->boundingRect();
-
-    fitInView(rc, Qt::KeepAspectRatio);
+    fitInView(mapScene()->boundingRect(), Qt::KeepAspectRatio);
     repaint();
 }
+
+void MapView::setFitToView() {
+    setMode(Mode::FitToView);
+    
+    // Setting not-panned scene rectangle
+    setSceneRect(mapScene()->boundingRect());
+    zoomToFit();
+}
+
+void MapView::onModeSet() {
+    // Clear things from the previous modes.
+    zoom_rect_           = nullptr;
+    last_point_          = {};
+    last_scene_rect_     = {};
+    pressed_scene_point_ = {};
+}
+
+void MapView::clearSelection() {
+    // Clear selected items
+    selected_items_.clear();
+
+    // Clear the properties table
+    main_view_->setTableModel();
+}
+
 
 void MapView::mousePressEvent(QMouseEvent* event) {
     if (event->button() & Qt::LeftButton) {
         is_pressed_ = true;
         last_point_ = event->pos();
         pressed_scene_point_ = mapToScene(event->pos());
+        
+        selectItem(last_point_);
     } else {
         QGraphicsView::mousePressEvent(event);
+        return;
     }
 
-    auto map_scene = static_cast<MapScene*>(scene());
+    auto map_scene = mapScene();
 
     switch (mode_) {
     case Mode::Pan:
@@ -74,7 +99,7 @@ void MapView::mousePressEvent(QMouseEvent* event) {
         break;
     }
 
-    default:
+    default:        
         break;
     }
 }
@@ -84,39 +109,28 @@ void MapView::mouseReleaseEvent(QMouseEvent* event) {
 
     is_pressed_ = false;
     pressed_scene_point_ = {};
-    
+    last_point_ = {};    
 
     setCursor(Qt::ArrowCursor);
-    auto sc = (MapScene*)scene();
+    auto map_scene = mapScene();
 
     switch (mode_) {
-    case Mode::Pan:
-        break;    
-
     case Mode::Zoom:
         Q_ASSERT(zoom_rect_ != nullptr);
         fitInView(zoom_rect_->rect(), Qt::KeepAspectRatio);
-        sc->removeItem(zoom_rect_);
-        repaint();
+
+        map_scene->removeItem(zoom_rect_);
         zoom_rect_ = nullptr;
+
+        repaint();        
         break;
 
+    case Mode::Pan:
+        // Fall through to let selected items to display properties in the
+        // Pan mode.
+        break;
     default:
-        auto selected_items = items(event->pos());
-        auto selected_item = static_cast<MetaLayerItem*>(nullptr);
-
-        for (auto item : selected_items) {
-            selected_item = MetaLayerItem::item_cast(item);
-            if (selected_item)
-                break;
-        }
-
-        if (selected_item) {
-            prop_model_ = std::make_unique<MetaItemPropertyModel>
-                (selected_item->properties(), this);
-
-            main_view_->setTableModel(prop_model_.release());
-        }
+        break;
     }
 }
 
@@ -172,6 +186,29 @@ void MapView::mouseMoveEvent(QMouseEvent* event) {
     }
 
     last_point_ = event->pos();
+}
+
+void MapView::selectItem(const QPoint& pos) {
+    auto selected_items = items(pos);
+    auto selected_item = static_cast<MetaLayerItem*>(nullptr);
+
+    for (auto item : selected_items) {
+        selected_item = MetaLayerItem::item_cast(item);
+        if (selected_item)           
+            break;
+    }
+
+    if (selected_item) {
+        // Clear previous selection of meta model layer items.
+        clearSelection();
+
+        selected_items_.emplace_back(selected_item);
+
+        prop_model_ = std::make_unique<MetaItemPropertyModel>
+            (selected_item->properties(), this);
+
+        main_view_->setTableModel(prop_model_.release());
+    }
 }
 
 void MapView::resizeEvent(QResizeEvent* event) {

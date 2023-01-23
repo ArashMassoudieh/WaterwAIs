@@ -22,6 +22,10 @@ class LayerGraphicsSettings {
 public:
     QPen   pen   = {Qt::black};
     QBrush brush = {Qt::black};
+
+    // Settings for selected items
+    int    selected_line_width = 5;
+    QColor selected_color = {Qt::darkBlue};
 };
 
 //////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@ namespace WaterwAIs {
 namespace {
     // Default Node parameters    
     static constexpr double node_width    = 200;
-    static constexpr double node_height   = 200;    
+    static constexpr double node_height   = 200;
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
@@ -61,6 +61,14 @@ void NodeLayerItem::paint(QPainter* painter,
     // Icon
     auto source = QRectF(0, 0, pixmap.size().width(), pixmap.size().height());
     painter->drawPixmap(boundingRect(), pixmap, source);
+   
+    // Pen
+    if (isSelected()) {
+        auto pen = settings_.pen;
+        pen.setColor(settings_.selected_color);        
+        pen.setWidth(settings_.selected_line_width);
+        painter->setPen(pen);
+    }
 
     // Circle
     painter->drawEllipse(boundingRect());

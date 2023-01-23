@@ -16,6 +16,7 @@ Application::Application(int& argc, char** argv, int flags)
     : QApplication{argc, argv, flags} {
 
     setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+    setAttribute(Qt::AA_EnableHighDpiScaling);
 
     // Setting application settings
     setSettings();
