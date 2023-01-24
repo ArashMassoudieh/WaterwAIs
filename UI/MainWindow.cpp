@@ -19,6 +19,9 @@ namespace WaterwAIs {
 MainWindow::MainWindow(QWidget* parent)
     : QWidget(parent), scene_(new MapScene(this)) {
 
+    connect(this, &QObject::destroyed, this, [this](auto*) 
+        { onBeforeAppDestroy(); });
+
     main_view_ = new MainView(this);
 
     main_view_->setLayerListModel(&layers_list_model_);
@@ -30,6 +33,14 @@ MainWindow::MainWindow(QWidget* parent)
 
     // Build layers.
     buildLayers();
+}
+
+void MainWindow::onBeforeAppDestroy() {
+    main_view_->onBeforeAppDestroy();
+
+    // Called just before the application is about to be destroyed,
+    // so perform some cleanup here while the object is still alive.
+
 }
 
 void MainWindow::buildLayers() {

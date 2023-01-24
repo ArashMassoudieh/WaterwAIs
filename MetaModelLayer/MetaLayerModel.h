@@ -10,6 +10,11 @@ namespace WaterwAIs {
 
 class NodeLayerItem;
 
+namespace MetaLayerModelItems {
+class NodeItem;
+class LinkItem;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // MetaLayerModel
 // 
@@ -22,6 +27,9 @@ class NodeLayerItem;
 class MetaLayerModel: public LayerModel {
     Q_OBJECT
 public:
+    using NodeItemPtr = std::unique_ptr<MetaLayerModelItems::NodeItem>;
+    using LinkItemPtr = std::unique_ptr<MetaLayerModelItems::LinkItem>;
+
     using LayerNodeItemMap = qstr_unordered_map<NodeLayerItem*>;
 
     MetaLayerModel();
@@ -36,6 +44,12 @@ public:
 
     // Get Node
     const NodeLayerItem* getNode(QStringView node_name) const;
+
+    // Model-specific Node and Link item creator functions allowing to create
+    // node and link items with custom properties (i.e. special drawing based
+    // on name).
+    NodeItemPtr createNode(QStringView name, MetaComponentItem& component);
+    LinkItemPtr createLink(QStringView name, MetaComponentItem& component);
 
 protected:
     // Fills Meta model for components from JSON doc

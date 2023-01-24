@@ -33,7 +33,7 @@ Variable::Type typeFromValue(const QJsonValue& json_value) {
 
     // Check for double type
     auto ok = false;
-    auto value = json_value.toString().toDouble(&ok);
+    json_value.toString().toDouble(&ok);
 
     if (ok)
         type = Type::Value;
@@ -77,11 +77,21 @@ Item::Ptr Item::create(QStringView name, MetaComponentItem& component,
     auto type = component.type();
 
     switch (type) {
-    case MetaComponentItem::Type::Node:
-        return std::make_unique<NodeItem>(name, component, model);
+    case MetaComponentItem::Type::Node: {
+        // Check if model can provide custom node
+        auto node = model.createNode(name, component);
 
-    case MetaComponentItem::Type::Link:
-        return std::make_unique<LinkItem>(name, component, model);
+        return node ? std::move(node)
+            : std::make_unique<NodeItem>(name, component, model);
+    }
+
+    case MetaComponentItem::Type::Link: {
+        // Check if model can provide custom link
+        auto link = model.createLink(name, component);
+
+        return link ? std::move(link) :
+            std::make_unique<LinkItem>(name, component, model);
+    }
         
     case MetaComponentItem::Type::Entity:
         // TBD.
@@ -143,9 +153,19 @@ void NodeItem::getFromJson(const QJsonValue& json_value) {
     coordinates_ = {x, y};
 }
 
+NodeLayerItem* NodeItem::createLayerItem
+    (const LayerGraphicsSettings& gsettings) {
+    return new NodeLayerItem{gsettings, *this};
+}
+
 void NodeItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
     LayerGraphicsItems& items) {
-    auto node = new NodeLayerItem{gsettings, *this};
+    auto node = createLayerItem(gsettings);
+    
+    if (!node) {
+        qDebug() << "A null Node layer item was created";
+        return;
+    }
 
     // Add the node item to the graphics items collection.
     items.addItem(node);
@@ -170,6 +190,10 @@ void LinkItem::onProperty(QStringView name, const QJsonValue& json_value) {
         destination_ = json_value.toString();
 }
 
+LinkLayerItem* LinkItem::createLayerItem(const LayerGraphicsSettings& gsettings,
+    const NodeLayerItem* source, const NodeLayerItem* destination) {
+    return new LinkLayerItem{gsettings, *this, source, destination};
+}
 
 void LinkItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
     LayerGraphicsItems& items) {
@@ -186,8 +210,12 @@ void LinkItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
     auto source_node      = model_.getNode(source_);
     auto destination_node = model_.getNode(destination_);    
 
-    auto link = new LinkLayerItem{gsettings, *this, source_node,
-        destination_node};
+    auto link = createLayerItem(gsettings, source_node, destination_node);
+        
+    if (!link) {
+        qDebug() << "A null Node layer item was created";
+        return;
+    }
 
     // Add link to the graphics items collection.
     items.addItem(link);

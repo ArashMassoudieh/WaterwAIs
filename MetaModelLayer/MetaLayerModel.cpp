@@ -8,6 +8,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
+#include "NodeLayerItem.h"
 
 namespace WaterwAIs {
 
@@ -131,6 +132,64 @@ void MetaLayerModel::getFromJsonDocument(const QJsonDocument& json_doc) {
 const NodeLayerItem* MetaLayerModel::getNode(QStringView node_name) const {
     if (auto search = node_map_.find(node_name.toString()); search != node_map_.end())
         return search->second;
+    return {};
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// Example of custom Node item drawing its name
+
+/*
+class CustomNodeLayerItem: public NodeLayerItem {
+public:
+    CustomNodeLayerItem(const LayerGraphicsSettings& gsettings, NodeItem& node_item):
+        NodeLayerItem{gsettings, node_item} {
+    }
+
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
+        QWidget* widget) override {
+        NodeLayerItem::paint(painter, option, widget);
+
+        auto font = painter->font();
+        font.setPixelSize(24);
+        painter->setFont(font);
+
+        painter->drawText(boundingRect(), Qt::AlignCenter, model_item_.name().toString());
+    }
+};
+
+
+class CustomNodeItem: public NodeItem {
+public:
+    CustomNodeItem(QStringView name, MetaComponentItem& component, MetaLayerModel& model):
+        NodeItem{name, component, model} {}
+
+    NodeLayerItem* createLayerItem(const LayerGraphicsSettings& gsettings) override {
+        return new CustomNodeLayerItem{gsettings, *this};
+    }
+};
+*/
+
+MetaLayerModel::NodeItemPtr MetaLayerModel::createNode(QStringView name,
+    MetaComponentItem& component) {
+    // Create custom Node objects here like:
+    //if (name == u"subcatchment2")
+    //    return std::make_unique<CustomNodeItem>(name, component, *this);
+
+    // default Node item creation in the Item::create()
+    return {};
+}
+
+MetaLayerModel::LinkItemPtr MetaLayerModel::createLink(QStringView name,
+    MetaComponentItem& component) {
+    Q_UNUSED(name);
+    Q_UNUSED(component);
+
+    // Create custom Link objects here like:
+    // return std::make_unique<CustomLinkItem>(name, component, model);
+    //
+
+    // default Node item creation in the Item::create()
     return {};
 }
 

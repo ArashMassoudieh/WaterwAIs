@@ -42,6 +42,13 @@ MainView::MainView(QWidget* parent):
 
 MainView::~MainView() {}
 
+void MainView::onBeforeAppDestroy() {
+    map_view_->onBeforeAppDestroy();
+
+    // Called just before the application is about to be destroyed,
+    // so perform some cleanup here while the object is still alive.
+}
+
 
 void MainView::setStatusText(QStringView text) {
     ui->statusbar->setText(text.toString());

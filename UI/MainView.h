@@ -26,8 +26,9 @@ class MapView;
 // MainView
 
 class MainView: public QWidget {
-    Q_OBJECT
+    friend class MainWindow;
 
+    Q_OBJECT
 public:
     explicit MainView(QWidget* parent = nullptr);
     ~MainView();
@@ -49,6 +50,8 @@ protected slots:
     void on_btnOpen_clicked();
 
 private:
+    void onBeforeAppDestroy();
+
     void mapViewModesCheck();
 
     void setupLayerList();

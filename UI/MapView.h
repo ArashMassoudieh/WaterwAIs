@@ -16,9 +16,12 @@ class MapScene;
 // MapView
 
 class MapView: public QGraphicsView {
-    Q_OBJECT
+    Q_OBJECT        
 public:
+    friend class MainView;
+
     explicit MapView(QWidget* parent = nullptr);
+    ~MapView() override;
 
     // Operation type    
     enum class Mode {
@@ -42,9 +45,11 @@ public:
     void setFitToView();
 
 public slots:
-    void zoomToFit();
+    void zoomToFit();    
 
 protected:
+    void onBeforeAppDestroy();
+
     MapScene* mapScene() { return reinterpret_cast<MapScene*>(scene()); }
 
     void mousePressEvent  (QMouseEvent* event) override;
@@ -55,7 +60,7 @@ protected:
 
     // Selected items
     void selectItem(const QPoint& pos);
-    void clearSelection();
+    void clearSelection(bool on_destroy = false);
 
 private:
     class SelectedItem {
@@ -64,6 +69,8 @@ private:
             { if (item_) item_->setSelected(true); }
 
         ~SelectedItem() { if (item_) item_->setSelected(false); }
+
+        void clear() { item_ = nullptr;  }
     private:
         QGraphicsItem* item_;
     };

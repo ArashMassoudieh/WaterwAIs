@@ -32,6 +32,16 @@ MapView::MapView(QWidget* parent)
     zoom_rect_ = nullptr;
 }
 
+MapView::~MapView() {
+}
+
+
+void MapView::onBeforeAppDestroy() {
+    // Clearing the selected items before destruction while we still have
+    // objects alive.
+    clearSelection();
+}
+
 void MapView::zoomToFit() {
     fitInView(mapScene()->boundingRect(), Qt::KeepAspectRatio);
     repaint();
@@ -53,8 +63,17 @@ void MapView::onModeSet() {
     pressed_scene_point_ = {};
 }
 
-void MapView::clearSelection() {
+void MapView::clearSelection(bool on_destroy) {
     // Clear selected items
+    if (on_destroy) {
+        // Clearing the selected items during destruction if there are any,
+        //  as they may be stale and already destroyed.
+        for (auto& sel_item : selected_items_)
+            sel_item.clear();
+
+        return;
+    }
+
     selected_items_.clear();
 
     // Clear the properties table

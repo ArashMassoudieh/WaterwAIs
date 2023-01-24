@@ -30,6 +30,9 @@ public:
     // Map view, containing all layers
     MapView* mapView() { return main_view_->mapView(); }
 
+protected:
+    void onBeforeAppDestroy();
+
 private:
     void buildLayers();
 

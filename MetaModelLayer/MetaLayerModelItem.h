@@ -7,6 +7,8 @@
 namespace WaterwAIs {
 
 class MetaLayerModel;
+class NodeLayerItem;
+class LinkLayerItem;
 
 namespace MetaLayerModelItems {
 
@@ -70,7 +72,11 @@ public:
     void addGraphicsItems(const LayerGraphicsSettings& gsettings,
         LayerGraphicsItems& items) override;
 
-    const QPointF coordinates() const { return coordinates_; }    
+    const QPointF coordinates() const { return coordinates_; }
+
+    // Creates graphical layer item for Node.
+    virtual NodeLayerItem* createLayerItem
+        (const LayerGraphicsSettings& gsettings);
 
 private:
     QPointF coordinates_;    
@@ -93,6 +99,11 @@ public:
 
     QStringView source     () const { return source_; }
     QStringView destination() const { return destination_; }
+
+    // Creates graphical layer item for Link.
+    virtual LinkLayerItem* createLayerItem
+        (const LayerGraphicsSettings& gsettings, const NodeLayerItem* source,
+            const NodeLayerItem* destination);
 
 protected:
     void onProperty(QStringView name, 
