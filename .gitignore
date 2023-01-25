@@ -46,3 +46,9 @@ build/release/
 build/debug/
 
 *.autosave
+
+build-ConvertMetaModel-Desktop_Qt_5_15_2_GCC_64bit-Debug/
+
+*.f3a4550
+
+*.user

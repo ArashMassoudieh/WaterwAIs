@@ -14,7 +14,7 @@ INCLUDEPATH += \
         Common
 
 
-QMAKE_CXXFLAGS += -fconcepts
+#QMAKE_CXXFLAGS += -fconcepts
 
 FORMS += \
     Forms/dlglayerproperties.ui \
