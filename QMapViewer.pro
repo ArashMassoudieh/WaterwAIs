@@ -13,9 +13,6 @@ INCLUDEPATH += \
 	. \
         Common
 
-
-#QMAKE_CXXFLAGS += -fconcepts
-
 FORMS += \
     Forms/dlglayerproperties.ui \
     Forms/mainview.ui
@@ -123,20 +120,6 @@ SOURCES += main.cpp
 
 
 RESOURCES += images.qrc
-
-DISTFILES += json/Centroids.geojson \
-    json/HickeyRunSewer.geojson \
-    json/PourPoints.geojson \
-    json/SubWaterSheds.geojson \
-    json/1.png \
-    json/2.png \
-    json/3.png \
-    json/4.png \
-    json/5.png
-
-OTHER_FILES += \
-    $$PWD\Json\*.*
-
 
 #DEFINES += Arash
 

@@ -44,6 +44,14 @@ public:
     void setMousePan () { setMode(Mode::Pan); }
     void setFitToView();
 
+    // Zoom In/Out
+    void zoom(bool in);
+
+    // Zoom factor
+    double zoomFactor() const { return zoom_factor_; }
+    void setZoomFactor(double zoom_factor) { zoom_factor_ = zoom_factor; }
+
+
 public slots:
     void zoomToFit();    
 
@@ -60,7 +68,7 @@ protected:
 
     // Selected items
     void selectItem(const QPoint& pos);
-    void clearSelection(bool on_destroy = false);
+    void clearSelection();
 
 private:
     class SelectedItem {
@@ -93,6 +101,8 @@ private:
 
     // Models  
     std::unique_ptr<MetaItemPropertyModel> prop_model_;
+
+    double zoom_factor_;
 };
 
 } // namespace WaterwAIs {

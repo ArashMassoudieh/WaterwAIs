@@ -21,20 +21,20 @@ namespace WaterwAIs {
 namespace {
     auto constexpr zoom_color = QColor(100, 100, 100);
     auto constexpr zoom_rect_zvalue = 50000;
+    auto constexpr default_zoom_factor = 1.75;
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
 // MapView
 
 MapView::MapView(QWidget* parent)
-    : QGraphicsView{parent} {
+    : QGraphicsView{parent}, zoom_factor_{default_zoom_factor} {
     mode_ = Mode::None;
     zoom_rect_ = nullptr;
 }
 
 MapView::~MapView() {
 }
-
 
 void MapView::onBeforeAppDestroy() {
     // Clearing the selected items before destruction while we still have
@@ -44,6 +44,13 @@ void MapView::onBeforeAppDestroy() {
 
 void MapView::zoomToFit() {
     fitInView(mapScene()->boundingRect(), Qt::KeepAspectRatio);
+    repaint();
+}
+
+void MapView::zoom(bool in) {
+    auto factor = in ? zoom_factor_ : 1 / zoom_factor_;
+
+    scale(factor, factor);
     repaint();
 }
 
@@ -63,17 +70,8 @@ void MapView::onModeSet() {
     pressed_scene_point_ = {};
 }
 
-void MapView::clearSelection(bool on_destroy) {
+void MapView::clearSelection() {
     // Clear selected items
-    if (on_destroy) {
-        // Clearing the selected items during destruction if there are any,
-        //  as they may be stale and already destroyed.
-        for (auto& sel_item : selected_items_)
-            sel_item.clear();
-
-        return;
-    }
-
     selected_items_.clear();
 
     // Clear the properties table
@@ -123,6 +121,7 @@ void MapView::mousePressEvent(QMouseEvent* event) {
     }
 }
 
+
 void MapView::mouseReleaseEvent(QMouseEvent* event) {
     QGraphicsView::mouseReleaseEvent(event);
 
@@ -162,7 +161,8 @@ void MapView::mouseMoveEvent(QMouseEvent* event) {
     int y = pos.y();
 
     // Set status text with coordinates
-    mainView()->setStatusText(QString::number(x) + "," + QString::number(y));
+    mainView()->setStatusText(QStringLiteral("Coordinates: ") + 
+        QString::number(x) + "," + QString::number(y));
 
     if (!is_pressed_)
         return;

@@ -6,6 +6,7 @@
 #include <QStringListModel>
 #include <QNetworkAccessManager>
 #include <QMenu>
+#include <QToolButton>
 #include <QLabel>
 #include <QTimer>
 #include <QStandardItemModel>
@@ -42,6 +43,8 @@ public:
 
 protected slots:
     void on_btnZoom_clicked();
+    void on_btnZoomIn_clicked();
+    void on_btnZoomOut_clicked();
     void on_btnPan_clicked();
     void on_btnFitToView_clicked();
 
@@ -50,9 +53,13 @@ protected slots:
     void on_btnOpen_clicked();
 
 private:
+    void createMapViewControls();
     void onBeforeAppDestroy();
 
+    void zoomMapView(bool in);
     void mapViewModesCheck();
+
+    void showLayerProperties();
 
     void setupLayerList();
     void scheduleTasks(std::chrono::milliseconds interval = 1s);
@@ -73,6 +80,14 @@ private:
     QTimer timer_;
 
     MetaItemPropertyModel* properties_model_;
+     
+    QToolButton* btn_pan_         = nullptr;
+    QToolButton* btn_zoom_        = nullptr;
+    QToolButton* btn_zoom_in_     = nullptr;
+    QToolButton* btn_zoom_out_    = nullptr;
+    QToolButton* btn_fit_to_view_ = nullptr;
+
+    QLabel* status_bar_ = nullptr;
 };
 
 } // namespace WaterwAIs

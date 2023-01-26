@@ -172,6 +172,9 @@ public:
 
 MetaLayerModel::NodeItemPtr MetaLayerModel::createNode(QStringView name,
     MetaComponentItem& component) {
+    Q_UNUSED(name);
+    Q_UNUSED(component);
+
     // Create custom Node objects here like:
     //if (name == u"subcatchment2")
     //    return std::make_unique<CustomNodeItem>(name, component, *this);

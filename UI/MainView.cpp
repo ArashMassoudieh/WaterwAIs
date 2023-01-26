@@ -26,6 +26,9 @@ MainView::MainView(QWidget* parent):
     ui(std::make_unique<Ui::MainView>()) {
     ui->setupUi(this);
 
+    // Creating Map view overlay controls
+    createMapViewControls();
+
     // Setting left part of the horizontal splitter to be 4 times less than
     // the right part.
     ui->splitter_2->setSizes(QList{100, 400});
@@ -42,6 +45,67 @@ MainView::MainView(QWidget* parent):
 
 MainView::~MainView() {}
 
+
+void MainView::createMapViewControls() {
+    // Tool buttons
+    auto button_layout = new QHBoxLayout{};
+    button_layout->setSpacing(1);
+    
+    auto icon_size = QSize{24,24};
+
+    auto add_tool_button = [&](QStringView name, QStringView icon_file,
+        QStringView text = {}, QStringView tooltip = {}, bool checkable = false) {
+
+        auto button = new QToolButton{};
+        button->setObjectName(name.toString());
+
+        button->setText(text.toString());
+        button->setIcon(QIcon{icon_file.toString()});
+        button->setToolTip(tooltip.toString());
+        button->setCheckable(checkable);
+
+        if (!text.isEmpty())
+            button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+        button->setIconSize(icon_size);
+        button_layout->addWidget(button);
+
+        return button;
+    };
+
+    
+    // Pan
+    btn_pan_ = add_tool_button(u"btnPan", u":/Resources/hand-rock.png", u"Pan",
+        u"Panning the view by mouse", true);
+
+    // Zoom
+    btn_zoom_ = add_tool_button(u"btnZoom", u":/Resources/zoom.png", u"Zoom",
+        u"Zooming the view by mouse", true);
+
+    // Zoom in
+    btn_zoom_in_ = add_tool_button(u"btnZoomIn", u":/Resources/zoomin.png", {},
+        u"Zooming in the view");
+    
+    // Zoom Out
+    btn_zoom_out_ = add_tool_button(u"btnZoomOut", u":/Resources/zoomout.png", {},
+        u"Zooming out the view");
+
+    // Fit in View
+    btn_fit_to_view_ = add_tool_button(u"btnFitToView", u":/Resources/expand.png", 
+        u"Fit View", u"Fit in view", true);
+
+    ui->gridLayout->addLayout(button_layout, 0, 0,
+        Qt::AlignRight | Qt::AlignTop);
+
+    // Status bar for coordinates
+    status_bar_ = new QLabel();    
+    ui->gridLayout->addWidget(status_bar_, 0, 0,
+        Qt::AlignLeft | Qt::AlignBottom);
+
+    QMetaObject::connectSlotsByName(this);
+}
+
+
 void MainView::onBeforeAppDestroy() {
     map_view_->onBeforeAppDestroy();
 
@@ -51,7 +115,7 @@ void MainView::onBeforeAppDestroy() {
 
 
 void MainView::setStatusText(QStringView text) {
-    ui->statusbar->setText(text.toString());
+    status_bar_->setText(text.toString());
 }
 
 
@@ -61,14 +125,8 @@ void MainView::setupLayerList() {
 
     connect(&submenu_, &QMenu::triggered, this,
         [&](QAction* action) {
-            if (action->text().contains("Properties")) {
-                auto model = (LayerListModel*)ui->lstLayers->model();
-                auto layer = (*model)[selected_item_].get();
-
-                auto dlg = new LayerPropertiesDialog(layer, this);
-                dlg->setModal(true);
-                dlg->show();
-            }
+            if (action->text().contains("Properties"))
+                showLayerProperties();            
         });
 
 
@@ -83,6 +141,21 @@ void MainView::setupLayerList() {
             selected_item_ = idx;
             submenu_.popup(global_pos);
         });
+
+    connect(ui->lstLayers, &QListView::doubleClicked, this,
+        [this](const auto& index) {
+            selected_item_ = index.row();
+            showLayerProperties();
+        });
+}
+
+void MainView::showLayerProperties() {
+    auto model = (LayerListModel*)ui->lstLayers->model();
+    auto layer = (*model)[selected_item_].get();
+
+    auto dlg = new LayerPropertiesDialog(layer, this);
+    dlg->setModal(true);
+    dlg->show();
 }
 
 
@@ -163,6 +236,21 @@ void MainView::on_btnZoom_clicked() {
     mapViewModesCheck();
 }
 
+void MainView::zoomMapView(bool in) {
+    if (map_view_->mode() == MapView::Mode::FitToView)
+        on_btnPan_clicked();
+
+    map_view_->zoom(in);
+}
+
+void MainView::on_btnZoomIn_clicked()  {
+    zoomMapView(true);
+}
+
+void MainView::on_btnZoomOut_clicked() {
+    zoomMapView(false);
+}
+
 void MainView::on_btnPan_clicked() {
     map_view_->setMousePan();
     mapViewModesCheck();
@@ -180,19 +268,19 @@ void MainView::mapViewModesCheck() {
 
     switch (mode) {    
     case MapView::Mode::Pan:
-        checked_tool_btn = ui->btnPan;
+        checked_tool_btn = btn_pan_;
         break;
     case MapView::Mode::Zoom:
-        checked_tool_btn = ui->btnZoom;
+        checked_tool_btn = btn_zoom_;
         break;
     case MapView::Mode::FitToView:
-        checked_tool_btn = ui->btnFitToView;
+        checked_tool_btn = btn_fit_to_view_;
         break;
     default:
         break;
     }
 
-    auto buttons = std::array{ ui->btnPan, ui->btnZoom, ui->btnFitToView };
+    auto buttons = std::array{btn_pan_, btn_zoom_, btn_fit_to_view_};
 
     for (auto button : buttons)
         button->setChecked(button == checked_tool_btn);

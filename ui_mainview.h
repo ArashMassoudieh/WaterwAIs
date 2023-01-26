@@ -11,9 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSplitter>
@@ -41,14 +41,8 @@ public:
     QListView *lstLayers;
     QTableView *tableView;
     QWidget *layoutWidget1;
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_2;
-    QToolButton *btnZoom;
-    QToolButton *btnPan;
-    QToolButton *btnFitToView;
-    QSpacerItem *horizontalSpacer;
+    QGridLayout *gridLayout;
     WaterwAIs::MapView *mapView;
-    QLabel *statusbar;
 
     void setupUi(QWidget *MainView)
     {
@@ -119,45 +113,13 @@ public:
         splitter_2->addWidget(layoutWidget);
         layoutWidget1 = new QWidget(splitter_2);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget1);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        btnZoom = new QToolButton(layoutWidget1);
-        btnZoom->setObjectName(QString::fromUtf8("btnZoom"));
-        btnZoom->setCheckable(true);
-
-        horizontalLayout_2->addWidget(btnZoom);
-
-        btnPan = new QToolButton(layoutWidget1);
-        btnPan->setObjectName(QString::fromUtf8("btnPan"));
-        btnPan->setCheckable(true);
-
-        horizontalLayout_2->addWidget(btnPan);
-
-        btnFitToView = new QToolButton(layoutWidget1);
-        btnFitToView->setObjectName(QString::fromUtf8("btnFitToView"));
-        btnFitToView->setCheckable(true);
-
-        horizontalLayout_2->addWidget(btnFitToView);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_2);
-
+        gridLayout = new QGridLayout(layoutWidget1);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
         mapView = new WaterwAIs::MapView(layoutWidget1);
         mapView->setObjectName(QString::fromUtf8("mapView"));
 
-        verticalLayout_2->addWidget(mapView);
-
-        statusbar = new QLabel(layoutWidget1);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-
-        verticalLayout_2->addWidget(statusbar);
+        gridLayout->addWidget(mapView, 0, 0, 1, 1);
 
         splitter_2->addWidget(layoutWidget1);
 
@@ -175,10 +137,6 @@ public:
         btnOpen->setText(QCoreApplication::translate("MainView", "Open", nullptr));
         btnMoveUp->setText(QCoreApplication::translate("MainView", "Up", nullptr));
         btnMoveDown->setText(QCoreApplication::translate("MainView", "Down", nullptr));
-        btnZoom->setText(QCoreApplication::translate("MainView", "Zoom", nullptr));
-        btnPan->setText(QCoreApplication::translate("MainView", "Pan", nullptr));
-        btnFitToView->setText(QCoreApplication::translate("MainView", "Fit to view", nullptr));
-        statusbar->setText(QString());
     } // retranslateUi
 
 };

@@ -6,5 +6,8 @@
         <file>Resources/rotateright.png</file>
         <file>Resources/zoomin.png</file>
         <file>Resources/zoomout.png</file>
+        <file>Resources/expand.png</file>
+        <file>Resources/hand-rock.png</file>
+        <file>Resources/zoom.png</file>
     </qresource>
 </RCC>
