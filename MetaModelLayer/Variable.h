@@ -2,12 +2,14 @@
 #define VARIABLE_H_89744759ADDA9F48
 
 #include <QJsonDocument>
-#include "Utilities/BTC.h"
+#include <Utilities/TimeSeries_s.h>
 
 #include <variant>
 #include <qstr_unordered_map.h>
 
 namespace WaterwAIs {
+
+using TimeSeries = CTimeSeries<double>;
 
 //////////////////////////////////////////////////////////////////////////
 // Variable
@@ -80,7 +82,7 @@ private:
     Type type_ = Type::NotAssigned;
     Role role_ = Role::None;
 
-    std::variant<double, QString, CTimeSeries<double>> value_;
+    std::variant<double, QString, TimeSeries> value_;
 };
 
 //////////////////////////////////////////////////////////////////////////

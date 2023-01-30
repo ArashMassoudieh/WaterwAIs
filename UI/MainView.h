@@ -14,6 +14,9 @@
 #include <MetaModelLayer/MetaItemPropertyModel.h>
 
 class QListView;
+class QSortFilterProxyModel;
+class QVBoxLayout;
+class QHBoxLayout;
 
 namespace Ui {
     class MainView;
@@ -41,6 +44,8 @@ public:
 
     void setStatusText(QStringView text);
 
+    void adjustMapViewControls(const QSize& adjustment);
+
 protected slots:
     void on_btnZoom_clicked();
     void on_btnZoomIn_clicked();
@@ -51,6 +56,10 @@ protected slots:
     void on_btnMoveUp_clicked();
     void on_btnMoveDown_clicked();
     void on_btnOpen_clicked();
+
+    void on_btnChartDlg_clicked();
+
+    void on_edtFilter_textChanged(const QString& text);
 
 private:
     void createMapViewControls();
@@ -78,8 +87,8 @@ private:
 
     QString task_id_;
     QTimer timer_;
-
-    MetaItemPropertyModel* properties_model_;
+    
+    QSortFilterProxyModel* prop_proxy_model_ = nullptr;
      
     QToolButton* btn_pan_         = nullptr;
     QToolButton* btn_zoom_        = nullptr;
@@ -87,7 +96,10 @@ private:
     QToolButton* btn_zoom_out_    = nullptr;
     QToolButton* btn_fit_to_view_ = nullptr;
 
-    QLabel* status_bar_ = nullptr;
+    QHBoxLayout* button_layout_   = nullptr;
+
+    QLabel*      status_bar_    = nullptr;
+    QVBoxLayout* status_layout_ = nullptr;
 };
 
 } // namespace WaterwAIs

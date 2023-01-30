@@ -1,24 +1,31 @@
 
 #include "MetaItemPropertyModel.h"
+#include <MetaModelLayer/MetaLayerItem.h>
 
 namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
 // PropModel
 
-MetaItemPropertyModel::MetaItemPropertyModel(const VariableMap& properties, QObject* parent):
+MetaItemPropertyModel::MetaItemPropertyModel(const MetaLayerItem& layer_item,
+    QObject* parent):
     QAbstractTableModel(parent) {    
     setHeaderData(0, Qt::Horizontal, tr("Property"));
     setHeaderData(1, Qt::Horizontal, tr("Value"));
 
-    buildProperies(properties);
+    buildProperies(layer_item);
 }
 
-void MetaItemPropertyModel::buildProperies(const VariableMap& properties) {
+void MetaItemPropertyModel::buildProperies(const MetaLayerItem& layer_item) {
     properties_.clear();
 
-    for (auto [name, value] : properties.vars())
+    for (auto [name, value] : layer_item.properties().vars())
         properties_.emplace_back(name, value.toString());
+
+    auto component_name = layer_item.modelItem().component().name();
+
+    item_label_ = "<b>" + layer_item.modelItem().name().toString() +
+        "</b> (" + component_name + ")";
 }
 
 
@@ -42,7 +49,8 @@ QVariant MetaItemPropertyModel::data(const QModelIndex& index, int role) const {
     return QVariant();
 }
 
-QVariant MetaItemPropertyModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant MetaItemPropertyModel::headerData
+    (int section, Qt::Orientation orientation, int role) const {
     if (role == Qt::DisplayRole) {
         if (orientation == Qt::Horizontal) {
             switch (section) {

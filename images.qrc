@@ -9,5 +9,8 @@
         <file>Resources/expand.png</file>
         <file>Resources/hand-rock.png</file>
         <file>Resources/zoom.png</file>
+        <file>Resources/settings.png</file>
+        <file>Resources/chart.png</file>
+        <file>Resources/resize.png</file>
     </qresource>
 </RCC>

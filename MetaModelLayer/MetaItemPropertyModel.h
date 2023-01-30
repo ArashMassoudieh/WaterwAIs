@@ -7,6 +7,8 @@
 
 namespace WaterwAIs {
 
+class MetaLayerItem;
+
 //////////////////////////////////////////////////////////////////////////
 // PropModel
 
@@ -16,7 +18,7 @@ namespace WaterwAIs {
 class MetaItemPropertyModel: public QAbstractTableModel {
     Q_OBJECT
 public:
-    explicit MetaItemPropertyModel(const VariableMap& properties, QObject* parent = 0);
+    explicit MetaItemPropertyModel(const MetaLayerItem& layer_item, QObject* parent = 0);
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -27,9 +29,12 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation,
         int role) const override;
     
-private:
-    void buildProperies(const VariableMap& properties);
+    QString itemLabel() const { return item_label_; }
 
+private:
+    void buildProperies(const MetaLayerItem& layer_item);
+
+    QString item_label_;
     std::vector<std::pair<QString, QString>> properties_;
 };
 

@@ -34,6 +34,7 @@ public:
 
     // Component
     MetaComponentItem& component() { return component_; }
+    const MetaComponentItem& component() const { return component_; }
 
     // Fills the layer item from the JSON value
     void getFromJson(const QJsonValue& json_value) override;

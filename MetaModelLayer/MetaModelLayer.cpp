@@ -36,4 +36,11 @@ MetaModelLayer::MetaModelLayer(LayerSceneInterface* scene,
     }
 }
 
+bool MetaModelLayer::zOrderMovable() {
+    // Meta model layer should keep its z order and it may not be moved in the
+    // layer list.
+    return false;
+}
+
+
 } // namespace WaterwAIs

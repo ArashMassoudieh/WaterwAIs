@@ -4,7 +4,7 @@ CONFIG += c++2a
 
 DEFINES += _NO_GSL
 
-QT += widgets core network
+QT += widgets core network charts
 
 qtHaveModule(printsupport): QT += printsupport
 qtHaveModule(opengl): QT += opengl
@@ -14,13 +14,15 @@ INCLUDEPATH += \
         Common
 
 FORMS += \
+    Forms/chartsettingsdialog.ui \
     Forms/dlglayerproperties.ui \
-    Forms/mainview.ui
+    Forms/mainview.ui \
+    Forms/chartdialog.ui
 
 HEADERS += \
 	Application/Application.h \
 	Application/Defs.h \
-	Application/FileNameProcessor.h \
+        Application/FileNameProcessor.h
 
 HEADERS += \
 	Common/Layer/CircleLayerItem.h \
@@ -54,28 +56,32 @@ HEADERS += \
 
 HEADERS += \
 	UI/LayerPropertiesDialog.h \
+        UI/ChartDialog.h \
+        UI/ChartView.h \
+        UI/ChartSettingsDlg.h \
 	UI/MainView.h \
 	UI/MainWindow.h \
 	UI/MapScene.h \
-	UI/MapView.h \
+        UI/MapView.h \
+        UI/MessageBox.h
+
 
 HEADERS += \
-	Utilities/_BTC.h \
-	Utilities/_BTCSet.h \
-	Utilities/BTC.h \
+        Utilities/TimeSeries_s.h \
+        Utilities/TimeSeries_s.hpp \
+        Utilities/TimeSeriesSet_s.h \
+        Utilities/TimeSeriesSet_s.hpp \
 	Utilities/cpoint.h \
 	Utilities/Matrix.h \
 	Utilities/NormalDist.h \
 	Utilities/QuickSort.h \
 	Utilities/Utilities.h \
 	Utilities/Vector.h \	
-	Utilities/BTC.hpp \
-	Utilities/BTCSet.hpp
+
 
 SOURCES += \
 	Application/Application.cpp \
-	Application/FileNameProcessor.cpp \
-
+        Application/FileNameProcessor.cpp
 
 SOURCES += \
 	Common/Logger.cpp \
@@ -104,6 +110,9 @@ SOURCES += \
 	
 SOURCES += \
     UI/LayerPropertiesDialog.cpp \
+    UI/ChartDialog.cpp \
+    UI/ChartView.cpp \
+    UI/ChartSettingsDlg.cpp \
     UI/MainView.cpp \
     UI/MainWindow.cpp \
     UI/MapScene.cpp \

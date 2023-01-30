@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QJsonObject>
+#include <QSortFilterProxyModel>
 
 #include <Layer/LayerListModel.h>
 #include <Layer/LayerItemDelegate.h>
@@ -15,6 +16,8 @@
 #include "LayerPropertiesDialog.h"
 
 #include <array>
+
+#include <UI/ChartDialog.h>
 
 namespace WaterwAIs {
 
@@ -33,6 +36,15 @@ MainView::MainView(QWidget* parent):
     // the right part.
     ui->splitter_2->setSizes(QList{100, 400});
 
+    // Setting special style for the filter line edit to look nicer in the
+    // splitter.
+    ui->edtFilter->setStyleSheet("QLineEdit {border-width: 1px; "
+        "border-style: solid; border-top-width: 0px;}"
+        "QLineEdit:hover {border-width: 1px; border-style: solid; "
+        "border-top-width: 0px;}");
+
+    //ui->labelItem->setVisible(false);
+
     map_view_ = ui->mapView;
     ui->mapView->setMainView(this);
 
@@ -48,8 +60,8 @@ MainView::~MainView() {}
 
 void MainView::createMapViewControls() {
     // Tool buttons
-    auto button_layout = new QHBoxLayout{};
-    button_layout->setSpacing(1);
+    button_layout_ = new QHBoxLayout{};
+    button_layout_->setSpacing(1);
     
     auto icon_size = QSize{24,24};
 
@@ -68,11 +80,10 @@ void MainView::createMapViewControls() {
             button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
         button->setIconSize(icon_size);
-        button_layout->addWidget(button);
+        button_layout_->addWidget(button);
 
         return button;
     };
-
     
     // Pan
     btn_pan_ = add_tool_button(u"btnPan", u":/Resources/hand-rock.png", u"Pan",
@@ -94,15 +105,32 @@ void MainView::createMapViewControls() {
     btn_fit_to_view_ = add_tool_button(u"btnFitToView", u":/Resources/expand.png", 
         u"Fit View", u"Fit in view", true);
 
-    ui->gridLayout->addLayout(button_layout, 0, 0,
+    // Chart Dialog
+    add_tool_button(u"btnChartDlg", {}, u"Chart dialog");
+
+    ui->gridLayout->addLayout(button_layout_, 0, 0,
         Qt::AlignRight | Qt::AlignTop);
 
     // Status bar for coordinates
-    status_bar_ = new QLabel();    
-    ui->gridLayout->addWidget(status_bar_, 0, 0,
-        Qt::AlignLeft | Qt::AlignBottom);
+    status_bar_ = new QLabel();
 
+    status_layout_ = new QVBoxLayout{};
+    status_layout_->addWidget(status_bar_);
+
+    ui->gridLayout->addLayout(status_layout_, 0, 0,
+            Qt::AlignLeft | Qt::AlignBottom);
+    
     QMetaObject::connectSlotsByName(this);
+}
+
+
+void MainView::adjustMapViewControls(const QSize& adjustment) {
+    // Adjusting the Map view overlay controls based on reported difference
+    // between the Map view and its viewport. 
+    // This will move controls into correct positions in the map view without
+    // overlapping with the view scrollbars.
+    button_layout_->setContentsMargins(0, 0, adjustment.width(), 0);
+    status_layout_->setContentsMargins(0, 0, 0, adjustment.height());
 }
 
 
@@ -228,8 +256,31 @@ void MainView::setLayerListModel(QAbstractListModel* names) {
 
 void MainView::setTableModel(MetaItemPropertyModel* propmodel) {
     qDebug() << ui->tableView->objectName();
-    ui->tableView->setModel(propmodel);
+
+    if (!propmodel) {
+        ui->tableView->setModel(nullptr);
+        ui->edtFilter->setText({});
+        ui->labelItem->setText("Item");
+
+        prop_proxy_model_ = nullptr;
+        return;
+    }
+
+    ui->labelItem->setText(propmodel->itemLabel());
+
+    prop_proxy_model_ = new QSortFilterProxyModel(this);
+    prop_proxy_model_->setSourceModel(propmodel);
+    
+    ui->tableView->setModel(prop_proxy_model_);
+    ui->tableView->sortByColumn(0, Qt::AscendingOrder);
+    ui->tableView->resizeColumnToContents(0);
 }
+
+void MainView::on_edtFilter_textChanged(const QString& text) {
+    if (prop_proxy_model_)
+        prop_proxy_model_->setFilterWildcard(text + "*");
+}
+
 
 void MainView::on_btnZoom_clicked() {
     map_view_->setMouseZoom();
@@ -259,6 +310,65 @@ void MainView::on_btnPan_clicked() {
 void MainView::on_btnFitToView_clicked() {
     map_view_->setFitToView();
     mapViewModesCheck();
+}
+
+namespace {
+TimeSeries& getTimeSeries() {
+    static auto ts = []() {
+        auto ts = TimeSeries{};
+
+        ts.append(40180.860000, 1.863205e+01);
+        ts.append(40180.870000, 1.851860e+01);
+        ts.append(40180.880000, 1.840513e+01);
+        ts.append(40180.890000, 1.829163e+01);
+        ts.append(40180.900000, 1.817813e+01);
+        ts.append(40180.910000, 1.806463e+01);
+        ts.append(40180.920000, 1.795113e+01);
+        ts.append(40180.930000, 1.783763e+01);
+        ts.append(40180.940000, 1.772413e+01);
+        ts.append(40180.950000, 1.761060e+01);
+        ts.append(40180.960000, 1.749707e+01);
+        ts.append(40180.970000, 1.738354e+01);
+        ts.append(40180.980000, 1.727000e+01);
+        ts.append(40180.990000, 1.715647e+01);
+        ts.append(40181.000000, 1.704294e+01);
+        ts.append(40181.010000, 1.692940e+01);
+        ts.append(40181.020000, 1.681585e+01);
+        ts.append(40181.030000, 1.670230e+01);
+        ts.append(40181.040000, 1.658875e+01);
+        ts.append(40181.050000, 1.647520e+01);
+        ts.append(40181.060000, 1.636165e+01);
+        ts.append(40181.070000, 1.624810e+01);
+        ts.append(40181.080000, 1.613455e+01);
+        ts.append(40181.090000, 1.602100e+01);
+        ts.append(40181.100000, 1.590744e+01);
+        ts.append(40181.110000, 1.579389e+01);
+        ts.append(40181.120000, 1.568034e+01);
+        ts.append(40181.130000, 1.556678e+01);
+        ts.append(40181.140000, 1.545324e+01);
+        ts.append(40181.150000, 1.533969e+01);
+        ts.append(40181.160000, 1.522615e+01);
+        ts.append(40181.170000, 1.511261e+01);
+        ts.append(40181.180000, 1.499906e+01);
+        ts.append(40181.190000, 1.488552e+01);
+        ts.append(40181.200000, 1.477199e+01);
+        ts.append(40181.210000, 1.465847e+01);
+
+        return ts;
+    }();
+
+    return ts;
+} 
+} // anonymous
+
+void MainView::on_btnChartDlg_clicked() {
+    auto& ts = getTimeSeries();
+
+    static auto chart_info = ChartInfo{"Catchment (1)_inflow_timeseries", ts};
+
+    auto dlg = new ChartDialog{chart_info, this};
+    dlg->setModal(true);
+    dlg->show();
 }
 
 void MainView::mapViewModesCheck() {
@@ -340,6 +450,7 @@ void MainView::on_btnOpen_clicked() {
     };
     QFileDialog::getOpenFileContent("OHQ Files (*.ohq)", fileContentReady);
 }
+
 
 void MainView::getFile10LinesContent(QString fileId) {
     auto req = QNetworkRequest{WW_SERVER_PATH("file_10_lines/" + fileId)};

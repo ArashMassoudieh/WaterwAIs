@@ -48,8 +48,9 @@ void MetaLayerModel::getComponentMetaModel(const QJsonDocument& json_doc) {
         if (handleItem(key, value))
             continue;
 
-        auto properties = value.toObject();
-        component_map_.emplace(key, properties);
+        auto properties = value.toObject();        
+        auto new_item = component_map_.emplace(key, properties);
+        new_item.first->second.setName(key);
     }
     components_ready_ = true;
 

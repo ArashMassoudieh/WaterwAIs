@@ -78,7 +78,7 @@ void Variable::getFromJsonObject(const QJsonObject& json_object) {
 
 QString Variable::toString() const{
     if (isNumeric()) {
-        return QString::number(std::get<double>(value_));
+        return QString::number(std::get<double>(value_), 'f', 2);
     } else if (isTimeSeries()) {
         // ??? get string representation of time series
         return std::get<QString>(value_);

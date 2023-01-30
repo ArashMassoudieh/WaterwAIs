@@ -37,7 +37,6 @@ void LayerModel::onModelDownloaded(QJsonDocument&& json_doc) {
     getFromJsonDocument(json_doc);
 
     emit modelLoaded();
-
 }
 
 void LayerModel::addGraphicsItems(const LayerGraphicsSettings& gsettings,

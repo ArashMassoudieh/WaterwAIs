@@ -53,7 +53,8 @@ private:
 
 MetaComponentItem::~MetaComponentItem() = default;
 
-MetaComponentItem::MetaComponentItem(const QJsonObject& json_object) : type_{Type::Unknown} {
+MetaComponentItem::MetaComponentItem(const QJsonObject& json_object)
+    : type_ {Type::Unknown} {
     for(auto& key: json_object.keys()) {
         if (key == "icon")
             icon_path_ = json_object.value(key).toString();

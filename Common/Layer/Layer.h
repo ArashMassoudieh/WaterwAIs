@@ -81,6 +81,9 @@ public:
     int zValue() const { return z_value_; }
     bool setZValue(int z);
 
+    // Allows to move layer in z-order
+    virtual bool zOrderMovable() { return true; }
+
     // Returns pointer to model class if the model was derived from it.
     template<typename T> T* to_model() {
         T* model = nullptr;
