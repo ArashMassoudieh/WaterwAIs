@@ -46,6 +46,9 @@ public:
     // Properties
     const VariableMap& properties() const { return properties_; }
 
+    // Tooltip
+    virtual QString toolTip() const;
+
 protected:
     virtual void onProperty(QStringView /*name*/, 
         const QJsonValue& /*json_value*/) {}

@@ -15,14 +15,17 @@ INCLUDEPATH += \
 
 FORMS += \
     Forms/chartsettingsdialog.ui \
+    Forms/chartwidget.ui \
     Forms/dlglayerproperties.ui \
-    Forms/mainview.ui \
-    Forms/chartdialog.ui
+    Forms/mainview.ui \    
+    Forms/itempropertieswidget.ui \
+    Forms/panel.ui
 
 HEADERS += \
 	Application/Application.h \
 	Application/Defs.h \
-        Application/FileNameProcessor.h
+        Application/FileNameProcessor.h \
+        Application/TimeSeriesCache.h
 
 HEADERS += \
 	Common/Layer/CircleLayerItem.h \
@@ -55,15 +58,17 @@ HEADERS += \
 	MetaModelLayer/Variable.h
 
 HEADERS += \
+        UI/Chart/ChartSettingsDlg.h \
+        UI/Chart/ChartView.h \
+        UI/Chart/ChartWidget.h \
+        UI/ItemPropertiesWidget.h \
 	UI/LayerPropertiesDialog.h \
-        UI/ChartDialog.h \
-        UI/ChartView.h \
-        UI/ChartSettingsDlg.h \
 	UI/MainView.h \
 	UI/MainWindow.h \
 	UI/MapScene.h \
         UI/MapView.h \
-        UI/MessageBox.h
+        UI/MessageBox.h \
+        UI/Panel.h
 
 
 HEADERS += \
@@ -72,19 +77,19 @@ HEADERS += \
         Utilities/TimeSeriesSet_s.h \
         Utilities/TimeSeriesSet_s.hpp \
 	Utilities/cpoint.h \
-	Utilities/Matrix.h \
-	Utilities/NormalDist.h \
+        Utilities/Matrix.h \
 	Utilities/QuickSort.h \
 	Utilities/Utilities.h \
-	Utilities/Vector.h \	
-
+        Utilities/Vector.h
 
 SOURCES += \
 	Application/Application.cpp \
-        Application/FileNameProcessor.cpp
+        Application/FileNameProcessor.cpp \
+        Application/TimeSeriesCache.cpp
 
 SOURCES += \
 	Common/Logger.cpp \
+        Common/Downloader.cpp \
 	Common/Layer/CircleLayerItem.cpp \
 	Common/Layer/Layer.cpp \
 	Common/Layer/LayerItemDelegate.cpp \
@@ -109,14 +114,17 @@ SOURCES += \
 	MetaModelLayer/Variable.cpp
 	
 SOURCES += \
+    UI/Chart/ChartSettingsDlg.cpp \
+    UI/Chart/ChartView.cpp \
+    UI/Chart/ChartWidget.cpp \
+    UI/ItemPropertiesWidget.cpp \
     UI/LayerPropertiesDialog.cpp \
-    UI/ChartDialog.cpp \
-    UI/ChartView.cpp \
-    UI/ChartSettingsDlg.cpp \
     UI/MainView.cpp \
     UI/MainWindow.cpp \
     UI/MapScene.cpp \
-    UI/MapView.cpp
+    UI/MapView.cpp \
+    UI/MessageBox.cpp \
+    UI/Panel.cpp
 
 SOURCES += \
 	Utilities/cpoint.cpp \
@@ -137,7 +145,7 @@ build_all:!build_pass {
     CONFIG += release
 }
 
-DATA_DIR = $$PWD/Json
+DATA_DIR = $$PWD/Data
 DEFINES += DATA_DIR=\"$$DATA_DIR\"
 
 wasm {

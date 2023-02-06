@@ -2,7 +2,7 @@
 #define CHARTSETTINGSDLG_H_8B35D0E364EB3F5A
 
 #include <QDialog>
-#include <UI/ChartView.h>
+#include "ChartView.h"
 
 namespace Ui {
 class ChartSettingsDialog;

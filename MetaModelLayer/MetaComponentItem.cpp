@@ -11,14 +11,13 @@ namespace WaterwAIs {
 
 class MetaComponentItem::IconDownloader {
 public:
-    IconDownloader(MetaComponentItem& item): 
-        downloader_{new Downloader{}, downloaderDeleter}, item_{item} {}
+    IconDownloader(MetaComponentItem& item): item_{item} {}
 
     void downloadIcon(IconDownloadedFunc callback) {
         item_.icon_ = QPixmap{};
         addObserver(callback);
 
-        downloader_->download<QPixmap>(WW_HOST_PATH(item_.iconPath()),
+        Downloader::instance().download<QPixmap>(WW_HOST_PATH(item_.iconPath()),
             [this] (auto result, const auto& image) {
                 if (result) {
                     item_.icon_ = image;
@@ -39,11 +38,7 @@ public:
         { callbacks_.emplace_back(callback); }
 
 private:    
-    static void downloaderDeleter(Downloader* p) { p->deleteLater(); }
-
-    std::unique_ptr <Downloader, void(*)(Downloader*)> downloader_;
-    MetaComponentItem&   item_;
-
+    MetaComponentItem& item_;
     std::vector<IconDownloadedFunc> callbacks_;
 };
 

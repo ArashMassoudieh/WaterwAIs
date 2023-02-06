@@ -12,5 +12,8 @@
         <file>Resources/settings.png</file>
         <file>Resources/chart.png</file>
         <file>Resources/resize.png</file>
+        <file>Resources/close_green.png</file>
+        <file>Resources/collapse-arrow-64.png</file>
+        <file>Resources/expand-arrow-64.png</file>
     </qresource>
 </RCC>

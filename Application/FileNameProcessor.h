@@ -23,12 +23,12 @@ public:
     virtual QString path(QStringView file_name, Hint hint = Hint::Host) = 0;
 
     // Returns global file name processor
-    static FileNameProcessor& get();
+    static FileNameProcessor& instance();
 };
 
 // Useful shortcut macros
-#define WW_HOST_PATH(x)   FileNameProcessor::get().path(x, FileNameProcessor::Hint::Host)
-#define WW_SERVER_PATH(x) FileNameProcessor::get().path(x, FileNameProcessor::Hint::Server)
+#define WW_HOST_PATH(x)   FileNameProcessor::instance().path(x, FileNameProcessor::Hint::Host)
+#define WW_SERVER_PATH(x) FileNameProcessor::instance().path(x, FileNameProcessor::Hint::Server)
 
 } // namespace WaterwAIs
 

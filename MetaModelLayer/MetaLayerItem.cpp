@@ -26,13 +26,22 @@ MetaLayerItem::MetaLayerItem(const LayerGraphicsSettings& gsettings,
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
 
+    // z-Value
     setZValue(item_zvalue);
+
+    // Tooltip
+    setAcceptHoverEvents(true);
 }
 
 MetaLayerItem* MetaLayerItem::item_cast(QGraphicsItem* item) {
     if (item && item->data(data_key).toString() == item_string)
         return static_cast<MetaLayerItem*>(item);
     return {};
+}
+
+void MetaLayerItem::hoverEnterEvent(QGraphicsSceneHoverEvent* /*event*/) {
+    if (toolTip().isEmpty())
+        setToolTip(model_item_.toolTip());
 }
 
 } // namespace WaterwAIs

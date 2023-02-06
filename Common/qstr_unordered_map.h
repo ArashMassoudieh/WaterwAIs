@@ -21,7 +21,6 @@ struct qstring_hash {
 };
 
 
-
 #ifdef Q_OS_WASM
 template <typename T>
 class qstr_unordered_map:
@@ -43,8 +42,9 @@ public:
 };
 #else
 template <typename T>
-    using qstr_unordered_map =
+using qstr_unordered_map =
     std::unordered_map<QString, T, qstring_hash, std::equal_to<>>;
+
 #endif
 
 } // namespace WaterwAIs

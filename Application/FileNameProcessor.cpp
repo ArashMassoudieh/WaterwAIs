@@ -27,7 +27,7 @@ public:
     }
 };
 
-FileNameProcessor& FileNameProcessor::get() {
+FileNameProcessor& FileNameProcessor::instance() {
     static auto fn_processor = FileNameProcessorImpl{};
     return fn_processor;
 }

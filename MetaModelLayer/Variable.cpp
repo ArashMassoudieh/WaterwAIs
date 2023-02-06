@@ -80,12 +80,19 @@ QString Variable::toString() const{
     if (isNumeric()) {
         return QString::number(std::get<double>(value_), 'f', 2);
     } else if (isTimeSeries()) {
-        // ??? get string representation of time series
+        // get path to the CSV file for time series
         return std::get<QString>(value_);
     } else if (isString()) {
         return std::get<QString>(value_);
     }
     return {};
+}
+
+QString Variable::presentationValue() const {
+    if (isTimeSeries())
+        return "time series";
+
+    return toString();
 }
 
 void Variable::fromString(QStringView value) {

@@ -46,8 +46,14 @@ void LayerModel::addGraphicsItems(const LayerGraphicsSettings& gsettings,
         item->addGraphicsItems(gsettings, items);
 }
 
+void LayerModel::downloadJson(QStringView json_file,
+    JsonDownloadedFunc callback) {
+    Downloader::instance().
+        download<QJsonDocument>(json_file.toString(), callback);
+}
+
 void LayerModel::getIcon(QStringView icon_path, QSize icon_size) {
-    downloader_.download<QPixmap>(WW_HOST_PATH(icon_path),
+    Downloader::instance().download<QPixmap>(WW_HOST_PATH(icon_path),
         [icon_size = std::move(icon_size), this]
             (auto result, const auto& image) {
 

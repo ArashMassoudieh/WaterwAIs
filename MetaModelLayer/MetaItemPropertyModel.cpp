@@ -2,6 +2,8 @@
 #include "MetaItemPropertyModel.h"
 #include <MetaModelLayer/MetaLayerItem.h>
 
+#include <QToolButton>
+
 namespace WaterwAIs {
 
 //////////////////////////////////////////////////////////////////////////
@@ -19,13 +21,13 @@ MetaItemPropertyModel::MetaItemPropertyModel(const MetaLayerItem& layer_item,
 void MetaItemPropertyModel::buildProperies(const MetaLayerItem& layer_item) {
     properties_.clear();
 
-    for (auto [name, value] : layer_item.properties().vars())
-        properties_.emplace_back(name, value.toString());
+    for (auto& [name, value] : layer_item.properties().vars())
+        properties_.emplace_back(value.type(), name, value.toString());
 
     auto component_name = layer_item.modelItem().component().name();
+    item_name_ = layer_item.modelItem().name().toString();
 
-    item_label_ = "<b>" + layer_item.modelItem().name().toString() +
-        "</b> (" + component_name + ")";
+    item_label_ = "<b>" + item_name_ + "</b> (" + component_name + ")";
 }
 
 
@@ -38,12 +40,23 @@ int MetaItemPropertyModel::columnCount(const QModelIndex& /*parent*/) const {
 }
 
 QVariant MetaItemPropertyModel::data(const QModelIndex& index, int role) const {
+    using Type = Variable::Type;
 
     if (role == Qt::DisplayRole) {
         if (index.column() == 0)
-            return properties_[index.row()].first;
-        if (index.column() == 1)
-            return properties_[index.row()].second;
+            return properties_[index.row()].name;
+        if (index.column() == 1) {
+            auto& prop = properties_[index.row()];
+
+            if (prop.type == Type::TimeSeries)
+                return QStringLiteral("<time series>");
+
+            return prop.value;
+        }
+    }
+
+    if (role == Qt::UserRole) {
+        return index.row();      
     }
 
     return QVariant();

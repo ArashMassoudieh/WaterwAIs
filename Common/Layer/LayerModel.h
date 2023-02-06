@@ -2,8 +2,7 @@
 #define LAYERMODEL_H_A7E44A83E2B95592
 
 #include "LayerModelItem.h"
-
-#include <Downloader.h>
+#include <Common/Downloader.h>
 #include <deque>
 
 namespace WaterwAIs {
@@ -48,8 +47,7 @@ protected:
 
     // Asynchronously downloads JSON file from 'json_file', which is converted
     // to the full path.
-    void downloadJson(QStringView json_file, JsonDownloadedFunc callback) 
-        { downloader_.download<QJsonDocument>(json_file.toString(), callback); }
+    void downloadJson(QStringView json_file, JsonDownloadedFunc callback);
 
     // Fills the model from some JSON document    
     virtual void getFromJsonDocument(const QJsonDocument& json_doc) = 0;
@@ -63,9 +61,6 @@ protected:
 
     // Item key/value container, where key is item name
     std::deque<std::unique_ptr<LayerModelItem>> items_;
-
-    // Downloader
-    Downloader downloader_;
 
     bool model_downloaded_ = false;
 

@@ -12,6 +12,9 @@
 #include <QStandardItemModel>
 
 #include <MetaModelLayer/MetaItemPropertyModel.h>
+#include <UI/Panel.h>
+
+#include <chrono>
 
 class QListView;
 class QSortFilterProxyModel;
@@ -24,7 +27,10 @@ namespace Ui {
 
 namespace WaterwAIs {
 
+using namespace std::chrono_literals;
+
 class MapView;
+class ChartInfo;
 
 //////////////////////////////////////////////////////////////////////////
 // MainView
@@ -46,6 +52,10 @@ public:
 
     void adjustMapViewControls(const QSize& adjustment);
 
+    // Displaying the chart in the lower panel.
+    void showTimeSeries(QStringView item_name,  QStringView prop_name,
+        QStringView ts_path);
+
 protected slots:
     void on_btnZoom_clicked();
     void on_btnZoomIn_clicked();
@@ -57,11 +67,9 @@ protected slots:
     void on_btnMoveDown_clicked();
     void on_btnOpen_clicked();
 
-    void on_btnChartDlg_clicked();
-
-    void on_edtFilter_textChanged(const QString& text);
-
 private:
+    using State = Panel::State;
+
     void createMapViewControls();
     void onBeforeAppDestroy();
 
@@ -71,10 +79,14 @@ private:
     void showLayerProperties();
 
     void setupLayerList();
+    void setupPropertyPanel();
+
     void scheduleTasks(std::chrono::milliseconds interval = 1s);
 
     void getFile10LinesContent(QString fileId);
     void getFileContent(QString fileId);
+
+    bool spuriosButtonClick();
 
     std::unique_ptr<Ui::MainView> ui;
 
@@ -86,9 +98,7 @@ private:
     QNetworkAccessManager network_mgr_;
 
     QString task_id_;
-    QTimer timer_;
-    
-    QSortFilterProxyModel* prop_proxy_model_ = nullptr;
+    QTimer timer_;    
      
     QToolButton* btn_pan_         = nullptr;
     QToolButton* btn_zoom_        = nullptr;
@@ -100,6 +110,9 @@ private:
 
     QLabel*      status_bar_    = nullptr;
     QVBoxLayout* status_layout_ = nullptr;
+
+    using Clock = std::chrono::steady_clock;
+    Clock::time_point last_tb_clicked_ts_;
 };
 
 } // namespace WaterwAIs

@@ -1,14 +1,13 @@
 #ifndef MESSAGEBOX_H_8C2504416242F936
 #define MESSAGEBOX_H_8C2504416242F936
 
+
 #include <QMessageBox>
+#include <chrono>
 
 namespace WaterwAIs {
-namespace MessageBox {
 
-using Icon = QMessageBox::Icon;
-using StandardButton  = QMessageBox::StandardButton;
-using StandardButtons = QMessageBox::StandardButtons;
+using namespace std::chrono_literals;
 
 //////////////////////////////////////////////////////////////////////////
 // MessageBox
@@ -19,47 +18,70 @@ using StandardButtons = QMessageBox::StandardButtons;
 //
 // Regular Qt message box functions hang when running under WebAssembly.
 
-inline void show(Icon icon, const QString& title, const QString& text,
-    StandardButtons buttons = {StandardButton::NoButton},
-    QWidget* parent = nullptr,
-    Qt::WindowFlags flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint) {
 
-    auto message_box = new QMessageBox{icon, title, text, buttons, parent,
-        flags};
-    message_box->show();
-}
+class MessageBox: public QMessageBox {
+public:
+    explicit MessageBox(QWidget* parent = nullptr);
 
-inline void information(const QString& title,
-    const QString& text, StandardButtons buttons = {StandardButton::Ok},
-    QWidget* parent = nullptr) {
+    MessageBox(Icon icon, const QString& title, const QString& text,
+        StandardButtons buttons = NoButton, QWidget* parent = nullptr,
+        Qt::WindowFlags flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);        
 
-    show(Icon::Information, title, text, buttons, parent);
-}
+    ~MessageBox() override;
 
+    // Auto close
+    void setAutoClose(bool auto_close) { auto_close_ = auto_close; }
+    bool autoClose() const { return auto_close_; }
 
-inline void question(const QString& title,
-    const QString& text, StandardButtons buttons = {StandardButton::Ok},
-    QWidget* parent = nullptr) {
+    // Close timeout
+    void setCloseTimeout(std::chrono::milliseconds timeout) 
+        { close_timeout_ = timeout; }
 
-    show(Icon::Question, title, text, buttons, parent);
-}
+    std::chrono::milliseconds timeout() const { return close_timeout_; }
 
-inline void warning(const QString& title,
-    const QString& text, StandardButtons buttons = {StandardButton::Ok},
-    QWidget* parent = nullptr) {
+    // Show
+    static void showMsg(Icon icon, const QString& title, const QString& text,
+        StandardButtons buttons = {StandardButton::NoButton},
+        QWidget* parent = nullptr,
+        Qt::WindowFlags flags = Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
-    show(Icon::Warning, title, text, buttons, parent);
-}
+    static void information(const QString& title,
+        const QString& text, StandardButtons buttons = {StandardButton::Ok},
+        QWidget* parent = nullptr) {
 
+        showMsg(Icon::Information, title, text, buttons, parent);
+    }
 
-inline void critical(const QString& title,
-    const QString& text, StandardButtons buttons = {StandardButton::Ok},
-    QWidget* parent = nullptr) {
+    static void question(const QString& title,
+        const QString& text, StandardButtons buttons = {StandardButton::Ok},
+        QWidget* parent = nullptr) {
 
-    show(Icon::Critical, title, text, buttons, parent);
-}
+        showMsg(Icon::Question, title, text, buttons, parent);
+    }
 
-} // namespace MessageBox
+    static void warning(const QString& title,
+        const QString& text, StandardButtons buttons = {StandardButton::Ok},
+        QWidget* parent = nullptr) {
+
+        showMsg(Icon::Warning, title, text, buttons, parent);
+    }
+
+    static void critical(const QString& title,
+        const QString& text, StandardButtons buttons = {StandardButton::Ok},
+        QWidget* parent = nullptr) {
+
+        showMsg(Icon::Critical, title, text, buttons, parent);
+    }
+protected:
+    using Clock = std::chrono::steady_clock;
+
+    void showEvent (QShowEvent* event) override;
+    void timerEvent(QTimerEvent* event) override;
+
+    std::chrono::milliseconds close_timeout_ = 1500ms;
+    bool auto_close_ = true;    
+};
+
 } // namespace WaterwAIs
 
 //////////////////////////////////////////////////////////////////////////

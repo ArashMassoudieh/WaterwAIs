@@ -42,7 +42,12 @@ void LayerListModel::addLayer(LayerPtr layer) {
     endInsertRows();
 }
 
-void LayerListModel::moveLayer(int src_idx, int dst_idx) {
+bool LayerListModel::moveLayer(int src_idx, int dst_idx) {
+    if (auto& layer = layers_[src_idx]; layer && !layer->zOrderMovable()) {
+        // This layer is not movable.
+        return false;
+    }
+
     beginResetModel();
     layers_.move(src_idx, dst_idx);
 
@@ -50,6 +55,7 @@ void LayerListModel::moveLayer(int src_idx, int dst_idx) {
         layers_[i]->setZValue(z_value_bottom - i);
     
     endResetModel();
+    return true;
 }
 
 int LayerListModel::rowCount(const QModelIndex& parent) const {
@@ -144,7 +150,7 @@ bool LayerListModel::dropMimeData(const QMimeData* data, Qt::DropAction action,
     
     if (auto& layer = layers_[src_idx]; layer && !layer->zOrderMovable()) {
         // This layer is not movable.
-        //MessageBox::information("Layers", "This layer cannot be moved");        
+        MessageBox::information("Layers", "This layer cannot be moved");
         return false;    
     }
 

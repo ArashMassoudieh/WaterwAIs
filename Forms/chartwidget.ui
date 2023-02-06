@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ChartDialog</class>
- <widget class="QDialog" name="ChartDialog">
+ <class>ChartWidget</class>
+ <widget class="QFrame" name="ChartWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
+    <width>574</width>
     <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Chart</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
    <property name="spacing">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>8</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>8</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>8</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>8</number>
+    <number>0</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0,0,0,0">
@@ -69,7 +69,23 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButtonReset">
+      <widget class="QPushButton" name="pushButtonGo">
+       <property name="maximumSize">
+        <size>
+         <width>45</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Builds chart for the range</string>
+       </property>
+       <property name="text">
+        <string>Go</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButtonReset">
        <property name="maximumSize">
         <size>
          <width>30</width>
@@ -81,28 +97,6 @@
        </property>
        <property name="text">
         <string>Res</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonGo">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Builds chart for the range</string>
-       </property>
-       <property name="text">
-        <string>Go</string>
        </property>
       </widget>
      </item>
@@ -120,7 +114,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButtonSettings">
+      <widget class="QToolButton" name="toolButtonSettings">
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -140,20 +134,13 @@
    <item>
     <widget class="WaterwAIs::ChartView" name="chartView" native="true"/>
    </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
    <class>WaterwAIs::ChartView</class>
    <extends>QWidget</extends>
-   <header>UI/ChartView.h</header>
+   <header>UI/Chart/ChartView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
