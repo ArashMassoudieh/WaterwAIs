@@ -163,7 +163,16 @@ wasm {
     defined(USE_LOCAL_DATA_FILES, var) {
         message("WASM will preload data files from $$DATA_DIR.")
         # Making WASM to preload Data folder content
-        QMAKE_LFLAGS += --preload-file $$DATA_DIR
+
+        equals(QT_MAJOR_VERSION, 5) {
+            # Qt 5.x
+            QMAKE_LFLAGS += --preload-file $$DATA_DIR
+        }
+
+        greaterThan(QT_MAJOR_VERSION, 5) {
+            #Qt 6 and above
+            QMAKE_LFLAGS += --preload-file $$DATA_DIR@/
+        }
     }
 }
 

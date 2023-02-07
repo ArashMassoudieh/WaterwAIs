@@ -7,9 +7,9 @@
 #include <QChart>
 
 
-
-#ifndef Qt6
-using namespace QtCharts;
+#include <QtGlobal>
+#if QT_VERSION < 0x060000
+    using namespace QtCharts;
 #endif
 
 namespace WaterwAIs {

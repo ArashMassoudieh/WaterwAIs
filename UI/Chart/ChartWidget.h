@@ -11,8 +11,9 @@ namespace Ui {
 class ChartWidget;
 }
 
-#ifndef Qt6
-using namespace QtCharts;
+#include <QtGlobal>
+#if QT_VERSION < 0x060000
+    using namespace QtCharts;
 #endif
 
 class QLabel;
