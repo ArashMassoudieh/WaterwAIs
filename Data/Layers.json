@@ -1,0 +1,32 @@
+{
+	"Watershed Centroids":
+	{
+		"url": "http://20.244.11.239/api/Centroids.geojson",
+		"description": "Centroids of sub-watersheds",
+		"type": "featureLayer"
+	},
+	"Sewer lines":
+	{
+		"url": "http://20.244.11.239/api/HickeyRunSewer.geojson",
+		"description": "Sewer flow lines",
+		"type": "featureLayer"
+	},
+	"Pour points":
+	{
+		"url": "http://20.244.11.239/api/HickeyRunSewer.geojson",
+		"description": "Subwatershed pour points",
+		"type": "featureLayer"
+	},
+	"Subwatersheds":
+	{
+		"url": "http://20.244.11.239/api/SubWaterSheds.geojson",
+		"description": "Sub-watersheds areas",
+		"type": "featureLayer"
+	},
+	"Model":
+	{
+		"url": "http://20.244.11.239/api/Example_input.json",
+		"description": "Centroids of sub-watersheds",
+		"type": "modelLayer"
+	}
+}
