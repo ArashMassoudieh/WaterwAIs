@@ -5,10 +5,7 @@
         },
         "description": "Reactor",
         "icon": "activate_sludge_reactor.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Aggregate_storage_layer": {
         "Storage": {
@@ -34,10 +31,7 @@
         "porosity": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Aquifer_recharge": {
         "color": {
@@ -51,10 +45,7 @@
         "recharge_rate": {
             "type": "timeseries"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Bed_sediment": {
         "K_eff": {
@@ -90,9 +81,6 @@
             "type": "value"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "water_content": {
             "type": "expression"
         },
@@ -111,9 +99,6 @@
         "icon": "build_up.png",
         "timeseries": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Catch basin": {
@@ -137,10 +122,7 @@
         "inflow": {
             "type": "timeseries"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Catchment": {
         "Evapotranspiration": {
@@ -187,10 +169,7 @@
         "loss_coefficient": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Catchment_link": {
         "color": {
@@ -201,10 +180,7 @@
             "type": "expression"
         },
         "icon": "Catchment_outlet.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Constituent": {
         "advective_masstransfer": {
@@ -241,9 +217,6 @@
         },
         "stoichiometric_constant": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Controlled_Reservoir": {
@@ -261,10 +234,7 @@
         "reservoir_power": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Desorption": {
         "description": "Desorption",
@@ -274,9 +244,6 @@
         },
         "rate_expression": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Dummy": {
@@ -300,10 +267,7 @@
         },
         "description": "Dummy",
         "icon": "Sewer_pipe_section.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Evapotranspiration_Aerodynamic (S)": {
         "B": {
@@ -328,9 +292,6 @@
         "icon": "Evapotranspiration_Aerodynamic.png",
         "rate": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         },
         "wind_speed": {
             "type": "timeseries"
@@ -366,9 +327,6 @@
         "rate": {
             "type": "expression"
         },
-        "typecategory": {
-            "type": ""
-        },
         "wind_speed": {
             "type": "timeseries"
         },
@@ -399,9 +357,6 @@
         },
         "solar_radiation": {
             "type": "timeseries"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Evapotranspiration_Energy_Balance (Soil)": {
@@ -424,9 +379,6 @@
         },
         "solar_radiation": {
             "type": "timeseries"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Evapotranspiration_Penmam (S)": {
@@ -470,9 +422,6 @@
         },
         "solar_scale_fact": {
             "type": "value"
-        },
-        "typecategory": {
-            "type": ""
         },
         "wind_scale_fact": {
             "type": "value"
@@ -529,9 +478,6 @@
         "solar_scale_fact": {
             "type": "value"
         },
-        "typecategory": {
-            "type": ""
-        },
         "wind_scale_fact": {
             "type": "value"
         },
@@ -559,9 +505,6 @@
         },
         "timeseries": {
             "type": "timeseries"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Evapotranspiration_Time_Series (Soil)": {
@@ -578,9 +521,6 @@
         },
         "timeseries": {
             "type": "timeseries"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Fixed flow": {
@@ -598,10 +538,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Fixedhead_to_channel": {
         "ManningCoeff": {
@@ -625,9 +562,6 @@
             "type": "expression"
         },
         "type": "link",
-        "typecategory": {
-            "type": ""
-        },
         "velocity": {
             "type": "expression"
         }
@@ -665,10 +599,7 @@
         "timeseries": {
             "type": "timeseries_prec"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Flow_control_device_(Gaussian_Kernel)": {
         "Q_max": {
@@ -703,10 +634,7 @@
         "timeseries": {
             "type": "timeseries_prec"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Flow_to_user": {
         "description": "Flow link to user",
@@ -714,10 +642,7 @@
             "type": "expression"
         },
         "icon": "arrow_to_user.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Groundwater cell": {
         "K_eff": {
@@ -752,10 +677,7 @@
         "specific_storage": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Immobile_Constituent": {
         "concentration": {
@@ -777,9 +699,6 @@
         },
         "stoichiometric_constant": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "MCMC": {
@@ -826,9 +745,6 @@
         },
         "samples_filename": {
             "type": "string"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Objective_Function": {
@@ -845,9 +761,6 @@
         },
         "object": {
             "type": "string"
-        },
-        "typecategory": {
-            "type": ""
         },
         "weight": {
             "type": "value"
@@ -870,9 +783,6 @@
         },
         "observed_data": {
             "type": "timeseries"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Parameter": {
@@ -886,9 +796,6 @@
         },
         "prior_distribution": {
             "type": "string"
-        },
-        "typecategory": {
-            "type": ""
         },
         "value": {
             "type": "value"
@@ -917,9 +824,6 @@
         },
         "stoichiometric_constant": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Pond": {
@@ -952,10 +856,7 @@
             "type": "expression"
         },
         "icon": "stormwaterpond.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Precipitation": {
         "coefficient": {
@@ -965,9 +866,6 @@
         "icon": "cloud.png",
         "timeseries": {
             "type": "timeseries_prec"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Precipitation_w_forcast": {
@@ -981,9 +879,6 @@
         },
         "timeseries": {
             "type": "timeseries_prec"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Reaction": {
@@ -994,9 +889,6 @@
         },
         "rate_expression": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "ReactionParameter": {
@@ -1014,9 +906,6 @@
         "temperature": {
             "type": "timeseries"
         },
-        "typecategory": {
-            "type": ""
-        },
         "value": {
             "type": "expression"
         }
@@ -1030,10 +919,7 @@
         "inflow_timeseries": {
             "type": "timeseries"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Reservoir": {
         "Storage": {
@@ -1044,10 +930,7 @@
         "inflow": {
             "type": "timeseries"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Reservoir_link_rule": {
         "Q_max": {
@@ -1067,10 +950,7 @@
             "type": "rule"
         },
         "icon": "reservoir_link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "River Segment": {
         "ManningCoeff": {
@@ -1127,9 +1007,6 @@
             "type": "value"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "velocity": {
             "type": "expression"
         }
@@ -1146,10 +1023,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Sedimentation tank element interface": {
         "area": {
@@ -1166,10 +1040,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Settling element": {
         "Storage": {
@@ -1180,10 +1051,7 @@
         },
         "description": "Settling element",
         "icon": "sedimentation_tank_element.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Settling element interface": {
         "area": {
@@ -1197,10 +1065,7 @@
             "type": "value"
         },
         "icon": "Settling_element_link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Sewer2Sewer_link": {
         "ManningCoeff": {
@@ -1223,10 +1088,7 @@
         "perimeter": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Sewer_channel_segment": {
         "ManningCoeff": {
@@ -1267,10 +1129,7 @@
         "perimeter": {
             "type": "expression"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Sewer_pipe": {
         "ManningCoeff": {
@@ -1323,10 +1182,7 @@
         "start_elevation": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Sewerchannelsegment": {
         "ManningCoeff": {
@@ -1367,10 +1223,7 @@
         "perimeter": {
             "type": "expression"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Sheet_flow": {
         "Evapotranspiration": {
@@ -1417,10 +1270,7 @@
         "loss_coefficient": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Sheetflow_link": {
         "color": {
@@ -1431,10 +1281,7 @@
             "type": "expression"
         },
         "icon": "sheet_flow_link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Soil": {
         "Evapotranspiration": {
@@ -1494,9 +1341,6 @@
             "type": "value"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "volume": {
             "type": "expression"
         }
@@ -1521,9 +1365,6 @@
         },
         "stoichiometric_constant": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "Spillway": {
@@ -1538,10 +1379,7 @@
         "reservoir_power": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Surface water to well": {
         "ManningCoeff": {
@@ -1558,10 +1396,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Suspended Sediments": {
         "advective_transfer": {
@@ -1605,9 +1440,6 @@
         "stoichiometric_constant": {
             "type": "expression"
         },
-        "typecategory": {
-            "type": ""
-        },
         "velocity_0": {
             "type": "value"
         }
@@ -1630,10 +1462,7 @@
             "type": "expression"
         },
         "icon": "watertank.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Trapezoidal Channel Segment": {
         "ManningCoeff": {
@@ -1689,10 +1518,7 @@
         "side_slope": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Trapezoidal_Channel_link": {
         "ManningCoeff": {
@@ -1716,9 +1542,6 @@
             "type": "expression"
         },
         "type": "link",
-        "typecategory": {
-            "type": ""
-        },
         "velocity": {
             "type": "expression"
         }
@@ -1739,9 +1562,6 @@
             "type": "value"
         },
         "type": "link",
-        "typecategory": {
-            "type": ""
-        },
         "width": {
             "type": "value"
         }
@@ -1785,10 +1605,7 @@
         "specific_yield": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "User": {
         "Storage": {
@@ -1796,10 +1613,7 @@
         },
         "description": "Water user",
         "icon": "farm.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "User_flow": {
         "description": "Flow link to water user",
@@ -1807,10 +1621,7 @@
             "type": "timeseries"
         },
         "icon": "farm_link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Water Storage": {
         "Storage": {
@@ -1824,10 +1635,7 @@
             "type": "value"
         },
         "icon": "Storage.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Water Transfer": {
         "color": {
@@ -1838,10 +1646,7 @@
             "type": "expression"
         },
         "icon": "Water_Transfer.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Well": {
         "Storage": {
@@ -1864,10 +1669,7 @@
             "type": "expression"
         },
         "icon": "Well.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "Well2soil horizontal link": {
         "color": {
@@ -1890,10 +1692,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Well2soil vertical link": {
         "color": {
@@ -1910,10 +1709,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "Well_aggregate": {
         "Storage": {
@@ -1939,10 +1735,7 @@
         "porosity": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "aggregate_to_soil_link": {
         "K_sat": {
@@ -1962,10 +1755,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "agricultural_user": {
         "Storage": {
@@ -1980,9 +1770,6 @@
             "type": "expression"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "use_rate": {
             "type": "timeseries"
         }
@@ -1993,10 +1780,7 @@
             "type": "expression"
         },
         "icon": "unconfined_aquifer2well.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "aquifer2well_link_pump": {
         "description": "Unconfined Aquifer to Well connector (pumped withdrawal)",
@@ -2004,10 +1788,7 @@
             "type": "expression"
         },
         "icon": "unconfined_aquifer2well.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "atmospheric exchange": {
         "coefficient": {
@@ -2023,9 +1804,6 @@
         },
         "timeseries": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "bed_sediment_to_fixedhead": {
@@ -2043,10 +1821,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "catchment-distributed": {
         "Evapotranspiration": {
@@ -2084,10 +1859,7 @@
         "loss_coefficient": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "channel2fixed": {
         "ManningCoeff": {
@@ -2110,19 +1882,13 @@
         "perimeter": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "chemical_source_timeseries": {
         "description": "Chemical source time series",
         "icon": "Chemical_Source_timeseries.png",
         "timeseries": {
             "type": "timeseries"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "commertial_user": {
@@ -2138,9 +1904,6 @@
             "type": "expression"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "use_rate": {
             "type": "timeseries"
         }
@@ -2156,9 +1919,6 @@
         },
         "timeseries": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "desalination_plant": {
@@ -2185,10 +1945,7 @@
         "storage_capacity": {
             "type": "value"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "distributed_catchment_link": {
         "Length": {
@@ -2214,10 +1971,7 @@
             "type": "expression"
         },
         "icon": "dcatchment-catchment-link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "distributed_catchment_to_fixed_head_link": {
         "Length": {
@@ -2237,10 +1991,7 @@
             "type": "expression"
         },
         "icon": "dcatchment-fixedhead-link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "distributed_catchment_to_stream_link": {
         "Length": {
@@ -2260,10 +2011,7 @@
             "type": "expression"
         },
         "icon": "dcatchment-stream-link.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "drain_pipe": {
         "color": {
@@ -2283,10 +2031,7 @@
         "pipe_diameter": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "fixed_head": {
         "Storage": {
@@ -2303,10 +2048,7 @@
             "type": "value"
         },
         "icon": "fixedhead.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "fixed_hydraulic_gradient_link": {
         "Hydraulic_Gradient": {
@@ -2335,10 +2077,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "general_parameters": {
         "alloutputfile": {
@@ -2354,9 +2093,6 @@
         },
         "simulation_start_time": {
             "type": "value"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "groundwater_link": {
@@ -2371,10 +2107,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "groundwater_to_fixedhead": {
         "area": {
@@ -2388,10 +2121,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "groundwater_to_stream": {
         "area": {
@@ -2408,10 +2138,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "industrial_user": {
         "Storage": {
@@ -2426,9 +2153,6 @@
             "type": "expression"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "use_rate": {
             "type": "timeseries"
         }
@@ -2445,10 +2169,7 @@
             "type": "expression"
         },
         "icon": "junction_rigid.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "junction_elastic": {
         "Storage": {
@@ -2465,10 +2186,7 @@
             "type": "expression"
         },
         "icon": "junction.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "lake2groundwater_link": {
         "area": {
@@ -2485,10 +2203,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "optimizer": {
         "description": "Optimizer Parameters",
@@ -2516,9 +2231,6 @@
         },
         "shakescalered": {
             "type": "value"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "pipe_1w": {
@@ -2542,10 +2254,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "pipe_2w": {
         "color": {
@@ -2568,10 +2277,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "public_user": {
         "Storage": {
@@ -2586,9 +2292,6 @@
             "type": "expression"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "use_rate": {
             "type": "timeseries"
         }
@@ -2614,10 +2317,7 @@
         "power": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "pump_with_timeseries_control": {
         "alpha": {
@@ -2643,10 +2343,7 @@
         "power": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "residential_user": {
         "Storage": {
@@ -2661,9 +2358,6 @@
             "type": "expression"
         },
         "type": "node",
-        "typecategory": {
-            "type": ""
-        },
         "use_rate": {
             "type": "timeseries"
         }
@@ -2692,10 +2386,7 @@
         "perimeter": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "sewer2pond": {
         "ManningCoeff": {
@@ -2739,10 +2430,7 @@
         "perimeter_2": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil2groundwater_link": {
         "area": {
@@ -2759,10 +2447,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil2sewer": {
         "Transmissivity_coefficient": {
@@ -2773,10 +2458,7 @@
             "type": "expression"
         },
         "icon": "soil2sewer.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_free_outflow": {
         "K_eff": {
@@ -2811,10 +2493,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_aggregate_link": {
         "K_eff": {
@@ -2843,10 +2522,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_fixedhead_link": {
         "K_eff": {
@@ -2875,10 +2551,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_fixedhead_link_H": {
         "K_eff": {
@@ -2907,10 +2580,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_fixedhead_link_H_KS": {
         "K_eff": {
@@ -2945,10 +2615,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_fixedhead_link_KS": {
         "K_eff": {
@@ -2983,10 +2650,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_soil_H_link": {
         "K_eff": {
@@ -3015,10 +2679,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_soil_H_link_w_KS": {
         "K_eff": {
@@ -3053,10 +2714,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_soil_link": {
         "K_eff": {
@@ -3091,10 +2749,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "soil_to_soil_link_KS": {
         "K_eff": {
@@ -3135,10 +2790,7 @@
         "m": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "solutionorder": {
         "description": null,
@@ -3177,9 +2829,6 @@
         "nr_tolerance": {
             "type": "value"
         },
-        "typecategory": {
-            "type": ""
-        },
         "write_solution_details": {
             "type": "string"
         }
@@ -3199,10 +2848,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "surface2groundwater_link": {
         "area": {
@@ -3219,10 +2865,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "surface_atmospheric exchange": {
         "coefficient": {
@@ -3238,9 +2881,6 @@
         },
         "timeseries": {
             "type": "expression"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "surface_release": {
@@ -3260,9 +2900,6 @@
         },
         "release_coefficient": {
             "type": "value"
-        },
-        "typecategory": {
-            "type": ""
         }
     },
     "surfacewater_to_soil_link": {
@@ -3283,10 +2920,7 @@
         "length": {
             "type": "expression"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "time_variable_fixed_head": {
         "Storage": {
@@ -3297,10 +2931,7 @@
             "type": "timeseries"
         },
         "icon": "fixedhead_timeseries.png",
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "unconfined_groundwater_to_fixedhead": {
         "Darcy flux": {
@@ -3318,9 +2949,6 @@
             "type": "value"
         },
         "type": "link",
-        "typecategory": {
-            "type": ""
-        },
         "width": {
             "type": "value"
         }
@@ -3346,10 +2974,7 @@
         "length": {
             "type": "value"
         },
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     },
     "water_supply_well": {
         "Storage": {
@@ -3372,10 +2997,7 @@
         "pumping_rate": {
             "type": "timeseries"
         },
-        "type": "node",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "node"
     },
     "wide_channel": {
         "ManningCoeff": {
@@ -3399,9 +3021,6 @@
             "type": "value"
         },
         "type": "link",
-        "typecategory": {
-            "type": ""
-        },
         "width": {
             "type": "value"
         }
@@ -3424,9 +3043,6 @@
             "type": "expression"
         },
         "icon": "vnotchweir.png",
-        "type": "link",
-        "typecategory": {
-            "type": ""
-        }
+        "type": "link"
     }
 }
