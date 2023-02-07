@@ -107,18 +107,19 @@ void Item::getFromJson(const QJsonValue& json_value) {
 
     // Item properties
     for (auto& property : json_object.keys()) {
-        auto value = json_object.value(property);
+        auto value = json_object.value(property);        
 
+        // or properties that have been already preset.        
         auto prop_value = Variable{typeFromProperty(property, value)};
         prop_value.fromString(value.toString());
 
-        // We set only properties that match component's meta model item.
-        auto property_set = properties_.setIfExistInOtherMap
-            (component_.properties(), property, prop_value);
+        auto property_set = properties_.setIfExist(property, prop_value);        
 
-        // or properties that have been already preset.
-        if (!property_set)
-            property_set = properties_.setIfExist(property, prop_value);
+        if (!property_set) {
+            // We set only properties that match component's meta model item.
+            property_set = properties_.setIfExistInOtherMap
+            (component_.properties(), property, value.toString());
+        }       
 
         qDebug() << "[" << MetaComponentItem::typeToSting(type()) <<  
             "] item, [set " << property_set << "] property=" <<
@@ -126,6 +127,45 @@ void Item::getFromJson(const QJsonValue& json_value) {
 
         onProperty(property, value);
     }
+}
+
+QString Item::toolTip() const {
+    // Building basic tooltip from the model.
+    auto tooltip = QString{};
+
+    tooltip += "<b><font color=blue>" + name_ + "</font></b> (" +
+        component_.name() + ")";
+
+    if (properties_.empty())
+        return tooltip;
+
+    // We have some properties, so let's present them in the tooltip
+    // in a table sorted by name.
+    auto props = std::map<QString, QString>{};
+    auto& prop_map = properties_.vars();
+
+    for (auto& [name, value] : prop_map)
+        props[name] = value.presentationValue();
+
+    constexpr auto max_rows = 10U;
+
+    tooltip += "<br>Properties:<center><table border=1 width=\"100%\" "
+        "style=\"border-collapse: collapse; margin: 0px;\">";
+
+    for (auto row_count = 0U; auto& [name, value] : props) {        
+        tooltip += 
+            "<tr><td><b>" + name + "</b></td><td>" + value + "</td></tr>";
+        
+        row_count++;
+
+        if (row_count >= max_rows) {
+            "<tr><td>More...</td><td></td></tr>";
+            break;
+        }
+    }
+
+    tooltip += "</table></center>";
+    return tooltip;
 }
 
 //////////////////////////////////////////////////////////////////////////

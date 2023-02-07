@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="QSplitter" name="splitter_2">
+    <widget class="QSplitter" name="map_layers_splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -24,6 +24,9 @@
      </property>
      <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
@@ -54,6 +57,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="btnMoveUp">
+           <property name="toolTip">
+            <string>Moves layer up</string>
+           </property>
            <property name="text">
             <string>Up</string>
            </property>
@@ -61,6 +67,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="btnMoveDown">
+           <property name="toolTip">
+            <string>Moves layer down</string>
+           </property>
            <property name="text">
             <string>Down</string>
            </property>
@@ -96,24 +105,23 @@
            <bool>true</bool>
           </property>
          </widget>
-         <widget class="QTableView" name="tableView">
-          <property name="mouseTracking">
-           <bool>true</bool>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-         </widget>
+         <widget class="WaterwAIs::Panel" name="propertyPanel"/>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="WaterwAIs::MapView" name="mapView"/>
-       </item>
-      </layout>
+     <widget class="QSplitter" name="panel_splitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="WaterwAIs::MapView" name="mapView"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="WaterwAIs::Panel" name="panelWidget"/>
      </widget>
     </widget>
    </item>
@@ -124,6 +132,12 @@
    <class>WaterwAIs::MapView</class>
    <extends>QGraphicsView</extends>
    <header>UI/MapView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>WaterwAIs::Panel</class>
+   <extends>QFrame</extends>
+   <header>UI/Panel.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -51,7 +51,6 @@ public:
     double zoomFactor() const { return zoom_factor_; }
     void setZoomFactor(double zoom_factor) { zoom_factor_ = zoom_factor; }
 
-
 public slots:
     void zoomToFit();    
 

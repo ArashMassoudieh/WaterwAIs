@@ -24,7 +24,7 @@ public:
     void addLayer(LayerPtr layer);
 
     // Moves layer from one position to another
-    void moveLayer(int from, int to);
+    bool moveLayer(int from, int to);
 
     // Returns a number of stored layers
     size_t size() const { return layers_.size(); }

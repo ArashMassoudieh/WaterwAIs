@@ -12,6 +12,12 @@
         "slope": {
             "type": "value"
         },
+		"inflow": {
+            "delegate": "Browser",
+            "description": "Inflow time series",
+            "type": "timeseries",
+            "unit": ""
+        },
         "icon": "/5.png",
         "name": "Sub-Catchment"
     },
@@ -22,7 +28,7 @@
         },
         "elevation": {
             "type": "value"
-        },
+        },		
         "icon": "/5.png"
     },
     "sewer pipe": {
@@ -32,7 +38,7 @@
         },
         "length": {
             "type": "value"
-        },
+        },		
         "icon": "/5.png"
     }
 }

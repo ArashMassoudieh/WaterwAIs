@@ -1,20 +1,27 @@
 
+
+#include "MainView.h"
+#include "ui_mainview.h"
+
 #include <QDebug>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QJsonObject>
 
+#include <Application/FileNameProcessor.h>
+
 #include <Layer/LayerListModel.h>
 #include <Layer/LayerItemDelegate.h>
 
-#include <Application/FileNameProcessor.h>
+#include <UI/MessageBox.h>
 
-#include "MainView.h"
 #include "MapView.h"
-#include "ui_mainview.h"
 #include "LayerPropertiesDialog.h"
+#include "ItemPropertiesWidget.h"
+#include "Chart/ChartWidget.h"
 
 #include <array>
+
 
 namespace WaterwAIs {
 
@@ -26,21 +33,40 @@ MainView::MainView(QWidget* parent):
     ui(std::make_unique<Ui::MainView>()) {
     ui->setupUi(this);
 
+    // Layer button icons
+    auto up_icon = QApplication::style()->standardIcon(QStyle::SP_ArrowUp);
+    ui->btnMoveUp->setIcon(up_icon);
+
+    auto down_icon = QApplication::style()->standardIcon(QStyle::SP_ArrowDown);
+    ui->btnMoveDown->setIcon(down_icon);
+
+    auto open_icon = QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
+    ui->btnOpen->setIcon(open_icon);
+
+
     // Creating Map view overlay controls
     createMapViewControls();
 
+    ui->panelWidget->hide();
+
     // Setting left part of the horizontal splitter to be 4 times less than
     // the right part.
-    ui->splitter_2->setSizes(QList{100, 400});
-
+    ui->map_layers_splitter->setSizes(QList{100, 400});
+    
     map_view_ = ui->mapView;
     ui->mapView->setMainView(this);
 
     // Setting up the layers list.
     setupLayerList();
 
+    // Setting up the item property panel
+    setupPropertyPanel();
+
     // Setting up tasks
     scheduleTasks();
+
+    // Setting panel widget to be twice less than the map view.
+    ui->panel_splitter->setSizes(QList{200, 100});
 }
 
 MainView::~MainView() {}
@@ -48,8 +74,8 @@ MainView::~MainView() {}
 
 void MainView::createMapViewControls() {
     // Tool buttons
-    auto button_layout = new QHBoxLayout{};
-    button_layout->setSpacing(1);
+    button_layout_ = new QHBoxLayout{};
+    button_layout_->setSpacing(1);
     
     auto icon_size = QSize{24,24};
 
@@ -68,11 +94,10 @@ void MainView::createMapViewControls() {
             button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
         button->setIconSize(icon_size);
-        button_layout->addWidget(button);
+        button_layout_->addWidget(button);
 
         return button;
     };
-
     
     // Pan
     btn_pan_ = add_tool_button(u"btnPan", u":/Resources/hand-rock.png", u"Pan",
@@ -93,16 +118,30 @@ void MainView::createMapViewControls() {
     // Fit in View
     btn_fit_to_view_ = add_tool_button(u"btnFitToView", u":/Resources/expand.png", 
         u"Fit View", u"Fit in view", true);
-
-    ui->gridLayout->addLayout(button_layout, 0, 0,
+    
+    ui->gridLayout->addLayout(button_layout_, 0, 0,
         Qt::AlignRight | Qt::AlignTop);
 
     // Status bar for coordinates
-    status_bar_ = new QLabel();    
-    ui->gridLayout->addWidget(status_bar_, 0, 0,
-        Qt::AlignLeft | Qt::AlignBottom);
+    status_bar_ = new QLabel();
 
+    status_layout_ = new QVBoxLayout{};
+    status_layout_->addWidget(status_bar_);
+
+    ui->gridLayout->addLayout(status_layout_, 0, 0,
+            Qt::AlignLeft | Qt::AlignBottom);
+    
     QMetaObject::connectSlotsByName(this);
+}
+
+
+void MainView::adjustMapViewControls(const QSize& adjustment) {
+    // Adjusting the Map view overlay controls based on reported difference
+    // between the Map view and its viewport. 
+    // This will move controls into correct positions in the map view without
+    // overlapping with the view scrollbars.
+    button_layout_->setContentsMargins(0, 0, adjustment.width(), 0);
+    status_layout_->setContentsMargins(0, 0, 0, adjustment.height());
 }
 
 
@@ -118,6 +157,21 @@ void MainView::setStatusText(QStringView text) {
     status_bar_->setText(text.toString());
 }
 
+void MainView::setupPropertyPanel() {
+    auto property_widget = new ItemPropertiesWidget{this};
+
+    connect(property_widget, &ItemPropertiesWidget::showTimeSeries, this,
+        [this](auto item, auto name, auto ts_path) { 
+            showTimeSeries(item, name, ts_path);
+        });
+
+    ui->propertyPanel->setWidget(property_widget);
+
+    ui->propertyPanel->setTitleText(u"Item:");
+
+    // We don't close property panel.
+    ui->propertyPanel->setCloseable(false);    
+}
 
 void MainView::setupLayerList() {
     ui->lstLayers->setItemDelegate(new LayerItemDelegate());
@@ -212,23 +266,27 @@ void MainView::setLayerListModel(QAbstractListModel* names) {
             is_up   = false;
             is_down = false;
         } else {
-            int r = selected[0].indexes()[0].row();
+            auto r = static_cast<size_t>(selected[0].indexes()[0].row());
             if (r == 0)
                 is_up = false;            
 
-            auto model = (LayerListModel*)ui->lstLayers->model();
+            auto model = static_cast<LayerListModel*>(ui->lstLayers->model());
             if (r == model->size() - 1)
                 is_down = false;            
         }
 
-        ui->btnMoveUp->setEnabled(is_up);
+        ui->btnMoveUp  ->setEnabled(is_up);
         ui->btnMoveDown->setEnabled(is_down);
     });
 }
 
 void MainView::setTableModel(MetaItemPropertyModel* propmodel) {
-    qDebug() << ui->tableView->objectName();
-    ui->tableView->setModel(propmodel);
+    auto property_widget = 
+        qobject_cast<ItemPropertiesWidget*>(ui->propertyPanel->getWidget());
+
+    Q_ASSERT(property_widget);
+
+    property_widget->setTableModel(propmodel);
 }
 
 void MainView::on_btnZoom_clicked() {
@@ -291,29 +349,66 @@ void MainView::mapViewModesCheck() {
 
 
 void MainView::on_btnMoveUp_clicked() {
+    if (spuriosButtonClick())
+        return;
+
     auto selected = ui->lstLayers->selectionModel()->selectedRows();
     if (selected.size() == 0)
         return;    
 
     auto row = selected[0].row();
-    auto layers = (LayerListModel*)ui->lstLayers->model();
-    if (row > 0)
-        layers->moveLayer(row, row - 1);    
+    auto layers = static_cast<LayerListModel*>(ui->lstLayers->model());
+
+    if (row > 0) {
+        if (layers->moveLayer(row, row - 1)) {
+            auto index = ui->lstLayers->model()->index(row - 1, 0);
+            ui->lstLayers->setCurrentIndex(index);
+        } else {
+            MessageBox::information("Layers", "This layer cannot be moved up");
+        }
+    }
+}
+
+bool MainView::spuriosButtonClick() {
+    if (last_tb_clicked_ts_ == Clock::time_point{}) {
+        // First click
+        last_tb_clicked_ts_ = Clock::now();
+        return false;
+    }
+    
+    if (Clock::now() - last_tb_clicked_ts_ < 100ms) {
+        // Spurious second click
+        last_tb_clicked_ts_ = Clock::time_point{};
+        return true;
+    }
+    return false;
 }
 
 void MainView::on_btnMoveDown_clicked() {
+    if (spuriosButtonClick())
+        return;
+
     auto selected = ui->lstLayers->selectionModel()->selectedRows();
     if (selected.size() == 0)
-        return;    
+        return;
 
-    auto row = selected[0].row();
-    auto layers = (LayerListModel*)ui->lstLayers->model();
+    auto row = static_cast<size_t>(selected[0].row());
+    auto layers = static_cast<LayerListModel*>(ui->lstLayers->model());
 
-    if (row < layers->size() - 1)
-        layers->moveLayer(row + 1, row);
+    if (row < layers->size() - 1) {
+        if (layers->moveLayer(row + 1, row)) {
+            auto index = ui->lstLayers->model()->index(row +1, 0);
+            ui->lstLayers->setCurrentIndex(index);
+        } else {
+            MessageBox::information("Layers", "This layer cannot be moved up");
+        }
+    }
 }
 
 void MainView::on_btnOpen_clicked() {
+    if (spuriosButtonClick())
+        return;
+
     auto fileContentReady = [this](const QString& fileName, const QByteArray& fileContent) {
         if (!fileName.isEmpty()) {
             if (!fileName.toLower().endsWith(".ohq")) {
@@ -339,6 +434,25 @@ void MainView::on_btnOpen_clicked() {
         }
     };
     QFileDialog::getOpenFileContent("OHQ Files (*.ohq)", fileContentReady);
+}
+
+void MainView::showTimeSeries(QStringView item_name, QStringView prop_name,
+    QStringView ts_path) {
+    auto chart_info = ChartInfo{prop_name, ts_path};
+
+    auto panel_widget = 
+        qobject_cast<ChartWidget*>(ui->panelWidget->getWidget());
+
+    if (!panel_widget || panel_widget->chartInfo() != chart_info) {
+        auto chart_widget = new ChartWidget{chart_info};
+
+        ui->panelWidget->setWidget(chart_widget);
+        ui->panelWidget->setIcon(u":/Resources/chart.png");
+
+        ui->panelWidget->setTitleText(item_name.toString() + " - " +
+            chart_info.name());
+    }    
+    ui->panelWidget->show();
 }
 
 void MainView::getFile10LinesContent(QString fileId) {

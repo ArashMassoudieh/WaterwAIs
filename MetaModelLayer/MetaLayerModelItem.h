@@ -34,6 +34,7 @@ public:
 
     // Component
     MetaComponentItem& component() { return component_; }
+    const MetaComponentItem& component() const { return component_; }
 
     // Fills the layer item from the JSON value
     void getFromJson(const QJsonValue& json_value) override;
@@ -44,6 +45,9 @@ public:
 
     // Properties
     const VariableMap& properties() const { return properties_; }
+
+    // Tooltip
+    virtual QString toolTip() const;
 
 protected:
     virtual void onProperty(QStringView /*name*/, 

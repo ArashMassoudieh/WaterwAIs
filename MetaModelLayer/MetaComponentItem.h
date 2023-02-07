@@ -29,12 +29,16 @@ public:
     
     MetaComponentItem(const QJsonObject& json_object);
     
+    // Name
+    QString name() const { return name_; }
+    void setName(QStringView name) { name_ = name.toString(); }
+
     // Type
     Type type() const { return type_; }
     void setType(Type type) { type_ = type; }
 
     // Icon file name
-    QStringView iconPath() const { return icon_path_; }
+    QString iconPath() const { return icon_path_; }
     void setIconPath(QStringView icon_path);
 
     // Icon
@@ -50,6 +54,7 @@ public:
     static QString typeToSting(Type type);
 
 private:
+    QString      name_;
     Type         type_;
     QString      icon_path_;
     QPixmap      icon_;

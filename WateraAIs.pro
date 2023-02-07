@@ -4,7 +4,7 @@ CONFIG += c++2a
 
 DEFINES += _NO_GSL
 
-QT += widgets core network
+QT += widgets core network charts
 
 qtHaveModule(printsupport): QT += printsupport
 qtHaveModule(opengl): QT += opengl
@@ -14,13 +14,18 @@ INCLUDEPATH += \
         Common
 
 FORMS += \
+    Forms/chartsettingsdialog.ui \
+    Forms/chartwidget.ui \
     Forms/dlglayerproperties.ui \
-    Forms/mainview.ui
+    Forms/mainview.ui \    
+    Forms/itempropertieswidget.ui \
+    Forms/panel.ui
 
 HEADERS += \
 	Application/Application.h \
 	Application/Defs.h \
-	Application/FileNameProcessor.h \
+        Application/FileNameProcessor.h \
+        Application/TimeSeriesCache.h
 
 HEADERS += \
 	Common/Layer/CircleLayerItem.h \
@@ -53,32 +58,38 @@ HEADERS += \
 	MetaModelLayer/Variable.h
 
 HEADERS += \
+        UI/Chart/ChartSettingsDlg.h \
+        UI/Chart/ChartView.h \
+        UI/Chart/ChartWidget.h \
+        UI/ItemPropertiesWidget.h \
 	UI/LayerPropertiesDialog.h \
 	UI/MainView.h \
 	UI/MainWindow.h \
 	UI/MapScene.h \
-	UI/MapView.h \
+        UI/MapView.h \
+        UI/MessageBox.h \
+        UI/Panel.h
+
 
 HEADERS += \
-	Utilities/_BTC.h \
-	Utilities/_BTCSet.h \
-	Utilities/BTC.h \
+        Utilities/TimeSeries_s.h \
+        Utilities/TimeSeries_s.hpp \
+        Utilities/TimeSeriesSet_s.h \
+        Utilities/TimeSeriesSet_s.hpp \
 	Utilities/cpoint.h \
-	Utilities/Matrix.h \
-	Utilities/NormalDist.h \
+        Utilities/Matrix.h \
 	Utilities/QuickSort.h \
 	Utilities/Utilities.h \
-	Utilities/Vector.h \	
-	Utilities/BTC.hpp \
-	Utilities/BTCSet.hpp
+        Utilities/Vector.h
 
 SOURCES += \
 	Application/Application.cpp \
-	Application/FileNameProcessor.cpp \
-
+        Application/FileNameProcessor.cpp \
+        Application/TimeSeriesCache.cpp
 
 SOURCES += \
 	Common/Logger.cpp \
+        Common/Downloader.cpp \
 	Common/Layer/CircleLayerItem.cpp \
 	Common/Layer/Layer.cpp \
 	Common/Layer/LayerItemDelegate.cpp \
@@ -103,11 +114,17 @@ SOURCES += \
 	MetaModelLayer/Variable.cpp
 	
 SOURCES += \
+    UI/Chart/ChartSettingsDlg.cpp \
+    UI/Chart/ChartView.cpp \
+    UI/Chart/ChartWidget.cpp \
+    UI/ItemPropertiesWidget.cpp \
     UI/LayerPropertiesDialog.cpp \
     UI/MainView.cpp \
     UI/MainWindow.cpp \
     UI/MapScene.cpp \
-    UI/MapView.cpp
+    UI/MapView.cpp \
+    UI/MessageBox.cpp \
+    UI/Panel.cpp
 
 SOURCES += \
 	Utilities/cpoint.cpp \
@@ -128,7 +145,7 @@ build_all:!build_pass {
     CONFIG += release
 }
 
-DATA_DIR = $$PWD/Json
+DATA_DIR = $$PWD/Data
 DEFINES += DATA_DIR=\"$$DATA_DIR\"
 
 wasm {
@@ -146,7 +163,16 @@ wasm {
     defined(USE_LOCAL_DATA_FILES, var) {
         message("WASM will preload data files from $$DATA_DIR.")
         # Making WASM to preload Data folder content
-        QMAKE_LFLAGS += --preload-file $$DATA_DIR
+
+        equals(QT_MAJOR_VERSION, 5) {
+            # Qt 5.x
+            QMAKE_LFLAGS += --preload-file $$DATA_DIR
+        }
+
+        greaterThan(QT_MAJOR_VERSION, 5) {
+            #Qt 6 and above
+            QMAKE_LFLAGS += --preload-file $$DATA_DIR@/
+        }
     }
 }
 

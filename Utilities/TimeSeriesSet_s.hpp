@@ -1,16 +1,8 @@
-#include "BTCSet.h"
+#include "TimeSeriesSet_s.h"
 #include "string.h"
 #include <fstream>
 #include "Utilities.h"
-#include "DistributionNUnif.h"
 #include <iostream>
-#include "Vector.h"
-#include "Matrix.h"
-#include <omp.h>
-#ifdef QT_version
-#include "qdebug.h"
-#include "qdatastream.h"
-#endif // QT_version
 
 using namespace std;
 
@@ -531,19 +523,6 @@ vector<T> CTimeSeriesSet<T>::std(int limit, vector<int> index)
 	for (unsigned int i = 0; i<index.size(); i++)
 		v.push_back(BTC[index[i]].std(limit));
 	return v;
-
-}
-
-template <class T>
-CMatrix CTimeSeriesSet<T>::correlation(int limit, int n)
-{
-	CMatrix r_xy(n);
-
-	for (int i=0; i<n; i++)
-		for (int j=0; j<=i; j++)
-			r_xy[i][j] = R(BTC[i], BTC[j], limit);
-
-	return r_xy;
 
 }
 

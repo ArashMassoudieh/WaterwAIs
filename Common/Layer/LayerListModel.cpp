@@ -5,6 +5,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QMimeData>
+#include <UI/MessageBox.h>
 
 #include "Layer.h"
 
@@ -41,7 +42,12 @@ void LayerListModel::addLayer(LayerPtr layer) {
     endInsertRows();
 }
 
-void LayerListModel::moveLayer(int src_idx, int dst_idx) {
+bool LayerListModel::moveLayer(int src_idx, int dst_idx) {
+    if (auto& layer = layers_[src_idx]; layer && !layer->zOrderMovable()) {
+        // This layer is not movable.
+        return false;
+    }
+
     beginResetModel();
     layers_.move(src_idx, dst_idx);
 
@@ -49,6 +55,7 @@ void LayerListModel::moveLayer(int src_idx, int dst_idx) {
         layers_[i]->setZValue(z_value_bottom - i);
     
     endResetModel();
+    return true;
 }
 
 int LayerListModel::rowCount(const QModelIndex& parent) const {
@@ -128,19 +135,30 @@ bool LayerListModel::dropMimeData(const QMimeData* data, Qt::DropAction action,
     auto encoded_data = data->data(DRAG_MIME_DATA);
     
     auto rows = 0;
-    auto srcIndx = 0;
+    auto src_idx = 0;
 
     if (auto stream = QDataStream{&encoded_data, QIODevice::ReadOnly};
         !stream.atEnd()) {
-        stream >> srcIndx;
+        stream >> src_idx;
         ++rows;
+    }
+
+    if (src_idx >= layers_.size()) {
+        // Invalid index
+        return false;
+    }
+    
+    if (auto& layer = layers_[src_idx]; layer && !layer->zOrderMovable()) {
+        // This layer is not movable.
+        MessageBox::information("Layers", "This layer cannot be moved");
+        return false;    
     }
 
     if (dst_idx >= layers_.size()) {
         dst_idx = layers_.size() - 1;
     }
-    QMetaObject::invokeMethod(this, [this, dst_idx, srcIndx]() {
-        moveLayer(srcIndx, dst_idx);
+    QMetaObject::invokeMethod(this, [this, dst_idx, src_idx]() {
+        moveLayer(src_idx, dst_idx);
         }, Qt::QueuedConnection);
 
     return true;

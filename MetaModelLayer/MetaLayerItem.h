@@ -27,7 +27,12 @@ public:
     // Properties
     const VariableMap& properties() const { return model_item_.properties(); }
 
+    // Model item
+    const ModelItem& modelItem() const { return model_item_; }
+
 protected:
+    void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
+
     // Meta model data item for this graphics object.
     ModelItem& model_item_;
 

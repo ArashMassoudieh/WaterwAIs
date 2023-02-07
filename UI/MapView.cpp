@@ -217,14 +217,14 @@ void MapView::selectItem(const QPoint& pos) {
             break;
     }
 
-    if (selected_item) {
-        // Clear previous selection of meta model layer items.
-        clearSelection();
+    // Clear previous selection of meta model layer items.
+    clearSelection();
 
+    if (selected_item) {
         selected_items_.emplace_back(selected_item);
 
         prop_model_ = std::make_unique<MetaItemPropertyModel>
-            (selected_item->properties(), this);
+            (*selected_item, this);
 
         main_view_->setTableModel(prop_model_.release());
     }
@@ -235,6 +235,14 @@ void MapView::resizeEvent(QResizeEvent* event) {
 
     if (mode_ == Mode::FitToView)
         zoomToFit();
+    
+    auto view_rc     = rect();
+    auto viewport_rc = viewport()->rect();
+
+    auto diff_rc = QSize{view_rc.width() - viewport_rc.width(),
+                        view_rc.height() - viewport_rc.height()};
+
+    main_view_->adjustMapViewControls(diff_rc);
 }
 
 

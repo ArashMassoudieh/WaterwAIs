@@ -13,6 +13,7 @@ public:
     MetaModelLayer(LayerSceneInterface* scene,
         QStringView component_json_file = {}, QStringView json_file = {});
 
+    bool zOrderMovable() override;
 private:
 };
 

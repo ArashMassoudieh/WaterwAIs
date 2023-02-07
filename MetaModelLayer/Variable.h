@@ -2,7 +2,6 @@
 #define VARIABLE_H_89744759ADDA9F48
 
 #include <QJsonDocument>
-#include "Utilities/BTC.h"
 
 #include <variant>
 #include <qstr_unordered_map.h>
@@ -29,12 +28,18 @@ public:
         Input
     };
     
-    Variable(Type type = Type::NotAssigned): type_{type} { init(); }
+    Variable(Type type = Type::NotAssigned, QStringView value = {})
+        : type_{type} {
+        init();
+        if (!value.isEmpty())
+            fromString(value);
+    }
+
     Variable(const QJsonObject& json_object);
     Variable(QStringView type_str);
     
-    void getFromJsonObject(const QJsonObject& json_object);    
-
+    void getFromJsonObject(const QJsonObject& json_object);
+   
     // Type
     Type type() const { return type_; }
     void setType(const Type& type) { type_ = type; init(); }
@@ -61,6 +66,11 @@ public:
     QString toString() const;
     void fromString(QStringView value);
 
+    // Gets variable value string for 'presentation' - it can be different
+    // from a real string value thus hiding it from the user.
+    QString presentationValue() const;
+    
+
     void setValue(double value) { 
         if (isNumeric())
             value_ = value;
@@ -80,7 +90,7 @@ private:
     Type type_ = Type::NotAssigned;
     Role role_ = Role::None;
 
-    std::variant<double, QString, CTimeSeries<double>> value_;
+    std::variant<double, QString> value_;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -106,9 +116,12 @@ public:
 
     // Sets variable if it exists in the other map
     bool setIfExistInOtherMap(const VariableMap& other_map, QStringView name,
-        const Variable& value = {}) {
-        if (other_map.contains(name.toString())) {
-            set(name, value);
+        QStringView value = {}) {
+        
+        if (auto var = other_map.get(name); var) {
+            // Import type from the variable with the same name from the other
+            //map.
+            set(name, Variable{var->type(), value});
             return true;
         }
         return false;

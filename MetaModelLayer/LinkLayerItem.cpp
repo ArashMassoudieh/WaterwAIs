@@ -1,6 +1,7 @@
 
 #include "LinkLayerItem.h"
 #include "NodeLayerItem.h"
+#include <cmath>
 
 #include <QVector2D>
 

@@ -52,7 +52,7 @@ public:
 
         auto reply = netrwork_mgr_.get(QNetworkRequest(url));
 
-        connect(reply, &QNetworkReply::finished, this, [this, reply, callback]() {
+        connect(reply, &QNetworkReply::finished, this, [reply, callback]() {
             if (reply->error()) {
                 // Our download finished with error, so we can't proceed
                 qDebug() << "Url:" << reply->url() << ", Error occurred: "
@@ -85,6 +85,9 @@ public:
     void download(U path, DownloadCallback<T> callback) {
         download<T>(QUrl{QString{path}}, callback);
     }
+
+    // Global instance
+    static Downloader& instance();
 
 private:
     QNetworkAccessManager netrwork_mgr_;
