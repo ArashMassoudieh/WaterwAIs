@@ -85,10 +85,7 @@ private:
     void onModeSet();    
 
     Mode mode_;
-
-    bool   is_pressed_ = false;
-    QPoint last_point_;
-    QRectF last_scene_rect_;
+    bool is_pressed_ = false;
 
     QPointF pressed_scene_point_;
     QGraphicsRectItem* zoom_rect_;

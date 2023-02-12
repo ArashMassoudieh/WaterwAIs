@@ -31,7 +31,7 @@ public:
     Variable(Type type = Type::NotAssigned, QStringView value = {})
         : type_{type} {
         init();
-        if (!value.isEmpty())
+        if (!value.isNull())
             fromString(value);
     }
 

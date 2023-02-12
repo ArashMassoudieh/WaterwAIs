@@ -1,13 +1,16 @@
 
 #include "MainWindow.h"
-
 #include "MapScene.h"
+#include "MapView.h"
+
+#include <Application/Defs.h>
 
 #include <FeatureLayer/FeatureLayer.h>
 #include <MetaModelLayer/MetaModelLayer.h>
-#include "MapView.h"
 
 #include <QVBoxLayout>
+#include <QApplication>
+
 #include <array>
 
 
@@ -23,8 +26,6 @@ MainWindow::MainWindow(QWidget* parent)
         { onBeforeAppDestroy(); });
 
     main_view_ = new MainView(this);
-
-    main_view_->setLayerListModel(&layers_list_model_);
     mapView()->setScene(scene_);
 
     auto layout = new QVBoxLayout();
@@ -40,50 +41,69 @@ void MainWindow::onBeforeAppDestroy() {
 
     // Called just before the application is about to be destroyed,
     // so perform some cleanup here while the object is still alive.
-
 }
 
 void MainWindow::buildLayers() {
-    // Add feature layers
-    addFeatureLayers();
+    // Show layers information downloading widget...
+    msg_list_model_.setText(u"Downloading layer info...");
+    main_view_->setMessageListModel(&msg_list_model_);    
 
-    // Add Meta model layer
-    addMetaModelLayer();
-
-    // Build the layer list model
-    buildLayerListModel();
+    layers_info_ = std::make_unique<LayersInfo>(LAYERS_FILE,
+        [this](auto result) { onLayersInfoLoaded(result); });
 }
 
+void MainWindow::onLayersInfoLoaded(bool result) {
+    if (result) {
+        // Hide layers downloading information.
+        main_view_->setLayerListModel(&layers_list_model_);
+
+#ifndef IGNORE_FEATURE_LAYERS
+        // Add feature layers
+        addFeatureLayers();
+#endif // IGNORE_FEATURE_LAYERS
+
+        // Add Meta model layer
+        addMetaModelLayer();
+
+        // Build the layer list model
+        buildLayerListModel();
+    } else {
+        // Download failed.
+        auto icon = QApplication::style()->standardIcon(QStyle::SP_BrowserStop);
+        msg_list_model_.setText(u"Downloading layer info failed", icon);
+    }
+}
+
+
 void MainWindow::addFeatureLayers() {
-    struct LayerInfo {
-        QColor      color;
-        QStringView json_file;
-        bool        uses_shapes = true;
-    };
-
-    // Information about Feature layers.
-    auto layer_infos = std::array {
-        LayerInfo{Qt::red,    u"Centroids.geojson"},
-        LayerInfo{Qt::blue,   u"HickeyRunSewer.geojson", false},
-        LayerInfo{Qt::green,  u"PourPoints.geojson"},
-        LayerInfo{Qt::yellow, u"SubWaterSheds.geojson"},
-    };
-
     // Building and adding layers
-   for (auto&& layer_info : layer_infos) {        
-           layers_.emplace_back(std::make_shared<FeatureLayer>
-               (scene_, layer_info.color, layer_info.json_file,
-                   layer_info.uses_shapes ? Layer::Option::UsesShapes
-                   : Layer::Option::None));
-   }
+    auto& feature_layers = layers_info_->featureLayers();
+
+    for (auto&& layer_info : feature_layers) {
+        if (layer_info.json_file.isEmpty()) {
+            qDebug() << "Layer: " << layer_info.name << " has empty JSON file";
+            continue;
+        }
+
+        layers_.emplace_back(std::make_shared<FeatureLayer>
+            (scene_, layer_info.name, layer_info.color, layer_info.json_file,
+                layer_info.uses_shapes ? Layer::Option::UsesShapes
+                : Layer::Option::None, layer_info.description));
+    }
 }
 
 void MainWindow::addMetaModelLayer() {
-    auto component_json_file = u"meta_model.json";
-    auto model_json_file     = u"Example_input.json";
+    if (layers_info_->metaModel().json_file.isEmpty() ||
+        layers_info_->model().json_file.isEmpty()) {
+        qDebug() << "Meta-model/model has empty JSON file";
+        return;
+    }
 
-    auto meta_model_layer = std::make_shared<MetaModelLayer>(scene_, 
-        component_json_file, model_json_file);
+    auto meta_model_layer = std::make_shared<MetaModelLayer>(scene_,
+        u"Meta-Model",
+        layers_info_->metaModel().json_file,
+        layers_info_->model().json_file,
+        layers_info_->model().description);
 
     layers_.emplace_back(meta_model_layer);
 }
@@ -92,7 +112,7 @@ void MainWindow::buildLayerListModel() {
     // Adding layers to the layer list model
     for (auto&& layer : layers_) {
         connect(layer.get(), &Layer::layerReady,
-            this, [this]() { zoomAll(); });
+            this, [this](auto) { zoomAll(); });
 
         // Adding layer to the layer list model.
         layers_list_model_.addLayer(layer);

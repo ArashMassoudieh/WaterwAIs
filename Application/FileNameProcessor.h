@@ -24,6 +24,9 @@ public:
 
     // Returns global file name processor
     static FileNameProcessor& instance();
+
+    // Returns true if file name is URL.
+    static bool isUrl(QStringView file_name);
 };
 
 // Useful shortcut macros

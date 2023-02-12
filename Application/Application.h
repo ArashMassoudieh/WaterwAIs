@@ -26,6 +26,9 @@ public:
     // Return path settings
     static const PathSettings& paths() { return paths_; }
 
+    // Setting host path - base path for names that don't specify absolute path
+    static void setHostPath(QStringView path);
+
 private:
     // Main Window
     std::unique_ptr<MainWindow> main_window_;

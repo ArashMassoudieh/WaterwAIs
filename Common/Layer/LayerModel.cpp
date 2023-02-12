@@ -7,22 +7,28 @@ namespace WaterwAIs {
 //////////////////////////////////////////////////////////////////////////
 // LayerModel
 
+LayerModel::LayerModel(): download_state_{DownloadState::None} {
+}
+
 void LayerModel::clear() {
+    download_state_ = DownloadState::None;
     items_.clear();
     onClear();
 }
 
 void LayerModel::getFromJson(QStringView json_file) {
-    model_downloaded_ = false;
+    download_state_ = DownloadState::Downloading;
 
     downloadJson(WW_HOST_PATH(json_file),
         [this](auto result, auto&& json_doc) {
             clear();
             if(result) {
-                model_downloaded_ = true;
+                download_state_ = DownloadState::Downloaded;
                 onModelDownloaded(std::move(json_doc));
             } else {
+                download_state_ = DownloadState::Failed;
                 qDebug() << "Layer model loading failed";
+                emit modelLoaded(false);
                 return;
             }
         });
@@ -36,7 +42,7 @@ void LayerModel::onModelDownloaded(QJsonDocument&& json_doc) {
     // that model is ready.
     getFromJsonDocument(json_doc);
 
-    emit modelLoaded();
+    emit modelLoaded(true);
 }
 
 void LayerModel::addGraphicsItems(const LayerGraphicsSettings& gsettings,

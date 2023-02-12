@@ -24,6 +24,9 @@ public:
         PropertyInfo(Type t, const QString& n, const QString& v)
             : type{t}, name{n}, value{v} {}
 
+        bool validTimeSeries() const
+            { return type == Type::TimeSeries && !value.isEmpty(); }
+
         Type    type = Type::NotAssigned;
         QString name;
         QString value;

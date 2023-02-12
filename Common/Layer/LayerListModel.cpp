@@ -1,12 +1,13 @@
 
 #include "LayerListModel.h"
 
+#include <QApplication>
 #include <QIcon>
+#include <QMimeData>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QMimeData>
-#include <UI/MessageBox.h>
 
+#include <UI/MessageBox.h>
 #include "Layer.h"
 
 namespace WaterwAIs {
@@ -16,7 +17,39 @@ namespace WaterwAIs {
 namespace {
 
 constexpr auto z_value_bottom = 9000;
+constexpr auto icon_size = QSize{20, 20};
+
 } // anonymous
+
+//////////////////////////////////////////////////////////////////////////
+// MessageListModel
+
+MessageListModel::MessageListModel(QObject* parent)
+    : QAbstractListModel{parent} {
+}
+
+void MessageListModel::setText(QStringView text, const QIcon& icon) {
+    beginResetModel();
+    message_ = text.toString();
+    icon_    = icon;
+    endResetModel();
+}
+
+int MessageListModel::rowCount(const QModelIndex& /*parent*/) const {
+    return 1;
+}
+
+QVariant MessageListModel::data(const QModelIndex& /*index*/, int role) const {
+    switch (role) {
+    case Qt::DisplayRole:
+        return QVariant::fromValue(message_);
+
+    case Qt::DecorationRole:
+        if (!icon_.isNull())
+            return icon_.pixmap(icon_size);
+    }
+    return {};
+}
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -39,12 +72,25 @@ void LayerListModel::addLayer(LayerPtr layer) {
     connect(layer_model.get(), &LayerModel::iconLoaded, this, [this, c]() {
         emit dataChanged(index(c), index(c), QVector<int>{Qt::DecorationRole});
     });
+
+    connect(layer_model.get(), &LayerModel::modelLoaded, this,
+        [this](auto) {
+            // refreshing
+            beginResetModel();
+            endResetModel();
+        });
+
     endInsertRows();
 }
 
 bool LayerListModel::moveLayer(int src_idx, int dst_idx) {
     if (auto& layer = layers_[src_idx]; layer && !layer->zOrderMovable()) {
         // This layer is not movable.
+        return false;
+    }
+    
+    if (auto& layer = layers_[dst_idx]; layer && !layer->zOrderMovable()) {
+        // The layer cannot be moved to the not movable layer position.
         return false;
     }
 
@@ -55,6 +101,8 @@ bool LayerListModel::moveLayer(int src_idx, int dst_idx) {
         layers_[i]->setZValue(z_value_bottom - i);
     
     endResetModel();
+
+    emit layerMoved(dst_idx);
     return true;
 }
 
@@ -69,11 +117,30 @@ QVariant LayerListModel::data(const QModelIndex& index, int role) const {
     auto row = index.row();
 
     switch (role) {
-    case Qt::DisplayRole:
-        return QVariant::fromValue(layers_[row].get());
+        case Qt::DisplayRole:
+            return QVariant::fromValue(layers_[row].get());
 
-    case Qt::DecorationRole:
-        return QPixmap{layers_[row]->icon()};
+        case Qt::DecorationRole: {
+            auto& layer = layers_[row];
+
+            if (layer->model()->downloadFailed()) {
+                auto icon = 
+                    QApplication::style()->standardIcon(QStyle::SP_BrowserStop);
+                return icon.pixmap(icon_size);
+            }
+            return QPixmap{layers_[row]->icon()};
+        }
+
+        case Qt::ToolTipRole: {
+            auto& layer = layers_[row];
+            if (layer->model()->downloading())
+                return QVariant::fromValue(layer->name() + " downloading...");
+
+            if (layer->model()->downloadFailed())
+                return QVariant::fromValue(layer->name() + " download failed");
+
+            return QVariant::fromValue(layers_[row]->description());
+        }        
     }
     return {};
 }

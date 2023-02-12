@@ -42,6 +42,7 @@ class Downloader: public QObject {
 public:
     template <typename T>
     using DownloadCallback = std::function<void(bool, T&&)>;
+    using RequestPrepareFunc = std::function<void(QNetworkRequest&)>;
 
     void downloadData(const QUrl& url, DownloadCallback<QByteArray> callback) {
         if (!callback) {
@@ -50,7 +51,13 @@ public:
             return;
         }
 
-        auto reply = netrwork_mgr_.get(QNetworkRequest(url));
+        auto request = QNetworkRequest{url};
+        
+        // Preprocessing request
+        if (req_prepare_func_)
+            req_prepare_func_(request);
+
+        auto reply = netrwork_mgr_.get(request);
 
         connect(reply, &QNetworkReply::finished, this, [reply, callback]() {
             if (reply->error()) {
@@ -86,11 +93,16 @@ public:
         download<T>(QUrl{QString{path}}, callback);
     }
 
+    // Request preparation function
+    void setReqPrepareFunc(RequestPrepareFunc req_prep_func) 
+        { req_prepare_func_ = req_prep_func; }    
+
     // Global instance
     static Downloader& instance();
 
 private:
-    QNetworkAccessManager netrwork_mgr_;
+    RequestPrepareFunc req_prepare_func_;
+    QNetworkAccessManager netrwork_mgr_;   
 };
 
 

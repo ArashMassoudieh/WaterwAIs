@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'chartsettingsdialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 6.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,6 +10,7 @@
 #define UI_CHARTSETTINGSDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAbstractButton>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
@@ -36,7 +37,7 @@ public:
     void setupUi(QDialog *ChartSettingsDialog)
     {
         if (ChartSettingsDialog->objectName().isEmpty())
-            ChartSettingsDialog->setObjectName(QString::fromUtf8("ChartSettingsDialog"));
+            ChartSettingsDialog->setObjectName("ChartSettingsDialog");
         ChartSettingsDialog->resize(213, 129);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -44,26 +45,26 @@ public:
         sizePolicy.setHeightForWidth(ChartSettingsDialog->sizePolicy().hasHeightForWidth());
         ChartSettingsDialog->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(ChartSettingsDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName("verticalLayout");
         formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setObjectName("formLayout");
         label = new QLabel(ChartSettingsDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName("label");
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
         comboBoxTheme = new QComboBox(ChartSettingsDialog);
-        comboBoxTheme->setObjectName(QString::fromUtf8("comboBoxTheme"));
+        comboBoxTheme->setObjectName("comboBoxTheme");
 
         formLayout->setWidget(0, QFormLayout::FieldRole, comboBoxTheme);
 
         label_2 = new QLabel(ChartSettingsDialog);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName("label_2");
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
 
         comboBoxLegend = new QComboBox(ChartSettingsDialog);
-        comboBoxLegend->setObjectName(QString::fromUtf8("comboBoxLegend"));
+        comboBoxLegend->setObjectName("comboBoxLegend");
 
         formLayout->setWidget(1, QFormLayout::FieldRole, comboBoxLegend);
 
@@ -71,12 +72,12 @@ public:
         verticalLayout->addLayout(formLayout);
 
         checkBoxAntiAliasing = new QCheckBox(ChartSettingsDialog);
-        checkBoxAntiAliasing->setObjectName(QString::fromUtf8("checkBoxAntiAliasing"));
+        checkBoxAntiAliasing->setObjectName("checkBoxAntiAliasing");
 
         verticalLayout->addWidget(checkBoxAntiAliasing);
 
         buttonBox = new QDialogButtonBox(ChartSettingsDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName("buttonBox");
         buttonBox->setLayoutDirection(Qt::LeftToRight);
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
@@ -85,8 +86,8 @@ public:
 
 
         retranslateUi(ChartSettingsDialog);
-        QObject::connect(buttonBox, SIGNAL(accepted()), ChartSettingsDialog, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), ChartSettingsDialog, SLOT(reject()));
+        QObject::connect(buttonBox, &QDialogButtonBox::accepted, ChartSettingsDialog, qOverload<>(&QDialog::accept));
+        QObject::connect(buttonBox, &QDialogButtonBox::rejected, ChartSettingsDialog, qOverload<>(&QDialog::reject));
         QObject::connect(comboBoxTheme, SIGNAL(currentIndexChanged(int)), ChartSettingsDialog, SLOT(changed()));
         QObject::connect(comboBoxLegend, SIGNAL(currentIndexChanged(int)), ChartSettingsDialog, SLOT(changed()));
         QObject::connect(checkBoxAntiAliasing, SIGNAL(clicked(bool)), ChartSettingsDialog, SLOT(changed()));

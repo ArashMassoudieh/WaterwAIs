@@ -77,14 +77,16 @@ void Variable::getFromJsonObject(const QJsonObject& json_object) {
 }
 
 QString Variable::toString() const{
-    if (isNumeric()) {
+    if (isNumeric())
         return QString::number(std::get<double>(value_), 'f', 2);
-    } else if (isTimeSeries()) {
+    
+    if (isTimeSeries()) {
         // get path to the CSV file for time series
         return std::get<QString>(value_);
     } else if (isString()) {
         return std::get<QString>(value_);
     }
+    
     return {};
 }
 

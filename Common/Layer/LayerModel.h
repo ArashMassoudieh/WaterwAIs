@@ -14,10 +14,19 @@ namespace WaterwAIs {
 class LayerModel: public QObject {
     Q_OBJECT
 public:
+    enum class DownloadState {
+        None = 0,
+        Downloading,
+        Downloaded,
+        Failed
+    };
+
     using GraphicsItems = LayerModelItem::GraphicsItems;
 
     // Default icon size for presentation in layer list model.
-    static constexpr auto default_icon_size = QSize{24, 24};
+    static constexpr auto default_icon_size = QSize{20, 20};
+
+    LayerModel();
 
     // Clears the model
     void clear();
@@ -38,8 +47,18 @@ public:
     void getIcon(QStringView icon_path, QSize icon_size = default_icon_size);
     const QPixmap& icon() const { return icon_; }
 
+    // Model download state functions
+    bool downloading() const 
+        { return download_state_ == DownloadState::Downloading; }
+
+    bool downloaded () const 
+        { return download_state_ == DownloadState::Downloaded; }
+
+    bool downloadFailed() const 
+        { return download_state_ == DownloadState::Failed; }
+
 signals:
-    void modelLoaded();
+    void modelLoaded(bool);
     void iconLoaded();
 
 protected:
@@ -61,8 +80,8 @@ protected:
 
     // Item key/value container, where key is item name
     std::deque<std::unique_ptr<LayerModelItem>> items_;
-
-    bool model_downloaded_ = false;
+    
+    DownloadState download_state_;
 
 private:
     QString name_;

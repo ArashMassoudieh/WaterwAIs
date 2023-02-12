@@ -1,10 +1,12 @@
 {
-    "Activated_Sludge_Reactor": {
+    "name": "Meta-Model",
+	"icon": "/5.png",
+	"Activated_Sludge_Reactor": {
         "Storage": {
             "type": "balance"
         },
         "description": "Reactor",
-        "icon": "activate_sludge_reactor.png",
+        "icon": "Icons/activate_sludge_reactor.png",
         "type": "node"
     },
     "Aggregate_storage_layer": {
@@ -24,7 +26,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "aggregates.png",
+        "icon": "Icons/aggregates.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -41,7 +43,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "aquifer_recharge.png",
+        "icon": "Icons/aquifer_recharge.png",
         "recharge_rate": {
             "type": "timeseries"
         },
@@ -70,7 +72,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "bed_sediment.png",
+        "icon": "Icons/bed_sediment.png",
         "length": {
             "type": "value"
         },
@@ -96,7 +98,7 @@
             "type": "expression"
         },
         "description": "Buildup constant-rate",
-        "icon": "build_up.png",
+        "icon": "Icons/build_up.png",
         "timeseries": {
             "type": "expression"
         }
@@ -118,7 +120,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Catch_basin.png",
+        "icon": "Icons/Catch_basin.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -159,7 +161,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "rainwater-catchment.png",
+        "icon": "Icons/rainwater-catchment.png",
         "inflow_timeseries": {
             "type": "timeseries"
         },
@@ -179,7 +181,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "Catchment_outlet.png",
+        "icon": "Icons/Catchment_outlet.png",
         "type": "link"
     },
     "Constituent": {
@@ -202,7 +204,7 @@
         "external_source": {
             "type": "source"
         },
-        "icon": "constituent.png",
+        "icon": "Icons/constituent.png",
         "inflow_concentration": {
             "type": "timeseries"
         },
@@ -224,7 +226,7 @@
             "type": "balance"
         },
         "description": "Reservoir with controlled outflow",
-        "icon": "Reservoid_Control.png",
+        "icon": "Icons/Reservoid_Control.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -238,7 +240,7 @@
     },
     "Desorption": {
         "description": "Desorption",
-        "icon": "desorption.png",
+        "icon": "Icons/desorption.png",
         "normalizing_quantity": {
             "type": ""
         },
@@ -266,7 +268,7 @@
             "type": "value"
         },
         "description": "Dummy",
-        "icon": "Sewer_pipe_section.png",
+        "icon": "Icons/Sewer_pipe_section.png",
         "type": "node"
     },
     "Evapotranspiration_Aerodynamic (S)": {
@@ -289,7 +291,7 @@
         "e_as": {
             "type": "expression"
         },
-        "icon": "Evapotranspiration_Aerodynamic.png",
+        "icon": "Icons/Evapotranspiration_Aerodynamic.png",
         "rate": {
             "type": "expression"
         },
@@ -323,7 +325,7 @@
         "e_as": {
             "type": "expression"
         },
-        "icon": "Evapotranspiration_Aerodynamic_soil.png",
+        "icon": "Icons/Evapotranspiration_Aerodynamic_soil.png",
         "rate": {
             "type": "expression"
         },
@@ -348,7 +350,7 @@
             "type": "value"
         },
         "description": null,
-        "icon": "Evapotranspiration_energy_balance.png",
+        "icon": "Icons/Evapotranspiration_energy_balance.png",
         "l_v": {
             "type": "expression"
         },
@@ -370,7 +372,7 @@
             "type": "value"
         },
         "description": null,
-        "icon": "Evapotranspiration_energy_balance_soil.png",
+        "icon": "Icons/Evapotranspiration_energy_balance_soil.png",
         "l_v": {
             "type": "expression"
         },
@@ -410,7 +412,7 @@
         "gamma": {
             "type": "value"
         },
-        "icon": "Evapotranspiration_Priestly_Taylor.png",
+        "icon": "Icons/Evapotranspiration_Priestly_Taylor.png",
         "l_v": {
             "type": "expression"
         },
@@ -465,7 +467,7 @@
         "gamma": {
             "type": "value"
         },
-        "icon": "Evapotranspiration_Priestly_Taylor_soil.png",
+        "icon": "Icons/Evapotranspiration_Priestly_Taylor_soil.png",
         "l_v": {
             "type": "expression"
         },
@@ -499,7 +501,7 @@
             "type": "value"
         },
         "description": null,
-        "icon": "Evapotranspiration_timeseries.png",
+        "icon": "Icons/Evapotranspiration_timeseries.png",
         "rate": {
             "type": "expression"
         },
@@ -515,7 +517,7 @@
             "type": "value"
         },
         "description": null,
-        "icon": "Evapotranspiration_timeseries_soil.png",
+        "icon": "Icons/Evapotranspiration_timeseries_soil.png",
         "rate": {
             "type": "expression"
         },
@@ -534,7 +536,7 @@
         "flow": {
             "type": "value"
         },
-        "icon": "fixed_flow.png",
+        "icon": "Icons/fixed_flow.png",
         "length": {
             "type": "expression"
         },
@@ -554,7 +556,7 @@
         "hydraulic_radious": {
             "type": "expression"
         },
-        "icon": "fixed2channel.png",
+        "icon": "Icons/fixed2channel.png",
         "length": {
             "type": "expression"
         },
@@ -586,7 +588,7 @@
         "flow_coefficient": {
             "type": "value"
         },
-        "icon": "control_valve.png",
+        "icon": "Icons/control_valve.png",
         "kernel_delay_parameter": {
             "type": "value"
         },
@@ -621,7 +623,7 @@
         "flow_coefficient": {
             "type": "value"
         },
-        "icon": "control_valve.png",
+        "icon": "Icons/control_valve.png",
         "kernel_delay_parameter": {
             "type": "value"
         },
@@ -641,7 +643,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "arrow_to_user.png",
+        "icon": "Icons/arrow_to_user.png",
         "type": "link"
     },
     "Groundwater cell": {
@@ -667,7 +669,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "Groundwater.png",
+        "icon": "Icons/Groundwater.png",
         "moisture_content": {
             "type": "expression"
         },
@@ -690,7 +692,7 @@
         "external_source": {
             "type": "source"
         },
-        "icon": "immobile_constituent_reactor.png",
+        "icon": "Icons/immobile_constituent_reactor.png",
         "mass": {
             "type": "balance"
         },
@@ -755,7 +757,7 @@
         "expression": {
             "type": "expression"
         },
-        "icon": "objective.png",
+        "icon": "Icons/objective.png",
         "method": {
             "type": "string"
         },
@@ -777,7 +779,7 @@
         "expression": {
             "type": "expression"
         },
-        "icon": "observation.png",
+        "icon": "Icons/observation.png",
         "object": {
             "type": "string"
         },
@@ -790,7 +792,7 @@
         "high": {
             "type": "value"
         },
-        "icon": "parameter.png",
+        "icon": "Icons/parameter.png",
         "low": {
             "type": "value"
         },
@@ -812,7 +814,7 @@
         "external_source": {
             "type": "source"
         },
-        "icon": "Particle.png",
+        "icon": "Icons/Particle.png",
         "mass": {
             "type": "balance"
         },
@@ -855,7 +857,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "stormwaterpond.png",
+        "icon": "Icons/stormwaterpond.png",
         "type": "node"
     },
     "Precipitation": {
@@ -863,7 +865,7 @@
             "type": "expression"
         },
         "description": "Precipitation",
-        "icon": "cloud.png",
+        "icon": "Icons/cloud.png",
         "timeseries": {
             "type": "timeseries_prec"
         }
@@ -873,7 +875,7 @@
             "type": "expression"
         },
         "description": "Precipitation with forcast",
-        "icon": "cloud.png",
+        "icon": "Icons/cloud.png",
         "kernel_smoothed_forcast": {
             "type": "expression"
         },
@@ -883,7 +885,7 @@
     },
     "Reaction": {
         "description": "Chemical reaction",
-        "icon": "reaction.png",
+        "icon": "Icons/reaction.png",
         "normalizing_quantity": {
             "type": ""
         },
@@ -899,7 +901,7 @@
             "type": "value"
         },
         "description": "Reaction Parameter",
-        "icon": "reactionparameter.png",
+        "icon": "Icons/reactionparameter.png",
         "reference_temperature": {
             "type": "value"
         },
@@ -915,7 +917,7 @@
             "type": "balance"
         },
         "description": "Reactor",
-        "icon": "reactor.png",
+        "icon": "Icons/reactor.png",
         "inflow_timeseries": {
             "type": "timeseries"
         },
@@ -926,7 +928,7 @@
             "type": "balance"
         },
         "description": "Reservoir",
-        "icon": "Reservoir_Rating_Curve.png",
+        "icon": "Icons/Reservoir_Rating_Curve.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -949,7 +951,7 @@
         "flow": {
             "type": "rule"
         },
-        "icon": "reservoir_link.png",
+        "icon": "Icons/reservoir_link.png",
         "type": "link"
     },
     "River Segment": {
@@ -984,7 +986,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "River.png",
+        "icon": "Icons/River.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -1019,7 +1021,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "River2BedLink.png",
+        "icon": "Icons/River2BedLink.png",
         "length": {
             "type": "expression"
         },
@@ -1036,7 +1038,7 @@
         "flow": {
             "type": "value"
         },
-        "icon": "sedimentation_tank_element.png",
+        "icon": "Icons/sedimentation_tank_element.png",
         "length": {
             "type": "expression"
         },
@@ -1050,7 +1052,7 @@
             "type": "value"
         },
         "description": "Settling element",
-        "icon": "sedimentation_tank_element.png",
+        "icon": "Icons/sedimentation_tank_element.png",
         "type": "node"
     },
     "Settling element interface": {
@@ -1064,7 +1066,7 @@
         "flow": {
             "type": "value"
         },
-        "icon": "Settling_element_link.png",
+        "icon": "Icons/Settling_element_link.png",
         "type": "link"
     },
     "Sewer2Sewer_link": {
@@ -1081,7 +1083,7 @@
         "hydraulic_radious": {
             "type": "expression"
         },
-        "icon": "sewer2sewer_link.png",
+        "icon": "Icons/sewer2sewer_link.png",
         "length": {
             "type": "expression"
         },
@@ -1113,7 +1115,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Sewer_pipe.png",
+        "icon": "Icons/Sewer_pipe.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -1169,7 +1171,7 @@
         "hydraulic_radius": {
             "type": "expression"
         },
-        "icon": "Sewer_pipe_link.png",
+        "icon": "Icons/Sewer_pipe_link.png",
         "length": {
             "type": "value"
         },
@@ -1207,7 +1209,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Sewer_pipe_section.png",
+        "icon": "Icons/Sewer_pipe_section.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -1263,7 +1265,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "sheet_flow.png",
+        "icon": "Icons/sheet_flow.png",
         "loss": {
             "type": "expression"
         },
@@ -1280,7 +1282,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "sheet_flow_link.png",
+        "icon": "Icons/sheet_flow_link.png",
         "type": "link"
     },
     "Soil": {
@@ -1318,7 +1320,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Soil.png",
+        "icon": "Icons/Soil.png",
         "m": {
             "type": "expression"
         },
@@ -1356,7 +1358,7 @@
         "external_source": {
             "type": "source"
         },
-        "icon": "sorbed_constituent.png",
+        "icon": "Icons/sorbed_constituent.png",
         "mass": {
             "type": "balance"
         },
@@ -1372,7 +1374,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "Splillway.png",
+        "icon": "Icons/Splillway.png",
         "reservoir_coeff": {
             "type": "value"
         },
@@ -1392,7 +1394,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "surface2well.png",
+        "icon": "Icons/surface2well.png",
         "length": {
             "type": "value"
         },
@@ -1418,7 +1420,7 @@
         "external_source": {
             "type": "source"
         },
-        "icon": "suspended_sediments.png",
+        "icon": "Icons/suspended_sediments.png",
         "mass": {
             "type": "balance"
         },
@@ -1461,7 +1463,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "watertank.png",
+        "icon": "Icons/watertank.png",
         "type": "node"
     },
     "Trapezoidal Channel Segment": {
@@ -1496,7 +1498,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Trapezoidal_Channel.png",
+        "icon": "Icons/Trapezoidal_Channel.png",
         "inflow": {
             "type": "timeseries"
         },
@@ -1534,7 +1536,7 @@
         "hydraulic_radious": {
             "type": "expression"
         },
-        "icon": "River2River.png",
+        "icon": "Icons/River2River.png",
         "length": {
             "type": "expression"
         },
@@ -1557,7 +1559,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "unconfined_GW2unconfined_GW.png",
+        "icon": "Icons/unconfined_GW2unconfined_GW.png",
         "length": {
             "type": "value"
         },
@@ -1589,7 +1591,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "unconfined_aquifer.png",
+        "icon": "Icons/unconfined_aquifer.png",
         "piezometric_head": {
             "type": "expression"
         },
@@ -1612,7 +1614,7 @@
             "type": "balance"
         },
         "description": "Water user",
-        "icon": "farm.png",
+        "icon": "Icons/farm.png",
         "type": "node"
     },
     "User_flow": {
@@ -1620,7 +1622,7 @@
         "flow": {
             "type": "timeseries"
         },
-        "icon": "farm_link.png",
+        "icon": "Icons/farm_link.png",
         "type": "link"
     },
     "Water Storage": {
@@ -1634,7 +1636,7 @@
         "elevation": {
             "type": "value"
         },
-        "icon": "Storage.png",
+        "icon": "Icons/Storage.png",
         "type": "node"
     },
     "Water Transfer": {
@@ -1645,7 +1647,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "Water_Transfer.png",
+        "icon": "Icons/Water_Transfer.png",
         "type": "link"
     },
     "Well": {
@@ -1668,7 +1670,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Well.png",
+        "icon": "Icons/Well.png",
         "type": "node"
     },
     "Well2soil horizontal link": {
@@ -1682,7 +1684,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "well-to-soil-H-link.png",
+        "icon": "Icons/well-to-soil-H-link.png",
         "interface_area": {
             "type": "expression"
         },
@@ -1705,7 +1707,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "well-to-soil-V-link.png",
+        "icon": "Icons/well-to-soil-V-link.png",
         "length": {
             "type": "expression"
         },
@@ -1731,7 +1733,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "Well_aggregate.png",
+        "icon": "Icons/Well_aggregate.png",
         "porosity": {
             "type": "value"
         },
@@ -1751,7 +1753,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "aggregate2soil.png",
+        "icon": "Icons/aggregate2soil.png",
         "length": {
             "type": "expression"
         },
@@ -1765,7 +1767,7 @@
             "type": "value"
         },
         "description": "Agricultural User",
-        "icon": "agriculture.png",
+        "icon": "Icons/agriculture.png",
         "net_use_rate": {
             "type": "expression"
         },
@@ -1779,7 +1781,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "unconfined_aquifer2well.png",
+        "icon": "Icons/unconfined_aquifer2well.png",
         "type": "link"
     },
     "aquifer2well_link_pump": {
@@ -1787,7 +1789,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "unconfined_aquifer2well.png",
+        "icon": "Icons/unconfined_aquifer2well.png",
         "type": "link"
     },
     "atmospheric exchange": {
@@ -1795,7 +1797,7 @@
             "type": "expression"
         },
         "description": "Atmospheric Exchange",
-        "icon": "Chemical_Source_exchange.png",
+        "icon": "Icons/Chemical_Source_exchange.png",
         "rate_coefficient": {
             "type": "value"
         },
@@ -1817,7 +1819,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "bed_sediment_2_fixed_head.png",
+        "icon": "Icons/bed_sediment_2_fixed_head.png",
         "length": {
             "type": "value"
         },
@@ -1852,7 +1854,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "catchment.png",
+        "icon": "Icons/catchment.png",
         "loss": {
             "type": "expression"
         },
@@ -1875,7 +1877,7 @@
         "hydraulic_radious": {
             "type": "expression"
         },
-        "icon": "channel2fixed.png",
+        "icon": "Icons/channel2fixed.png",
         "length": {
             "type": "expression"
         },
@@ -1886,7 +1888,7 @@
     },
     "chemical_source_timeseries": {
         "description": "Chemical source time series",
-        "icon": "Chemical_Source_timeseries.png",
+        "icon": "Icons/Chemical_Source_timeseries.png",
         "timeseries": {
             "type": "timeseries"
         }
@@ -1899,7 +1901,7 @@
             "type": "value"
         },
         "description": "Commertial User",
-        "icon": "commertial.png",
+        "icon": "Icons/commertial.png",
         "net_use_rate": {
             "type": "expression"
         },
@@ -1913,7 +1915,7 @@
             "type": "expression"
         },
         "description": "Chemical source - constant",
-        "icon": "Chemical_source_constant.png",
+        "icon": "Icons/Chemical_source_constant.png",
         "rate_per_volume": {
             "type": "value"
         },
@@ -1935,7 +1937,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "desalination_plant.png",
+        "icon": "Icons/desalination_plant.png",
         "maximum_production_rate": {
             "type": "timeseries"
         },
@@ -1970,7 +1972,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "dcatchment-catchment-link.png",
+        "icon": "Icons/dcatchment-catchment-link.png",
         "type": "link"
     },
     "distributed_catchment_to_fixed_head_link": {
@@ -1990,7 +1992,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "dcatchment-fixedhead-link.png",
+        "icon": "Icons/dcatchment-fixedhead-link.png",
         "type": "link"
     },
     "distributed_catchment_to_stream_link": {
@@ -2010,7 +2012,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "dcatchment-stream-link.png",
+        "icon": "Icons/dcatchment-stream-link.png",
         "type": "link"
     },
     "drain_pipe": {
@@ -2027,7 +2029,7 @@
         "head_loss_coefficient": {
             "type": "value"
         },
-        "icon": "drain_pipe.png",
+        "icon": "Icons/drain_pipe.png",
         "pipe_diameter": {
             "type": "value"
         },
@@ -2047,7 +2049,7 @@
         "head": {
             "type": "value"
         },
-        "icon": "fixedhead.png",
+        "icon": "Icons/fixedhead.png",
         "type": "node"
     },
     "fixed_hydraulic_gradient_link": {
@@ -2073,7 +2075,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "fixed_hydro_gradient.png",
+        "icon": "Icons/fixed_hydro_gradient.png",
         "m": {
             "type": "expression"
         },
@@ -2103,7 +2105,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "Groundwater_link.png",
+        "icon": "Icons/Groundwater_link.png",
         "length": {
             "type": "value"
         },
@@ -2117,7 +2119,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "gw_2_fixed_head.png",
+        "icon": "Icons/gw_2_fixed_head.png",
         "length": {
             "type": "value"
         },
@@ -2134,7 +2136,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "gw_2_fixed_head.png",
+        "icon": "Icons/gw_2_fixed_head.png",
         "length": {
             "type": "value"
         },
@@ -2148,7 +2150,7 @@
             "type": "value"
         },
         "description": "Industrial User",
-        "icon": "industrial.png",
+        "icon": "Icons/industrial.png",
         "net_use_rate": {
             "type": "expression"
         },
@@ -2168,7 +2170,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "junction_rigid.png",
+        "icon": "Icons/junction_rigid.png",
         "type": "node"
     },
     "junction_elastic": {
@@ -2185,7 +2187,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "junction.png",
+        "icon": "Icons/junction.png",
         "type": "node"
     },
     "lake2groundwater_link": {
@@ -2199,7 +2201,7 @@
         "hydraulic_conductivity": {
             "type": "expression"
         },
-        "icon": "Surface2GW_link.png",
+        "icon": "Icons/Surface2GW_link.png",
         "length": {
             "type": "value"
         },
@@ -2250,7 +2252,7 @@
         "hz_coeff": {
             "type": "value"
         },
-        "icon": "pipe_1w.png",
+        "icon": "Icons/pipe_1w.png",
         "length": {
             "type": "value"
         },
@@ -2273,7 +2275,7 @@
         "hz_coeff": {
             "type": "value"
         },
-        "icon": "pipe.png",
+        "icon": "Icons/pipe.png",
         "length": {
             "type": "value"
         },
@@ -2287,7 +2289,7 @@
             "type": "value"
         },
         "description": "Public User",
-        "icon": "public.png",
+        "icon": "Icons/public.png",
         "net_use_rate": {
             "type": "expression"
         },
@@ -2313,7 +2315,7 @@
         "head_0": {
             "type": "value"
         },
-        "icon": "pump.png",
+        "icon": "Icons/pump.png",
         "power": {
             "type": "expression"
         },
@@ -2339,7 +2341,7 @@
         "head_0": {
             "type": "value"
         },
-        "icon": "pump_with_time_series_control.png",
+        "icon": "Icons/pump_with_time_series_control.png",
         "power": {
             "type": "expression"
         },
@@ -2353,7 +2355,7 @@
             "type": "value"
         },
         "description": "Residential User",
-        "icon": "residential.png",
+        "icon": "Icons/residential.png",
         "net_use_rate": {
             "type": "expression"
         },
@@ -2379,7 +2381,7 @@
         "hydraulic_radious": {
             "type": "expression"
         },
-        "icon": "sewer2fixedhead_link.png",
+        "icon": "Icons/sewer2fixedhead_link.png",
         "length": {
             "type": "expression"
         },
@@ -2420,7 +2422,7 @@
         "hydraulic_radious_2": {
             "type": "expression"
         },
-        "icon": "sewer2pond_link.png",
+        "icon": "Icons/sewer2pond_link.png",
         "length": {
             "type": "expression"
         },
@@ -2443,7 +2445,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "soil2gw_link.png",
+        "icon": "Icons/soil2gw_link.png",
         "length": {
             "type": "expression"
         },
@@ -2457,7 +2459,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2sewer.png",
+        "icon": "Icons/soil2sewer.png",
         "type": "link"
     },
     "soil_free_outflow": {
@@ -2486,7 +2488,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soilfreeflow.png",
+        "icon": "Icons/soilfreeflow.png",
         "length": {
             "type": "value"
         },
@@ -2515,7 +2517,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2aggregate.png",
+        "icon": "Icons/soil2aggregate.png",
         "length": {
             "type": "expression"
         },
@@ -2544,7 +2546,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2fixedhead.png",
+        "icon": "Icons/soil2fixedhead.png",
         "length": {
             "type": "expression"
         },
@@ -2573,7 +2575,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2fixedhead.png",
+        "icon": "Icons/soil2fixedhead.png",
         "length": {
             "type": "value"
         },
@@ -2608,7 +2610,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2fixedhead_KS.png",
+        "icon": "Icons/soil2fixedhead_KS.png",
         "length": {
             "type": "value"
         },
@@ -2643,7 +2645,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2fixedhead_KS.png",
+        "icon": "Icons/soil2fixedhead_KS.png",
         "length": {
             "type": "expression"
         },
@@ -2672,7 +2674,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2soilH.png",
+        "icon": "Icons/soil2soilH.png",
         "length": {
             "type": "value"
         },
@@ -2707,7 +2709,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "soil2soilH_KS.png",
+        "icon": "Icons/soil2soilH_KS.png",
         "length": {
             "type": "value"
         },
@@ -2742,7 +2744,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "Soil2Soil.png",
+        "icon": "Icons/Soil2Soil.png",
         "length": {
             "type": "expression"
         },
@@ -2783,7 +2785,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "Soil2Soil_KS.png",
+        "icon": "Icons/Soil2Soil_KS.png",
         "length": {
             "type": "expression"
         },
@@ -2844,7 +2846,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "Surface2GW_link.png",
+        "icon": "Icons/Surface2GW_link.png",
         "length": {
             "type": "value"
         },
@@ -2861,7 +2863,7 @@
         "hydraulic_conductivity": {
             "type": "value"
         },
-        "icon": "Surface2GW_link.png",
+        "icon": "Icons/Surface2GW_link.png",
         "length": {
             "type": "value"
         },
@@ -2872,7 +2874,7 @@
             "type": "expression"
         },
         "description": "Surface Atmospheric Exchange",
-        "icon": "Surface_Chemical_Source_exchange.png",
+        "icon": "Icons/Surface_Chemical_Source_exchange.png",
         "rate_coefficient": {
             "type": "value"
         },
@@ -2891,7 +2893,7 @@
         "exponent_of_depth": {
             "type": "value"
         },
-        "icon": "surface_release.png",
+        "icon": "Icons/surface_release.png",
         "normalizing_quantity": {
             "type": ""
         },
@@ -2916,7 +2918,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "surface2soil.png",
+        "icon": "Icons/surface2soil.png",
         "length": {
             "type": "expression"
         },
@@ -2930,7 +2932,7 @@
         "head": {
             "type": "timeseries"
         },
-        "icon": "fixedhead_timeseries.png",
+        "icon": "Icons/fixedhead_timeseries.png",
         "type": "node"
     },
     "unconfined_groundwater_to_fixedhead": {
@@ -2944,7 +2946,7 @@
         "hydraulic_gradient": {
             "type": "expression"
         },
-        "icon": "unconfined_GW2fixedhead.png",
+        "icon": "Icons/unconfined_GW2fixedhead.png",
         "length": {
             "type": "value"
         },
@@ -2970,7 +2972,7 @@
         "head_loss": {
             "type": "expression"
         },
-        "icon": "valve.png",
+        "icon": "Icons/valve.png",
         "length": {
             "type": "value"
         },
@@ -2993,7 +2995,7 @@
         "head": {
             "type": "expression"
         },
-        "icon": "water_supply_well.png",
+        "icon": "Icons/water_supply_well.png",
         "pumping_rate": {
             "type": "timeseries"
         },
@@ -3016,7 +3018,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "wide_channel.png",
+        "icon": "Icons/wide_channel.png",
         "length": {
             "type": "value"
         },
@@ -3042,7 +3044,7 @@
         "flow": {
             "type": "expression"
         },
-        "icon": "vnotchweir.png",
+        "icon": "Icons/vnotchweir.png",
         "type": "link"
     }
 }

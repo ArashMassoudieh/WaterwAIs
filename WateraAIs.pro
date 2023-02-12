@@ -25,6 +25,7 @@ HEADERS += \
 	Application/Application.h \
 	Application/Defs.h \
         Application/FileNameProcessor.h \
+        Application/LayersInfo.h \
         Application/TimeSeriesCache.h
 
 HEADERS += \
@@ -85,6 +86,7 @@ HEADERS += \
 SOURCES += \
 	Application/Application.cpp \
         Application/FileNameProcessor.cpp \
+        Application/LayersInfo.cpp \
         Application/TimeSeriesCache.cpp
 
 SOURCES += \
@@ -148,19 +150,28 @@ build_all:!build_pass {
 DATA_DIR = $$PWD/Data
 DEFINES += DATA_DIR=\"$$DATA_DIR\"
 
+# Specyfying to use local "data" files(models, icons, etc)
+# from the project Data folder.
+# Production app should load resources from the Cloud and
+# thus not need this line.
+USE_LOCAL_DATA_FILES = 1
+
+defined(USE_LOCAL_DATA_FILES, var) {
+DEFINES += USE_LOCAL_DATA_FILES
+}
+
 wasm {
     QMAKE_LFLAGS += -sASYNCIFY -Os
 
-    # Direct WASM to load local data files whem starting the app.
-    # This is needed to allow to load their content when app
-    # is running inside the WASM and use resources from the local
-    # data files (JSON, layer icons etc).
-    #
-    # Production app should load resources from the Cloud and
-    # thus not need this
-    USE_LOCAL_DATA_FILES = 1
-
     defined(USE_LOCAL_DATA_FILES, var) {
+        # Direct WASM to load local data files whem starting the app.
+        # This is needed to allow to load their content when app
+        # is running inside the WASM and use resources from the local
+        # data files (JSON, layer icons etc).
+        #
+        # Production app should load resources from the Cloud and
+        # thus not need this
+
         message("WASM will preload data files from $$DATA_DIR.")
         # Making WASM to preload Data folder content
 

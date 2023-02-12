@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'itempropertieswidget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 6.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -29,26 +29,27 @@ public:
     void setupUi(QFrame *ItemPropertiesWidget)
     {
         if (ItemPropertiesWidget->objectName().isEmpty())
-            ItemPropertiesWidget->setObjectName(QString::fromUtf8("ItemPropertiesWidget"));
+            ItemPropertiesWidget->setObjectName("ItemPropertiesWidget");
         ItemPropertiesWidget->resize(278, 401);
         ItemPropertiesWidget->setLineWidth(0);
         verticalLayout = new QVBoxLayout(ItemPropertiesWidget);
         verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         tableView = new QTableView(ItemPropertiesWidget);
-        tableView->setObjectName(QString::fromUtf8("tableView"));
+        tableView->setObjectName("tableView");
         tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableView->setSortingEnabled(true);
         tableView->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
         tableView->horizontalHeader()->setStretchLastSection(true);
         tableView->verticalHeader()->setVisible(false);
-        tableView->verticalHeader()->setDefaultSectionSize(24);
+        tableView->verticalHeader()->setMinimumSectionSize(20);
+        tableView->verticalHeader()->setDefaultSectionSize(20);
 
         verticalLayout->addWidget(tableView);
 
         edtFilter = new QLineEdit(ItemPropertiesWidget);
-        edtFilter->setObjectName(QString::fromUtf8("edtFilter"));
+        edtFilter->setObjectName("edtFilter");
 
         verticalLayout->addWidget(edtFilter);
 

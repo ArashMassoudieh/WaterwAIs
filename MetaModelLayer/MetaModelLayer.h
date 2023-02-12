@@ -10,8 +10,9 @@ namespace WaterwAIs {
 
 class MetaModelLayer: public Layer {
 public:
-    MetaModelLayer(LayerSceneInterface* scene,
-        QStringView component_json_file = {}, QStringView json_file = {});
+    MetaModelLayer(LayerSceneInterface* scene, QStringView name,
+        QStringView component_json_file = {}, QStringView json_file = {},
+        QStringView description = {});
 
     bool zOrderMovable() override;
 private:

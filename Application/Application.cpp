@@ -55,11 +55,14 @@ void Application::setSettings() {
     paths_.server_path = SERVER_PATH;
 
     // Host path - Base Url or local folder
-    auto url = QUrl{HOST_PATH};
-    auto scheme = url.scheme();
-    auto is_url = scheme == "http" || scheme == "https";
+    setHostPath(QStringLiteral(HOST_PATH));
+}
 
-    paths_.host_path = is_url ? HOST_PATH : "file:" HOST_PATH;
+void Application::setHostPath(QStringView path) {    
+    auto is_url = FileNameProcessor::isUrl(path);
+    auto host_path = path.toString();
+
+    paths_.host_path = is_url ? host_path : "file:" + host_path;
 }
 
 } //namespace WaterwAIs

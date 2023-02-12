@@ -29,12 +29,12 @@
 	],
 	"Meta-Model":
 	{
-		"url": "meta_model.json",
+		"url": "MetaModel.json",
 		"description": "Centroids of sub-watersheds"		
 	},
 	"Model":
 	{
-		"url": "Example_input.json",
+		"url": "SligoCreekModel.json",
 		"description": "Model layer"
 	}
 }

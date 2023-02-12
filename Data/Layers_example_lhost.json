@@ -3,26 +3,26 @@
 	[
 		["Watershed Centroids",
 		{
-			"url": "Centroids.geojson",
+			"url": "http://localhost/Data/Centroids.geojson",
 			"description": "Centroids of sub-watersheds",		
 			"color": "red"
 		}],
 		["Sewer lines",
 		{
-			"url": "HickeyRunSewer.geojson",
+			"url": "http://localhost/Data/HickeyRunSewer.geojson",
 			"description": "Sewer flow lines",			
 			"color": "blue",
 			"contours": "true"
 		}],
 		["Pour points",
 		{
-			"url": "PourPoints.geojson",
+			"url": "http://localhost/Data/PourPoints.geojson",
 			"description": "Subwatershed pour points",
 			"color": "green"
 		}],
 		["Subwatersheds",
 		{
-			"url": "SubWaterSheds.geojson",
+			"url": "http://localhost/Data/SubWaterSheds.geojson",
 			"description": "Sub-watersheds areas",			
 			"color": "yellow"
 		}]

@@ -6,8 +6,10 @@
 
 #include <Layer/Layer.h>
 #include <Layer/LayerListModel.h>
+#include <Application/LayersInfo.h>
 
 #include "MainView.h"
+#include <memory>
 
 namespace WaterwAIs {
 
@@ -35,6 +37,8 @@ protected:
 
 private:
     void buildLayers();
+    void onLayersInfoLoaded(bool result);
+
 
     void addFeatureLayers();
     void addMetaModelLayer();
@@ -45,9 +49,13 @@ private:
     MainView* main_view_;
     MapScene* scene_;
 
-    // Feature Layers
+    //Layers
+    std::unique_ptr<LayersInfo> layers_info_;
+
     std::vector<Layer::Ptr> layers_;
-    LayerListModel layers_list_model_;
+
+    LayerListModel   layers_list_model_;
+    MessageListModel msg_list_model_;
 };
 
 } // namespace WaterwAIs

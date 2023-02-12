@@ -21,7 +21,7 @@ namespace WaterwAIs {
 namespace {
     auto constexpr zoom_color = QColor(100, 100, 100);
     auto constexpr zoom_rect_zvalue = 50000;
-    auto constexpr default_zoom_factor = 1.75;
+    auto constexpr default_zoom_factor = 1.25;
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
@@ -65,9 +65,9 @@ void MapView::setFitToView() {
 void MapView::onModeSet() {
     // Clear things from the previous modes.
     zoom_rect_           = nullptr;
-    last_point_          = {};
-    last_scene_rect_     = {};
     pressed_scene_point_ = {};
+
+    setDragMode(mode_ == Mode::Pan ? ScrollHandDrag : NoDrag);
 }
 
 void MapView::clearSelection() {
@@ -82,10 +82,9 @@ void MapView::clearSelection() {
 void MapView::mousePressEvent(QMouseEvent* event) {
     if (event->button() & Qt::LeftButton) {
         is_pressed_ = true;
-        last_point_ = event->pos();
         pressed_scene_point_ = mapToScene(event->pos());
         
-        selectItem(last_point_);
+        selectItem(event->pos());
     } else {
         QGraphicsView::mousePressEvent(event);
         return;
@@ -94,8 +93,10 @@ void MapView::mousePressEvent(QMouseEvent* event) {
     auto map_scene = mapScene();
 
     switch (mode_) {
-    case Mode::Pan:
-        setCursor(Qt::ClosedHandCursor);
+    case Mode::Pan:        
+        map_scene->enterDragMode(true);
+        QGraphicsView::mousePressEvent(event);
+        map_scene->enterDragMode(false);
         break;
 
     case Mode::Zoom: {
@@ -127,7 +128,6 @@ void MapView::mouseReleaseEvent(QMouseEvent* event) {
 
     is_pressed_ = false;
     pressed_scene_point_ = {};
-    last_point_ = {};    
 
     setCursor(Qt::ArrowCursor);
     auto map_scene = mapScene();
@@ -168,25 +168,6 @@ void MapView::mouseMoveEvent(QMouseEvent* event) {
         return;
     
     switch (mode_) {
-    case Mode::Pan: {
-        if(last_scene_rect_.isNull())
-            last_scene_rect_ = scene()->sceneRect();
-
-        auto ps = mapToScene(last_point_);
-        auto ts = mapToScene(event->pos());
-
-        auto dx = ts.x() - ps.x();
-        auto dy = ts.y() - ps.y();
-        auto rc = last_scene_rect_;
-
-        rc.translate(-dx, -dy);
-        last_scene_rect_ = rc;
-
-        setSceneRect(rc);
-        repaint();
-        break;
-    }
-
     case Mode::Zoom: {
         auto ps = pressed_scene_point_;
         auto ts = mapToScene(event->pos());
@@ -202,9 +183,7 @@ void MapView::mouseMoveEvent(QMouseEvent* event) {
 
     default:
         break;
-    }
-
-    last_point_ = event->pos();
+    }   
 }
 
 void MapView::selectItem(const QPoint& pos) {

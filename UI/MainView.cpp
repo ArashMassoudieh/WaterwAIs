@@ -31,18 +31,7 @@ namespace WaterwAIs {
 MainView::MainView(QWidget* parent):
     QWidget(parent),
     ui(std::make_unique<Ui::MainView>()) {
-    ui->setupUi(this);
-
-    // Layer button icons
-    auto up_icon = QApplication::style()->standardIcon(QStyle::SP_ArrowUp);
-    ui->btnMoveUp->setIcon(up_icon);
-
-    auto down_icon = QApplication::style()->standardIcon(QStyle::SP_ArrowDown);
-    ui->btnMoveDown->setIcon(down_icon);
-
-    auto open_icon = QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
-    ui->btnOpen->setIcon(open_icon);
-
+    ui->setupUi(this);    
 
     // Creating Map view overlay controls
     createMapViewControls();
@@ -57,7 +46,7 @@ MainView::MainView(QWidget* parent):
     ui->mapView->setMainView(this);
 
     // Setting up the layers list.
-    setupLayerList();
+    //setupLayerList();
 
     // Setting up the item property panel
     setupPropertyPanel();
@@ -67,9 +56,40 @@ MainView::MainView(QWidget* parent):
 
     // Setting panel widget to be twice less than the map view.
     ui->panel_splitter->setSizes(QList{200, 100});
+
+    QMetaObject::connectSlotsByName(this);
 }
 
 MainView::~MainView() {}
+
+void MainView::createLayerListControls() {
+    // Tool buttons
+    auto button_layout = new QHBoxLayout{};
+    button_layout->setSpacing(1);
+    
+    // Move Up
+    btnMoveUp_ = new QToolButton{};
+    btnMoveUp_->setObjectName("btnMoveUp");
+
+    auto icon = QApplication::style()->standardIcon(QStyle::SP_ArrowUp);
+    btnMoveUp_->setIcon(icon);
+    btnMoveUp_->setToolTip("Moves layer up");
+    button_layout->addWidget(btnMoveUp_);
+
+    // Move Down
+    btnMoveDown_ = new QToolButton{};
+    btnMoveDown_->setObjectName("btnMoveDown");
+
+    icon = QApplication::style()->standardIcon(QStyle::SP_ArrowDown);
+    btnMoveDown_->setIcon(icon);
+    btnMoveDown_->setToolTip("Moves layer down");
+    button_layout->addWidget(btnMoveDown_);
+
+    ui->gridLayout_layers->addLayout(button_layout, 0, 0,
+        Qt::AlignRight | Qt::AlignTop);
+
+    QMetaObject::connectSlotsByName(this);
+}
 
 
 void MainView::createMapViewControls() {
@@ -129,9 +149,7 @@ void MainView::createMapViewControls() {
     status_layout_->addWidget(status_bar_);
 
     ui->gridLayout->addLayout(status_layout_, 0, 0,
-            Qt::AlignLeft | Qt::AlignBottom);
-    
-    QMetaObject::connectSlotsByName(this);
+            Qt::AlignLeft | Qt::AlignBottom);    
 }
 
 
@@ -174,6 +192,9 @@ void MainView::setupPropertyPanel() {
 }
 
 void MainView::setupLayerList() {
+    // Creating Layer list controls
+    createLayerListControls();
+
     ui->lstLayers->setItemDelegate(new LayerItemDelegate());
     submenu_.addAction("Properties");
 
@@ -252,8 +273,14 @@ void MainView::scheduleTasks(std::chrono::milliseconds interval) {
     });
 }
 
+void MainView::setMessageListModel(MessageListModel* msg_model) {
+    ui->lstLayers->setModel(msg_model);
+}
 
-void MainView::setLayerListModel(QAbstractListModel* names) {
+
+void MainView::setLayerListModel(LayerListModel* names) {    
+    setupLayerList();
+
     ui->lstLayers->setModel(names);
 
     connect(ui->lstLayers->selectionModel(), &QItemSelectionModel::selectionChanged,
@@ -275,8 +302,14 @@ void MainView::setLayerListModel(QAbstractListModel* names) {
                 is_down = false;            
         }
 
-        ui->btnMoveUp  ->setEnabled(is_up);
-        ui->btnMoveDown->setEnabled(is_down);
+        btnMoveUp_  ->setEnabled(is_up);
+        btnMoveDown_->setEnabled(is_down);
+    });
+
+    connect(names, &LayerListModel::layerMoved, this, [this](int to) {
+        // Updating selected layer after moving.
+        auto index = ui->lstLayers->model()->index(to, 0);
+        ui->lstLayers->setCurrentIndex(index);        
     });
 }
 
@@ -392,16 +425,12 @@ void MainView::on_btnMoveDown_clicked() {
     if (selected.size() == 0)
         return;
 
-    auto row = static_cast<size_t>(selected[0].row());
+    auto row = selected[0].row();
     auto layers = static_cast<LayerListModel*>(ui->lstLayers->model());
 
-    if (row < layers->size() - 1) {
-        if (layers->moveLayer(row + 1, row)) {
-            auto index = ui->lstLayers->model()->index(row +1, 0);
-            ui->lstLayers->setCurrentIndex(index);
-        } else {
-            MessageBox::information("Layers", "This layer cannot be moved up");
-        }
+    if (row < static_cast<int>(layers->size()) - 1) {        
+        if (!layers->moveLayer(row, row + 1))
+            MessageBox::information("Layers", "This layer cannot be moved down");
     }
 }
 

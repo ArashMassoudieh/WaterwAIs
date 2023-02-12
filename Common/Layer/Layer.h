@@ -31,8 +31,12 @@ public:
     using LayerModelPtr = std::shared_ptr<LayerModel>;
     using GraphicsItems = std::vector<QGraphicsItem*>;
 
-    Layer(LayerSceneInterface* scene = nullptr, LayerModelPtr model = {},
-        const QColor& color = Qt::black, Options options = Option::None);
+    Layer(LayerSceneInterface* scene = nullptr, 
+        LayerModelPtr model   = {},
+        QStringView   name    = {},
+        const QColor& color   = Qt::black,        
+        Options       options = Option::None,
+        QStringView   description = {});
 
     ~Layer() override;
 
@@ -46,7 +50,12 @@ public:
     LayerModelPtr model() { return model_; }   
 
     // Name
-    QString name() const { return model_ ? model_->name() : ""; }
+    QString name() const;
+
+    // Description
+    QString description() const { return description_; }
+    void setDescription(QStringView description)
+        { description_ = description.toString(); }
 
     // Icon
     const QPixmap& icon() const 
@@ -81,6 +90,9 @@ public:
     int zValue() const { return z_value_; }
     bool setZValue(int z);
 
+    // Display text
+    QString displayText() const;
+
     // Allows to move layer in z-order
     virtual bool zOrderMovable() { return true; }
 
@@ -93,10 +105,10 @@ public:
     }    
 
 signals:
-    void layerReady();
+    void layerReady(bool);
 
 protected slots:
-    void onModelLoaded();
+    void onModelLoaded(bool result);
 
 protected:
     // LayerGraphicsItems
@@ -122,10 +134,12 @@ protected:
     qreal opacity_ = 1;
     int   z_value_ = 0;
 
-    QColor color_;
-    QRectF bound_rect_;
+    QString name_;
+    QColor  color_;
+    QRectF  bound_rect_;
 
     Options options_;
+    QString description_;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Layer::Options)

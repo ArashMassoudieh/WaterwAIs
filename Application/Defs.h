@@ -34,10 +34,31 @@
 #endif
 
 // Example of loading models and icons from some host server.
-//#define HOST_PATH "http://localhost/Data"
+#define SERVER_PATH "http://localhost/Data"
+//#define SERVER_PATH "http://20.244.11.239/api"
 
-#define SERVER_PATH "http://20.244.11.239/api"
+// Force to use server path - if needed for testing etc.
+//#undef USE_LOCAL_DATA_FILES
 
+#ifndef USE_LOCAL_DATA_FILES
+#undef HOST_PATH
+#define HOST_PATH SERVER_PATH
+#endif // !USE_LOCAL_DATA_FILES
+
+
+/////////////////////////////////////////////////////////
+
+
+// Name of the file containing layers information
+// #define LAYERS_FILE u"Layers_example.json"
+// #define LAYERS_FILE u"Layers_example_lhost.json"
+
+// #define LAYERS_FILE u"Layers_sligo.json"
+
+#define LAYERS_FILE u"Layers.json"
+
+// Specifies that application should load only model layer
+//#define IGNORE_FEATURE_LAYERS
 
 /////////////////////////////////////////////////////////
 #endif // DEFS_H_A4D4292FA26545AF

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'panel.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.2
+** Created by: Qt User Interface Compiler version 6.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -34,19 +34,19 @@ public:
     void setupUi(QFrame *Panel)
     {
         if (Panel->objectName().isEmpty())
-            Panel->setObjectName(QString::fromUtf8("Panel"));
+            Panel->setObjectName("Panel");
         Panel->resize(430, 300);
         Panel->setFrameShape(QFrame::StyledPanel);
         verticalLayout = new QVBoxLayout(Panel);
         verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(0);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(-1, -1, -1, 2);
         labelIcon = new QLabel(Panel);
-        labelIcon->setObjectName(QString::fromUtf8("labelIcon"));
+        labelIcon->setObjectName("labelIcon");
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -59,7 +59,7 @@ public:
         horizontalLayout->addWidget(labelIcon);
 
         labelTitle = new QLabel(Panel);
-        labelTitle->setObjectName(QString::fromUtf8("labelTitle"));
+        labelTitle->setObjectName("labelTitle");
         labelTitle->setAutoFillBackground(true);
         labelTitle->setFrameShape(QFrame::NoFrame);
         labelTitle->setFrameShadow(QFrame::Plain);
@@ -67,17 +67,17 @@ public:
         horizontalLayout->addWidget(labelTitle);
 
         btnExpand = new QToolButton(Panel);
-        btnExpand->setObjectName(QString::fromUtf8("btnExpand"));
+        btnExpand->setObjectName("btnExpand");
 
         horizontalLayout->addWidget(btnExpand);
 
         btnCollapse = new QToolButton(Panel);
-        btnCollapse->setObjectName(QString::fromUtf8("btnCollapse"));
+        btnCollapse->setObjectName("btnCollapse");
 
         horizontalLayout->addWidget(btnCollapse);
 
         btnClose = new QToolButton(Panel);
-        btnClose->setObjectName(QString::fromUtf8("btnClose"));
+        btnClose->setObjectName("btnClose");
 
         horizontalLayout->addWidget(btnClose);
 
@@ -85,7 +85,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         placeholder = new QFrame(Panel);
-        placeholder->setObjectName(QString::fromUtf8("placeholder"));
+        placeholder->setObjectName("placeholder");
         placeholder->setFrameShape(QFrame::StyledPanel);
         placeholder->setFrameShadow(QFrame::Raised);
 

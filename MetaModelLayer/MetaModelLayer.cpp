@@ -15,7 +15,11 @@ namespace {
 // MetaModelLayer
 
 MetaModelLayer::MetaModelLayer(LayerSceneInterface* scene,
-    QStringView component_json_file, QStringView json_file) : Layer{scene} {
+    QStringView name, QStringView component_json_file,
+    QStringView json_file, QStringView description)
+    : Layer{scene, {}, name} {
+
+    setDescription(description);
 
     // We use a fixed z-value for the Meta model layer.
     z_value_ = meta_layer_z_value;

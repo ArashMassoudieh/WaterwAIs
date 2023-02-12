@@ -2,12 +2,17 @@
 #include "FileNameProcessor.h"
 #include "Application.h"
 #include <QDebug>
+#include <QUrl>
 
 namespace WaterwAIs {
 
 class FileNameProcessorImpl: public FileNameProcessor {
 public:
     QString path(QStringView file_name, Hint hint = Hint::Host) override {
+        // If file name is a full URL then we should use it "AS IS".
+        if (isUrl(file_name))
+            return file_name.toString();
+
         auto& paths = Application::paths();
 
         auto file_path = hint == Hint::Host ? paths.host_path
@@ -26,6 +31,13 @@ public:
         return file_path;
     }
 };
+
+bool FileNameProcessor::isUrl(QStringView file_name) {
+    auto url = QUrl{file_name.toString()};
+    auto scheme = url.scheme();
+    return scheme == "http" || scheme == "https";
+}
+
 
 FileNameProcessor& FileNameProcessor::instance() {
     static auto fn_processor = FileNameProcessorImpl{};

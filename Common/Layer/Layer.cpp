@@ -8,8 +8,10 @@ namespace WaterwAIs {
 // Layer
 
 Layer::Layer(LayerSceneInterface* scene, LayerModelPtr model,
-    const QColor& color, Options options)
-    : scene_{scene}, model_{model}, color_{color}, options_{options} {
+    QStringView name, const QColor& color, Options options,
+    QStringView description)
+    : scene_{scene}, model_{model}, name_{name.toString()}, color_{color}
+    , options_{options}, description_{description.toString()} {
     
     gsettings_.pen.setStyle(Qt::SolidLine);
 }
@@ -23,28 +25,31 @@ void Layer::clear() {
     bound_rect_ = {};
 }
 
+QString Layer::name() const {
+    auto name = model_ ? model_->name() : QString{};
+    return name.isEmpty() ? name_ : name;
+}
+
 void Layer::getFromJson(QStringView json_url) {
     if (model_) {
         connect(model_.get(), &LayerModel::modelLoaded, this,
-            [this]() { onModelLoaded(); });
+            [this](auto result) { onModelLoaded(result); });
 
         model_->getFromJson(json_url);
     }    
 }
 
-void Layer::onModelLoaded() {
-    if (!model_) {
-        qDebug() << "Model loaded without model object!";
-        Q_ASSERT(false);
-        return;
+void Layer::onModelLoaded(bool result) {
+    if (result) {
+        clear();
+
+        // Adding graphic items from the model.
+        addItemsFromModel();
+    } else {
+        qDebug() << "Model loading failed";
     }
-
-    clear();
-
-    // Adding graphic items from the model.
-    addItemsFromModel();
     
-    emit layerReady();
+    emit layerReady(result);
 }
 
 void Layer::addItemsFromModel() {
@@ -149,5 +154,17 @@ void Layer::settingsChanged() {
     if (scene_)
         scene_->onLayerChanged(bound_rect_);
 }
+
+QString Layer::displayText() const {    
+    auto text = name();
+
+    if (model_->downloading())
+        text += " - downloading...";
+    else if (model_->downloadFailed())
+        text += " - [failed]";
+
+    return text;
+}
+
 
 } // namespace WaterwAIs

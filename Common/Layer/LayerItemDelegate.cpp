@@ -6,6 +6,14 @@
 
 namespace WaterwAIs {
 
+namespace {
+
+auto constexpr icon_offset_x = 0;//10;
+auto constexpr text_offset_x = 10;
+
+} // anonymous
+
+
 //////////////////////////////////////////////////////////////////////////
 // LayerItemDelegate
 
@@ -19,21 +27,18 @@ void LayerItemDelegate::paint(QPainter* painter,
     auto opt = QStyleOptionViewItem{option};
     initStyleOption(&opt, index);
 
-    auto d = index.data();
-    auto layer = qvariant_cast<Layer*>(d);
+    auto layer = qvariant_cast<Layer*>(index.data());
 
     painter->save();
     if (option.state & QStyle::State_Selected)
         painter->fillRect(option.rect, option.palette.highlight());
 
     if (!opt.decorationSize.isEmpty()) {
-        auto constexpr icon_offset_x = 10;
+        auto icon_data = index.data(Qt::DecorationRole).value<QPixmap>();
 
         painter->drawImage(QRect{opt.rect.topLeft() + QPoint(icon_offset_x, 0),
-            opt.decorationSize}, layer->icon().toImage());
-    }
-
-    auto constexpr text_offset_x = 20;
+            opt.decorationSize}, icon_data.toImage());
+    }    
 
     auto rc = opt.rect;
     rc.adjust(opt.decorationSize.width() + text_offset_x, 0, 0, 0);
@@ -43,8 +48,9 @@ void LayerItemDelegate::paint(QPainter* painter,
     } else {
         painter->setPen(QPen(Qt::black));
     }
-    painter->drawText(rc, Qt::AlignLeft | Qt::AlignVCenter, layer->name());
+    painter->drawText(rc, Qt::AlignLeft | Qt::AlignVCenter, layer->displayText());
     painter->restore();    
 }
+
 
 } // namespace WaterwAIs

@@ -31,6 +31,8 @@ using namespace std::chrono_literals;
 
 class MapView;
 class ChartInfo;
+class LayerListModel;
+class MessageListModel;
 
 //////////////////////////////////////////////////////////////////////////
 // MainView
@@ -45,7 +47,10 @@ public:
 
     MapView* mapView() { return map_view_; }
 
-    void setLayerListModel(QAbstractListModel* names = nullptr);
+    void setMessageListModel(MessageListModel* msg_model = nullptr);
+    void setLayerListModel(LayerListModel* names = nullptr);
+
+
     void setTableModel(MetaItemPropertyModel* propmodel = nullptr);
 
     void setStatusText(QStringView text);
@@ -70,7 +75,9 @@ protected slots:
 private:
     using State = Panel::State;
 
+    void createLayerListControls();
     void createMapViewControls();
+
     void onBeforeAppDestroy();
 
     void zoomMapView(bool in);
@@ -100,6 +107,9 @@ private:
     QString task_id_;
     QTimer timer_;    
      
+    QToolButton* btnMoveUp_       = nullptr;
+    QToolButton* btnMoveDown_     = nullptr;
+
     QToolButton* btn_pan_         = nullptr;
     QToolButton* btn_zoom_        = nullptr;
     QToolButton* btn_zoom_in_     = nullptr;

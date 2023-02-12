@@ -34,8 +34,12 @@ private:
 
 class FeatureLayer: public Layer {
 public:
-    FeatureLayer(LayerSceneInterface* scene, const QColor& color = Qt::black,
-        QStringView json_file = {}, Options options = Option::None);
+    FeatureLayer(LayerSceneInterface* scene, 
+        QStringView   name        = {},
+        const QColor& color       = Qt::black,
+        QStringView   json_file   = {},
+        Options       options     = Option::None,
+        QStringView   description = {});
 
     FeatureType getFeatureType() { 
         auto model = to_model<FeatureLayerModel>();

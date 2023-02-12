@@ -147,7 +147,7 @@ void ItemPropertiesWidget::setTableModel(MetaItemPropertyModel* propmodel) {
         auto prop_index = prop_proxy_model_->data(item, Qt::UserRole).toInt();
         auto item_prop = prop_model_->getProperty(prop_index);
 
-        if (item_prop.type == Type::TimeSeries) {
+        if (item_prop.validTimeSeries()) {
             auto text_btn_widget = new TextButtonWidget{prop_index};
             text_btn_widget->setIcon(u":/Resources/chart.png");
 
@@ -172,7 +172,7 @@ QSize ItemPropertiesWidget::minimumSizeHint() const {
 void ItemPropertiesWidget::onButtonWidgetClicked(int prop_index) {
     auto&& prop = prop_model_->getProperty(prop_index);
 
-    if (prop.type == Type::TimeSeries)
+    if (prop.validTimeSeries())
         emit showTimeSeries(prop_model_->itemName(), prop.name, prop.value);   
 }
 

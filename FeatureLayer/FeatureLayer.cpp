@@ -67,9 +67,10 @@ void FeatureLayerModel::getFromJsonDocument(const QJsonDocument& json_doc) {
 //////////////////////////////////////////////////////////////////////////
 // FeatureLayer
 
-FeatureLayer::FeatureLayer(LayerSceneInterface* scene, const QColor& color,
-    QStringView json_file, Options options)
-    : Layer{scene, nullptr, color, options} {
+FeatureLayer::FeatureLayer(LayerSceneInterface* scene, QStringView name
+    , const QColor& color, QStringView json_file, Options options,
+    QStringView description)
+    : Layer{scene, nullptr, name, color, options, description} {
     if (!json_file.isEmpty()) {
         // We have a JSON file to build the feature model for the layer.
         model_ = std::make_shared<FeatureLayerModel>();

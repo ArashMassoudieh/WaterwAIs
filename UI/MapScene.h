@@ -25,8 +25,15 @@ public:
 
     QRectF boundingRect() const { return rect_; }
 
+    // Called when the map view enters or leaves the panning drag mode.
+    void enterDragMode(bool drag) { drag_mode_ = drag; }
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+
 private:
     QRectF rect_;
+    bool   drag_mode_;
 };
 
 } // namespace WaterwAIs

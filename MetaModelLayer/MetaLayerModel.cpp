@@ -3,10 +3,7 @@
 #include "MetaLayerModelItem.h"
 
 #include <Application/FileNameProcessor.h>
-
 #include <QJsonObject>
-#include <QNetworkRequest>
-#include <QNetworkReply>
 
 #include "NodeLayerItem.h"
 
@@ -54,7 +51,7 @@ void MetaLayerModel::getComponentMetaModel(const QJsonDocument& json_doc) {
     }
     components_ready_ = true;
 
-    if (model_downloaded_) {
+    if (downloaded()) {
         // Our component model was downloaded after the main model was
         // downloaded. So, now it is time to load the main model.
         LayerModel::onModelDownloaded(std::move(json_doc_));

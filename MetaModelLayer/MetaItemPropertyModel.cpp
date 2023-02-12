@@ -48,7 +48,7 @@ QVariant MetaItemPropertyModel::data(const QModelIndex& index, int role) const {
         if (index.column() == 1) {
             auto& prop = properties_[index.row()];
 
-            if (prop.type == Type::TimeSeries)
+            if (prop.validTimeSeries())
                 return QStringLiteral("<time series>");
 
             return prop.value;
