@@ -21,8 +21,9 @@ public:
     struct PropertyInfo {
         using Type = Variable::Type;
 
-        PropertyInfo(Type t, const QString& n, const QString& v)
-            : type{t}, name{n}, value{v} {}
+        PropertyInfo(Type t, const QString& n, const QString& v,
+            const QString& p)
+            : type{t}, name{n}, value{v}, presentation{p} {}
 
         bool validTimeSeries() const
             { return type == Type::TimeSeries && !value.isEmpty(); }
@@ -30,6 +31,7 @@ public:
         Type    type = Type::NotAssigned;
         QString name;
         QString value;
+        QString presentation;
     };
 
     explicit MetaItemPropertyModel(const MetaLayerItem& layer_item, QObject* parent = 0);

@@ -2,6 +2,12 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#include <Common/qstr_unordered_map.h>
+#include <cmath>
+
+
+
+
 namespace WaterwAIs {
 
 namespace {
@@ -22,6 +28,24 @@ Variable::Type to_type(QStringView type_string) {
     return type;
 }
 
+QString processValueUnit(QStringView unit_str) {
+    static auto unit_map = []() {
+        auto umap = qstr_unordered_map<QString>{};
+
+        // Converting units from model to something more readable
+        
+        // Using superscript 2 for ~^2
+        umap["m~^2"] = "m" + QString::fromWCharArray(L"\u00B2"); 
+
+        return umap;
+    }();
+    
+    if (auto found = unit_map.find(unit_str); found != unit_map.end())
+        return found->second;
+
+    return unit_str.toString();
+}
+
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
@@ -38,6 +62,7 @@ Variable::Variable(QStringView type_string): type_{to_type(type_string)} {
 void Variable::init() {
     // Initializing value from type
     value_ = {};
+    value_unit_.clear();
 
     switch (type_) {
     case Type::NotAssigned:
@@ -77,8 +102,15 @@ void Variable::getFromJsonObject(const QJsonObject& json_object) {
 }
 
 QString Variable::toString() const{
-    if (isNumeric())
-        return QString::number(std::get<double>(value_), 'f', 2);
+    if (isNumeric()) {
+        auto value = std::get<double>(value_);
+        auto integr = 0.0;
+
+        auto float_part = std::modf(value, &integr);
+        auto precision  = float_part == 0.0 ? 0 : 2;
+
+        return QString::number(value, 'f', precision);
+    }
     
     if (isTimeSeries()) {
         // get path to the CSV file for time series
@@ -91,15 +123,32 @@ QString Variable::toString() const{
 }
 
 QString Variable::presentationValue() const {
-    if (isTimeSeries())
-        return "time series";
+    if (isTimeSeries()) {
+        auto value = std::get<QString>(value_);
+        return !value.isEmpty() ? "time series..." : "";
+    }
 
+    if (isNumeric() && !value_unit_.isEmpty()) {
+        auto val_str = toString();
+
+        val_str += " " + value_unit_;
+        return val_str;
+    }
     return toString();
 }
 
 void Variable::fromString(QStringView value) {
     if (isNumeric()) {
-        value_ = value.toDouble();
+        if (!value.isEmpty() && value.back() == ']') {
+            // We have units
+            auto parts = QStringView{value.data(), value.size() - 1}.split('[');
+
+            if (parts.size() > 1) {
+                value_      = parts[0].toDouble();
+                value_unit_ = processValueUnit(parts[1].toString());
+            }
+        } else
+            value_ = value.toDouble();
     } else if (isTimeSeries()) {
         value_ = value.toString();
     } else if (isString()) {

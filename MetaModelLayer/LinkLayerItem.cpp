@@ -8,10 +8,12 @@
 namespace WaterwAIs {
 
 namespace {    
-    static constexpr auto   link_arrow_size = 10.0;    
+    static constexpr auto link_arrow_size = 10.0;    
+    static constexpr auto link_line_width = 5;
 
     static constexpr double Pi = 3.14159265358979323846264338327950288419717;
     static constexpr double TwoPi = 2.0 * Pi;
+
 } // anonymous
 
 
@@ -32,8 +34,8 @@ QRectF LinkLayerItem::boundingRect() const {
     if (!source_node_ || !dest_node_)
         return QRectF();
 
-    auto pen_width = 1.0;
-    auto extra = (pen_width + arrow_size_) / 8.0;
+    //auto pen_width = 1.0;
+    auto extra = (link_line_width + arrow_size_);// / 8.0;
 
     auto rect = QRectF{
         source_point_, 
@@ -54,17 +56,18 @@ void LinkLayerItem::paint(QPainter* painter,
     
     auto line = QLineF{source_point_, dest_point_};
     if (qFuzzyCompare(line.length(), qreal(0.)))
-        return;
+        return;    
 
     // Use layer's color
     auto color = settings_.pen.color();
-    auto pen = QPen{color, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    auto pen = QPen{color, link_line_width, Qt::SolidLine, Qt::RoundCap,
+        Qt::RoundJoin};
 
     // Draw the line itself
     if (isSelected()) {
         color = settings_.selected_color;
         pen.setColor(color);
-        pen.setWidth(settings_.selected_line_width);
+        pen.setWidth(link_line_width + 2);
     }
 
     painter->setPen(pen);

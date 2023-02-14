@@ -147,19 +147,19 @@ QString Item::toolTip() const {
     for (auto& [name, value] : prop_map)
         props[name] = value.presentationValue();
 
-    constexpr auto max_rows = 10U;
+    constexpr auto max_rows = 25U;
 
     tooltip += "<br>Properties:<center><table border=1 width=\"100%\" "
         "style=\"border-collapse: collapse; margin: 0px;\">";
 
-    for (auto row_count = 0U; auto& [name, value] : props) {        
+    for (auto row_count = 0U; auto& [name, value] : props) {   
         tooltip += 
             "<tr><td><b>" + name + "</b></td><td>" + value + "</td></tr>";
         
         row_count++;
 
         if (row_count >= max_rows) {
-            "<tr><td>More...</td><td></td></tr>";
+            tooltip += "<tr><td>More...</td><td></td></tr>";
             break;
         }
     }

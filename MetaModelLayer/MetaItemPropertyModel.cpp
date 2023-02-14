@@ -22,7 +22,8 @@ void MetaItemPropertyModel::buildProperies(const MetaLayerItem& layer_item) {
     properties_.clear();
 
     for (auto& [name, value] : layer_item.properties().vars())
-        properties_.emplace_back(value.type(), name, value.toString());
+        properties_.emplace_back(value.type(), name, value.toString(), 
+            value.presentationValue());
 
     auto component_name = layer_item.modelItem().component().name();
     item_name_ = layer_item.modelItem().name().toString();
@@ -47,11 +48,7 @@ QVariant MetaItemPropertyModel::data(const QModelIndex& index, int role) const {
             return properties_[index.row()].name;
         if (index.column() == 1) {
             auto& prop = properties_[index.row()];
-
-            if (prop.validTimeSeries())
-                return QStringLiteral("<time series>");
-
-            return prop.value;
+            return prop.presentation;
         }
     }
 

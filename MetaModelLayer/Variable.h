@@ -66,6 +66,9 @@ public:
     QString toString() const;
     void fromString(QStringView value);
 
+    // Value unit
+    QString valueUnit() const { return value_unit_; }
+
     // Gets variable value string for 'presentation' - it can be different
     // from a real string value thus hiding it from the user.
     QString presentationValue() const;
@@ -91,6 +94,8 @@ private:
     Role role_ = Role::None;
 
     std::variant<double, QString> value_;
+
+    QString value_unit_; // Specifies dimensional unit for 'Value' type
 };
 
 //////////////////////////////////////////////////////////////////////////
