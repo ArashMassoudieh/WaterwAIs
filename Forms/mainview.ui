@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>687</width>
+    <width>884</width>
     <height>596</height>
    </rect>
   </property>
@@ -35,7 +35,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="childrenCollapsible">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -93,6 +93,23 @@
        </layout>
       </widget>
       <widget class="WaterwAIs::Panel" name="panelWidget"/>
+     </widget>
+     <widget class="QSplitter" name="gen_panel_splitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QListView" name="genericItemsList">
+          <property name="text" stdset="0">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="WaterwAIs::Panel" name="propertyGenPanel"/>
      </widget>
     </widget>
    </item>

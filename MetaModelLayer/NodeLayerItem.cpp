@@ -7,6 +7,7 @@ namespace {
     // Default Node parameters    
     static constexpr double node_width    = 200;
     static constexpr double node_height   = 200;
+    static constexpr auto sel_adjustment  = 10;
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
@@ -30,16 +31,25 @@ NodeLayerItem::NodeLayerItem(const LayerGraphicsSettings& gsettings,
 NodeLayerItem::~NodeLayerItem() {
 }
 
-QRectF NodeLayerItem::boundingRect() const {
-    return QRectF(getX()-width() / 2, getY()-height() / 2,
+QRectF NodeLayerItem::rect() const {
+    return QRectF(getX() - width() / 2, getY() - height() / 2,
         width(), height());
 }
 
-QPainterPath NodeLayerItem::shape() const {
-    auto path = QPainterPath{};
-    path.addRect(boundingRect());
-    return path;
+QRectF NodeLayerItem::selectedRect() const {
+    return rect().adjusted(-sel_adjustment, -sel_adjustment,
+        sel_adjustment, sel_adjustment);
 }
+
+QRectF NodeLayerItem::boundingRect() const {
+    return selectedRect();      
+}
+
+//QPainterPath NodeLayerItem::shape() const {
+//    auto path = QPainterPath{};
+//    path.addRect(boundingRect());
+//    return path;
+//}
 
 void NodeLayerItem::paint(QPainter* painter, 
     const QStyleOptionGraphicsItem* option, QWidget* /*widget*/) {
@@ -58,9 +68,11 @@ void NodeLayerItem::paint(QPainter* painter,
         boundingRect().height() * (1 - iconmargin)};
     */
 
+    auto rc = rect();
+
     // Icon
     auto source = QRectF(0, 0, pixmap.size().width(), pixmap.size().height());
-    painter->drawPixmap(boundingRect(), pixmap, source);
+    painter->drawPixmap(rc, pixmap, source);
    
     // Pen
     if (isSelected()) {
@@ -71,7 +83,19 @@ void NodeLayerItem::paint(QPainter* painter,
     }
 
     // Circle
-    painter->drawEllipse(boundingRect());
+    painter->drawEllipse(rc);
+
+    // Draw a second rectangle for the selected item.
+    if (isSelected()) {
+        auto path = QPainterPath{};
+
+        path.addEllipse(selectedRect());
+        path.addEllipse(rect());
+
+        painter->setBrush(Qt::darkCyan);
+        painter->drawPath(path);
+    }
+        
 }
 
 void NodeLayerItem::setSize(const QSizeF& size) {

@@ -4,6 +4,9 @@
 
 #include "Panel.h"
 #include "MainView.h"
+#include "ItemNavigator.h"
+
+#include <MetaModelLayer/MetaLayerItem.h>
 
 #include <QSortFilterProxyModel>
 #include <QToolButton>
@@ -109,16 +112,43 @@ ItemPropertiesWidget::ItemPropertiesWidget(QWidget* parent):
         "border-top-width: 1px; border-bottom-width: 0;}");
 
     setStyleSheet("QFrame {border: none;}");
+
+    setupControls();
 }
 
 ItemPropertiesWidget::~ItemPropertiesWidget() {
     delete ui;
 }
 
+void ItemPropertiesWidget::setupControls() {
+    // Tool buttons    
+
+    // Navigate button
+    btnNavigate_ = new QToolButton{};
+    btnNavigate_->setObjectName("btnNavigate");
+
+    btnNavigate_->setIconSize({20, 20});
+
+    auto icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);
+    btnNavigate_->setIcon(icon);
+    btnNavigate_->setToolTip("Navigates to the item");
+
+    ui->gridLayout->addWidget(btnNavigate_, 0, 0,
+        Qt::AlignRight | Qt::AlignTop);
+
+    QMetaObject::connectSlotsByName(this);
+
+    btnNavigate_->hide();
+}
+
+void ItemPropertiesWidget::onNavigatorSet() {
+    btnNavigate_->setIcon(icon());
+}
+
+
 void ItemPropertiesWidget::setTableModel(MetaItemPropertyModel* propmodel) {
     prop_model_ = propmodel;
-    qDebug() << ui->tableView->objectName();
-
+    
     auto panel = qobject_cast<WaterwAIs::Panel*>(parent());
     Q_ASSERT(panel);
 
@@ -129,6 +159,9 @@ void ItemPropertiesWidget::setTableModel(MetaItemPropertyModel* propmodel) {
         panel->setTitleText(u"Item");
 
         prop_proxy_model_ = nullptr;
+        setNavigator();
+
+        btnNavigate_->hide();
         return;
     }
 
@@ -158,6 +191,8 @@ void ItemPropertiesWidget::setTableModel(MetaItemPropertyModel* propmodel) {
             ui->tableView->setIndexWidget(item, text_btn_widget);
         }
     }
+     
+    btnNavigate_->show();
 }
 
 void ItemPropertiesWidget::on_edtFilter_textChanged(const QString& text) {
@@ -170,10 +205,16 @@ QSize ItemPropertiesWidget::minimumSizeHint() const {
 }
 
 void ItemPropertiesWidget::onButtonWidgetClicked(int prop_index) {
-    auto&& prop = prop_model_->getProperty(prop_index);
+    auto& prop = prop_model_->getProperty(prop_index);
 
-    if (prop.validTimeSeries())
-        emit showTimeSeries(prop_model_->itemName(), prop.name, prop.value);   
+    if (prop.validTimeSeries()) {
+        emit showTimeSeries(prop_model_->itemName(), prop.name, prop.value,
+            navigator());
+    }        
+}
+
+void ItemPropertiesWidget::on_btnNavigate_clicked() {
+   navigate();
 }
 
 } // namespace WaterwAIs

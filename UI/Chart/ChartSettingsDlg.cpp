@@ -33,6 +33,9 @@ void ChartSettingsDialog::fill() {
 
     auto& settings = ChartView::chartSettings();
 
+    // Title
+    ui->checkBoxTitle->setChecked(settings.title);
+
     // Theme Combobox    
     ui->comboBoxTheme->addItem("Light"        , QChart::ChartThemeLight);
     ui->comboBoxTheme->addItem("Blue Cerulean", QChart::ChartThemeBlueCerulean);
@@ -77,6 +80,9 @@ void ChartSettingsDialog::changed() {
 
     // Update settings
     auto& settings = ChartView::chartSettings();
+
+    // Title
+    settings.title = ui->checkBoxTitle->isChecked();
 
     // Theme
     settings.theme = static_cast<QChart::ChartTheme>(

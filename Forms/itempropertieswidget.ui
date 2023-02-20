@@ -13,13 +13,13 @@
   <property name="windowTitle">
    <string>Frame</string>
   </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
   <property name="lineWidth">
    <number>0</number>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -32,7 +32,10 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <item>
+   <property name="verticalSpacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
     <widget class="QTableView" name="tableView">
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
@@ -50,14 +53,14 @@
       <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderMinimumSectionSize">
-      <number>20</number>
+      <number>24</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>20</number>
+      <number>24</number>
      </attribute>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="QLineEdit" name="edtFilter">
      <property name="placeholderText">
       <string>Filter properties</string>

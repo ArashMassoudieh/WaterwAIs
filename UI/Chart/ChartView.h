@@ -20,8 +20,9 @@ namespace WaterwAIs {
 class ChartSettings {
 public:
     QChart::ChartTheme theme = QChart::ChartThemeLight;
-    int  legend = 0; // No Legend
-    bool anti_aliasing = false;
+    bool title  = false; // No title
+    int  legend = 0;     // No Legend
+    bool anti_aliasing = true;
 };
 
 

@@ -45,7 +45,7 @@ public:
     LayerGraphicsItem(const LayerGraphicsSettings& settings)
         : settings_{settings} {
         // Making layer items selectable and accept hover events
-        T::setFlags(QGraphicsItem::ItemIsSelectable);       
+        //T::setFlags(QGraphicsItem::ItemIsSelectable);
         T::setAcceptHoverEvents(true);
     }
     

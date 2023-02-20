@@ -15,5 +15,6 @@
         <file>Resources/close_green.png</file>
         <file>Resources/collapse-arrow-64.png</file>
         <file>Resources/expand-arrow-64.png</file>
+        <file>Resources/app.png</file>
     </qresource>
 </RCC>

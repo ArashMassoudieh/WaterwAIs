@@ -9,24 +9,24 @@ namespace WaterwAIs {
 //////////////////////////////////////////////////////////////////////////
 // PropModel
 
-MetaItemPropertyModel::MetaItemPropertyModel(const MetaLayerItem& layer_item,
+MetaItemPropertyModel::MetaItemPropertyModel(const ModelItem& model_item,
     QObject* parent):
     QAbstractTableModel(parent) {    
     setHeaderData(0, Qt::Horizontal, tr("Property"));
     setHeaderData(1, Qt::Horizontal, tr("Value"));
 
-    buildProperies(layer_item);
+    buildProperies(model_item);
 }
 
-void MetaItemPropertyModel::buildProperies(const MetaLayerItem& layer_item) {
+void MetaItemPropertyModel::buildProperies(const ModelItem& model_item) {
     properties_.clear();
 
-    for (auto& [name, value] : layer_item.properties().vars())
+    for (auto& [name, value] : model_item.properties().vars())
         properties_.emplace_back(value.type(), name, value.toString(), 
             value.presentationValue());
 
-    auto component_name = layer_item.modelItem().component().name();
-    item_name_ = layer_item.modelItem().name().toString();
+    auto component_name = model_item.component().name();
+    item_name_ = model_item.name().toString();
 
     item_label_ = "<b>" + item_name_ + "</b> (" + component_name + ")";
 }

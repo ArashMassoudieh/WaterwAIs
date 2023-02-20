@@ -35,7 +35,7 @@ QRectF LinkLayerItem::boundingRect() const {
         return QRectF();
 
     //auto pen_width = 1.0;
-    auto extra = (link_line_width + arrow_size_);// / 8.0;
+    auto extra = (link_line_width + arrow_size_) / 8.0;
 
     auto rect = QRectF{
         source_point_, 

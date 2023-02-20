@@ -75,14 +75,14 @@ void MapView::clearSelection() {
     selected_items_.clear();
 
     // Clear the properties table
-    main_view_->setTableModel();
+    main_view_->setItemPropertiesModel();
 }
 
 
 void MapView::mousePressEvent(QMouseEvent* event) {
     if (event->button() & Qt::LeftButton) {
         is_pressed_ = true;
-        pressed_scene_point_ = mapToScene(event->pos());
+        pressed_scene_point_ = mapToScene(event->pos());        
         
         selectItem(event->pos());
     } else {
@@ -194,18 +194,23 @@ void MapView::selectItem(const QPoint& pos) {
         selected_item = MetaLayerItem::item_cast(item);
         if (selected_item)           
             break;
-    }
-
-    // Clear previous selection of meta model layer items.
-    clearSelection();
+    }    
 
     if (selected_item) {
+        selected_items_.clear();
         selected_items_.emplace_back(selected_item);
 
         prop_model_ = std::make_unique<MetaItemPropertyModel>
-            (*selected_item, this);
+            (selected_item->modelItem(), this);
 
-        main_view_->setTableModel(prop_model_.release());
+        main_view_->setItemPropertiesModel(prop_model_.release(), selected_item);
+    } else {
+        // Clear previous selection of meta model layer items if no new item is
+        // selected and we are not in the Pan mode. 
+        // In the Pan mode we allow user to move the viewport without clearing
+        // the selection.
+        if (mode_ != Mode::Pan)
+            clearSelection();
     }
 }
 

@@ -39,12 +39,9 @@ private:
     void buildLayers();
     void onLayersInfoLoaded(bool result);
 
-
     void addFeatureLayers();
     void addMetaModelLayer();
     void buildLayerListModel();
-
-    void zoomAll();
 
     MainView* main_view_;
     MapScene* scene_;

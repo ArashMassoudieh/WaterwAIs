@@ -13,9 +13,13 @@
 #include <Layer/LayerListModel.h>
 #include <Layer/LayerItemDelegate.h>
 
+#include <MetaModelLayer/MetaModelLayer.h>
+#include <MetaModelLayer/MetaLayerModel.h>
+#include <MetaModelLayer/NodeLayerItem.h>
+#include <MetaModelLayer/GenericItemListModel.h>
+
 #include <UI/MessageBox.h>
 
-#include "MapView.h"
 #include "LayerPropertiesDialog.h"
 #include "ItemPropertiesWidget.h"
 #include "Chart/ChartWidget.h"
@@ -43,13 +47,13 @@ MainView::MainView(QWidget* parent):
     ui->map_layers_splitter->setSizes(QList{100, 400});
     
     map_view_ = ui->mapView;
-    ui->mapView->setMainView(this);
-
-    // Setting up the layers list.
-    //setupLayerList();
+    ui->mapView->setMainView(this);    
 
     // Setting up the item property panel
     setupPropertyPanel();
+
+    // Setting up the 'generic' item property panel
+    setupGenItemPropertyPanel();
 
     // Setting up tasks
     scheduleTasks();
@@ -120,11 +124,11 @@ void MainView::createMapViewControls() {
     };
     
     // Pan
-    btn_pan_ = add_tool_button(u"btnPan", u":/Resources/hand-rock.png", u"Pan",
+    btn_pan_ = add_tool_button(u"btnPan", u":/Resources/hand-rock.png", {}, //u"Pan",
         u"Panning the view by mouse", true);
 
     // Zoom
-    btn_zoom_ = add_tool_button(u"btnZoom", u":/Resources/zoom.png", u"Zoom",
+    btn_zoom_ = add_tool_button(u"btnZoom", u":/Resources/zoom.png", {}, //u"Zoom",
         u"Zooming the view by mouse", true);
 
     // Zoom in
@@ -137,8 +141,11 @@ void MainView::createMapViewControls() {
 
     // Fit in View
     btn_fit_to_view_ = add_tool_button(u"btnFitToView", u":/Resources/expand.png", 
-        u"Fit View", u"Fit in view", true);
+        {}, u"Fit in view", true);
     
+    // Test button
+    //add_tool_button(u"btnTest", {}, u"Test button");
+
     ui->gridLayout->addLayout(button_layout_, 0, 0,
         Qt::AlignRight | Qt::AlignTop);
 
@@ -150,6 +157,93 @@ void MainView::createMapViewControls() {
 
     ui->gridLayout->addLayout(status_layout_, 0, 0,
             Qt::AlignLeft | Qt::AlignBottom);    
+}
+
+void MainView::on_btnTest_clicked() {
+    // test code..
+}
+
+void MainView::onMetaModelLoaded(MetaModelLayerPtr model_layer) {
+    gen_items_list_model_.reset();
+    auto model = model_layer->to_model<MetaLayerModel>();
+
+    if (!model->genericItemMap().empty()) {
+        // We have some generic items, so let's shoe the panel for them.
+        ui->gen_panel_splitter->show();
+
+        //Fill the generic item list widget...
+        gen_items_list_model_ = 
+            std::make_unique<GenericItemListModel>(*model, this);        
+
+        ui->genericItemsList->setIconSize(QSize(24, 24));
+        ui->genericItemsList->setModel(gen_items_list_model_.get());
+
+        auto selection_model = ui->genericItemsList->selectionModel();
+
+        connect(selection_model, &QItemSelectionModel::selectionChanged, this,
+            [this](const auto& selected, const auto&) {
+                auto indexes = selected.indexes();
+
+                if (!indexes.isEmpty()) {
+                    auto& index = indexes.front();
+                    onGenericItemSelected(index);
+                } else {
+                    onGenericItemSelected();
+                }
+            });
+
+        ui->map_layers_splitter->setSizes(QList{100, 400, 100});
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////
+// GenericItemNavigator
+class GenericItemNavigator: public ItemNavigator {
+public:
+    using GenericItem = MetaLayerModelItems::GenericItem;
+
+    GenericItemNavigator(const QModelIndex& index, 
+        const GenericItem* generic_item, MainView* main_view):
+        index_{index}, generic_item_{generic_item}, main_view_{main_view} {}
+
+    // Returns item's icon
+    QIcon itemIcon() const override { 
+        return generic_item_->component().icon();
+    }
+
+    // Performs navigating to the item
+    void navigate() override
+        { main_view_->navigateToGenericItem(index_); }
+private:
+    QModelIndex index_;
+    const GenericItem* generic_item_;    
+    MainView* main_view_;
+};
+
+
+void MainView::onGenericItemSelected(const QModelIndex& index) {
+    auto property_widget =
+        qobject_cast<ItemPropertiesWidget*>(ui->propertyGenPanel->getWidget());
+
+    Q_ASSERT(property_widget);
+
+    if (!index.isValid()) {
+        property_widget->setTableModel(nullptr);
+        return;
+    }
+
+    auto generic_item = gen_items_list_model_->getItem(index);
+    Q_ASSERT(generic_item);
+    
+    // Set property model
+    auto prop_model = 
+        std::make_unique<MetaItemPropertyModel>(*generic_item, this);
+
+    property_widget->setTableModel(prop_model.release());
+
+    // Set navigator
+    property_widget->setNavigator(std::make_shared<GenericItemNavigator>
+        (index, generic_item, this));
 }
 
 
@@ -179,8 +273,8 @@ void MainView::setupPropertyPanel() {
     auto property_widget = new ItemPropertiesWidget{this};
 
     connect(property_widget, &ItemPropertiesWidget::showTimeSeries, this,
-        [this](auto item, auto name, auto ts_path) { 
-            showTimeSeries(item, name, ts_path);
+        [this](auto item, auto name, auto ts_path, auto item_navigator) { 
+            showTimeSeries(item, name, ts_path, item_navigator);
         });
 
     ui->propertyPanel->setWidget(property_widget);
@@ -188,17 +282,36 @@ void MainView::setupPropertyPanel() {
     ui->propertyPanel->setTitleText(u"Item:");
 
     // We don't close property panel.
-    ui->propertyPanel->setCloseable(false);    
+    ui->propertyPanel->setCloseable(false);
 }
+
+void MainView::setupGenItemPropertyPanel() {   
+    gen_items_list_model_.reset();
+    ui->gen_panel_splitter->hide();
+
+    auto property_widget = new ItemPropertiesWidget{this};
+
+     connect(property_widget, &ItemPropertiesWidget::showTimeSeries, this,
+         [this](auto item, auto name, auto ts_path, auto item_navigator) {
+             showTimeSeries(item, name, ts_path, item_navigator);
+         });
+
+    ui->propertyGenPanel->setWidget(property_widget);
+    ui->propertyGenPanel->setTitleText(u"Item:");
+
+    // We don't close property panel.
+    ui->propertyGenPanel->setCloseable(false);
+}
+
 
 void MainView::setupLayerList() {
     // Creating Layer list controls
     createLayerListControls();
 
     ui->lstLayers->setItemDelegate(new LayerItemDelegate());
-    submenu_.addAction("Properties");
+    layers_submenu_.addAction("Properties");
 
-    connect(&submenu_, &QMenu::triggered, this,
+    connect(&layers_submenu_, &QMenu::triggered, this,
         [&](QAction* action) {
             if (action->text().contains("Properties"))
                 showLayerProperties();            
@@ -213,20 +326,20 @@ void MainView::setupLayerList() {
             if (idx < 0)
                 return;
 
-            selected_item_ = idx;
-            submenu_.popup(global_pos);
+            selected_layer_idx_ = idx;
+            layers_submenu_.popup(global_pos);
         });
 
     connect(ui->lstLayers, &QListView::doubleClicked, this,
         [this](const auto& index) {
-            selected_item_ = index.row();
+            selected_layer_idx_ = index.row();
             showLayerProperties();
         });
 }
 
 void MainView::showLayerProperties() {
     auto model = (LayerListModel*)ui->lstLayers->model();
-    auto layer = (*model)[selected_item_].get();
+    auto layer = (*model)[selected_layer_idx_].get();
 
     auto dlg = new LayerPropertiesDialog(layer, this);
     dlg->setModal(true);
@@ -313,18 +426,42 @@ void MainView::setLayerListModel(LayerListModel* names) {
     });
 }
 
-void MainView::setTableModel(MetaItemPropertyModel* propmodel) {
+//////////////////////////////////////////////////////////////////////////
+// LayerItemNavigator
+
+class LayerItemNavigator: public ItemNavigator {
+public:
+    LayerItemNavigator(MetaLayerItem* layer_item, MainView* main_view):
+        layer_item_{layer_item}, main_view_{main_view}{}
+    
+    // Returns item's icon
+    QIcon itemIcon() const override
+        { return layer_item_->modelItem().component().icon(); }
+
+    // Performs navigating to the item
+    void navigate() override
+        { main_view_->navigateToLayerItem(layer_item_); }
+
+private:
+    MetaLayerItem* layer_item_;
+    MainView* main_view_;
+};
+
+
+void MainView::setItemPropertiesModel(MetaItemPropertyModel* propmodel, 
+    MetaLayerItem* layer_item) {
     auto property_widget = 
         qobject_cast<ItemPropertiesWidget*>(ui->propertyPanel->getWidget());
 
     Q_ASSERT(property_widget);
+    
+    if (layer_item) {
+        property_widget->setNavigator
+            (std::make_shared<LayerItemNavigator>(layer_item, this));
+    } else
+        property_widget->setNavigator();    
 
     property_widget->setTableModel(propmodel);
-}
-
-void MainView::on_btnZoom_clicked() {
-    map_view_->setMouseZoom();
-    mapViewModesCheck();
 }
 
 void MainView::zoomMapView(bool in) {
@@ -342,13 +479,33 @@ void MainView::on_btnZoomOut_clicked() {
     zoomMapView(false);
 }
 
+void MainView::on_btnZoom_clicked() {
+    onModeButtonClicked(MapView::Mode::Zoom);
+}
+
 void MainView::on_btnPan_clicked() {
-    map_view_->setMousePan();
-    mapViewModesCheck();
+    onModeButtonClicked(MapView::Mode::Pan);
 }
 
 void MainView::on_btnFitToView_clicked() {
-    map_view_->setFitToView();
+    onModeButtonClicked(MapView::Mode::FitToView);
+
+    // Apply set fit view immediately after we changed the mode. 
+    if (map_view_->mode() == MapView::Mode::FitToView)
+        map_view_->setFitToView();
+}
+
+void MainView::onModeButtonClicked(MapView::Mode mode) {
+    if (spuriosButtonClick())
+        return;
+
+    auto view_mode = map_view_->mode();
+
+    if (view_mode != mode)
+        map_view_->setMode(mode);
+    else
+        map_view_->setNoneMode();
+
     mapViewModesCheck();
 }
 
@@ -409,7 +566,7 @@ bool MainView::spuriosButtonClick() {
         return false;
     }
     
-    if (Clock::now() - last_tb_clicked_ts_ < 100ms) {
+    if (Clock::now() - last_tb_clicked_ts_ < 200ms) {
         // Spurious second click
         last_tb_clicked_ts_ = Clock::time_point{};
         return true;
@@ -466,7 +623,7 @@ void MainView::on_btnOpen_clicked() {
 }
 
 void MainView::showTimeSeries(QStringView item_name, QStringView prop_name,
-    QStringView ts_path) {
+    QStringView ts_path, ItemNavigatorPtr item_navigator) {
     auto chart_info = ChartInfo{prop_name, ts_path};
 
     auto panel_widget = 
@@ -474,6 +631,7 @@ void MainView::showTimeSeries(QStringView item_name, QStringView prop_name,
 
     if (!panel_widget || panel_widget->chartInfo() != chart_info) {
         auto chart_widget = new ChartWidget{chart_info};
+        chart_widget->setNavigator(item_navigator);
 
         ui->panelWidget->setWidget(chart_widget);
         ui->panelWidget->setIcon(u":/Resources/chart.png");
@@ -483,6 +641,17 @@ void MainView::showTimeSeries(QStringView item_name, QStringView prop_name,
     }    
     ui->panelWidget->show();
 }
+
+void MainView::navigateToLayerItem(const MetaLayerItem* layer_item) {
+    if (layer_item)
+        ui->mapView->centerOn(layer_item);
+}
+
+void MainView::navigateToGenericItem(const QModelIndex& index) {
+    if (index.isValid())
+        ui->genericItemsList->scrollTo(index);
+}
+
 
 void MainView::getFile10LinesContent(QString fileId) {
     auto req = QNetworkRequest{WW_SERVER_PATH("file_10_lines/" + fileId)};

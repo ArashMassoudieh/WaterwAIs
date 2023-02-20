@@ -3,9 +3,11 @@
 
 #include <QFrame>
 #include <QChart>
+#include <QDateTime>
 
 #include <Utilities/TimeSeries_s.h>
 #include <MetaModelLayer/Variable.h>
+#include <UI/ItemNavigator.h>
 
 namespace Ui {
 class ChartWidget;
@@ -21,6 +23,8 @@ class QLabel;
 namespace WaterwAIs {
 
 class ChartView;
+class MetaLayerItem;
+class ItemNavigator;
 
 //////////////////////////////////////////////////////////////////////////
 // ChartInfo
@@ -37,8 +41,7 @@ public:
     QString name() const { return name_; }
     QString timeSeriesPath() const { return time_series_path_; }   
 
-    bool operator==(const ChartInfo& other) const { return  equalTo(other); }
-    bool operator!=(const ChartInfo& other) const { return !equalTo(other); }
+    bool operator==(const ChartInfo& other) const { return  equalTo(other); }    
 
     bool equalTo(const ChartInfo& other) const  {
         return name_ == other.name_ && 
@@ -52,12 +55,14 @@ private:
 
 
 //////////////////////////////////////////////////////////////////////////
-// ChartDialog
+// ChartWidget
 
-class ChartWidget : public QFrame {
+class ChartWidget : public QFrame, public ItemNavigatorHolder {
     Q_OBJECT
 
 public:
+    using ItemNavigatorPtr = std::shared_ptr<ItemNavigator>;
+
     explicit ChartWidget(const ChartInfo& chart_info, QWidget *parent = nullptr);
     ~ChartWidget();    
 
@@ -71,7 +76,11 @@ public slots:
 protected slots:
     void on_toolButtonSettings_clicked();
     void on_pushButtonGo_clicked();
-    void on_toolButtonReset_clicked();    
+    void on_toolButtonReset_clicked(); 
+    void on_toolButtonNav_clicked();
+
+    // ItemNavigatorHolder
+    void onNavigatorSet() override;
 
 private:
     using TimeSeriesPtr = ChartInfo::TimeSeriesPtr;
@@ -85,11 +94,11 @@ private:
 
     void enableChartControls(bool enable = true);
 
-    const ChartInfo& chart_info_;
+    ChartInfo chart_info_;
     QChart* chart_;
 
-    double min_t_ = 0.0;
-    double max_t_ = 0.0;
+    QDateTime min_t_;
+    QDateTime max_t_;
 
     TimeSeriesPtr tseries_;
 

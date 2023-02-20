@@ -5,6 +5,7 @@
 #include "MetaComponentItem.h"
 
 #include <qstr_unordered_map.h>
+#include <map>
 
 namespace WaterwAIs {
 
@@ -13,6 +14,7 @@ class NodeLayerItem;
 namespace MetaLayerModelItems {
 class NodeItem;
 class LinkItem;
+class GenericItem;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -27,10 +29,16 @@ class LinkItem;
 class MetaLayerModel: public LayerModel {
     Q_OBJECT
 public:
-    using NodeItemPtr = std::unique_ptr<MetaLayerModelItems::NodeItem>;
-    using LinkItemPtr = std::unique_ptr<MetaLayerModelItems::LinkItem>;
+    using NodeItem    = MetaLayerModelItems::NodeItem;
+    using LinkItem    = MetaLayerModelItems::LinkItem;
+    using GenericItem = MetaLayerModelItems::GenericItem;
+
+    using NodeItemPtr    = std::unique_ptr<NodeItem>;
+    using LinkItemPtr    = std::unique_ptr<LinkItem>;
+    using GenericItemPtr = std::unique_ptr<GenericItem>;
 
     using LayerNodeItemMap = qstr_unordered_map<NodeLayerItem*>;
+    using GenericItemMap   = std::map<QString, GenericItem*, std::less<>>;
 
     MetaLayerModel();
     virtual ~MetaLayerModel();    
@@ -45,11 +53,16 @@ public:
     // Get Node
     const NodeLayerItem* getNode(QStringView node_name) const;
 
+    // Map of Generic (no type) model items
+          GenericItemMap& genericItemMap()       { return generic_item_map_; }
+    const GenericItemMap& genericItemMap() const { return generic_item_map_; }
+
     // Model-specific Node and Link item creator functions allowing to create
     // node and link items with custom properties (i.e. special drawing based
     // on name).
-    NodeItemPtr createNode(QStringView name, MetaComponentItem& component);
-    LinkItemPtr createLink(QStringView name, MetaComponentItem& component);
+    NodeItemPtr    createNode   (QStringView name, MetaComponentItem& component);
+    LinkItemPtr    createLink   (QStringView name, MetaComponentItem& component);
+    GenericItemPtr createGeneric(QStringView name, MetaComponentItem& component);
 
 protected:
     // Fills Meta model for components from JSON doc
@@ -74,7 +87,10 @@ private:
     bool components_ready_ = false;
 
     // Map containing Node graphics items, needed for links between nodes.
-    qstr_unordered_map<NodeLayerItem*> node_map_;
+    LayerNodeItemMap node_map_;
+
+    // Map containing generic items (with no type)
+    GenericItemMap generic_item_map_;
 
     QJsonDocument json_doc_;
 };

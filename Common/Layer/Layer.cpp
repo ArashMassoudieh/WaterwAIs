@@ -14,6 +14,10 @@ Layer::Layer(LayerSceneInterface* scene, LayerModelPtr model,
     , options_{options}, description_{description.toString()} {
     
     gsettings_.pen.setStyle(Qt::SolidLine);
+
+    // For "contour" layers let's use a wider pen width by default.
+    if (!options_.testFlag(Option::UsesShapes))
+        gsettings_.pen.setWidth(3);
 }
 
 Layer::~Layer() {

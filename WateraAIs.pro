@@ -48,6 +48,7 @@ HEADERS += \
 	FeatureLayer/FeatureModelItem.h
 
 HEADERS += \
+        MetaModelLayer/GenericItemListModel.h \
 	MetaModelLayer/LinkLayerItem.h \
 	MetaModelLayer/MetaComponentItem.h \
 	MetaModelLayer/MetaItemPropertyModel.h \
@@ -62,6 +63,7 @@ HEADERS += \
         UI/Chart/ChartSettingsDlg.h \
         UI/Chart/ChartView.h \
         UI/Chart/ChartWidget.h \
+        UI/ItemNavigator.h \
         UI/ItemPropertiesWidget.h \
 	UI/LayerPropertiesDialog.h \
 	UI/MainView.h \
@@ -105,6 +107,7 @@ SOURCES += \
 	FeatureLayer/FeatureModelItem.cpp
 
 SOURCES += \
+        MetaModelLayer/GenericItemListModel.cpp \
 	MetaModelLayer/LinkLayerItem.cpp \
 	MetaModelLayer/MetaComponentItem.cpp \
 	MetaModelLayer/MetaItemPropertyModel.cpp \
@@ -119,6 +122,7 @@ SOURCES += \
     UI/Chart/ChartSettingsDlg.cpp \
     UI/Chart/ChartView.cpp \
     UI/Chart/ChartWidget.cpp \
+    UI/ItemNavigator.cpp \
     UI/ItemPropertiesWidget.cpp \
     UI/LayerPropertiesDialog.cpp \
     UI/MainView.cpp \

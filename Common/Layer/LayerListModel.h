@@ -23,8 +23,8 @@ public:
     void setText(QStringView text, const QIcon& icon = {});
 
 public:
-    virtual int rowCount(const QModelIndex& parent) const override;
-    virtual QVariant data(const QModelIndex& index, int role) const override;
+    int rowCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
 
 private:
     QString message_;
@@ -42,6 +42,9 @@ public:
 
     explicit LayerListModel(QObject* parent = nullptr);
 
+    // Clears the list model;
+    void clear() { layers_.clear(); }
+
     // Adds layer to the model
     void addLayer(LayerPtr layer);
 
@@ -58,16 +61,16 @@ signals:
     void layerMoved(int to);
 
 public:
-    virtual int rowCount(const QModelIndex& parent) const override;
-    virtual QVariant data(const QModelIndex& index, int role) const override;
+    int rowCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
 
-    virtual Qt::DropActions supportedDropActions() const override;
-    virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
+    Qt::DropActions supportedDropActions() const override;
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
 
-    virtual QStringList mimeTypes() const override;
-    virtual QMimeData* mimeData(const QModelIndexList& indexes) const override;
+    QStringList mimeTypes() const override;
+    QMimeData* mimeData(const QModelIndexList& indexes) const override;
 
-    virtual bool dropMimeData(const QMimeData* data, Qt::DropAction action, 
+    bool dropMimeData(const QMimeData* data, Qt::DropAction action,
         int row, int column, const QModelIndex& parent) override;
 
 private:

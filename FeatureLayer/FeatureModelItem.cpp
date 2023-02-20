@@ -133,9 +133,9 @@ void MultiPolygonModelItem::addGraphicsItems
     auto plygn = QPolygonF{};
 
     for (auto&& point : geometry_)
-        plygn.append(point);    
+        plygn.append(point);
 
-    items.addItem(new PolygonLayerItem{gsettings, plygn});
+    items.addItem(new PolygonLayerItem{gsettings, plygn, true});
 }
 
 } // namespace WaterwAIs

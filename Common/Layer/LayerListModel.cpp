@@ -117,7 +117,7 @@ QVariant LayerListModel::data(const QModelIndex& index, int role) const {
     auto row = index.row();
 
     switch (role) {
-        case Qt::DisplayRole:
+        case Qt::DisplayRole: // Store layer pointer for the layer delegate.
             return QVariant::fromValue(layers_[row].get());
 
         case Qt::DecorationRole: {

@@ -118,6 +118,24 @@ private:
     QString destination_;
 };
 
+
+//////////////////////////////////////////////////////////////////////////
+// GenericItem
+
+class GenericItem: public Item {
+public:
+    GenericItem(QStringView name, MetaComponentItem& component,
+        MetaLayerModel& model):
+        Item{name, component, model} {}
+
+    void addGraphicsItems(const LayerGraphicsSettings&,
+        LayerGraphicsItems&) override { /* No graphical items */ }
+
+private:
+};
+
+
+
 } // namespace MetaLayerModelItems
 } // namespace WaterwAIs
 

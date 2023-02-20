@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>574</width>
+    <width>620</width>
     <height>490</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0,0,0,0">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0,0,0,0,0">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
@@ -42,12 +42,21 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditFrom">
+      <widget class="QDateTimeEdit" name="lineEditFrom">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="displayFormat">
+        <string>MM-dd-yyyy hh:mm</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -59,12 +68,21 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditTo">
+      <widget class="QDateTimeEdit" name="lineEditTo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="displayFormat">
+        <string>MM-dd-yyyy hh:mm</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -112,6 +130,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButtonNav">
+       <property name="toolTip">
+        <string>Navigates to the item</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolButtonSettings">

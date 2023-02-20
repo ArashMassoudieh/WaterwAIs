@@ -92,6 +92,14 @@ Item::Ptr Item::create(QStringView name, MetaComponentItem& component,
         return link ? std::move(link) :
             std::make_unique<LinkItem>(name, component, model);
     }
+
+    case MetaComponentItem::Type::Unknown: {
+        // Check if model can provide custom generic item
+        auto node = model.createGeneric(name, component);
+
+        return node ? std::move(node)
+            : std::make_unique<GenericItem>(name, component, model);
+    }
         
     case MetaComponentItem::Type::Entity:
         // TBD.
@@ -121,9 +129,9 @@ void Item::getFromJson(const QJsonValue& json_value) {
             (component_.properties(), property, value.toString());
         }       
 
-        qDebug() << "[" << MetaComponentItem::typeToSting(type()) <<  
-            "] item, [set " << property_set << "] property=" <<
-            property << ", value =" << value;
+        //qDebug() << "[" << MetaComponentItem::typeToSting(type()) <<  
+        //    "] item, [set " << property_set << "] property=" <<
+        //    property << ", value =" << value;
 
         onProperty(property, value);
     }

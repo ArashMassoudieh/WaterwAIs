@@ -53,7 +53,7 @@
 // #define LAYERS_FILE u"Layers_example.json"
 // #define LAYERS_FILE u"Layers_example_lhost.json"
 
-// #define LAYERS_FILE u"Layers_sligo.json"
+//#define LAYERS_FILE u"Layers_sligo.json"
 
 #define LAYERS_FILE u"Layers.json"
 

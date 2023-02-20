@@ -116,6 +116,11 @@ void MetaLayerModel::getFromJsonDocument(const QJsonDocument& json_doc) {
         if (auto item = Item::create(key, *component, *this); item) {
             item->getFromJson(item_value);
 
+            if (item->type() == MetaComponentItem::Type::Unknown) {
+                // Generic item
+                generic_item_map_.emplace(key, static_cast<GenericItem*>(item.get()));
+            }
+
             // Storing the items in the model making sure that the node items are
             // placed at the front, so their layer graphic items will be created
             // first and become available to the link graphic items.
@@ -193,5 +198,20 @@ MetaLayerModel::LinkItemPtr MetaLayerModel::createLink(QStringView name,
     // default Node item creation in the Item::create()
     return {};
 }
+
+
+MetaLayerModel::GenericItemPtr MetaLayerModel::createGeneric(QStringView name,
+    MetaComponentItem& component) {
+    Q_UNUSED(name);
+    Q_UNUSED(component);
+
+    // Create custom Generic objects here like:
+    // return std::make_unique<CustomGenericItem>(name, component, model);
+    //
+
+    // default Unknown item creation in the Item::create()
+    return {};
+}
+
 
 } // namespace WaterwAIs

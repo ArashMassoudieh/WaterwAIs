@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>213</width>
-    <height>129</height>
+    <width>227</width>
+    <height>170</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,25 +22,35 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Theme:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxTheme"/>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Legend:</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <widget class="QComboBox" name="comboBoxLegend"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="checkBoxTitle">
+       <property name="toolTip">
+        <string>Shows chart title</string>
+       </property>
+       <property name="text">
+        <string>Title</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -75,8 +85,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>164</x>
-     <y>108</y>
+     <x>173</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -91,8 +101,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>164</x>
-     <y>108</y>
+     <x>173</x>
+     <y>160</y>
     </hint>
     <hint type="destinationlabel">
      <x>173</x>
@@ -107,8 +117,8 @@
    <slot>changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>106</x>
-     <y>19</y>
+     <x>168</x>
+     <y>65</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -123,8 +133,8 @@
    <slot>changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>116</x>
-     <y>43</y>
+     <x>178</x>
+     <y>98</y>
     </hint>
     <hint type="destinationlabel">
      <x>39</x>
@@ -139,12 +149,28 @@
    <slot>changed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>55</x>
-     <y>84</y>
+     <x>64</x>
+     <y>130</y>
     </hint>
     <hint type="destinationlabel">
      <x>11</x>
      <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxTitle</sender>
+   <signal>clicked()</signal>
+   <receiver>ChartSettingsDialog</receiver>
+   <slot>changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>35</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>107</x>
+     <y>12</y>
     </hint>
    </hints>
   </connection>

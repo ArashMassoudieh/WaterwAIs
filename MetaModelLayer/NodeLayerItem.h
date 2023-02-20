@@ -21,7 +21,7 @@ public:
     ~NodeLayerItem() override;
     
     QRectF boundingRect() const override;
-    QPainterPath shape() const override;
+    //QPainterPath shape() const override;
 
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
         QWidget* widget) override;
@@ -45,6 +45,9 @@ public:
     qreal height() const { return size_.height(); }
 
 private:
+    QRectF rect() const;
+    QRectF selectedRect() const;
+
     QPointF   coordinates_;
     QSizeF    size_;
 };

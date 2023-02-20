@@ -26,5 +26,17 @@
      	"diameter": "0.1[m]",
      	"length": "50[m]",
      	"name": "the sewer pipe"
-     }
+     },
+	 "build-up (1)" : {
+     	"type": "Build up",
+     	"build_up_rate": "0.345[m/day]",
+		"coefficient": "1.239",
+     	"name": "the build-up"
+     },
+	 "Constituent (1)": {
+		"type": "Constituent",
+		"diffusion_coefficient": "23455.78",
+		"inflow_concentration": "Timeseries/subcatchment2.csv",
+		"name": "the constituent"
+	 }
 }

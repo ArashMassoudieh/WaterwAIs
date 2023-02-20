@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget* parent)
     connect(this, &QObject::destroyed, this, [this](auto*) 
         { onBeforeAppDestroy(); });
 
+    // Icon
+    setWindowIcon(QIcon{":/Resources/app.png"});
+
     main_view_ = new MainView(this);
     mapView()->setScene(scene_);
 
@@ -44,6 +47,8 @@ void MainWindow::onBeforeAppDestroy() {
 }
 
 void MainWindow::buildLayers() {
+    layers_list_model_.clear();
+
     // Show layers information downloading widget...
     msg_list_model_.setText(u"Downloading layer info...");
     main_view_->setMessageListModel(&msg_list_model_);    
@@ -106,21 +111,23 @@ void MainWindow::addMetaModelLayer() {
         layers_info_->model().description);
 
     layers_.emplace_back(meta_model_layer);
+
+    // We will notify the main view that meta-model is loaded.
+    connect(meta_model_layer.get(), &Layer::layerReady,
+        this, [this, meta_model_layer]() {
+            main_view_->onMetaModelLoaded(meta_model_layer);
+        });
 }
 
 void MainWindow::buildLayerListModel() {
     // Adding layers to the layer list model
-    for (auto&& layer : layers_) {
+    for (auto& layer : layers_) {
         connect(layer.get(), &Layer::layerReady,
-            this, [this](auto) { zoomAll(); });
+            this, [this](auto) { main_view_->mapView()->zoomToFit(); });
 
         // Adding layer to the layer list model.
         layers_list_model_.addLayer(layer);
     }
-}
-
-void MainWindow::zoomAll() {
-    main_view_->mapView()->zoomToFit();
 }
 
 } // namespace WaterwAIs

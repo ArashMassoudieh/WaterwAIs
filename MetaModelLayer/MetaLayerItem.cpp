@@ -17,6 +17,10 @@ static constexpr double item_zvalue = 40000;
 MetaLayerItem::MetaLayerItem(const LayerGraphicsSettings& gsettings,
     ModelItem& model_item)
     : LayerGenericItem{gsettings}, model_item_{model_item} {
+
+    // Allow item to be selected.
+    LayerGenericItem::setFlags(QGraphicsItem::ItemIsSelectable);
+
     // Common settings
     setData(data_key, item_string);
 

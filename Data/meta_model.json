@@ -40,5 +40,55 @@
             "type": "value"
         },		
         "icon": "/5.png"
+    },
+	"Build up": {
+        "build_up_rate": {
+            "type": "value"
+        },
+        "coefficient": {
+            "type": "value"
+        },
+        "description": "Buildup constant-rate",
+        "icon": "Icons/build_up.png",
+        "timeseries": {
+            "type": "timeseries"
+        }
+    },
+	"Constituent": {
+        "advective_masstransfer": {
+            "type": "expression"
+        },
+        "concentration": {
+            "type": "expression"
+        },
+        "description": "Chemical constituent",
+        "diffusion_coefficient": {
+            "type": "value"
+        },
+        "diffusive_masstransfer": {
+            "type": "expression"
+        },
+        "external_mass_flow_timeseries": {
+            "type": "timeseries"
+        },
+        "external_source": {
+            "type": "source"
+        },
+        "icon": "Icons/constituent.png",
+        "inflow_concentration": {
+            "type": "timeseries"
+        },
+        "inflow_loading": {
+            "type": "expression"
+        },
+        "mass": {
+            "type": "balance"
+        },
+        "masstransfer": {
+            "type": "expression"
+        },
+        "stoichiometric_constant": {
+            "type": "expression"
+        }
     }
 }

@@ -33,7 +33,7 @@ void MapScene::mousePressEvent(QGraphicsSceneMouseEvent* event) {
     // items to be selected, but we need clear the acceptance of the event
     // after item selection in order to let the GraphicView to do panning.
     if (drag_mode_)
-        event->setAccepted(false);    
+        event->setAccepted(false);
 }
 
 } // namespace WaterwAIs

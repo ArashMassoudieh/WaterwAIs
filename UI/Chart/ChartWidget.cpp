@@ -6,39 +6,35 @@
 #include "ChartSettingsDlg.h"
 
 #include <Application/TimeSeriesCache.h>
+#include <MetaModelLayer/MetaLayerItem.h>
 
+#include <QStyle>
 #include <QLineSeries>
 #include <QChart>
 #include <QValueAxis>
+#include <QDateTimeAxis>
 #include <QDoubleValidator>
 
 namespace WaterwAIs {
 
 namespace {
 
-class RangeFromValidator: public QDoubleValidator {
-public:
-    RangeFromValidator(double bottom, double top, int decimals,
-        QObject* parent = nullptr)
-        :QDoubleValidator(bottom, top, decimals, parent) {
-    }
+static constexpr auto date_format  = "MM-dd-yyyy hh:mm";
+static constexpr auto input_format = "MM-dd-yyyy hh:mm";
 
-    virtual void fixup(QString& input)const override {
-        input = QString::number(bottom(), 'f', decimals());
-    }
-};
+// This function takes the number of days since 12/30/1899 00:00:00
+// and converts it into a number of msecs since Epoch needed to cunstruct
+// QDateTime instances for charts.
+double toMSecsSinceEpoch(double days) {
+    return (days * 86400 - 2209161600) * 1000;
+}
 
-class RangeToValidator: public QDoubleValidator {
-public:
-    RangeToValidator(double bottom, double top, int decimals,
-        QObject* parent = nullptr)
-        :QDoubleValidator(bottom, top, decimals, parent) {
-    }
-
-    virtual void fixup(QString& input)const override {
-        input = QString::number(top(), 'f', decimals());
-    }
-};
+// This function returns the number of days since 12/30/1899 00:00:00
+// from QDateTime value.
+double daysFromDateTime(const QDateTime dt) {
+    auto secs_epoch = static_cast<double>(dt.toSecsSinceEpoch());
+    return (secs_epoch + 2209161600) / 86400;
+}
 
 } // anonymous
 
@@ -56,8 +52,14 @@ ChartWidget::ChartWidget(const ChartInfo& chart_info, QWidget* parent):
     
     ui->toolButtonReset->setIcon(QIcon{":/Resources/resize.png"});
     ui->toolButtonReset->setText("");
+    
+    auto icon = QApplication::style()->standardIcon(QStyle::SP_CommandLink);
+    ui->toolButtonNav->setIcon(icon);    
 
-    setWindowIcon(QIcon{":/Resources/chart.png"});   
+    ui->lineEditFrom->setDisplayFormat(input_format);
+    ui->lineEditTo  ->setDisplayFormat(input_format);
+
+    setWindowIcon(QIcon{":/Resources/chart.png"});
 
     // Creating chart for time series
     createChart();
@@ -66,6 +68,10 @@ ChartWidget::ChartWidget(const ChartInfo& chart_info, QWidget* parent):
 ChartWidget::~ChartWidget() {
     hideStatusText();
     delete ui;
+}
+
+void ChartWidget::onNavigatorSet() {
+    ui->toolButtonNav->setIcon(ItemNavigatorHolder::icon());
 }
 
 void ChartWidget::on_toolButtonSettings_clicked() {
@@ -84,13 +90,17 @@ void ChartWidget::on_pushButtonGo_clicked() {
 }
 
 void ChartWidget::fillSeries() {
-    auto from = ui->lineEditFrom->text().toDouble();
-    auto to   = ui->lineEditTo->text().toDouble();
+    auto from = ui->lineEditFrom->dateTime();
+    auto to   = ui->lineEditTo  ->dateTime();
+
+    qDebug() << "from: " << from;
+    qDebug() << "to  : " << to;
 
     if (from > to) {
         std::swap(from, to);
-        ui->lineEditFrom->setText(QString::number(from, 'f', 2));
-        ui->lineEditTo->setText(QString::number(to, 'f', 2));
+        
+        ui->lineEditFrom->setDateTime(from);
+        ui->lineEditTo  ->setDateTime(to);
     }
 
     auto series = qobject_cast<QLineSeries*>(chart_->series().front());
@@ -108,12 +118,15 @@ void ChartWidget::fillSeries() {
     auto max_value = 0.0;
     auto first_value = true;
 
+    auto from_days = daysFromDateTime(from);
+    auto to_days   = daysFromDateTime(to);
+
     for (auto i = 0; i < count; i++) {
         auto time = ts.GetT(i);
-        if (time > to)
+        if (time > to_days)
             break;
 
-        if (time >= from) {
+        if (time >= from_days) {
             auto value = ts.GetC(i);
 
             if (first_value) {
@@ -126,7 +139,7 @@ void ChartWidget::fillSeries() {
             min_value = std::min(min_value, value);
             max_value = std::max(max_value, value);
 
-            series->append(time, value);
+            series->append(toMSecsSinceEpoch(time), value);
         }
     }
 
@@ -152,39 +165,41 @@ void ChartWidget::fillChart() {
     hideStatusText();
 
     auto series = qobject_cast<QLineSeries*>(chart_->series().front());
-    Q_ASSERT(series);
+    Q_ASSERT(series);    
 
     for (auto i = 0; i < count; i++)
-        series->append(ts.GetT(i), ts.GetC(i));
+        series->append(toMSecsSinceEpoch(ts.GetT(i)), ts.GetC(i));    
 
-    chart_->addSeries(series);
+    auto axisX = new QDateTimeAxis{};
+    axisX->setFormat(date_format);
+    
+    min_t_.setMSecsSinceEpoch(toMSecsSinceEpoch(ts.mint()));
+    max_t_.setMSecsSinceEpoch(toMSecsSinceEpoch(ts.maxt()));
 
-    min_t_ = ts.mint();
-    max_t_ = ts.maxt();
+    axisX->setRange(min_t_, max_t_);
 
-    chart_->createDefaultAxes();
-    chart_->axes(Qt::Horizontal).first()->setRange(min_t_, max_t_);
-    chart_->axes(Qt::Vertical).first()->setRange(ts.minC(), ts.maxC());
+    //axisX->setTickCount(5);
+    //axisX->setTitleText("time");
 
-    // Add space to label to add space between labels and axis
-    auto axis_x = qobject_cast<QValueAxis*>(chart_->axes(Qt::Horizontal).first());
-    axis_x->setLabelFormat("%.2f  ");
-    //axis_x->setTitleText("time");
+    chart_->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
 
-    auto axis_y = qobject_cast<QValueAxis*>(chart_->axes(Qt::Vertical).first());
-    axis_y->setLabelFormat("%.2f  ");
+    auto axisY = new QValueAxis{};
+    axisY->setLabelFormat("%.2f  ");
+    axisY->setRange(ts.minC(), ts.maxC());
+
+    chart_->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
 
     setupChart();
     ui->chartView->setChart(chart_);
 
     // Updating From/To
-    ui->lineEditFrom->setText(QString::number(min_t_, 'f', 2));
-    ui->lineEditFrom->setValidator(new RangeFromValidator(min_t_, max_t_, 2,
-        ui->lineEditFrom));
+    ui->lineEditFrom->setDateTime(min_t_);    
+    ui->lineEditFrom->setDateTimeRange(min_t_, max_t_);
 
-    ui->lineEditTo->setText(QString::number(max_t_, 'f', 2));
-    ui->lineEditTo->setValidator(new RangeToValidator(min_t_, max_t_, 2,
-        ui->lineEditTo));
+    ui->lineEditTo->setDateTime(max_t_);
+    ui->lineEditTo->setDateTimeRange(min_t_, max_t_);
 
     // Enable chart-related controls as chart is ready.
     enableChartControls(); 
@@ -192,8 +207,8 @@ void ChartWidget::fillChart() {
 
 
 void ChartWidget::on_toolButtonReset_clicked() {
-    ui->lineEditFrom->setText(QString::number(min_t_, 'f', 2));
-    ui->lineEditTo  ->setText(QString::number(max_t_, 'f', 2));
+    ui->lineEditFrom->setDateTime(min_t_);
+    ui->lineEditTo  ->setDateTime(max_t_);
 
     fillSeries();
 }
@@ -213,7 +228,6 @@ void ChartWidget::createChart() {
 
     // Creating chart
     chart_ = new QChart{};
-    chart_->setTitle(chart_info_.name());
 
     auto series = new QLineSeries{chart_};
     series->setName("Values");
@@ -242,6 +256,9 @@ void ChartWidget::createChart() {
 void ChartWidget::setupChart() {
     // Settings
     auto& settings = ChartView::chartSettings();
+
+    // Title        
+    chart_->setTitle(settings.title ? chart_info_.name() : "");
 
     // Theme
     chart_->setTheme(settings.theme);
@@ -287,5 +304,10 @@ QSize ChartWidget::minimumSizeHint() const {
     // This ensures that we can collapse the channel widget to 0 size.
     return {0, 0};
 }
+
+void ChartWidget::on_toolButtonNav_clicked() {
+    navigate();
+}
+
 
 } // namespace WaterwAIs
