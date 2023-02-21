@@ -265,19 +265,21 @@ CTimeSeriesSet<T>::CTimeSeriesSet(string _filename, bool varytime)
 					for (unsigned int i = 1; i < s.size(); i++) names.push_back(s[i]);
 				if (aquiutils::tail(s[0],5) == "units" || aquiutils::tail(s[0], 4) == "unit")
 					for (unsigned int i = 1; i < s.size(); i++) units.push_back(s[i]);
+                if (aquiutils::left(s[0],2) == "//")
+                {
+                    names.push_back(aquiutils::right(s[1],s[1].length()-2));
+                    for (unsigned int i = 3; i < s.size(); i+=2) names.push_back(s[i]);
+                }
 				if ((s[0].substr(0, 2) != "//") && (aquiutils::tail(s[0],5) != "names") && (aquiutils::tail(s[0],5) != "units"))
 				{
 					if (nvars == 0) { nvars = s.size() - 1; BTC.resize(nvars); }
 					if (int(s.size()) == nvars + 1)
 						for (int i = 0; i < nvars; i++)
 						{
-							BTC[i].t.push_back(atof(s[0].c_str()));
-							BTC[i].C.push_back(atof(s[i + 1].c_str()));
-							BTC[i].n++;
-							if (BTC[i].t.size()>2)
+                            BTC[i].append(atof(s[0].c_str()),atof(s[i + 1].c_str()));
+                            if (BTC[i].n>2)
                                 if ((BTC[i].GetT(BTC[i].tSize() - 1) - BTC[i].GetT(BTC[i].tSize() - 2)) != (BTC[i].GetT(BTC[i].tSize() - 2) - BTC[i].GetT(BTC[i].tSize() - 3)))
 									BTC[i].structured = false;
-
 						}
 
 				}
@@ -293,7 +295,11 @@ CTimeSeriesSet<T>::CTimeSeriesSet(string _filename, bool varytime)
 					for (unsigned int i = 1; i < s.size(); i++) if (aquiutils::trim(s[i])!="") names.push_back(s[i]);
 				if (aquiutils::tail(s[0],5) == "units" || aquiutils::tail(s[0], 4) == "unit")
 					for (unsigned int i = 1; i < s.size(); i++) units.push_back(s[i]);
-				if ((s[0].substr(0, 2) != "//") && (aquiutils::tail(s[0],5) != "names") && (aquiutils::tail(s[0],5) != "units"))
+                if (aquiutils::left(s[0],2) == "//")
+                {
+                    for (unsigned int i = 1; i < s.size(); i+=2) names.push_back(s[i]);
+                }
+                if ((s[0].substr(0, 2) != "//") && (aquiutils::tail(s[0],5) != "names") && (aquiutils::tail(s[0],5) != "units"))
 				{
 					if (nvars == 0) { nvars = s.size() / 2; BTC.resize(nvars); }
 
@@ -302,12 +308,10 @@ CTimeSeriesSet<T>::CTimeSeriesSet(string _filename, bool varytime)
 						if (int(s.size()) >= 2 * (i + 1))
 							if ((aquiutils::trim(s[2 * i]) != "") && (aquiutils::trim(s[2 * i + 1]) != ""))
 							{
-								BTC[i].t.push_back(atof(s[2 * i].c_str()));
-								BTC[i].C.push_back(atof(s[2 * i + 1].c_str()));
-								BTC[i].n++;
-								if (BTC[i].t.size()>2)
-									if ((BTC[i].GetT(BTC[i].t.size() - 1) - BTC[i].GetT(BTC[i].t.size() - 2)) != (BTC[i].GetT(BTC[i].t.size() - 2) - BTC[i].GetT(BTC[i].t.size() - 3)))
-										BTC[i].structured = false;
+                                BTC[i].append(atof(s[2*i].c_str()),atof(s[2*i + 1].c_str()));
+                                if (BTC[i].n>2)
+                                    if ((BTC[i].GetT(BTC[i].tSize() - 1) - BTC[i].GetT(BTC[i].tSize() - 2)) != (BTC[i].GetT(BTC[i].tSize() - 2) - BTC[i].GetT(BTC[i].tSize() - 3)))
+                                        BTC[i].structured = false;
 							}
 					}
 				}
