@@ -34,8 +34,12 @@
 #endif
 
 // Example of loading models and icons from some host server.
-#define SERVER_PATH "http://localhost/Data"
+//#define SERVER_PATH "http://localhost/Data"
 //#define SERVER_PATH "http://20.244.11.239/api"
+
+// NOTE: Empty server path means that the application needs to get the
+// server location from the Application::url() call.
+#define SERVER_PATH ""
 
 // Force to use server path - if needed for testing etc.
 //#undef USE_LOCAL_DATA_FILES

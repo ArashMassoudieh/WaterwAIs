@@ -2,6 +2,7 @@
 #define APPLICATION_H_8A4B1365A0E60012
 
 #include <QApplication>
+
 #include <memory>
 
 namespace WaterwAIs {
@@ -28,6 +29,9 @@ public:
 
     // Setting host path - base path for names that don't specify absolute path
     static void setHostPath(QStringView path);
+
+    // Returns application URL for WebAssembly run
+    static QUrl url();
 
 private:
     // Main Window

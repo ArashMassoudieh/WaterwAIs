@@ -144,7 +144,6 @@ SOURCES += main.cpp
 
 RESOURCES += images.qrc
 
-#DEFINES += Arash
 
 build_all:!build_pass {
     CONFIG -= build_all

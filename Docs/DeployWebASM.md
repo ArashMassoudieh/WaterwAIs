@@ -18,16 +18,24 @@ Open `Edit` -> `Preferences...`. On left side, choose `Devices` and enter path t
 ## Build Qt
 Select Release build and build project.
 
+**NOTE:** Make sure that the line `USE_LOCAL_DATA_FILES = 1` **IS COMMENTED OUT** in the `WateraAIs.pro` project file for the deployment Release build!
+
 ![Build WASM](Build-Project.png)
 
-Copy those files to server (`$HOME/app/html` on server):
+Modify the WateraAIs.html similar to the same file in the `Deploy stuff` folder
+or just copy it into the build output folder (i.e. ending as 'build-WateraAIs-WebAssembly_Qt_6_4_2-Release').
+It enables WateraAIs flavicon and replaces Qt logo image.
+
+After modification, copy `app.svg` and `app.png` from the the `Deploy stuff` folder to the build output folder.
+
+Copy those files from the build output folder to server (`$HOME/app/html` on server):
 ```
-object_script.QMapViewer.js
-QMapViewer.html
-QMapViewer.js
-QMapViewer.wasm
+WateraAIs.html
+WateraAIs.js
+WateraAIs.wasm
 qtloader.js
-qtlogo.svg
+app.svg
+app.png
 ```
 
 ## Setup nginx
