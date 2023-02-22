@@ -1,1617 +1,2022 @@
 {
-    "name": "Meta-Model",
-	"icon": "/5.png",
-	"Activated_Sludge_Reactor": {
-        "Storage": {
-            "type": "balance"
-        },
-        "description": "Reactor",
-        "icon": "Icons/activate_sludge_reactor.png",
-        "type": "node"
-    },
     "Aggregate_storage_layer": {
+        "K_sat": {
+            "delegate": "UnitBox",
+            "description": "Saturated Hydraulc Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m/day;ft/day;m/s;ft/s"
+        },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Initial Storage;Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^3;ft~^3"
         },
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Base Area",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2;ft~^2"
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Initial Water Depth; Water Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft;cm"
         },
         "description": "Aggregate zone",
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/aggregates.png",
         "inflow": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Inflow time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "porosity": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Porosity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "type": "node"
     },
-    "Aquifer_recharge": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Aquifer recharge",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/aquifer_recharge.png",
-        "recharge_rate": {
-            "type": "timeseries"
-        },
-        "type": "link"
-    },
-    "Bed_sediment": {
-        "K_eff": {
-            "type": "expression"
-        },
-        "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "value"
-        },
-        "description": "Bed sediment layer",
-        "head": {
-            "type": "expression"
-        },
-        "hydraulic_conductivity": {
-            "type": "value"
-        },
-        "icon": "Icons/bed_sediment.png",
-        "length": {
-            "type": "value"
-        },
-        "porosity": {
-            "type": "value"
-        },
-        "specific_storage": {
-            "type": "value"
-        },
-        "type": "node",
-        "water_content": {
-            "type": "expression"
-        },
-        "width": {
-            "type": "value"
-        }
-    },
-    "Build up": {
-        "build_up_rate": {
-            "type": "value"
-        },
-        "coefficient": {
-            "type": "expression"
-        },
-        "description": "Buildup constant-rate",
-        "icon": "Icons/build_up.png",
-        "timeseries": {
-            "type": "expression"
-        }
-    },
     "Catch basin": {
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Initial Storage;Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^3;ft~^3"
         },
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Base Area",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2;ft~^2"
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Water Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft;cm"
         },
         "description": null,
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Catch_basin.png",
         "inflow": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Inflow time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "node"
     },
     "Catchment": {
         "Evapotranspiration": {
-            "type": "source"
+            "delegate": "ComboBox;Sources",
+            "description": "Evapotranspiration",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "ManningCoeff": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Manning's Roughness Coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Precipitation": {
-            "type": "source"
+            "delegate": "ComboBox;Sources",
+            "description": "precipitation time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Slope": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Catchment slope in the direction of flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Initial Storage;Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Width": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "The width of the catchment",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Catchment area",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2;ft~^2"
         },
         "depression_storage": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Depression storage",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Average water depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft;cm;in"
         },
         "description": "Catchment",
         "elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Mean elevation of the catchment",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Average water head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/rainwater-catchment.png",
         "inflow_timeseries": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Inflow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "loss": {
-            "type": "expression"
+            "delegate": "ComboBox;Sources",
+            "description": "Loss rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "loss_coefficient": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Loss coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "1/day;1/hr"
         },
         "type": "node"
     },
     "Catchment_link": {
-        "color": {
-            "type": "string"
-        },
         "description": "Link from a catchment",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Catchment_outlet.png",
         "type": "link"
     },
     "Constituent": {
         "advective_masstransfer": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Advective mass transfer rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "concentration": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Concentration",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "g/m~^3"
         },
         "description": "Chemical constituent",
         "diffusion_coefficient": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Diffusion Coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2/s;m~^2/day;ft~^2/s;ft~^2/day"
         },
         "diffusive_masstransfer": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Diffusive mass transfer rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "external_mass_flow_timeseries": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "External mass flow time-series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "external_source": {
-            "type": "source"
+            "delegate": "ComboBox;Sources",
+            "description": "External source",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/constituent.png",
         "inflow_concentration": {
-            "type": "timeseries"
-        },
-        "inflow_loading": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Inflow concentration",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "mass": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Mass",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "masstransfer": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Total mass transfer rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "stoichiometric_constant": {
-            "type": "expression"
-        }
-    },
-    "Controlled_Reservoir": {
-        "Storage": {
-            "type": "balance"
+            "delegate": "expressionEditor",
+            "description": "Stoichiometric Constant",
+            "includeinoutput": "false",
+            "type": "expression",
+            "unit": ""
         },
-        "description": "Reservoir with controlled outflow",
-        "icon": "Icons/Reservoid_Control.png",
-        "inflow": {
-            "type": "timeseries"
-        },
-        "reservoir_coeff": {
-            "type": "value"
-        },
-        "reservoir_power": {
-            "type": "value"
-        },
-        "type": "node"
-    },
-    "Desorption": {
-        "description": "Desorption",
-        "icon": "Icons/desorption.png",
-        "normalizing_quantity": {
-            "type": ""
-        },
-        "rate_expression": {
-            "type": "expression"
-        }
-    },
-    "Dummy": {
-        "Calc_Value_1": {
-            "type": "expression"
-        },
-        "Storage": {
-            "type": "balance"
-        },
-        "a": {
-            "type": "value"
-        },
-        "b": {
-            "type": "value"
-        },
-        "c": {
-            "type": "value"
-        },
-        "d": {
-            "type": "value"
-        },
-        "description": "Dummy",
-        "icon": "Icons/Sewer_pipe_section.png",
-        "type": "node"
+        "type": "constituent"
     },
     "Evapotranspiration_Aerodynamic (S)": {
         "B": {
-            "type": "expression"
+            "delegate": "",
+            "description": "B coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "R_h": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Relative humidity time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Temperature": {
-            "type": "timeseries"
-        },
-        "coefficient": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Temperature time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "corr_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "description": null,
         "e_as": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated humidity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Evapotranspiration_Aerodynamic.png",
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
+        "type": "source",
         "wind_speed": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "wind time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "z0": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Roughness height",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "z2": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Wind measurement elevation",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         }
     },
     "Evapotranspiration_Aerodynamic (Soil)": {
         "B": {
-            "type": "expression"
+            "delegate": "",
+            "description": "B coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "R_h": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Relative humidity time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Temperature": {
-            "type": "timeseries"
-        },
-        "coefficient": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Temperature time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "corr_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "description": null,
         "e_as": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated humidity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Evapotranspiration_Aerodynamic_soil.png",
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
+        "type": "source",
         "wind_speed": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "wind time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "z0": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Roughness height",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "z2": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Wind measurement elevation",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         }
     },
     "Evapotranspiration_Energy_Balance (S)": {
         "Temperature": {
-            "type": "timeseries"
-        },
-        "coefficient": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Temperature time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "corr_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "description": null,
         "icon": "Icons/Evapotranspiration_energy_balance.png",
-        "l_v": {
-            "type": "expression"
-        },
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "solar_radiation": {
-            "type": "timeseries"
-        }
+            "delegate": "Browser",
+            "description": "Solar Radiation (W/m^2)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
+        "type": "source"
     },
     "Evapotranspiration_Energy_Balance (Soil)": {
         "Temperature": {
-            "type": "timeseries"
-        },
-        "coefficient": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Temperature time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "corr_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "description": null,
         "icon": "Icons/Evapotranspiration_energy_balance_soil.png",
-        "l_v": {
-            "type": "expression"
-        },
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "solar_radiation": {
-            "type": "timeseries"
-        }
+            "delegate": "Browser",
+            "description": "Solar Radiation (W/m^2)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
+        "type": "source"
     },
     "Evapotranspiration_Penmam (S)": {
         "B": {
-            "type": "expression"
+            "delegate": "",
+            "description": "B coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Delta": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Gradient of e_as vs T",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Ea": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Aerodynamic Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Er": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Radiation-based Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "R_h": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Relative humidity time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Temperature": {
-            "type": "timeseries"
-        },
-        "coefficient": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Temperature time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": null,
         "e_as": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated humidity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "gamma": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "psychrometric constant (Pa/C)",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "icon": "Icons/Evapotranspiration_Priestly_Taylor.png",
-        "l_v": {
-            "type": "expression"
-        },
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "solar_radiation": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Solar Radiation (W/m^2)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "solar_scale_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Solar radiation scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
+        "type": "source",
         "wind_scale_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Wind scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "wind_speed": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "wind time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "z0": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Roughness height",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "z2": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Wind measurement elevation",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         }
     },
     "Evapotranspiration_Penman (Soil)": {
         "B": {
-            "type": "expression"
+            "delegate": "",
+            "description": "B coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Delta": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Gradient of e_as vs T",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Ea": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Aerodynamic Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Er": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Radiation-based Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "R_h": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Relative humidity time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Temperature": {
-            "type": "timeseries"
-        },
-        "coefficient": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Temperature time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": null,
         "e_as": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated humidity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "gamma": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "psychrometric constant (Pa/C)",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "icon": "Icons/Evapotranspiration_Priestly_Taylor_soil.png",
-        "l_v": {
-            "type": "expression"
-        },
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "solar_radiation": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Solar Radiation (W/m^2)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "solar_scale_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Solar radiation scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
+        "type": "source",
         "wind_scale_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Wind scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "wind_speed": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "wind time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "z0": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Roughness height",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft"
         },
         "z2": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Wind measurement elevation",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft"
         }
     },
     "Evapotranspiration_Time_Series (S)": {
-        "coefficient": {
-            "type": "expression"
-        },
         "corr_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "description": null,
         "icon": "Icons/Evapotranspiration_timeseries.png",
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "timeseries": {
-            "type": "timeseries"
-        }
+            "delegate": "Browser",
+            "description": "Evaporation time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
+        "type": "source"
     },
     "Evapotranspiration_Time_Series (Soil)": {
-        "coefficient": {
-            "type": "expression"
-        },
         "corr_fact": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Scale factor",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "description": null,
         "icon": "Icons/Evapotranspiration_timeseries_soil.png",
         "rate": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Evapotranspiration rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "timeseries": {
-            "type": "timeseries"
-        }
-    },
-    "Fixed flow": {
-        "area": {
-            "type": "expression"
+            "delegate": "Browser",
+            "description": "Evaporation time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "color": {
-            "type": "string"
-        },
-        "description": "Fixed flow",
-        "flow": {
-            "type": "value"
-        },
-        "icon": "Icons/fixed_flow.png",
-        "length": {
-            "type": "expression"
-        },
-        "type": "link"
+        "type": "source"
     },
     "Fixedhead_to_channel": {
         "ManningCoeff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Link from a fixed head boundary to a channel segment",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/fixed2channel.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Connector length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "type": "link",
-        "velocity": {
-            "type": "expression"
-        }
+        "type": "link"
     },
     "Flow_control_device": {
         "Q_max": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Maximum flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day;ft~^3/day"
         },
         "Q_min": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Minimum flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day;ft~^3/day"
         },
         "S_max": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Upper precipitation threshold",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day"
         },
         "S_min": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Lower precipitation threshold",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day"
         },
         "description": "Flow control device",
         "flow": {
-            "type": "rule"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "flow_coefficient": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Flow multiplier",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "icon": "Icons/control_valve.png",
         "kernel_delay_parameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Mean kernel delay time",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "day"
         },
         "kernel_smoothed_forcast": {
-            "type": "expression"
-        },
-        "lambda": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Kernel Smoothed Forcast",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "timeseries": {
-            "type": "timeseries_prec"
+            "delegate": "Browser;time series",
+            "description": "Precipitation intensity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "Flow_control_device_(Gaussian_Kernel)": {
         "Q_max": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Maximum flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day;ft~^3/day"
         },
         "Q_min": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Minimum flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day;ft~^3/day"
         },
         "S_max": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Upper precipitation threshold",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day"
         },
         "S_min": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Lower precipitation threshold",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day"
         },
         "description": "Flow control device (Gaussian Kernel)",
         "flow": {
-            "type": "rule"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "flow_coefficient": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Flow multiplier",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "icon": "Icons/control_valve.png",
         "kernel_delay_parameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Mean kernel delay time",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "day"
         },
         "kernel_smoothed_forcast": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Kernel Smoothed Forcast",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "kernel_spread_parameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Kernel spread parameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "day"
         },
         "timeseries": {
-            "type": "timeseries_prec"
+            "delegate": "Browser;time series",
+            "description": "Precipitation intensity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "type": "link"
-    },
-    "Flow_to_user": {
-        "description": "Flow link to user",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/arrow_to_user.png",
         "type": "link"
     },
     "Groundwater cell": {
-        "K_eff": {
-            "type": "expression"
-        },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Initial Storage; Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Cell area",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "depth": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Cell Depth",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "description": "Groundwater cell",
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_conductivity": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Hydraulic Conductivity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
         "icon": "Icons/Groundwater.png",
         "moisture_content": {
-            "type": "expression"
+            "delegate": "ValueBox",
+            "description": "Moisture content",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "porosity": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Porosity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "specific_storage": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Specific Storage",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "1/m;1/ft;1/cm;1/in"
         },
         "type": "node"
-    },
-    "Immobile_Constituent": {
-        "concentration": {
-            "type": "expression"
-        },
-        "description": "Immobile constituent",
-        "external_mass_flow_timeseries": {
-            "type": "timeseries"
-        },
-        "external_source": {
-            "type": "source"
-        },
-        "icon": "Icons/immobile_constituent_reactor.png",
-        "mass": {
-            "type": "balance"
-        },
-        "masstransfer": {
-            "type": "expression"
-        },
-        "stoichiometric_constant": {
-            "type": "expression"
-        }
-    },
-    "MCMC": {
-        "acceptance_rate": {
-            "type": "value"
-        },
-        "add_noise_to_realizations": {
-            "type": "string"
-        },
-        "continue_based_on_file_name": {
-            "type": "string"
-        },
-        "description": "Markov chain Monte Carlo settings",
-        "icon": "",
-        "initial_purturbation": {
-            "type": "string"
-        },
-        "initual_purturbation_factor": {
-            "type": "value"
-        },
-        "number_of_burnout_samples": {
-            "type": "value"
-        },
-        "number_of_chains": {
-            "type": "value"
-        },
-        "number_of_post_estimate_realizations": {
-            "type": "value"
-        },
-        "number_of_samples": {
-            "type": "value"
-        },
-        "number_of_threads": {
-            "type": "value"
-        },
-        "perform_global_sensitivity": {
-            "type": "string"
-        },
-        "purturbation_change_scale": {
-            "type": "value"
-        },
-        "record_interval": {
-            "type": "value"
-        },
-        "samples_filename": {
-            "type": "string"
-        }
     },
     "Objective_Function": {
         "description": "Objective function",
         "exceedance_probability": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Exceedance probability",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "expression": {
-            "type": "expression"
+            "delegate": "expressionEditor",
+            "description": "Expression",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/objective.png",
         "method": {
-            "type": "string"
+            "delegate": "ComboBox;items:integrate,value,maximum,variance,exceedance",
+            "description": "Calculation method",
+            "includeinoutput": "false",
+            "type": "string",
+            "unit": ""
         },
         "object": {
-            "type": "string"
+            "delegate": "ComboBox;BlockLinks",
+            "description": "Object",
+            "includeinoutput": "false",
+            "type": "string",
+            "unit": ""
         },
+        "type": "objective_function",
         "weight": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Weight",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         }
     },
     "Observation": {
         "description": "Observation",
         "error_standard_deviation": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Error standard deviation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "error_structure": {
-            "type": "string"
+            "delegate": "ComboBox;items:normal,log-normal",
+            "description": "Error probability distribution",
+            "includeinoutput": "false",
+            "type": "string",
+            "unit": ""
         },
         "expression": {
-            "type": "expression"
+            "delegate": "expressionEditor",
+            "description": "Expression",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/observation.png",
         "object": {
-            "type": "string"
+            "delegate": "ComboBox;BlockLinks",
+            "description": "Object",
+            "includeinoutput": "false",
+            "type": "string",
+            "unit": ""
         },
         "observed_data": {
-            "type": "timeseries"
-        }
+            "delegate": "Browser",
+            "description": "Observed data time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
+        "type": "observation"
     },
     "Parameter": {
         "description": "Parameter",
         "high": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Upper Limit",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "icon": "Icons/parameter.png",
         "low": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Lower Limit",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "prior_distribution": {
-            "type": "string"
+            "delegate": "ComboBox;items:normal,log-normal",
+            "description": "Prior distribution",
+            "includeinoutput": "false",
+            "type": "string",
+            "unit": ""
         },
+        "type": "parameter",
         "value": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Value",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         }
     },
     "Particle": {
         "concentration": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Concentration",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "g/m~^3"
         },
         "description": "Solid Particle",
         "external_mass_flow_timeseries": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "External mass flow time-series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "external_source": {
-            "type": "source"
+            "delegate": "ComboBox;Sources",
+            "description": "External source",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Particle.png",
         "mass": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Mass",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "masstransfer": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Mass transfer rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "settling_velocity": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Settling velocity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/s;m/day;ft/s;ft/day"
         },
         "stoichiometric_constant": {
-            "type": "expression"
-        }
+            "delegate": "expressionEditor",
+            "description": "Stoichiometric Constant",
+            "includeinoutput": "false",
+            "type": "expression",
+            "unit": ""
+        },
+        "type": "constituent"
     },
     "Pond": {
         "Evapotranspiration": {
-            "type": "source"
+            "delegate": "ComboBox;Sources",
+            "description": "Evapotranspiration",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Precipitation": {
-            "type": "source"
+            "delegate": "ComboBox;Sources",
+            "description": "precipitation time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Storage": {
-            "type": "balance"
+            "delegate": "UnitBox",
+            "description": "Initial Storage;Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^3;ft~^3"
         },
         "alpha": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "The coefficient (~alpha) in the rating curve S = ~alpha d^~beta",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Surface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "beta": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "The exponent (~beta) in the rating curve S = ~alpha d^~beta",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom elevation of pond",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Water depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Stormwater pond",
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/stormwaterpond.png",
+        "inflow": {
+            "delegate": "Browser",
+            "description": "Inflow rate time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
         "type": "node"
     },
     "Precipitation": {
-        "coefficient": {
-            "type": "expression"
-        },
         "description": "Precipitation",
         "icon": "Icons/cloud.png",
         "timeseries": {
-            "type": "timeseries_prec"
-        }
+            "delegate": "Browser;time series",
+            "description": "Precipitation intensity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
+        "type": "source"
     },
     "Precipitation_w_forcast": {
-        "coefficient": {
-            "type": "expression"
-        },
         "description": "Precipitation with forcast",
         "icon": "Icons/cloud.png",
         "kernel_smoothed_forcast": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Kernel Smoothed Forcast",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "timeseries": {
-            "type": "timeseries_prec"
-        }
+            "delegate": "Browser;time series",
+            "description": "Precipitation intensity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
+        },
+        "type": "source"
     },
     "Reaction": {
         "description": "Chemical reaction",
         "icon": "Icons/reaction.png",
-        "normalizing_quantity": {
-            "type": ""
-        },
         "rate_expression": {
-            "type": "expression"
-        }
+            "delegate": "expressionEditor",
+            "description": "Rate Expression",
+            "includeinoutput": "",
+            "type": "expression",
+            "unit": ""
+        },
+        "type": "Reaction"
     },
     "ReactionParameter": {
         "Arrhenius_factor": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Arrhenius temperature correction factor",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "base_value": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Value",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "description": "Reaction Parameter",
         "icon": "Icons/reactionparameter.png",
         "reference_temperature": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Reference Temperature",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "temperature": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Temperature time-series (degrees Celsius)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
+        "type": "ReactionParameter",
         "value": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Value",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         }
-    },
-    "Reactor": {
-        "Storage": {
-            "type": "balance"
-        },
-        "description": "Reactor",
-        "icon": "Icons/reactor.png",
-        "inflow_timeseries": {
-            "type": "timeseries"
-        },
-        "type": "node"
-    },
-    "Reservoir": {
-        "Storage": {
-            "type": "balance"
-        },
-        "description": "Reservoir",
-        "icon": "Icons/Reservoir_Rating_Curve.png",
-        "inflow": {
-            "type": "timeseries"
-        },
-        "type": "node"
     },
     "Reservoir_link_rule": {
         "Q_max": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Maximum flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day;ft~^3/day"
         },
         "Q_min": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Minimum flow",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day;ft~^3/day"
         },
         "S_max": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Maximum storage",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3;ft~^3"
         },
         "S_min": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Minimum storage",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3;ft~^3"
         },
         "description": "Reservoir outflow with a rule-based flow",
         "flow": {
-            "type": "rule"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/reservoir_link.png",
         "type": "link"
     },
-    "River Segment": {
-        "ManningCoeff": {
-            "type": "value"
-        },
-        "Storage": {
-            "type": "balance"
-        },
-        "ag_area": {
-            "type": "value"
-        },
-        "ag_withdrawal": {
-            "type": "expression"
-        },
-        "ag_withdrawal_per_unit_area": {
-            "type": "timeseries"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "base_width": {
-            "type": "value"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": "River Segment",
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/River.png",
-        "inflow": {
-            "type": "timeseries"
-        },
-        "length": {
-            "type": "value"
-        },
-        "non_ag_area": {
-            "type": "value"
-        },
-        "non_ag_withdrawal": {
-            "type": "expression"
-        },
-        "non_ag_withdrawal_per_unit_area": {
-            "type": "timeseries"
-        },
-        "perimeter": {
-            "type": "expression"
-        },
-        "side_slope": {
-            "type": "value"
-        },
-        "type": "node",
-        "velocity": {
-            "type": "expression"
-        }
-    },
-    "River_bed_sediment_link": {
-        "area": {
-            "type": "expression"
-        },
-        "description": "River to bed link",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/River2BedLink.png",
-        "length": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "Sedimentation tank element interface": {
-        "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Settling element interface",
-        "flow": {
-            "type": "value"
-        },
-        "icon": "Icons/sedimentation_tank_element.png",
-        "length": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "Settling element": {
-        "Storage": {
-            "type": "balance"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "description": "Settling element",
-        "icon": "Icons/sedimentation_tank_element.png",
-        "type": "node"
-    },
-    "Settling element interface": {
-        "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Settling element interface",
-        "flow": {
-            "type": "value"
-        },
-        "icon": "Icons/Settling_element_link.png",
-        "type": "link"
-    },
     "Sewer2Sewer_link": {
         "ManningCoeff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Link from a sewer pipe block to another",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/sewer2sewer_link.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Connector length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "Sewer_channel_segment": {
         "ManningCoeff": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Manning's Roughness Coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Initial Water Depth; Water Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft;cm"
         },
         "description": "Sewer Channel Segment",
         "diameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Diameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Sewer_pipe.png",
         "inflow": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Inflow time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "length": {
-            "type": "value"
-        },
-        "normalized_area": {
-            "type": "expression"
-        },
-        "normalized_depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Segment length",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "node"
     },
     "Sewer_pipe": {
         "ManningCoeff": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m"
         },
         "area_1": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Start area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area_2": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "End area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "depth_1": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Start Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "depth_2": {
-            "type": "expression"
+            "delegate": "",
+            "description": "End Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Sewer pipe",
         "diameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Diameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "eff_area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "end_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "End elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow rate (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_gradient": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Gradient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radius": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective hydraulic radious",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Sewer_pipe_link.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Pipe length",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "perimeter_1": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Start wetted perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter_2": {
-            "type": "expression"
+            "delegate": "",
+            "description": "End wetted perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "start_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Start elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "type": "link"
     },
     "Sewerchannelsegment": {
         "ManningCoeff": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Manning's Roughness Coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Initial Water Depth; Water Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft;cm"
         },
         "description": "Sewer Channel Segment",
         "diameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Diameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Sewer_pipe_section.png",
         "inflow": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Inflow time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Segment length",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "normalized_area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Normalized area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "normalized_depth": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Normalized water depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "node"
-    },
-    "Sheet_flow": {
-        "Evapotranspiration": {
-            "type": "source"
-        },
-        "Precipitation": {
-            "type": "source"
-        },
-        "RoughnessCoeff": {
-            "type": "value"
-        },
-        "Slope": {
-            "type": "value"
-        },
-        "Storage": {
-            "type": "balance"
-        },
-        "Width": {
-            "type": "value"
-        },
-        "area": {
-            "type": "value"
-        },
-        "depression_storage": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": "Sheet flow",
-        "elevation": {
-            "type": "value"
-        },
-        "flow_exponent": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/sheet_flow.png",
-        "loss": {
-            "type": "expression"
-        },
-        "loss_coefficient": {
-            "type": "value"
-        },
-        "type": "node"
-    },
-    "Sheetflow_link": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Link from sheet flow surface",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/sheet_flow_link.png",
-        "type": "link"
     },
     "Soil": {
         "Evapotranspiration": {
-            "type": "source"
-        },
-        "K_sat": {
-            "type": "expression"
+            "delegate": "ComboBox;Sources",
+            "description": "Evapotranspiration",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat_original": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Saturated Hydraulc Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m/day;ft/day;m/s;ft/s"
         },
         "K_sat_scale_factor": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Hydraulic conductivity scale factor",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
+            "delegate": "ValueBox",
+            "description": "Effective Moisture content",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^3"
         },
         "alpha": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Van Genuchten's alpha parameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "1/m;1/ft;1/cm"
         },
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Area of the soil block",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2;ft~^2"
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation of the soil block",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "depth": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Depth of the soil block",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "description": "Variably Saturated Soil Block",
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Soil.png",
-        "m": {
-            "type": "expression"
-        },
         "n": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Van Genuchten's n parameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "pressure_head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Pressure Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "specific_storage": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Specific storage",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "1/m;1/ft"
         },
         "theta": {
-            "type": "expression"
+            "delegate": "ValueBox",
+            "description": "Initial Moisture Content; Moisture Content",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "theta_res": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Residual Moisture Content",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "theta_sat": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Saturated Moisture Content",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "type": "node",
         "volume": {
-            "type": "expression"
+            "delegate": "",
+            "description": "volume",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         }
-    },
-    "Sorbed_Constituent": {
-        "concentration": {
-            "type": "expression"
-        },
-        "description": "sorbed chemical constituent",
-        "external_mass_flow_timeseries": {
-            "type": "timeseries"
-        },
-        "external_source": {
-            "type": "source"
-        },
-        "icon": "Icons/sorbed_constituent.png",
-        "mass": {
-            "type": "balance"
-        },
-        "masstransfer": {
-            "type": "expression"
-        },
-        "stoichiometric_constant": {
-            "type": "expression"
-        }
-    },
-    "Spillway": {
-        "description": "Reservoir spillway",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/Splillway.png",
-        "reservoir_coeff": {
-            "type": "value"
-        },
-        "reservoir_power": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "Surface water to well": {
-        "ManningCoeff": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Surface water to well link",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/surface2well.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "Suspended Sediments": {
-        "advective_transfer": {
-            "type": "expression"
-        },
-        "alpha": {
-            "type": "value"
-        },
-        "beta": {
-            "type": "value"
-        },
-        "concentration": {
-            "type": "expression"
-        },
-        "description": "Suspended sediments",
-        "external_mass_flow_timeseries": {
-            "type": "timeseries"
-        },
-        "external_source": {
-            "type": "source"
-        },
-        "icon": "Icons/suspended_sediments.png",
-        "mass": {
-            "type": "balance"
-        },
-        "masstransfer": {
-            "type": "expression"
-        },
-        "resuspension_rate": {
-            "type": "expression"
-        },
-        "settling_transfer": {
-            "type": "expression"
-        },
-        "settling_velocity": {
-            "type": "value"
-        },
-        "slope": {
-            "type": "expression"
-        },
-        "stoichiometric_constant": {
-            "type": "expression"
-        },
-        "velocity_0": {
-            "type": "value"
-        }
-    },
-    "Tank": {
-        "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "value"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": null,
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/watertank.png",
-        "type": "node"
     },
     "Trapezoidal Channel Segment": {
         "ManningCoeff": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Manning's Roughness Coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Storage": {
-            "type": "balance"
+            "delegate": "",
+            "description": "Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "ag_area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Area of agriculural land",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2"
         },
         "ag_withdrawal": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Agricultural Withdrawal",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "ag_withdrawal_per_unit_area": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Agricultural Withdrawal per unit area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "base_width": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Base Width",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "bottom_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Bottom Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "depth": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Initial Water Depth; Water Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft;cm"
         },
         "description": "Trapezoidal Channel Segment",
         "head": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulc Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Trapezoidal_Channel.png",
         "inflow": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Inflow time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Segment length",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "non_ag_area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Area of non-agriculural activity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^2"
         },
         "non_ag_withdrawal": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Non-Agricultural Withdrawal",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "non_ag_withdrawal_per_unit_area": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Non-Agricultural Withdrawal per unit area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "side_slope": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Side Slope",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "type": "node"
     },
     "Trapezoidal_Channel_link": {
         "ManningCoeff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "description": "Link from a river segment to another",
+        "description": "Link from a channel segment to another",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "icon": "Icons/River2River.png",
+        "icon": "Icons/Trapezoidal_Channel_Link.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Connector length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "type": "link",
-        "velocity": {
-            "type": "expression"
-        }
-    },
-    "UC_groundwater_link": {
-        "Darcy flux": {
-            "type": "expression"
-        },
-        "description": "Unconfined Aquifer link",
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/unconfined_GW2unconfined_GW.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link",
-        "width": {
-            "type": "value"
-        }
-    },
-    "Unconfined Groundwater cell": {
-        "K_eff": {
-            "type": "expression"
-        },
-        "Precipitation": {
-            "type": "source"
-        },
-        "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "value"
-        },
-        "base_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": "Unconfined Aquifer Cell",
-        "hydraulic_conductivity": {
-            "type": "value"
-        },
-        "icon": "Icons/unconfined_aquifer.png",
-        "piezometric_head": {
-            "type": "expression"
-        },
-        "porosity": {
-            "type": "value"
-        },
-        "recharge": {
-            "type": "expression"
-        },
-        "recharge_per_area": {
-            "type": "timeseries"
-        },
-        "specific_yield": {
-            "type": "value"
-        },
-        "type": "node"
+        "type": "link"
     },
     "User": {
         "Storage": {
-            "type": "balance"
+            "delegate": "UnitBox",
+            "description": "Initial Storage;Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^3;ft~^3"
         },
         "description": "Water user",
         "icon": "Icons/farm.png",
@@ -1620,1429 +2025,1014 @@
     "User_flow": {
         "description": "Flow link to water user",
         "flow": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Flow rate time series",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/farm_link.png",
         "type": "link"
     },
-    "Water Storage": {
-        "Storage": {
-            "type": "balance"
-        },
-        "capacity": {
-            "type": "value"
-        },
-        "description": null,
-        "elevation": {
-            "type": "value"
-        },
-        "icon": "Icons/Storage.png",
-        "type": "node"
-    },
-    "Water Transfer": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Water Transfer",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/Water_Transfer.png",
-        "type": "link"
-    },
-    "Well": {
-        "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": "Well",
-        "diameter": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/Well.png",
-        "type": "node"
-    },
-    "Well2soil horizontal link": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Horizontal link from well to soil",
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/well-to-soil-H-link.png",
-        "interface_area": {
-            "type": "expression"
-        },
-        "interface_area_reverse": {
-            "type": "expression"
-        },
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "Well2soil vertical link": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Vertical link from well to soil",
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/well-to-soil-V-link.png",
-        "length": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "Well_aggregate": {
-        "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": "Well-filled with aggregates",
-        "diameter": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/Well_aggregate.png",
-        "porosity": {
-            "type": "value"
-        },
-        "type": "node"
-    },
     "aggregate_to_soil_link": {
         "K_sat": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Saturated Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Aggregate layer to soil link",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/aggregate2soil.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Lenght",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
-    },
-    "agricultural_user": {
-        "Storage": {
-            "type": "balance"
-        },
-        "constant_use_rate": {
-            "type": "value"
-        },
-        "description": "Agricultural User",
-        "icon": "Icons/agriculture.png",
-        "net_use_rate": {
-            "type": "expression"
-        },
-        "type": "node",
-        "use_rate": {
-            "type": "timeseries"
-        }
-    },
-    "aquifer2well_link": {
-        "description": "Unconfined Aquifer to Well connector for (fixed withdrawal)",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/unconfined_aquifer2well.png",
-        "type": "link"
-    },
-    "aquifer2well_link_pump": {
-        "description": "Unconfined Aquifer to Well connector (pumped withdrawal)",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/unconfined_aquifer2well.png",
-        "type": "link"
-    },
-    "atmospheric exchange": {
-        "coefficient": {
-            "type": "expression"
-        },
-        "description": "Atmospheric Exchange",
-        "icon": "Icons/Chemical_Source_exchange.png",
-        "rate_coefficient": {
-            "type": "value"
-        },
-        "saturation": {
-            "type": "value"
-        },
-        "timeseries": {
-            "type": "expression"
-        }
-    },
-    "bed_sediment_to_fixedhead": {
-        "area": {
-            "type": "expression"
-        },
-        "description": "Bed sediment to fixed head link",
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_conductivity": {
-            "type": "value"
-        },
-        "icon": "Icons/bed_sediment_2_fixed_head.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "catchment-distributed": {
-        "Evapotranspiration": {
-            "type": "source"
-        },
-        "ManningCoeff": {
-            "type": "value"
-        },
-        "Precipitation": {
-            "type": "source"
-        },
-        "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "value"
-        },
-        "depression_storage": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": null,
-        "elevation": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/catchment.png",
-        "loss": {
-            "type": "expression"
-        },
-        "loss_coefficient": {
-            "type": "value"
-        },
-        "type": "node"
     },
     "channel2fixed": {
         "ManningCoeff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Link from a channel segment to fixed head boundary",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/channel2fixed.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Connector length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
-    "chemical_source_timeseries": {
-        "description": "Chemical source time series",
-        "icon": "Icons/Chemical_Source_timeseries.png",
-        "timeseries": {
-            "type": "timeseries"
-        }
-    },
-    "commertial_user": {
-        "Storage": {
-            "type": "balance"
+    "darcy_connector": {
+        "Transmissivity": {
+            "delegate": "UnitBox",
+            "description": "Head-loss coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m~^3/day"
         },
-        "constant_use_rate": {
-            "type": "value"
-        },
-        "description": "Commertial User",
-        "icon": "Icons/commertial.png",
-        "net_use_rate": {
-            "type": "expression"
-        },
-        "type": "node",
-        "use_rate": {
-            "type": "timeseries"
-        }
-    },
-    "constant_source": {
-        "coefficient": {
-            "type": "expression"
-        },
-        "description": "Chemical source - constant",
-        "icon": "Icons/Chemical_source_constant.png",
-        "rate_per_volume": {
-            "type": "value"
-        },
-        "timeseries": {
-            "type": "expression"
-        }
-    },
-    "desalination_plant": {
-        "Storage": {
-            "type": "balance"
-        },
-        "constant_production_rate": {
-            "type": "value"
-        },
-        "description": "Desalination Plant",
-        "elevation": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/desalination_plant.png",
-        "maximum_production_rate": {
-            "type": "timeseries"
-        },
-        "production_rate": {
-            "type": "expression"
-        },
-        "storage_capacity": {
-            "type": "value"
-        },
-        "type": "node"
-    },
-    "distributed_catchment_link": {
-        "Length": {
-            "type": "value"
-        },
-        "ManningCoeff": {
-            "type": "expression"
-        },
-        "Width": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": null,
+        "description": "Darcy connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow rate (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/dcatchment-catchment-link.png",
-        "type": "link"
-    },
-    "distributed_catchment_to_fixed_head_link": {
-        "Length": {
-            "type": "value"
-        },
-        "Width": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": null,
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/dcatchment-fixedhead-link.png",
-        "type": "link"
-    },
-    "distributed_catchment_to_stream_link": {
-        "Length": {
-            "type": "value"
-        },
-        "Width": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": null,
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/dcatchment-stream-link.png",
+        "icon": "Icons/darcy_connector.png",
         "type": "link"
     },
     "drain_pipe": {
-        "color": {
-            "type": "string"
-        },
         "crest_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Crest Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "description": "Drain pipe",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow rate (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "head_loss_coefficient": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Head-loss coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "icon": "Icons/drain_pipe.png",
         "pipe_diameter": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Pipe Diameter",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "type": "link"
     },
     "fixed_head": {
         "Storage": {
-            "type": "balance"
-        },
-        "area": {
-            "type": "value"
-        },
-        "bottom_elevation": {
-            "type": "expression"
+            "delegate": "UnitBox",
+            "description": "Initial Storage; Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^3;ft~^3"
         },
         "description": "Fixed-head boundary",
         "head": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Head",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft"
         },
         "icon": "Icons/fixedhead.png",
         "type": "node"
     },
     "fixed_hydraulic_gradient_link": {
         "Hydraulic_Gradient": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Hydraulic Gradient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_eff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Fixed Hydraulic Gradient link",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/fixed_hydro_gradient.png",
         "m": {
-            "type": "expression"
+            "delegate": "",
+            "description": "m parameter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
-    "general_parameters": {
-        "alloutputfile": {
-            "type": "string"
-        },
-        "description": "General Parameters",
-        "icon": "",
-        "observed_outputfile": {
-            "type": "string"
-        },
-        "simulation_end_time": {
-            "type": "value"
-        },
-        "simulation_start_time": {
-            "type": "value"
-        }
-    },
     "groundwater_link": {
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Interface Area",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
         "description": "Groundwater link",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow rate",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Groundwater_link.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Length",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "type": "link"
     },
     "groundwater_to_fixedhead": {
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Interface Area",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
         "description": "Groundwater to fixed head",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/gw_2_fixed_head.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Length",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "type": "link"
     },
     "groundwater_to_stream": {
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Interface Area",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
         "description": "Groundwater to stream",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_conductivity": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Hydraulic Conductivity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
         "icon": "Icons/gw_2_fixed_head.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Length",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "type": "link"
-    },
-    "industrial_user": {
-        "Storage": {
-            "type": "balance"
-        },
-        "constant_use_rate": {
-            "type": "value"
-        },
-        "description": "Industrial User",
-        "icon": "Icons/industrial.png",
-        "net_use_rate": {
-            "type": "expression"
-        },
-        "type": "node",
-        "use_rate": {
-            "type": "timeseries"
-        }
-    },
-    "junction": {
-        "Storage": {
-            "type": "balance"
-        },
-        "description": "Rigid Junction",
-        "elevation": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/junction_rigid.png",
-        "type": "node"
-    },
-    "junction_elastic": {
-        "Storage": {
-            "type": "balance"
-        },
-        "description": "Elastic Junction",
-        "elasticity": {
-            "type": "value"
-        },
-        "elevation": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/junction.png",
-        "type": "node"
     },
     "lake2groundwater_link": {
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Interface Area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Lake to groundwater link",
         "flow": {
-            "type": "expression"
-        },
-        "hydraulic_conductivity": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Surface2GW_link.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Length",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft"
         },
         "type": "link"
-    },
-    "optimizer": {
-        "description": "Optimizer Parameters",
-        "icon": "",
-        "maxpop": {
-            "type": "value"
-        },
-        "ngen": {
-            "type": "value"
-        },
-        "numthreads": {
-            "type": "value"
-        },
-        "outputfile": {
-            "type": "string"
-        },
-        "pcross": {
-            "type": "value"
-        },
-        "pmute": {
-            "type": "value"
-        },
-        "shakescale": {
-            "type": "value"
-        },
-        "shakescalered": {
-            "type": "value"
-        }
-    },
-    "pipe_1w": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Pipe (Hazen-Williams Equation, 1 way)",
-        "diameter": {
-            "type": "value"
-        },
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "hz_coeff": {
-            "type": "value"
-        },
-        "icon": "Icons/pipe_1w.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "pipe_2w": {
-        "color": {
-            "type": "string"
-        },
-        "description": "Pipe (Hazen-Williams Equation, 2 way)",
-        "diameter": {
-            "type": "value"
-        },
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "hz_coeff": {
-            "type": "value"
-        },
-        "icon": "Icons/pipe.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "public_user": {
-        "Storage": {
-            "type": "balance"
-        },
-        "constant_use_rate": {
-            "type": "value"
-        },
-        "description": "Public User",
-        "icon": "Icons/public.png",
-        "net_use_rate": {
-            "type": "expression"
-        },
-        "type": "node",
-        "use_rate": {
-            "type": "timeseries"
-        }
-    },
-    "pump": {
-        "alpha": {
-            "type": "value"
-        },
-        "beta": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Pump with a quadratic head-flow relationship",
-        "flow": {
-            "type": "expression"
-        },
-        "head_0": {
-            "type": "value"
-        },
-        "icon": "Icons/pump.png",
-        "power": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "pump_with_timeseries_control": {
-        "alpha": {
-            "type": "value"
-        },
-        "beta": {
-            "type": "value"
-        },
-        "coefficient_time_series": {
-            "type": "timeseries"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Pump with time series control",
-        "flow": {
-            "type": "expression"
-        },
-        "head_0": {
-            "type": "value"
-        },
-        "icon": "Icons/pump_with_time_series_control.png",
-        "power": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "residential_user": {
-        "Storage": {
-            "type": "balance"
-        },
-        "constant_use_rate": {
-            "type": "value"
-        },
-        "description": "Residential User",
-        "icon": "Icons/residential.png",
-        "net_use_rate": {
-            "type": "expression"
-        },
-        "type": "node",
-        "use_rate": {
-            "type": "timeseries"
-        }
     },
     "sewer2fixed": {
         "Hydraulic Gradient": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydralic Gradient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "ManningCoeff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Link from a sewer pipe segment to fixed head boundary",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/sewer2fixedhead_link.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Connector length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "sewer2pond": {
         "ManningCoeff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area_1": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Upstream cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area_2": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Downstream area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "depth_2": {
-            "type": "expression"
+            "delegate": "",
+            "description": "End Depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Link from a sewer pipe segment to a pond",
-        "diameter": {
-            "type": "expression"
-        },
         "end_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Pipe bottom elevation at the pond",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_gradient": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic Gradient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious_1": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Upstream Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_radious_2": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Downstream Hydraulic Radius",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/sewer2pond_link.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Connector length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter_1": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Upstream Wetted Perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "perimeter_2": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Downstream wetted perimeter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "soil2groundwater_link": {
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Interface Area",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
         "description": "Soil to groundwater link",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_conductivity": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Hydraulic Conductivity",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
         "icon": "Icons/soil2gw_link.png",
-        "length": {
-            "type": "expression"
-        },
         "type": "link"
     },
     "soil2sewer": {
         "Transmissivity_coefficient": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Transmissivity coefficient",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "1/day"
         },
         "description": "Link from soil to a sewer pipe segment",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/soil2sewer.png",
         "type": "link"
     },
     "soil_free_outflow": {
         "K_eff": {
-            "type": "expression"
-        },
-        "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat_original": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Saturated Hydraulc Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m/day;ft/day;m/s;ft/s"
         },
         "K_sat_scale_factor": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Hydraulic conductivity scale factor",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "UnitBox",
+            "description": "Interface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^2;ft~^2"
         },
         "description": "Horizontal Soil to fixed head connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/soilfreeflow.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Lenght",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft"
         },
         "m": {
-            "type": "expression"
+            "delegate": "",
+            "description": "m parameter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "soil_to_aggregate_link": {
         "K_eff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Soil to aggregate layer link",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/soil2aggregate.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Lenght",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "m": {
-            "type": "expression"
+            "delegate": "",
+            "description": "m parameter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "soil_to_fixedhead_link": {
         "K_eff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Soil to fixed head connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/soil2fixedhead.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Lenght",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "m": {
-            "type": "expression"
+            "delegate": "",
+            "description": "m parameter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "soil_to_fixedhead_link_H": {
         "K_eff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "UnitBox",
+            "description": "Interface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^2;ft~^2"
         },
         "description": "Horizontal Soil to fixed head connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/soil2fixedhead.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Lenght",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft"
         },
         "m": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "soil_to_fixedhead_link_H_KS": {
-        "K_eff": {
-            "type": "expression"
-        },
-        "K_sat": {
-            "type": "expression"
-        },
-        "K_sat_original": {
-            "type": "value"
-        },
-        "K_sat_scale_factor": {
-            "type": "value"
-        },
-        "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Horizontal Soil to fixed head connector",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/soil2fixedhead_KS.png",
-        "length": {
-            "type": "value"
-        },
-        "m": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "soil_to_fixedhead_link_KS": {
-        "K_eff": {
-            "type": "expression"
-        },
-        "K_sat": {
-            "type": "expression"
-        },
-        "K_sat_original": {
-            "type": "value"
-        },
-        "K_sat_scale_factor": {
-            "type": "value"
-        },
-        "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Soil to fixed head connector",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/soil2fixedhead_KS.png",
-        "length": {
-            "type": "expression"
-        },
-        "m": {
-            "type": "expression"
+            "delegate": "",
+            "description": "m parameter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "soil_to_soil_H_link": {
         "K_eff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Saturated Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "UnitBox",
+            "description": "Interface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m~^2;ft~^2"
         },
         "description": "Horizontal soil to soil connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/soil2soilH.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "length",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": "m;ft"
         },
         "m": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "soil_to_soil_H_link_w_KS": {
-        "K_eff": {
-            "type": "expression"
-        },
-        "K_sat": {
-            "type": "expression"
-        },
-        "K_sat_original": {
-            "type": "value"
-        },
-        "K_sat_scale_factor": {
-            "type": "value"
-        },
-        "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Horizontal soil to soil connector",
-        "flow": {
-            "type": "expression"
-        },
-        "icon": "Icons/soil2soilH_KS.png",
-        "length": {
-            "type": "value"
-        },
-        "m": {
-            "type": "expression"
+            "delegate": "",
+            "description": "m parameter",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "soil_to_soil_link": {
         "K_eff": {
-            "type": "expression"
-        },
-        "K_sat": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "Se": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Saturation",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Interface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Vertical soil to soil connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "flux": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flux",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_gradient": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Hydraulic gradient",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/Soil2Soil.png",
-        "length": {
-            "type": "expression"
-        },
-        "m": {
-            "type": "expression"
-        },
-        "type": "link"
-    },
-    "soil_to_soil_link_KS": {
-        "K_eff": {
-            "type": "expression"
-        },
-        "K_sat": {
-            "type": "expression"
-        },
-        "K_sat_original": {
-            "type": "value"
-        },
-        "K_sat_scale_factor": {
-            "type": "value"
-        },
-        "Se": {
-            "type": "expression"
-        },
-        "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Vertical soil to soil connector",
-        "flow": {
-            "type": "expression"
-        },
-        "flux": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/Soil2Soil_KS.png",
-        "length": {
-            "type": "expression"
-        },
-        "m": {
-            "type": "expression"
-        },
         "type": "link"
     },
     "solutionorder": {
         "description": null,
-        "icon": ""
-    },
-    "solver_settings": {
-        "c_n_weight": {
-            "type": "value"
-        },
-        "description": "Solver Settings",
-        "icon": "",
-        "initial_time_step": {
-            "type": "value"
-        },
-        "jacobian_method": {
-            "type": "string"
-        },
-        "maximum_number_of_matrix_inverstions": {
-            "type": "value"
-        },
-        "maximum_time_allowed": {
-            "type": "value"
-        },
-        "minimum_timestep": {
-            "type": "value"
-        },
-        "n_threads": {
-            "type": "value"
-        },
-        "nr_timestep_reduction_factor": {
-            "type": "value"
-        },
-        "nr_timestep_reduction_factor_fail": {
-            "type": "value"
-        },
-        "nr_tolerance": {
-            "type": "value"
-        },
-        "write_solution_details": {
-            "type": "string"
-        }
-    },
-    "surface2UCgroundwater_link": {
-        "area": {
-            "type": "value"
-        },
-        "description": "Surface water to unconfined groundwater link",
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_conductivity": {
-            "type": "value"
-        },
-        "icon": "Icons/Surface2GW_link.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
+        "icon": "Icons/",
+        "type": null
     },
     "surface2groundwater_link": {
         "area": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Interface Area",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
         "description": "Surface water to groundwater link",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "hydraulic_conductivity": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Hydraulic conductivity",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
         "icon": "Icons/Surface2GW_link.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Length",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm;in"
         },
         "type": "link"
     },
-    "surface_atmospheric exchange": {
-        "coefficient": {
-            "type": "expression"
+    "surfacewater_to_aggregate_link": {
+        "K_eff": {
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "description": "Surface Atmospheric Exchange",
-        "icon": "Icons/Surface_Chemical_Source_exchange.png",
-        "rate_coefficient": {
-            "type": "value"
+        "area": {
+            "delegate": "",
+            "description": "Interface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "saturation": {
-            "type": "value"
+        "description": "Surfacewater to aggregate layer",
+        "flow": {
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
-        "timeseries": {
-            "type": "expression"
-        }
-    },
-    "surface_release": {
-        "concentration_dependence_rate_expression": {
-            "type": "expression"
+        "icon": "Icons/surface2aggregate.png",
+        "length": {
+            "delegate": "UnitBox",
+            "description": "Lenght",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
-        "description": "Release from surface",
-        "exponent_of_depth": {
-            "type": "value"
-        },
-        "icon": "Icons/surface_release.png",
-        "normalizing_quantity": {
-            "type": ""
-        },
-        "rate_expression": {
-            "type": "expression"
-        },
-        "release_coefficient": {
-            "type": "value"
-        }
+        "type": "link"
     },
     "surfacewater_to_soil_link": {
         "K_eff": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Effective Hydraulic Conductivity",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Interface area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Surfacewater to soil connector",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/surface2soil.png",
         "length": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Lenght",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "type": "link"
     },
     "time_variable_fixed_head": {
         "Storage": {
-            "type": "balance"
+            "delegate": "ValueBox",
+            "description": "Initial Storage;Storage",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Time-variable fixed-head boundary",
         "head": {
-            "type": "timeseries"
+            "delegate": "Browser",
+            "description": "Head (m)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/fixedhead_timeseries.png",
         "type": "node"
     },
-    "unconfined_groundwater_to_fixedhead": {
-        "Darcy flux": {
-            "type": "expression"
-        },
-        "description": "Unconfined Groundwater to fixed head",
-        "flow": {
-            "type": "expression"
-        },
-        "hydraulic_gradient": {
-            "type": "expression"
-        },
-        "icon": "Icons/unconfined_GW2fixedhead.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link",
-        "width": {
-            "type": "value"
-        }
-    },
-    "valve": {
-        "K_factor": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
-        },
-        "description": "Valve",
-        "diameter": {
-            "type": "value"
-        },
-        "flow": {
-            "type": "expression"
-        },
-        "head_loss": {
-            "type": "expression"
-        },
-        "icon": "Icons/valve.png",
-        "length": {
-            "type": "value"
-        },
-        "type": "link"
-    },
-    "water_supply_well": {
-        "Storage": {
-            "type": "balance"
-        },
-        "bottom_elevation": {
-            "type": "value"
-        },
-        "depth": {
-            "type": "expression"
-        },
-        "description": "Water Supply Well",
-        "diameter": {
-            "type": "value"
-        },
-        "head": {
-            "type": "expression"
-        },
-        "icon": "Icons/water_supply_well.png",
-        "pumping_rate": {
-            "type": "timeseries"
-        },
-        "type": "node"
-    },
     "wide_channel": {
         "ManningCoeff": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Manning's roughness coefficient",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": ""
         },
         "area": {
-            "type": "expression"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "",
+            "description": "Cross-sectional area",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "depth": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Water depth",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "description": "Wide Channel",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow rate (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/wide_channel.png",
         "length": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Channel length",
+            "includeinoutput": "false",
+            "type": "value",
+            "unit": "m;ft;cm"
         },
         "type": "link",
         "width": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Width",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft;cm"
         }
     },
     "wier": {
         "alpha": {
-            "type": "value"
+            "delegate": "ValueBox",
+            "description": "Coefficient alpha in Q=alpha*(h-z_0)^beta",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "beta": {
-            "type": "value"
-        },
-        "color": {
-            "type": "string"
+            "delegate": "ValueBox",
+            "description": "Exponent beta in Q=alpha*(h-z_0)^beta",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": ""
         },
         "crest_elevation": {
-            "type": "value"
+            "delegate": "UnitBox",
+            "description": "Crest Elevation",
+            "includeinoutput": "",
+            "type": "value",
+            "unit": "m;ft"
         },
         "description": "V-notch weir based on a power-law rating curve",
         "flow": {
-            "type": "expression"
+            "delegate": "",
+            "description": "Flow rate (m~^3/day)",
+            "includeinoutput": "true",
+            "type": "timeseries",
+            "unit": ""
         },
         "icon": "Icons/vnotchweir.png",
         "type": "link"

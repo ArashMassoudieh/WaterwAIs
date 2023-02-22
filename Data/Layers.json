@@ -29,12 +29,12 @@
 	],
 	"Meta-Model":
 	{
-		"url": "meta_model.json",
-		"description": "Centroids of sub-watersheds"		
+		"url": "MetaModel.json",
+		"description": "Model Definitions"		
 	},
 	"Model":
 	{
-		"url": "Example_input.json",
+		"url": "HickyRun.json",
 		"description": "Model layer"
 	}
 }

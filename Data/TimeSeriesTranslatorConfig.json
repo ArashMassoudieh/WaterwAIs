@@ -1,5 +1,5 @@
 {
-	"MainOHQoutput": "/home/arash/Projects/QMapViewer/Data/OHQOutput/output.txt",
+	"MainOHQoutput": "/home/arash/Dropbox/Hicky_Run/Calibration/attempt_w_ks_200/hickey_run_output.txt",
 	"TimeSeriesFolder": "/home/arash/Projects/QMapViewer/Data/Timeseries",
-	"ReadInterval": 30
+	"ReadInterval": 300
 }

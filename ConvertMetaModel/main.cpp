@@ -19,10 +19,12 @@ int main(int argc, char *argv[])
             for(QString key: jsonobj.keys() ) {
                 QJsonObject vars = jsonobj[key].toObject();
                 QJsonObject outvar;
-                if (vars["type"] == "block") outvar["type"] = "node";
-                if (vars["type"] == "link") outvar["type"] = "link";
+                if (vars["type"]=="block")
+                    outvar["type"]="node";
+                else
+                    outvar["type"] = vars["type"];
                 outvar["description"] = vars["description"];
-                outvar["icon"] = vars["icon"].toObject()["filename"].toString();
+                outvar["icon"] = "Icons/" + vars["icon"].toObject()["filename"].toString();
                 QFile iconfile;
                 qDebug()<<QString::fromStdString("/home/arash/Projects/QAquifolium/resources/Icons/")+outvar["icon"].toString();
                 qDebug()<<iconfile.copy(QString::fromStdString("/home/arash/Projects/QAquifolium/resources/Icons/")+outvar["icon"].toString(), "/home/arash/Dropbox/JsonFilesToBeCopiedtoWaterwAIs/Icons/"+outvar["icon"].toString());
@@ -37,15 +39,19 @@ int main(int argc, char *argv[])
                         outvariable["unit"] = vars[variablekey].toObject()["unit"].toString().trimmed();
                         outvariable["delegate"] = vars[variablekey].toObject()["delegate"].toString().trimmed();
                         outvariable["description"] = vars[variablekey].toObject()["description"].toString().trimmed();
+                        outvariable["includeinoutput"] = vars[variablekey].toObject()["includeinoutput"].toString().trimmed();
+                        if (vars[variablekey].toObject()["includeinoutput"].toString().trimmed()=="true")
+                            outvariable["type"] = "timeseries";
                         if (vars[variablekey].toObject()["ask_user"].toString().trimmed()=="true" || vars[variablekey].toObject()["includeinoutput"].toString().trimmed()=="true")
                             outvar[variablekey.trimmed()] = outvariable;
+
                     }
                 }
                 out[key] = outvar;
             }
         }
     }
-    QFile outfile("/home/arash/Dropbox/JsonFilesToBeCopiedtoWaterwAIs/WaterwAIs/MetaModel.json");
+    QFile outfile("/home/arash/Projects/QMapViewer/Data/MetaModel.json");
     outfile.open(QIODevice::WriteOnly);
 
     QJsonDocument outjsonDoc = QJsonDocument(out);
@@ -54,7 +60,7 @@ int main(int argc, char *argv[])
 
 
     //convert OHQ to WaterwAIs
-    QFile ohqFile("/home/arash/Dropbox/Ahmed_simulation/Calibration/Calibration_10_24_2022_100_Ahmed.ohq");
+    QFile ohqFile("/home/arash/Dropbox/Hicky_Run/Calibration/attempt_w_ks_200/dep_storage_added_w_ks.ohq");
     ohqFile.open(QIODevice::ReadOnly);
     QTextStream in(&ohqFile);
     QJsonObject model;
@@ -79,12 +85,22 @@ int main(int argc, char *argv[])
                 {
                     QJsonValue jsonarg = it.value();
                     item[it.key()]=jsonarg;
+                    qDebug()<<out[arguments["type"]].toObject()[it.key()].toObject()["includeinoutput"];
+                    if (out[arguments["type"]].toObject()[it.key()].toObject()["includeinoutput"]=="true")
+                    {
+                        item[it.key()]="Timeseries/" + name + "_" + it.key() + ".csv";
+                    }
+                    if (item.contains("x"))
+                    {
+                        item["x"] = QString::number(-item["x"].toString().toDouble());
+                        item["y"] = QString::number(-item["y"].toString().toDouble());
+                    }
                 }
                 model[name] = item;
             }
         }
     }
-    QFile modeloutfile("/home/arash/Dropbox/JsonFilesToBeCopiedtoWaterwAIs/WaterwAIs/Model.json");
+    QFile modeloutfile("/home/arash/Projects/QMapViewer/Data/HickyRun.json");
     modeloutfile.open(QIODevice::WriteOnly);
 
     QJsonDocument modeloutjsonDoc = QJsonDocument(model);

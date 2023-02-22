@@ -588,7 +588,7 @@ bool CTimeSeries<T>::writefile(const std::string& Filename) {
     std::ofstream file(Filename);
 
     if (file.good()) {
-        file << "n " << n << ", BTC size " << C.size() << std::endl;
+        //file << "n " << n << ", BTC size " << C.size() << std::endl;
         for (int i = 0; i < n; i++)
             file << std::setprecision(10) << t[i] << ", " << C[i] << std::endl;
         file.close();

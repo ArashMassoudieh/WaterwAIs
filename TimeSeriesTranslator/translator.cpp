@@ -4,6 +4,7 @@
 Translator::Translator(QObject *parent) : QObject(parent)
 {
     ReadDirectoryInfo();
+    translate();
     connect(&timer, SIGNAL(timeout()),this, SLOT(translate()));
     timer.start(readInterval*1000);
 }
