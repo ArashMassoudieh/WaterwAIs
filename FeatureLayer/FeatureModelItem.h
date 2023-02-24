@@ -78,7 +78,7 @@ public:
 
 class PointModelItem: public FeatureModelItem {
 public:
-    PointModelItem(): FeatureModelItem{FeatureType::Point} {}
+    PointModelItem(): FeatureModelItem{FeatureType::Point} {}    
 
     void getFromJson(const QJsonValue& json_value) override;
     void addGraphicsItems(const LayerGraphicsSettings& gsettings,

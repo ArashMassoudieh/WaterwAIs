@@ -70,17 +70,7 @@ protected:
     void clearSelection();
 
 private:
-    class SelectedItem {
-    public:
-        SelectedItem(QGraphicsItem* item): item_{item}
-            { if (item_) item_->setSelected(true); }
-
-        ~SelectedItem() { if (item_) item_->setSelected(false); }
-
-        void clear() { item_ = nullptr;  }
-    private:
-        QGraphicsItem* item_;
-    };
+    class SelectedItem;    
     
     void onModeSet();    
 

@@ -1,0 +1,40 @@
+{
+	"FeatureLayers":
+	[
+		["Watershed Centroids",
+		{
+			"url": "Centroids.geojson",
+			"description": "Centroids of sub-watersheds",		
+			"color": "red"
+		}],
+		["Sewer lines",
+		{
+			"url": "HickeyRunSewer.geojson",
+			"description": "Sewer flow lines",			
+			"color": "blue",
+			"contours": "true"
+		}],
+		["Pour points",
+		{
+			"url": "PourPoints.geojson",
+			"description": "Subwatershed pour points",
+			"color": "green"
+		}],
+		["Subwatersheds",
+		{
+			"url": "SubWaterSheds.geojson",
+			"description": "Sub-watersheds areas",			
+			"color": "yellow"
+		}]
+	],
+	"Meta-Model":
+	{
+		"url": "meta_model.json",
+		"description": "Centroids of sub-watersheds"		
+	},
+	"Model":
+	{
+		"url": "Example_input.json",
+		"description": "Model layer"
+	}
+}

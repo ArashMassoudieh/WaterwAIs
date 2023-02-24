@@ -70,6 +70,7 @@ Item::Item(QStringView name, MetaComponentItem& component, MetaLayerModel& model
     : name_{name.toString()}, component_{component}, model_{model} {
     // Preset "name" property as each item is supposed to have name.
     properties_.set(u"name", {Variable::Type::String});
+    
 }
 
 Item::Ptr Item::create(QStringView name, MetaComponentItem& component,
@@ -149,20 +150,31 @@ QString Item::toolTip() const {
 
     // We have some properties, so let's present them in the tooltip
     // in a table sorted by name.
-    auto props = std::map<QString, QString>{};
+    auto props = std::map<QString, std::pair<QString, QString>, std::less<>>{};
     auto& prop_map = properties_.vars();
 
-    for (auto& [name, value] : prop_map)
-        props[name] = value.presentationValue();
+    for (auto& [name, value] : prop_map) {
+        auto display_name = value.displayName();
+
+        if (display_name.isEmpty())
+            display_name = name;
+
+        props[display_name] =
+            std::make_pair(value.presentationValue(), value.description());
+    }
 
     constexpr auto max_rows = 25U;
 
     tooltip += "<br>Properties:<center><table border=1 width=\"100%\" "
-        "style=\"border-collapse: collapse; margin: 0px;\">";
+        "style=\"border-collapse: collapse; margin: 1px;\">";
 
-    for (auto row_count = 0U; auto& [name, value] : props) {   
+    tooltip += "<tr><td><b>Property</b></td><td><b>Value</b></td>"
+        "<td><b><em>Description</em></b></td></tr>";
+
+    for (auto row_count = 0U; auto& [name, value] : props) {
         tooltip += 
-            "<tr><td><b>" + name + "</b></td><td>" + value + "</td></tr>";
+            "<tr><td>" + name + "</td><td>" + value.first + // Value
+            "</td><td><em>" + value.second + "</em></td></tr>"; // Description
         
         row_count++;
 

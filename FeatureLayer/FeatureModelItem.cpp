@@ -96,6 +96,8 @@ void MultiLineStrModelItem::addGraphicsItems
 //////////////////////////////////////////////////////////////////////////
 // PointModelItem
 
+constexpr auto point_radius = 20;
+
 void PointModelItem::getFromJson(const QJsonValue& json_value) {
     auto array = json_value.toArray();
     geometry_.emplace_back(array[0].toDouble(), array[1].toDouble());
@@ -104,7 +106,7 @@ void PointModelItem::getFromJson(const QJsonValue& json_value) {
 void PointModelItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
     LayerGraphicsItems& items) {
 
-    items.addItem(new CircleLayerItem{gsettings, geometry_.front(), 50});
+    items.addItem(new CircleLayerItem{gsettings, geometry_.front(), point_radius});
 }
 
 

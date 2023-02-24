@@ -153,6 +153,8 @@ build_all:!build_pass {
 DATA_DIR = $$PWD/Data
 DEFINES += DATA_DIR=\"$$DATA_DIR\"
 
+message("DATA_DIR=$$DATA_DIR")
+
 # Specyfying to use local "data" files(models, icons, etc)
 # from the project Data folder.
 # Production app should load resources from the Cloud and
@@ -175,7 +177,8 @@ wasm {
         # Production app should load resources from the Cloud and
         # thus not need this
 
-        message("WASM will preload data files from $$DATA_DIR.")
+
+        message("WASM will preload data files from $$DATA_DIR")
         # Making WASM to preload Data folder content
 
         equals(QT_MAJOR_VERSION, 5) {

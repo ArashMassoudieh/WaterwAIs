@@ -9,7 +9,7 @@ namespace WaterwAIs {
 
 namespace {    
     static constexpr auto link_arrow_size = 10.0;    
-    static constexpr auto link_line_width = 5;
+    static constexpr auto link_line_width = 7;
 
     static constexpr double Pi = 3.14159265358979323846264338327950288419717;
     static constexpr double TwoPi = 2.0 * Pi;
@@ -32,10 +32,9 @@ LinkLayerItem::LinkLayerItem(const LayerGraphicsSettings& gsettings,
 
 QRectF LinkLayerItem::boundingRect() const {
     if (!source_node_ || !dest_node_)
-        return QRectF();
-
-    //auto pen_width = 1.0;
-    auto extra = (link_line_width + arrow_size_) / 8.0;
+        return QRectF{};
+    
+    auto extra = (link_line_width + 2 * arrow_size_);
 
     auto rect = QRectF{
         source_point_, 
@@ -60,37 +59,43 @@ void LinkLayerItem::paint(QPainter* painter,
 
     // Use layer's color
     auto color = settings_.pen.color();
-    auto pen = QPen{color, link_line_width, Qt::SolidLine, Qt::RoundCap,
-        Qt::RoundJoin};
+    auto line_width = static_cast<qreal>(link_line_width);
+    auto arrow_size = arrow_size_;
 
     // Draw the line itself
     if (isSelected()) {
         color = settings_.selected_color;
-        pen.setColor(color);
-        pen.setWidth(link_line_width + 2);
+        
+        line_width *= 2;
+        arrow_size *= 2;
     }
+
+    auto pen = QPen{color, line_width, Qt::SolidLine, Qt::RoundCap,
+        Qt::RoundJoin};
 
     painter->setPen(pen);
     painter->drawLine(line);    
 
     // Draw the arrows
+    painter->setBrush(color);
+    
     auto angle = ::acos(line.dx() / line.length());
+
     if (line.dy() >= 0)
         angle = TwoPi - angle;
 
-    auto dest_arrow_p1 = dest_point_ + 
-        QPointF{sin(angle - Pi / 3) * arrow_size_,
-                cos(angle - Pi / 3) * arrow_size_};
+    auto dest_arrow_p1 = dest_point_ +
+        QPointF{sin(angle - Pi / 3) * arrow_size,
+                cos(angle - Pi / 3) * arrow_size};
 
-    auto dest_arrow_p2 = dest_point_ + 
-        QPointF{sin(angle - Pi + Pi / 3) * arrow_size_,
-                cos(angle - Pi + Pi / 3) * arrow_size_};
-
-    painter->setBrush(color);
+    auto dest_arrow_p2 = dest_point_ +
+        QPointF{sin(angle - Pi + Pi / 3) * arrow_size,
+                cos(angle - Pi + Pi / 3) * arrow_size};
 
     painter->drawPolygon(QPolygonF{} << line.p2() <<
         dest_arrow_p1 << dest_arrow_p2);
 }
+
 
 void LinkLayerItem::adjust() {
     if (!source_node_ || !dest_node_)
@@ -116,10 +121,50 @@ void LinkLayerItem::adjust() {
     dest_point_   = line.p2() - edge_offset_dest;
 }
 
+
 QPainterPath LinkLayerItem::shape() const {
     auto path = QPainterPath{};
-    path.addRect(boundingRect());
+
+    auto line = QLineF{source_point_, dest_point_};
+
+    if (qFuzzyCompare(line.length(), qreal(0.))) {
+        path.addRect(boundingRect());
+        return path;
+    }
+
+    auto polygon = QPolygonF{};
+
+    if (std::abs(line.dx()) > std::abs(line.dy())) {
+        auto half_height = link_line_width + arrow_size_;
+
+        // Points 1 and 2
+        polygon.append({source_point_.x(), source_point_.y() - half_height});
+        polygon.append({source_point_.x(), source_point_.y() + half_height});
+
+        // Points 3 and 4
+        polygon.append({dest_point_.x(), dest_point_.y() + half_height});
+        polygon.append({dest_point_.x(), dest_point_.y() - half_height});
+
+        // Point 5 = point 1
+        polygon.append({source_point_.x(), source_point_.y() - half_height});
+    } else {
+        auto half_width = link_line_width + arrow_size_;
+
+        // Points 1 and 2
+        polygon.append({source_point_.x() - half_width, source_point_.y()});
+        polygon.append({source_point_.x() + half_width, source_point_.y()});
+
+        // Points 3 and 4
+        polygon.append({dest_point_.x() + half_width, dest_point_.y()});
+        polygon.append({dest_point_.x() - half_width, dest_point_.y()});
+
+        // Point 5 = point 1
+        polygon.append({source_point_.x() - half_width, source_point_.y()});
+    }
+
+    path.addPolygon(polygon);
     return path;
 }
+
 
 } // namespace WaterwAIs

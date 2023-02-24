@@ -67,15 +67,30 @@ void Application::setSettings() {
     // Host path - Base Url or local folder
     auto host_path = QStringLiteral(HOST_PATH);
 
+    //qDebug() << "Host path:" << host_path;
+  
     if (host_path.isEmpty()) {
         // Special case when host path is empty. In this case, we should try
         // to get host path from the application Url, if any.
 
         if (auto app_url = url(); !app_url.isEmpty()) {
+            auto data_folder = QStringLiteral("Data");            
+
+            if (auto fragment = app_url.fragment(); fragment == "Test") {
+                app_url = app_url.adjusted(QUrl::RemoveFragment);
+                data_folder = QStringLiteral("TestData");
+            }
+
             host_path = app_url.adjusted(QUrl::RemoveFilename).toString()
-                + "Data";
+                + data_folder;
         }
     }
+
+#if !defined(Q_OS_WASM) && defined(USE_TEST_DATA)
+    // Directing to use Test data
+    host_path.replace(QStringLiteral("Data"), QStringLiteral("TestData"));
+#endif
+
     setHostPath(host_path);
 }
 
@@ -88,11 +103,16 @@ void Application::setHostPath(QStringView path) {
 
 
 QUrl Application::url() {
+
+#ifdef USE_LOCAL_DATA_FILES
+    return QUrl{};
+#endif // USE_LOCAL_DATA_FILES
+
 #ifdef EMSCRIPTEN
     emscripten::val location = emscripten::val::global("location");
     return QUrl(QString::fromStdString(location["href"].as<std::string>()));
 #else
-    return QUrl("http://localhost:30000/WateraAIs.html");
+    return QUrl("http://localhost:30000/WaterwAIs.html");
 #endif
 }
 

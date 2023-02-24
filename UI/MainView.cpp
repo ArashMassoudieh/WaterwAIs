@@ -560,17 +560,15 @@ void MainView::on_btnMoveUp_clicked() {
 }
 
 bool MainView::spuriosButtonClick() {
-    if (last_tb_clicked_ts_ == Clock::time_point{}) {
-        // First click
-        last_tb_clicked_ts_ = Clock::now();
-        return false;
-    }
-    
-    if (Clock::now() - last_tb_clicked_ts_ < 200ms) {
+    if (last_tb_clicked_ts_ != Clock::time_point{} && 
+        Clock::now() - last_tb_clicked_ts_ < 200ms) {
         // Spurious second click
         last_tb_clicked_ts_ = Clock::time_point{};
         return true;
-    }
+    }    
+    
+    // First click
+    last_tb_clicked_ts_ = Clock::now();    
     return false;
 }
 

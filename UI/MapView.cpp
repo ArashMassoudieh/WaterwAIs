@@ -25,6 +25,33 @@ namespace {
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
+// MapView::SelectedItem
+
+class MapView::SelectedItem {
+public:
+    SelectedItem(QGraphicsItem* item): item_{item} {
+        if (item_) {
+            z_value_ = item_->zValue();
+            item_->setZValue(z_value_ + 100);
+            item_->setSelected(true);
+        }
+    }
+
+    ~SelectedItem() { 
+        if (item_) {
+            item_->setZValue(z_value_);
+            item_->setSelected(false);
+        }
+    }
+
+    void clear() { item_ = nullptr; }
+private:
+    qreal z_value_;
+    QGraphicsItem* item_;
+};
+
+
+//////////////////////////////////////////////////////////////////////////
 // MapView
 
 MapView::MapView(QWidget* parent)

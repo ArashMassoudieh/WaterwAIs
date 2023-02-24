@@ -17,6 +17,8 @@ class MetaLayerItem: public LayerGenericItem {
 public:
     using ModelItem = MetaLayerModelItems::Item;
 
+    static constexpr double item_zvalue = 40000;
+
     MetaLayerItem(const LayerGraphicsSettings& gsettings,
         ModelItem& model_item);
         

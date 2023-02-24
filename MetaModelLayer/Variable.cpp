@@ -89,8 +89,15 @@ void Variable::init() {
 }
 
 void Variable::getFromJsonObject(const QJsonObject& json_object) {
+    // Setting type
     auto type_string = json_object.value("type").toString();
     type_ = to_type(type_string);
+
+    // Setting display name
+    display_name_ = json_object.value("name").toString();
+
+    // Setting description
+    description_ = json_object.value("description").toString();
 
     auto role_string = json_object.value("role").toString();
     if (role_string == "input") {

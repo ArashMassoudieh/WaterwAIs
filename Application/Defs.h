@@ -4,7 +4,7 @@
 #define _STR(x) #x
 #define STRINGIFY(x)  _STR(x)
 
-#define APP_NAME "WateraAIs"
+#define APP_NAME "WaterwAIs"
 
 //////////////////////////////////////////////////////////////////////////
 // Project location-dependent settings
@@ -49,6 +49,8 @@
 #define HOST_PATH SERVER_PATH
 #endif // !USE_LOCAL_DATA_FILES
 
+// Force using 'TestData' folder instead of 'Data'
+//#define USE_TEST_DATA
 
 /////////////////////////////////////////////////////////
 

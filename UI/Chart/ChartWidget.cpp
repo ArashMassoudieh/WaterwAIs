@@ -15,6 +15,8 @@
 #include <QDateTimeAxis>
 #include <QDoubleValidator>
 
+#include <cmath>
+
 namespace WaterwAIs {
 
 namespace {
@@ -185,7 +187,8 @@ void ChartWidget::fillChart() {
     series->attachAxis(axisX);
 
     auto axisY = new QValueAxis{};
-    axisY->setLabelFormat("%.2f  ");
+    axisY->setLabelFormat("%g");
+    axisY->setMinorTickCount(5);
     axisY->setRange(ts.minC(), ts.maxC());
 
     chart_->addAxis(axisY, Qt::AlignLeft);

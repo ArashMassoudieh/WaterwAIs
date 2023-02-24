@@ -28,8 +28,11 @@ public:
         Input
     };
     
-    Variable(Type type = Type::NotAssigned, QStringView value = {})
-        : type_{type} {
+    Variable(Type type = Type::NotAssigned, QStringView value = {},
+        QStringView display_name = {},
+        QStringView description = {})
+        : type_{type}, display_name_{display_name.toString()}
+        , description_ {description.toString()} {
         init();
         if (!value.isNull())
             fromString(value);
@@ -60,11 +63,16 @@ public:
     Role role() const { return role_; }
     void setRole(const Role& rl) { role_ = rl; }
 
-
     // Value
     // Gets/Sets using string representation of the value
     QString toString() const;
     void fromString(QStringView value);
+    
+    // Display name
+    QString displayName() const { return display_name_; }
+
+    // Description
+    QString description() const { return description_; }
 
     // Value unit
     QString valueUnit() const { return value_unit_; }
@@ -95,7 +103,9 @@ private:
 
     std::variant<double, QString> value_;
 
-    QString value_unit_; // Specifies dimensional unit for 'Value' type
+    QString display_name_; // Name for display
+    QString description_;  // Variable description.
+    QString value_unit_;   // Specifies dimensional unit for 'Value' type
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -126,7 +136,9 @@ public:
         if (auto var = other_map.get(name); var) {
             // Import type from the variable with the same name from the other
             //map.
-            set(name, Variable{var->type(), value});
+            set(name, Variable{var->type(), value,
+                var->displayName(), var->description()});
+
             return true;
         }
         return false;

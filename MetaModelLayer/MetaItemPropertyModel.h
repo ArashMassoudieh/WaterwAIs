@@ -26,8 +26,8 @@ public:
         using Type = Variable::Type;
 
         PropertyInfo(Type t, const QString& n, const QString& v,
-            const QString& p)
-            : type{t}, name{n}, value{v}, presentation{p} {}
+            const QString& p, const QString& d)
+            : type{t}, name{n}, value{v}, presentation{p}, description{d} {}
 
         bool validTimeSeries() const
             { return type == Type::TimeSeries && !value.isEmpty(); }
@@ -36,6 +36,7 @@ public:
         QString name;
         QString value;
         QString presentation;
+        QString description;
     };
 
     explicit MetaItemPropertyModel(const ModelItem& model_item, QObject* parent = 0);

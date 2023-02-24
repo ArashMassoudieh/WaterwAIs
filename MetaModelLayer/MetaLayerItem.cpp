@@ -7,7 +7,6 @@ namespace {
 // Default Node parameters
 static constexpr auto   data_key = 1000;
 static constexpr auto   item_string = "MLItem";
-static constexpr double item_zvalue = 40000;
 
 } // anonymous
 

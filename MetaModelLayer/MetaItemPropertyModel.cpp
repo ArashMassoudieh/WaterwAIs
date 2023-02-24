@@ -21,9 +21,15 @@ MetaItemPropertyModel::MetaItemPropertyModel(const ModelItem& model_item,
 void MetaItemPropertyModel::buildProperies(const ModelItem& model_item) {
     properties_.clear();
 
-    for (auto& [name, value] : model_item.properties().vars())
-        properties_.emplace_back(value.type(), name, value.toString(), 
-            value.presentationValue());
+    for (auto& [name, value] : model_item.properties().vars()) {
+        auto display_name = value.displayName();
+
+        if (display_name.isEmpty())
+            display_name = name;
+
+        properties_.emplace_back(value.type(), display_name, value.toString(),
+            value.presentationValue(), value.description());
+    }
 
     auto component_name = model_item.component().name();
     item_name_ = model_item.name().toString();
@@ -50,6 +56,11 @@ QVariant MetaItemPropertyModel::data(const QModelIndex& index, int role) const {
             auto& prop = properties_[index.row()];
             return prop.presentation;
         }
+    }
+
+    if (role == Qt::ToolTipRole) {
+        auto& prop = properties_[index.row()];
+        return prop.description;
     }
 
     if (role == Qt::UserRole) {

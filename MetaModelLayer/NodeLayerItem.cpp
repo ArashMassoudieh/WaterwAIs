@@ -5,9 +5,11 @@ namespace WaterwAIs {
 
 namespace {
     // Default Node parameters    
-    static constexpr double node_width    = 200;
-    static constexpr double node_height   = 200;
-    static constexpr auto sel_adjustment  = 10;
+static constexpr double node_width     = 200;
+static constexpr double node_height    = 200;
+
+static constexpr auto sel_adjustment   = 10;
+static constexpr auto bound_adjustment = 2;
 } // anonymous
 
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +17,7 @@ namespace {
 
 NodeLayerItem::NodeLayerItem(const LayerGraphicsSettings& gsettings,
     NodeItem& node_item)
-    : MetaLayerItem{gsettings, node_item} {
+    : MetaLayerItem{gsettings, node_item} {    
 
     // Size
     size_ = {node_width, node_height};
@@ -42,37 +44,36 @@ QRectF NodeLayerItem::selectedRect() const {
 }
 
 QRectF NodeLayerItem::boundingRect() const {
-    return selectedRect();      
+    // We need to add some bounding rectangle adjustments to avoid some
+    // circle clipping for selected node.
+    return selectedRect().adjusted(-bound_adjustment, -bound_adjustment,
+        bound_adjustment, bound_adjustment);
 }
 
-//QPainterPath NodeLayerItem::shape() const {
-//    auto path = QPainterPath{};
-//    path.addRect(boundingRect());
-//    return path;
-//}
+QPainterPath NodeLayerItem::shape() const {
+    auto path = QPainterPath{};
+    path.addEllipse(boundingRect());
+    return path;
+}
 
 void NodeLayerItem::paint(QPainter* painter, 
     const QStyleOptionGraphicsItem* option, QWidget* /*widget*/) {
     // General layer item setup stuff
     onPaint(painter, option);
 
-    auto& pixmap = model_item_.component().icon();
-   
-    /* ???
-    auto iconmargin = 0.0;
-
-    auto rect = QRectF{
-        boundingRect().left() * 0 + iconmargin * boundingRect().width(),
-        boundingRect().top()  * 0 + iconmargin * boundingRect().width(),
-        boundingRect().width()  * (1 - iconmargin),
-        boundingRect().height() * (1 - iconmargin)};
-    */
-
-    auto rc = rect();
-
+    auto rc = rect();    
+    
     // Icon
+    auto& pixmap = model_item_.component().icon();
     auto source = QRectF(0, 0, pixmap.size().width(), pixmap.size().height());
+
+    auto region = QRegion{rc.toRect(), QRegion::Ellipse};
+
+    painter->save();
+    painter->setClipRegion(region);
+
     painter->drawPixmap(rc, pixmap, source);
+    painter->restore();
    
     // Pen
     if (isSelected()) {
@@ -95,7 +96,8 @@ void NodeLayerItem::paint(QPainter* painter,
         painter->setBrush(Qt::darkCyan);
         painter->drawPath(path);
     }
-        
+    
+    painter->restore(); // restore painter state
 }
 
 void NodeLayerItem::setSize(const QSizeF& size) {
