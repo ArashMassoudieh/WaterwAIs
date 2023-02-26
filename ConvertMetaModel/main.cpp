@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
                         outvariable["unit"] = vars[variablekey].toObject()["unit"].toString().trimmed();
                         outvariable["delegate"] = vars[variablekey].toObject()["delegate"].toString().trimmed();
                         outvariable["description"] = vars[variablekey].toObject()["description"].toString().trimmed();
+                        outvariable["name"] = vars[variablekey].toObject()["description"].toString().trimmed();
                         outvariable["includeinoutput"] = vars[variablekey].toObject()["includeinoutput"].toString().trimmed();
                         if (vars[variablekey].toObject()["includeinoutput"].toString().trimmed()=="true")
                             outvariable["type"] = "timeseries";

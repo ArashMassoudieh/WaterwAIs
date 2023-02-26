@@ -4,6 +4,7 @@
             "delegate": "UnitBox",
             "description": "Saturated Hydraulc Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulc Conductivity",
             "type": "timeseries",
             "unit": "m/day;ft/day;m/s;ft/s"
         },
@@ -11,6 +12,7 @@
             "delegate": "",
             "description": "Initial Storage;Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage;Storage",
             "type": "timeseries",
             "unit": "m~^3;ft~^3"
         },
@@ -18,6 +20,7 @@
             "delegate": "UnitBox",
             "description": "Base Area",
             "includeinoutput": "",
+            "name": "Base Area",
             "type": "value",
             "unit": "m~^2;ft~^2"
         },
@@ -25,6 +28,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation",
             "includeinoutput": "",
+            "name": "Bottom Elevation",
             "type": "value",
             "unit": "m;ft"
         },
@@ -32,6 +36,7 @@
             "delegate": "UnitBox",
             "description": "Initial Water Depth; Water Depth",
             "includeinoutput": "true",
+            "name": "Initial Water Depth; Water Depth",
             "type": "timeseries",
             "unit": "m;ft;cm"
         },
@@ -40,6 +45,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -48,6 +54,7 @@
             "delegate": "Browser",
             "description": "Inflow time series",
             "includeinoutput": "true",
+            "name": "Inflow time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -55,6 +62,7 @@
             "delegate": "ValueBox",
             "description": "Porosity",
             "includeinoutput": "",
+            "name": "Porosity",
             "type": "value",
             "unit": ""
         },
@@ -65,6 +73,7 @@
             "delegate": "",
             "description": "Initial Storage;Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage;Storage",
             "type": "timeseries",
             "unit": "m~^3;ft~^3"
         },
@@ -72,6 +81,7 @@
             "delegate": "UnitBox",
             "description": "Base Area",
             "includeinoutput": "",
+            "name": "Base Area",
             "type": "value",
             "unit": "m~^2;ft~^2"
         },
@@ -79,6 +89,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation",
             "includeinoutput": "",
+            "name": "Bottom Elevation",
             "type": "value",
             "unit": "m;ft"
         },
@@ -86,6 +97,7 @@
             "delegate": "UnitBox",
             "description": "Water Depth",
             "includeinoutput": "true",
+            "name": "Water Depth",
             "type": "timeseries",
             "unit": "m;ft;cm"
         },
@@ -94,6 +106,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -102,6 +115,7 @@
             "delegate": "Browser",
             "description": "Inflow time series",
             "includeinoutput": "true",
+            "name": "Inflow time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -112,6 +126,7 @@
             "delegate": "ComboBox;Sources",
             "description": "Evapotranspiration",
             "includeinoutput": "true",
+            "name": "Evapotranspiration",
             "type": "timeseries",
             "unit": ""
         },
@@ -119,6 +134,7 @@
             "delegate": "ValueBox",
             "description": "Manning's Roughness Coefficient",
             "includeinoutput": "",
+            "name": "Manning's Roughness Coefficient",
             "type": "value",
             "unit": ""
         },
@@ -126,6 +142,7 @@
             "delegate": "ComboBox;Sources",
             "description": "precipitation time series",
             "includeinoutput": "true",
+            "name": "precipitation time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -133,6 +150,7 @@
             "delegate": "ValueBox",
             "description": "Catchment slope in the direction of flow",
             "includeinoutput": "",
+            "name": "Catchment slope in the direction of flow",
             "type": "value",
             "unit": ""
         },
@@ -140,6 +158,7 @@
             "delegate": "",
             "description": "Initial Storage;Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage;Storage",
             "type": "timeseries",
             "unit": ""
         },
@@ -147,6 +166,7 @@
             "delegate": "UnitBox",
             "description": "The width of the catchment",
             "includeinoutput": "",
+            "name": "The width of the catchment",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -154,6 +174,7 @@
             "delegate": "UnitBox",
             "description": "Catchment area",
             "includeinoutput": "",
+            "name": "Catchment area",
             "type": "value",
             "unit": "m~^2;ft~^2"
         },
@@ -161,6 +182,7 @@
             "delegate": "UnitBox",
             "description": "Depression storage",
             "includeinoutput": "",
+            "name": "Depression storage",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -168,6 +190,7 @@
             "delegate": "UnitBox",
             "description": "Average water depth",
             "includeinoutput": "true",
+            "name": "Average water depth",
             "type": "timeseries",
             "unit": "m;ft;cm;in"
         },
@@ -176,6 +199,7 @@
             "delegate": "UnitBox",
             "description": "Mean elevation of the catchment",
             "includeinoutput": "",
+            "name": "Mean elevation of the catchment",
             "type": "value",
             "unit": "m;ft"
         },
@@ -183,6 +207,7 @@
             "delegate": "",
             "description": "Average water head",
             "includeinoutput": "true",
+            "name": "Average water head",
             "type": "timeseries",
             "unit": ""
         },
@@ -191,6 +216,7 @@
             "delegate": "Browser",
             "description": "Inflow",
             "includeinoutput": "true",
+            "name": "Inflow",
             "type": "timeseries",
             "unit": ""
         },
@@ -198,6 +224,7 @@
             "delegate": "ComboBox;Sources",
             "description": "Loss rate",
             "includeinoutput": "true",
+            "name": "Loss rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -205,6 +232,7 @@
             "delegate": "UnitBox",
             "description": "Loss coefficient",
             "includeinoutput": "",
+            "name": "Loss coefficient",
             "type": "value",
             "unit": "1/day;1/hr"
         },
@@ -216,6 +244,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -227,6 +256,7 @@
             "delegate": "",
             "description": "Advective mass transfer rate",
             "includeinoutput": "true",
+            "name": "Advective mass transfer rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -234,6 +264,7 @@
             "delegate": "UnitBox",
             "description": "Concentration",
             "includeinoutput": "true",
+            "name": "Concentration",
             "type": "timeseries",
             "unit": "g/m~^3"
         },
@@ -242,6 +273,7 @@
             "delegate": "UnitBox",
             "description": "Diffusion Coefficient",
             "includeinoutput": "",
+            "name": "Diffusion Coefficient",
             "type": "value",
             "unit": "m~^2/s;m~^2/day;ft~^2/s;ft~^2/day"
         },
@@ -249,6 +281,7 @@
             "delegate": "",
             "description": "Diffusive mass transfer rate",
             "includeinoutput": "true",
+            "name": "Diffusive mass transfer rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -256,6 +289,7 @@
             "delegate": "Browser",
             "description": "External mass flow time-series",
             "includeinoutput": "true",
+            "name": "External mass flow time-series",
             "type": "timeseries",
             "unit": ""
         },
@@ -263,6 +297,7 @@
             "delegate": "ComboBox;Sources",
             "description": "External source",
             "includeinoutput": "true",
+            "name": "External source",
             "type": "timeseries",
             "unit": ""
         },
@@ -271,6 +306,7 @@
             "delegate": "Browser",
             "description": "Inflow concentration",
             "includeinoutput": "true",
+            "name": "Inflow concentration",
             "type": "timeseries",
             "unit": ""
         },
@@ -278,6 +314,7 @@
             "delegate": "",
             "description": "Mass",
             "includeinoutput": "true",
+            "name": "Mass",
             "type": "timeseries",
             "unit": ""
         },
@@ -285,6 +322,7 @@
             "delegate": "",
             "description": "Total mass transfer rate",
             "includeinoutput": "true",
+            "name": "Total mass transfer rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -292,6 +330,7 @@
             "delegate": "expressionEditor",
             "description": "Stoichiometric Constant",
             "includeinoutput": "false",
+            "name": "Stoichiometric Constant",
             "type": "expression",
             "unit": ""
         },
@@ -302,6 +341,7 @@
             "delegate": "",
             "description": "B coefficient",
             "includeinoutput": "true",
+            "name": "B coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -309,6 +349,7 @@
             "delegate": "Browser",
             "description": "Relative humidity time series",
             "includeinoutput": "true",
+            "name": "Relative humidity time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -316,6 +357,7 @@
             "delegate": "Browser",
             "description": "Temperature time series",
             "includeinoutput": "true",
+            "name": "Temperature time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -323,6 +365,7 @@
             "delegate": "ValueBox",
             "description": "Scale factor",
             "includeinoutput": "false",
+            "name": "Scale factor",
             "type": "value",
             "unit": ""
         },
@@ -331,6 +374,7 @@
             "delegate": "",
             "description": "Saturated humidity",
             "includeinoutput": "true",
+            "name": "Saturated humidity",
             "type": "timeseries",
             "unit": ""
         },
@@ -339,6 +383,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -347,6 +392,7 @@
             "delegate": "Browser",
             "description": "wind time series",
             "includeinoutput": "true",
+            "name": "wind time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -354,6 +400,7 @@
             "delegate": "UnitBox",
             "description": "Roughness height",
             "includeinoutput": "false",
+            "name": "Roughness height",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -361,6 +408,7 @@
             "delegate": "UnitBox",
             "description": "Wind measurement elevation",
             "includeinoutput": "false",
+            "name": "Wind measurement elevation",
             "type": "value",
             "unit": "m;ft;cm;in"
         }
@@ -370,6 +418,7 @@
             "delegate": "",
             "description": "B coefficient",
             "includeinoutput": "true",
+            "name": "B coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -377,6 +426,7 @@
             "delegate": "Browser",
             "description": "Relative humidity time series",
             "includeinoutput": "true",
+            "name": "Relative humidity time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -384,6 +434,7 @@
             "delegate": "Browser",
             "description": "Temperature time series",
             "includeinoutput": "true",
+            "name": "Temperature time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -391,6 +442,7 @@
             "delegate": "ValueBox",
             "description": "Scale factor",
             "includeinoutput": "false",
+            "name": "Scale factor",
             "type": "value",
             "unit": ""
         },
@@ -399,6 +451,7 @@
             "delegate": "",
             "description": "Saturated humidity",
             "includeinoutput": "true",
+            "name": "Saturated humidity",
             "type": "timeseries",
             "unit": ""
         },
@@ -407,6 +460,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -415,6 +469,7 @@
             "delegate": "Browser",
             "description": "wind time series",
             "includeinoutput": "true",
+            "name": "wind time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -422,6 +477,7 @@
             "delegate": "ValueBox",
             "description": "Roughness height",
             "includeinoutput": "false",
+            "name": "Roughness height",
             "type": "value",
             "unit": ""
         },
@@ -429,6 +485,7 @@
             "delegate": "ValueBox",
             "description": "Wind measurement elevation",
             "includeinoutput": "false",
+            "name": "Wind measurement elevation",
             "type": "value",
             "unit": ""
         }
@@ -438,6 +495,7 @@
             "delegate": "Browser",
             "description": "Temperature time series",
             "includeinoutput": "true",
+            "name": "Temperature time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -445,6 +503,7 @@
             "delegate": "ValueBox",
             "description": "Scale factor",
             "includeinoutput": "false",
+            "name": "Scale factor",
             "type": "value",
             "unit": ""
         },
@@ -454,6 +513,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -461,6 +521,7 @@
             "delegate": "Browser",
             "description": "Solar Radiation (W/m^2)",
             "includeinoutput": "true",
+            "name": "Solar Radiation (W/m^2)",
             "type": "timeseries",
             "unit": ""
         },
@@ -471,6 +532,7 @@
             "delegate": "Browser",
             "description": "Temperature time series",
             "includeinoutput": "true",
+            "name": "Temperature time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -478,6 +540,7 @@
             "delegate": "ValueBox",
             "description": "Scale factor",
             "includeinoutput": "false",
+            "name": "Scale factor",
             "type": "value",
             "unit": ""
         },
@@ -487,6 +550,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -494,6 +558,7 @@
             "delegate": "Browser",
             "description": "Solar Radiation (W/m^2)",
             "includeinoutput": "true",
+            "name": "Solar Radiation (W/m^2)",
             "type": "timeseries",
             "unit": ""
         },
@@ -504,6 +569,7 @@
             "delegate": "",
             "description": "B coefficient",
             "includeinoutput": "true",
+            "name": "B coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -511,6 +577,7 @@
             "delegate": "",
             "description": "Gradient of e_as vs T",
             "includeinoutput": "true",
+            "name": "Gradient of e_as vs T",
             "type": "timeseries",
             "unit": ""
         },
@@ -518,6 +585,7 @@
             "delegate": "",
             "description": "Aerodynamic Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Aerodynamic Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -525,6 +593,7 @@
             "delegate": "",
             "description": "Radiation-based Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Radiation-based Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -532,6 +601,7 @@
             "delegate": "Browser",
             "description": "Relative humidity time series",
             "includeinoutput": "true",
+            "name": "Relative humidity time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -539,6 +609,7 @@
             "delegate": "Browser",
             "description": "Temperature time series",
             "includeinoutput": "true",
+            "name": "Temperature time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -547,6 +618,7 @@
             "delegate": "",
             "description": "Saturated humidity",
             "includeinoutput": "true",
+            "name": "Saturated humidity",
             "type": "timeseries",
             "unit": ""
         },
@@ -554,6 +626,7 @@
             "delegate": "ValueBox",
             "description": "psychrometric constant (Pa/C)",
             "includeinoutput": "false",
+            "name": "psychrometric constant (Pa/C)",
             "type": "value",
             "unit": ""
         },
@@ -562,6 +635,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -569,6 +643,7 @@
             "delegate": "Browser",
             "description": "Solar Radiation (W/m^2)",
             "includeinoutput": "true",
+            "name": "Solar Radiation (W/m^2)",
             "type": "timeseries",
             "unit": ""
         },
@@ -576,6 +651,7 @@
             "delegate": "ValueBox",
             "description": "Solar radiation scale factor",
             "includeinoutput": "false",
+            "name": "Solar radiation scale factor",
             "type": "value",
             "unit": ""
         },
@@ -584,6 +660,7 @@
             "delegate": "ValueBox",
             "description": "Wind scale factor",
             "includeinoutput": "false",
+            "name": "Wind scale factor",
             "type": "value",
             "unit": ""
         },
@@ -591,6 +668,7 @@
             "delegate": "Browser",
             "description": "wind time series",
             "includeinoutput": "true",
+            "name": "wind time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -598,6 +676,7 @@
             "delegate": "UnitBox",
             "description": "Roughness height",
             "includeinoutput": "false",
+            "name": "Roughness height",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -605,6 +684,7 @@
             "delegate": "UnitBox",
             "description": "Wind measurement elevation",
             "includeinoutput": "false",
+            "name": "Wind measurement elevation",
             "type": "value",
             "unit": "m;ft;cm;in"
         }
@@ -614,6 +694,7 @@
             "delegate": "",
             "description": "B coefficient",
             "includeinoutput": "true",
+            "name": "B coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -621,6 +702,7 @@
             "delegate": "",
             "description": "Gradient of e_as vs T",
             "includeinoutput": "true",
+            "name": "Gradient of e_as vs T",
             "type": "timeseries",
             "unit": ""
         },
@@ -628,6 +710,7 @@
             "delegate": "",
             "description": "Aerodynamic Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Aerodynamic Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -635,6 +718,7 @@
             "delegate": "",
             "description": "Radiation-based Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Radiation-based Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -642,6 +726,7 @@
             "delegate": "Browser",
             "description": "Relative humidity time series",
             "includeinoutput": "true",
+            "name": "Relative humidity time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -649,6 +734,7 @@
             "delegate": "Browser",
             "description": "Temperature time series",
             "includeinoutput": "true",
+            "name": "Temperature time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -657,6 +743,7 @@
             "delegate": "",
             "description": "Saturated humidity",
             "includeinoutput": "true",
+            "name": "Saturated humidity",
             "type": "timeseries",
             "unit": ""
         },
@@ -664,6 +751,7 @@
             "delegate": "ValueBox",
             "description": "psychrometric constant (Pa/C)",
             "includeinoutput": "false",
+            "name": "psychrometric constant (Pa/C)",
             "type": "value",
             "unit": ""
         },
@@ -672,6 +760,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -679,6 +768,7 @@
             "delegate": "Browser",
             "description": "Solar Radiation (W/m^2)",
             "includeinoutput": "true",
+            "name": "Solar Radiation (W/m^2)",
             "type": "timeseries",
             "unit": ""
         },
@@ -686,6 +776,7 @@
             "delegate": "ValueBox",
             "description": "Solar radiation scale factor",
             "includeinoutput": "false",
+            "name": "Solar radiation scale factor",
             "type": "value",
             "unit": ""
         },
@@ -694,6 +785,7 @@
             "delegate": "ValueBox",
             "description": "Wind scale factor",
             "includeinoutput": "false",
+            "name": "Wind scale factor",
             "type": "value",
             "unit": ""
         },
@@ -701,6 +793,7 @@
             "delegate": "Browser",
             "description": "wind time series",
             "includeinoutput": "true",
+            "name": "wind time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -708,6 +801,7 @@
             "delegate": "UnitBox",
             "description": "Roughness height",
             "includeinoutput": "false",
+            "name": "Roughness height",
             "type": "value",
             "unit": "m;ft"
         },
@@ -715,6 +809,7 @@
             "delegate": "UnitBox",
             "description": "Wind measurement elevation",
             "includeinoutput": "false",
+            "name": "Wind measurement elevation",
             "type": "value",
             "unit": "m;ft"
         }
@@ -724,6 +819,7 @@
             "delegate": "ValueBox",
             "description": "Scale factor",
             "includeinoutput": "false",
+            "name": "Scale factor",
             "type": "value",
             "unit": ""
         },
@@ -733,6 +829,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -740,6 +837,7 @@
             "delegate": "Browser",
             "description": "Evaporation time series",
             "includeinoutput": "true",
+            "name": "Evaporation time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -750,6 +848,7 @@
             "delegate": "ValueBox",
             "description": "Scale factor",
             "includeinoutput": "false",
+            "name": "Scale factor",
             "type": "value",
             "unit": ""
         },
@@ -759,6 +858,7 @@
             "delegate": "",
             "description": "Evapotranspiration rate",
             "includeinoutput": "true",
+            "name": "Evapotranspiration rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -766,6 +866,7 @@
             "delegate": "Browser",
             "description": "Evaporation time series",
             "includeinoutput": "true",
+            "name": "Evaporation time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -776,6 +877,7 @@
             "delegate": "",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "true",
+            "name": "Manning's roughness coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -783,6 +885,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -791,6 +894,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -798,6 +902,7 @@
             "delegate": "",
             "description": "Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -806,6 +911,7 @@
             "delegate": "",
             "description": "Connector length",
             "includeinoutput": "true",
+            "name": "Connector length",
             "type": "timeseries",
             "unit": ""
         },
@@ -813,6 +919,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -823,6 +930,7 @@
             "delegate": "UnitBox",
             "description": "Maximum flow",
             "includeinoutput": "",
+            "name": "Maximum flow",
             "type": "value",
             "unit": "m~^3/day;ft~^3/day"
         },
@@ -830,6 +938,7 @@
             "delegate": "UnitBox",
             "description": "Minimum flow",
             "includeinoutput": "",
+            "name": "Minimum flow",
             "type": "value",
             "unit": "m~^3/day;ft~^3/day"
         },
@@ -837,6 +946,7 @@
             "delegate": "UnitBox",
             "description": "Upper precipitation threshold",
             "includeinoutput": "",
+            "name": "Upper precipitation threshold",
             "type": "value",
             "unit": "m/day"
         },
@@ -844,6 +954,7 @@
             "delegate": "UnitBox",
             "description": "Lower precipitation threshold",
             "includeinoutput": "",
+            "name": "Lower precipitation threshold",
             "type": "value",
             "unit": "m/day"
         },
@@ -852,6 +963,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -859,6 +971,7 @@
             "delegate": "ValueBox",
             "description": "Flow multiplier",
             "includeinoutput": "",
+            "name": "Flow multiplier",
             "type": "value",
             "unit": ""
         },
@@ -867,6 +980,7 @@
             "delegate": "UnitBox",
             "description": "Mean kernel delay time",
             "includeinoutput": "",
+            "name": "Mean kernel delay time",
             "type": "value",
             "unit": "day"
         },
@@ -874,6 +988,7 @@
             "delegate": "",
             "description": "Kernel Smoothed Forcast",
             "includeinoutput": "true",
+            "name": "Kernel Smoothed Forcast",
             "type": "timeseries",
             "unit": ""
         },
@@ -881,6 +996,7 @@
             "delegate": "Browser;time series",
             "description": "Precipitation intensity",
             "includeinoutput": "true",
+            "name": "Precipitation intensity",
             "type": "timeseries",
             "unit": ""
         },
@@ -891,6 +1007,7 @@
             "delegate": "UnitBox",
             "description": "Maximum flow",
             "includeinoutput": "",
+            "name": "Maximum flow",
             "type": "value",
             "unit": "m~^3/day;ft~^3/day"
         },
@@ -898,6 +1015,7 @@
             "delegate": "UnitBox",
             "description": "Minimum flow",
             "includeinoutput": "",
+            "name": "Minimum flow",
             "type": "value",
             "unit": "m~^3/day;ft~^3/day"
         },
@@ -905,6 +1023,7 @@
             "delegate": "UnitBox",
             "description": "Upper precipitation threshold",
             "includeinoutput": "",
+            "name": "Upper precipitation threshold",
             "type": "value",
             "unit": "m/day"
         },
@@ -912,6 +1031,7 @@
             "delegate": "UnitBox",
             "description": "Lower precipitation threshold",
             "includeinoutput": "",
+            "name": "Lower precipitation threshold",
             "type": "value",
             "unit": "m/day"
         },
@@ -920,6 +1040,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -927,6 +1048,7 @@
             "delegate": "ValueBox",
             "description": "Flow multiplier",
             "includeinoutput": "",
+            "name": "Flow multiplier",
             "type": "value",
             "unit": ""
         },
@@ -935,6 +1057,7 @@
             "delegate": "UnitBox",
             "description": "Mean kernel delay time",
             "includeinoutput": "",
+            "name": "Mean kernel delay time",
             "type": "value",
             "unit": "day"
         },
@@ -942,6 +1065,7 @@
             "delegate": "",
             "description": "Kernel Smoothed Forcast",
             "includeinoutput": "true",
+            "name": "Kernel Smoothed Forcast",
             "type": "timeseries",
             "unit": ""
         },
@@ -949,6 +1073,7 @@
             "delegate": "UnitBox",
             "description": "Kernel spread parameter",
             "includeinoutput": "",
+            "name": "Kernel spread parameter",
             "type": "value",
             "unit": "day"
         },
@@ -956,6 +1081,7 @@
             "delegate": "Browser;time series",
             "description": "Precipitation intensity",
             "includeinoutput": "true",
+            "name": "Precipitation intensity",
             "type": "timeseries",
             "unit": ""
         },
@@ -966,6 +1092,7 @@
             "delegate": "",
             "description": "Initial Storage; Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage; Storage",
             "type": "timeseries",
             "unit": ""
         },
@@ -973,6 +1100,7 @@
             "delegate": "UnitBox",
             "description": "Cell area",
             "includeinoutput": "false",
+            "name": "Cell area",
             "type": "value",
             "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
@@ -980,6 +1108,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation",
             "includeinoutput": "",
+            "name": "Bottom Elevation",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -987,6 +1116,7 @@
             "delegate": "UnitBox",
             "description": "Cell Depth",
             "includeinoutput": "false",
+            "name": "Cell Depth",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -995,6 +1125,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1002,6 +1133,7 @@
             "delegate": "UnitBox",
             "description": "Hydraulic Conductivity",
             "includeinoutput": "",
+            "name": "Hydraulic Conductivity",
             "type": "value",
             "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
@@ -1010,6 +1142,7 @@
             "delegate": "ValueBox",
             "description": "Moisture content",
             "includeinoutput": "true",
+            "name": "Moisture content",
             "type": "timeseries",
             "unit": ""
         },
@@ -1017,6 +1150,7 @@
             "delegate": "ValueBox",
             "description": "Porosity",
             "includeinoutput": "",
+            "name": "Porosity",
             "type": "value",
             "unit": ""
         },
@@ -1024,6 +1158,7 @@
             "delegate": "UnitBox",
             "description": "Specific Storage",
             "includeinoutput": "",
+            "name": "Specific Storage",
             "type": "value",
             "unit": "1/m;1/ft;1/cm;1/in"
         },
@@ -1035,6 +1170,7 @@
             "delegate": "ValueBox",
             "description": "Exceedance probability",
             "includeinoutput": "false",
+            "name": "Exceedance probability",
             "type": "value",
             "unit": ""
         },
@@ -1042,6 +1178,7 @@
             "delegate": "expressionEditor",
             "description": "Expression",
             "includeinoutput": "true",
+            "name": "Expression",
             "type": "timeseries",
             "unit": ""
         },
@@ -1050,6 +1187,7 @@
             "delegate": "ComboBox;items:integrate,value,maximum,variance,exceedance",
             "description": "Calculation method",
             "includeinoutput": "false",
+            "name": "Calculation method",
             "type": "string",
             "unit": ""
         },
@@ -1057,6 +1195,7 @@
             "delegate": "ComboBox;BlockLinks",
             "description": "Object",
             "includeinoutput": "false",
+            "name": "Object",
             "type": "string",
             "unit": ""
         },
@@ -1065,6 +1204,7 @@
             "delegate": "ValueBox",
             "description": "Weight",
             "includeinoutput": "false",
+            "name": "Weight",
             "type": "value",
             "unit": ""
         }
@@ -1075,6 +1215,7 @@
             "delegate": "ValueBox",
             "description": "Error standard deviation",
             "includeinoutput": "",
+            "name": "Error standard deviation",
             "type": "value",
             "unit": ""
         },
@@ -1082,6 +1223,7 @@
             "delegate": "ComboBox;items:normal,log-normal",
             "description": "Error probability distribution",
             "includeinoutput": "false",
+            "name": "Error probability distribution",
             "type": "string",
             "unit": ""
         },
@@ -1089,6 +1231,7 @@
             "delegate": "expressionEditor",
             "description": "Expression",
             "includeinoutput": "true",
+            "name": "Expression",
             "type": "timeseries",
             "unit": ""
         },
@@ -1097,6 +1240,7 @@
             "delegate": "ComboBox;BlockLinks",
             "description": "Object",
             "includeinoutput": "false",
+            "name": "Object",
             "type": "string",
             "unit": ""
         },
@@ -1104,6 +1248,7 @@
             "delegate": "Browser",
             "description": "Observed data time series",
             "includeinoutput": "true",
+            "name": "Observed data time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1115,6 +1260,7 @@
             "delegate": "ValueBox",
             "description": "Upper Limit",
             "includeinoutput": "",
+            "name": "Upper Limit",
             "type": "value",
             "unit": ""
         },
@@ -1123,6 +1269,7 @@
             "delegate": "ValueBox",
             "description": "Lower Limit",
             "includeinoutput": "",
+            "name": "Lower Limit",
             "type": "value",
             "unit": ""
         },
@@ -1130,6 +1277,7 @@
             "delegate": "ComboBox;items:normal,log-normal",
             "description": "Prior distribution",
             "includeinoutput": "false",
+            "name": "Prior distribution",
             "type": "string",
             "unit": ""
         },
@@ -1138,6 +1286,7 @@
             "delegate": "ValueBox",
             "description": "Value",
             "includeinoutput": "",
+            "name": "Value",
             "type": "value",
             "unit": ""
         }
@@ -1147,6 +1296,7 @@
             "delegate": "UnitBox",
             "description": "Concentration",
             "includeinoutput": "true",
+            "name": "Concentration",
             "type": "timeseries",
             "unit": "g/m~^3"
         },
@@ -1155,6 +1305,7 @@
             "delegate": "Browser",
             "description": "External mass flow time-series",
             "includeinoutput": "true",
+            "name": "External mass flow time-series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1162,6 +1313,7 @@
             "delegate": "ComboBox;Sources",
             "description": "External source",
             "includeinoutput": "true",
+            "name": "External source",
             "type": "timeseries",
             "unit": ""
         },
@@ -1170,6 +1322,7 @@
             "delegate": "",
             "description": "Mass",
             "includeinoutput": "true",
+            "name": "Mass",
             "type": "timeseries",
             "unit": ""
         },
@@ -1177,6 +1330,7 @@
             "delegate": "",
             "description": "Mass transfer rate",
             "includeinoutput": "true",
+            "name": "Mass transfer rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -1184,6 +1338,7 @@
             "delegate": "UnitBox",
             "description": "Settling velocity",
             "includeinoutput": "",
+            "name": "Settling velocity",
             "type": "value",
             "unit": "m/s;m/day;ft/s;ft/day"
         },
@@ -1191,6 +1346,7 @@
             "delegate": "expressionEditor",
             "description": "Stoichiometric Constant",
             "includeinoutput": "false",
+            "name": "Stoichiometric Constant",
             "type": "expression",
             "unit": ""
         },
@@ -1201,6 +1357,7 @@
             "delegate": "ComboBox;Sources",
             "description": "Evapotranspiration",
             "includeinoutput": "true",
+            "name": "Evapotranspiration",
             "type": "timeseries",
             "unit": ""
         },
@@ -1208,6 +1365,7 @@
             "delegate": "ComboBox;Sources",
             "description": "precipitation time series",
             "includeinoutput": "true",
+            "name": "precipitation time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1215,6 +1373,7 @@
             "delegate": "UnitBox",
             "description": "Initial Storage;Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage;Storage",
             "type": "timeseries",
             "unit": "m~^3;ft~^3"
         },
@@ -1222,6 +1381,7 @@
             "delegate": "ValueBox",
             "description": "The coefficient (~alpha) in the rating curve S = ~alpha d^~beta",
             "includeinoutput": "",
+            "name": "The coefficient (~alpha) in the rating curve S = ~alpha d^~beta",
             "type": "value",
             "unit": ""
         },
@@ -1229,6 +1389,7 @@
             "delegate": "",
             "description": "Surface area",
             "includeinoutput": "true",
+            "name": "Surface area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1236,6 +1397,7 @@
             "delegate": "ValueBox",
             "description": "The exponent (~beta) in the rating curve S = ~alpha d^~beta",
             "includeinoutput": "",
+            "name": "The exponent (~beta) in the rating curve S = ~alpha d^~beta",
             "type": "value",
             "unit": ""
         },
@@ -1243,6 +1405,7 @@
             "delegate": "UnitBox",
             "description": "Bottom elevation of pond",
             "includeinoutput": "",
+            "name": "Bottom elevation of pond",
             "type": "value",
             "unit": "m;ft"
         },
@@ -1250,6 +1413,7 @@
             "delegate": "",
             "description": "Water depth",
             "includeinoutput": "true",
+            "name": "Water depth",
             "type": "timeseries",
             "unit": ""
         },
@@ -1258,6 +1422,7 @@
             "delegate": "",
             "description": "Hydraulic head",
             "includeinoutput": "true",
+            "name": "Hydraulic head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1266,6 +1431,7 @@
             "delegate": "Browser",
             "description": "Inflow rate time series",
             "includeinoutput": "true",
+            "name": "Inflow rate time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1278,6 +1444,7 @@
             "delegate": "Browser;time series",
             "description": "Precipitation intensity",
             "includeinoutput": "true",
+            "name": "Precipitation intensity",
             "type": "timeseries",
             "unit": ""
         },
@@ -1290,6 +1457,7 @@
             "delegate": "",
             "description": "Kernel Smoothed Forcast",
             "includeinoutput": "true",
+            "name": "Kernel Smoothed Forcast",
             "type": "timeseries",
             "unit": ""
         },
@@ -1297,6 +1465,7 @@
             "delegate": "Browser;time series",
             "description": "Precipitation intensity",
             "includeinoutput": "true",
+            "name": "Precipitation intensity",
             "type": "timeseries",
             "unit": ""
         },
@@ -1309,6 +1478,7 @@
             "delegate": "expressionEditor",
             "description": "Rate Expression",
             "includeinoutput": "",
+            "name": "Rate Expression",
             "type": "expression",
             "unit": ""
         },
@@ -1319,6 +1489,7 @@
             "delegate": "ValueBox",
             "description": "Arrhenius temperature correction factor",
             "includeinoutput": "",
+            "name": "Arrhenius temperature correction factor",
             "type": "value",
             "unit": ""
         },
@@ -1326,6 +1497,7 @@
             "delegate": "ValueBox",
             "description": "Value",
             "includeinoutput": "",
+            "name": "Value",
             "type": "value",
             "unit": ""
         },
@@ -1335,6 +1507,7 @@
             "delegate": "ValueBox",
             "description": "Reference Temperature",
             "includeinoutput": "",
+            "name": "Reference Temperature",
             "type": "value",
             "unit": ""
         },
@@ -1342,6 +1515,7 @@
             "delegate": "Browser",
             "description": "Temperature time-series (degrees Celsius)",
             "includeinoutput": "true",
+            "name": "Temperature time-series (degrees Celsius)",
             "type": "timeseries",
             "unit": ""
         },
@@ -1350,6 +1524,7 @@
             "delegate": "",
             "description": "Value",
             "includeinoutput": "true",
+            "name": "Value",
             "type": "timeseries",
             "unit": ""
         }
@@ -1359,6 +1534,7 @@
             "delegate": "UnitBox",
             "description": "Maximum flow",
             "includeinoutput": "",
+            "name": "Maximum flow",
             "type": "value",
             "unit": "m~^3/day;ft~^3/day"
         },
@@ -1366,6 +1542,7 @@
             "delegate": "UnitBox",
             "description": "Minimum flow",
             "includeinoutput": "",
+            "name": "Minimum flow",
             "type": "value",
             "unit": "m~^3/day;ft~^3/day"
         },
@@ -1373,6 +1550,7 @@
             "delegate": "UnitBox",
             "description": "Maximum storage",
             "includeinoutput": "",
+            "name": "Maximum storage",
             "type": "value",
             "unit": "m~^3;ft~^3"
         },
@@ -1380,6 +1558,7 @@
             "delegate": "UnitBox",
             "description": "Minimum storage",
             "includeinoutput": "",
+            "name": "Minimum storage",
             "type": "value",
             "unit": "m~^3;ft~^3"
         },
@@ -1388,6 +1567,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -1399,6 +1579,7 @@
             "delegate": "",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "true",
+            "name": "Manning's roughness coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -1406,6 +1587,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1414,6 +1596,7 @@
             "delegate": "",
             "description": "Flow (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -1421,6 +1604,7 @@
             "delegate": "",
             "description": "Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -1429,6 +1613,7 @@
             "delegate": "",
             "description": "Connector length",
             "includeinoutput": "true",
+            "name": "Connector length",
             "type": "timeseries",
             "unit": ""
         },
@@ -1436,6 +1621,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -1446,6 +1632,7 @@
             "delegate": "ValueBox",
             "description": "Manning's Roughness Coefficient",
             "includeinoutput": "",
+            "name": "Manning's Roughness Coefficient",
             "type": "value",
             "unit": ""
         },
@@ -1453,6 +1640,7 @@
             "delegate": "",
             "description": "Storage",
             "includeinoutput": "true",
+            "name": "Storage",
             "type": "timeseries",
             "unit": ""
         },
@@ -1460,6 +1648,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1467,6 +1656,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation",
             "includeinoutput": "",
+            "name": "Bottom Elevation",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1474,6 +1664,7 @@
             "delegate": "UnitBox",
             "description": "Initial Water Depth; Water Depth",
             "includeinoutput": "true",
+            "name": "Initial Water Depth; Water Depth",
             "type": "timeseries",
             "unit": "m;ft;cm"
         },
@@ -1482,6 +1673,7 @@
             "delegate": "UnitBox",
             "description": "Diameter",
             "includeinoutput": "",
+            "name": "Diameter",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -1489,6 +1681,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1497,6 +1690,7 @@
             "delegate": "Browser",
             "description": "Inflow time series",
             "includeinoutput": "true",
+            "name": "Inflow time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1504,6 +1698,7 @@
             "delegate": "UnitBox",
             "description": "Segment length",
             "includeinoutput": "",
+            "name": "Segment length",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1511,6 +1706,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -1521,6 +1717,7 @@
             "delegate": "ValueBox",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "",
+            "name": "Manning's roughness coefficient",
             "type": "value",
             "unit": "m"
         },
@@ -1528,6 +1725,7 @@
             "delegate": "",
             "description": "Start area",
             "includeinoutput": "true",
+            "name": "Start area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1535,6 +1733,7 @@
             "delegate": "",
             "description": "End area",
             "includeinoutput": "true",
+            "name": "End area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1542,6 +1741,7 @@
             "delegate": "",
             "description": "Start Depth",
             "includeinoutput": "true",
+            "name": "Start Depth",
             "type": "timeseries",
             "unit": ""
         },
@@ -1549,6 +1749,7 @@
             "delegate": "",
             "description": "End Depth",
             "includeinoutput": "true",
+            "name": "End Depth",
             "type": "timeseries",
             "unit": ""
         },
@@ -1557,6 +1758,7 @@
             "delegate": "UnitBox",
             "description": "Diameter",
             "includeinoutput": "",
+            "name": "Diameter",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1564,6 +1766,7 @@
             "delegate": "",
             "description": "Effective area",
             "includeinoutput": "true",
+            "name": "Effective area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1571,6 +1774,7 @@
             "delegate": "UnitBox",
             "description": "End elevation",
             "includeinoutput": "",
+            "name": "End elevation",
             "type": "value",
             "unit": "m;ft"
         },
@@ -1578,6 +1782,7 @@
             "delegate": "",
             "description": "Flow rate (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow rate (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -1585,6 +1790,7 @@
             "delegate": "",
             "description": "Hydraulic Gradient",
             "includeinoutput": "true",
+            "name": "Hydraulic Gradient",
             "type": "timeseries",
             "unit": ""
         },
@@ -1592,6 +1798,7 @@
             "delegate": "",
             "description": "Effective hydraulic radious",
             "includeinoutput": "true",
+            "name": "Effective hydraulic radious",
             "type": "timeseries",
             "unit": ""
         },
@@ -1600,6 +1807,7 @@
             "delegate": "UnitBox",
             "description": "Pipe length",
             "includeinoutput": "",
+            "name": "Pipe length",
             "type": "value",
             "unit": "m;ft"
         },
@@ -1607,6 +1815,7 @@
             "delegate": "",
             "description": "Start wetted perimeter",
             "includeinoutput": "true",
+            "name": "Start wetted perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -1614,6 +1823,7 @@
             "delegate": "",
             "description": "End wetted perimeter",
             "includeinoutput": "true",
+            "name": "End wetted perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -1621,6 +1831,7 @@
             "delegate": "UnitBox",
             "description": "Start elevation",
             "includeinoutput": "",
+            "name": "Start elevation",
             "type": "value",
             "unit": "m;ft"
         },
@@ -1631,6 +1842,7 @@
             "delegate": "ValueBox",
             "description": "Manning's Roughness Coefficient",
             "includeinoutput": "",
+            "name": "Manning's Roughness Coefficient",
             "type": "value",
             "unit": ""
         },
@@ -1638,6 +1850,7 @@
             "delegate": "",
             "description": "Storage",
             "includeinoutput": "true",
+            "name": "Storage",
             "type": "timeseries",
             "unit": ""
         },
@@ -1645,6 +1858,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1652,6 +1866,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation",
             "includeinoutput": "",
+            "name": "Bottom Elevation",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1659,6 +1874,7 @@
             "delegate": "UnitBox",
             "description": "Initial Water Depth; Water Depth",
             "includeinoutput": "true",
+            "name": "Initial Water Depth; Water Depth",
             "type": "timeseries",
             "unit": "m;ft;cm"
         },
@@ -1667,6 +1883,7 @@
             "delegate": "UnitBox",
             "description": "Diameter",
             "includeinoutput": "",
+            "name": "Diameter",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -1674,6 +1891,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1682,6 +1900,7 @@
             "delegate": "Browser",
             "description": "Inflow time series",
             "includeinoutput": "true",
+            "name": "Inflow time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1689,6 +1908,7 @@
             "delegate": "UnitBox",
             "description": "Segment length",
             "includeinoutput": "",
+            "name": "Segment length",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1696,6 +1916,7 @@
             "delegate": "",
             "description": "Normalized area",
             "includeinoutput": "true",
+            "name": "Normalized area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1703,6 +1924,7 @@
             "delegate": "",
             "description": "Normalized water depth",
             "includeinoutput": "true",
+            "name": "Normalized water depth",
             "type": "timeseries",
             "unit": ""
         },
@@ -1710,6 +1932,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -1720,6 +1943,7 @@
             "delegate": "ComboBox;Sources",
             "description": "Evapotranspiration",
             "includeinoutput": "true",
+            "name": "Evapotranspiration",
             "type": "timeseries",
             "unit": ""
         },
@@ -1727,6 +1951,7 @@
             "delegate": "UnitBox",
             "description": "Saturated Hydraulc Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulc Conductivity",
             "type": "timeseries",
             "unit": "m/day;ft/day;m/s;ft/s"
         },
@@ -1734,6 +1959,7 @@
             "delegate": "ValueBox",
             "description": "Hydraulic conductivity scale factor",
             "includeinoutput": "",
+            "name": "Hydraulic conductivity scale factor",
             "type": "value",
             "unit": ""
         },
@@ -1741,6 +1967,7 @@
             "delegate": "ValueBox",
             "description": "Effective Moisture content",
             "includeinoutput": "true",
+            "name": "Effective Moisture content",
             "type": "timeseries",
             "unit": ""
         },
@@ -1748,6 +1975,7 @@
             "delegate": "",
             "description": "Storage",
             "includeinoutput": "true",
+            "name": "Storage",
             "type": "timeseries",
             "unit": "m~^3"
         },
@@ -1755,6 +1983,7 @@
             "delegate": "UnitBox",
             "description": "Van Genuchten's alpha parameter",
             "includeinoutput": "",
+            "name": "Van Genuchten's alpha parameter",
             "type": "value",
             "unit": "1/m;1/ft;1/cm"
         },
@@ -1762,6 +1991,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Area of the soil block",
             "includeinoutput": "",
+            "name": "Bottom Area of the soil block",
             "type": "value",
             "unit": "m~^2;ft~^2"
         },
@@ -1769,6 +1999,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation of the soil block",
             "includeinoutput": "",
+            "name": "Bottom Elevation of the soil block",
             "type": "value",
             "unit": "m;ft"
         },
@@ -1776,6 +2007,7 @@
             "delegate": "UnitBox",
             "description": "Depth of the soil block",
             "includeinoutput": "",
+            "name": "Depth of the soil block",
             "type": "value",
             "unit": "m;ft"
         },
@@ -1784,6 +2016,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1792,6 +2025,7 @@
             "delegate": "ValueBox",
             "description": "Van Genuchten's n parameter",
             "includeinoutput": "",
+            "name": "Van Genuchten's n parameter",
             "type": "value",
             "unit": ""
         },
@@ -1799,6 +2033,7 @@
             "delegate": "",
             "description": "Pressure Head",
             "includeinoutput": "true",
+            "name": "Pressure Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1806,6 +2041,7 @@
             "delegate": "UnitBox",
             "description": "Specific storage",
             "includeinoutput": "",
+            "name": "Specific storage",
             "type": "value",
             "unit": "1/m;1/ft"
         },
@@ -1813,6 +2049,7 @@
             "delegate": "ValueBox",
             "description": "Initial Moisture Content; Moisture Content",
             "includeinoutput": "true",
+            "name": "Initial Moisture Content; Moisture Content",
             "type": "timeseries",
             "unit": ""
         },
@@ -1820,6 +2057,7 @@
             "delegate": "ValueBox",
             "description": "Residual Moisture Content",
             "includeinoutput": "",
+            "name": "Residual Moisture Content",
             "type": "value",
             "unit": ""
         },
@@ -1827,6 +2065,7 @@
             "delegate": "ValueBox",
             "description": "Saturated Moisture Content",
             "includeinoutput": "",
+            "name": "Saturated Moisture Content",
             "type": "value",
             "unit": ""
         },
@@ -1835,6 +2074,7 @@
             "delegate": "",
             "description": "volume",
             "includeinoutput": "true",
+            "name": "volume",
             "type": "timeseries",
             "unit": ""
         }
@@ -1844,6 +2084,7 @@
             "delegate": "ValueBox",
             "description": "Manning's Roughness Coefficient",
             "includeinoutput": "",
+            "name": "Manning's Roughness Coefficient",
             "type": "value",
             "unit": ""
         },
@@ -1851,6 +2092,7 @@
             "delegate": "",
             "description": "Storage",
             "includeinoutput": "true",
+            "name": "Storage",
             "type": "timeseries",
             "unit": ""
         },
@@ -1858,6 +2100,7 @@
             "delegate": "UnitBox",
             "description": "Area of agriculural land",
             "includeinoutput": "",
+            "name": "Area of agriculural land",
             "type": "value",
             "unit": "m~^2"
         },
@@ -1865,6 +2108,7 @@
             "delegate": "",
             "description": "Agricultural Withdrawal",
             "includeinoutput": "true",
+            "name": "Agricultural Withdrawal",
             "type": "timeseries",
             "unit": ""
         },
@@ -1872,6 +2116,7 @@
             "delegate": "Browser",
             "description": "Agricultural Withdrawal per unit area",
             "includeinoutput": "true",
+            "name": "Agricultural Withdrawal per unit area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1879,6 +2124,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1886,6 +2132,7 @@
             "delegate": "UnitBox",
             "description": "Base Width",
             "includeinoutput": "",
+            "name": "Base Width",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1893,6 +2140,7 @@
             "delegate": "UnitBox",
             "description": "Bottom Elevation",
             "includeinoutput": "",
+            "name": "Bottom Elevation",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1900,6 +2148,7 @@
             "delegate": "UnitBox",
             "description": "Initial Water Depth; Water Depth",
             "includeinoutput": "true",
+            "name": "Initial Water Depth; Water Depth",
             "type": "timeseries",
             "unit": "m;ft;cm"
         },
@@ -1908,6 +2157,7 @@
             "delegate": "",
             "description": "Hydraulc Head",
             "includeinoutput": "true",
+            "name": "Hydraulc Head",
             "type": "timeseries",
             "unit": ""
         },
@@ -1916,6 +2166,7 @@
             "delegate": "Browser",
             "description": "Inflow time series",
             "includeinoutput": "true",
+            "name": "Inflow time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -1923,6 +2174,7 @@
             "delegate": "UnitBox",
             "description": "Segment length",
             "includeinoutput": "",
+            "name": "Segment length",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -1930,6 +2182,7 @@
             "delegate": "UnitBox",
             "description": "Area of non-agriculural activity",
             "includeinoutput": "",
+            "name": "Area of non-agriculural activity",
             "type": "value",
             "unit": "m~^2"
         },
@@ -1937,6 +2190,7 @@
             "delegate": "",
             "description": "Non-Agricultural Withdrawal",
             "includeinoutput": "true",
+            "name": "Non-Agricultural Withdrawal",
             "type": "timeseries",
             "unit": ""
         },
@@ -1944,6 +2198,7 @@
             "delegate": "Browser",
             "description": "Non-Agricultural Withdrawal per unit area",
             "includeinoutput": "true",
+            "name": "Non-Agricultural Withdrawal per unit area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1951,6 +2206,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -1958,6 +2214,7 @@
             "delegate": "ValueBox",
             "description": "Side Slope",
             "includeinoutput": "",
+            "name": "Side Slope",
             "type": "value",
             "unit": ""
         },
@@ -1968,6 +2225,7 @@
             "delegate": "",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "true",
+            "name": "Manning's roughness coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -1975,6 +2233,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -1983,6 +2242,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -1990,6 +2250,7 @@
             "delegate": "",
             "description": "Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -1998,6 +2259,7 @@
             "delegate": "",
             "description": "Connector length",
             "includeinoutput": "true",
+            "name": "Connector length",
             "type": "timeseries",
             "unit": ""
         },
@@ -2005,6 +2267,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2015,6 +2278,7 @@
             "delegate": "UnitBox",
             "description": "Initial Storage;Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage;Storage",
             "type": "timeseries",
             "unit": "m~^3;ft~^3"
         },
@@ -2028,6 +2292,7 @@
             "delegate": "Browser",
             "description": "Flow rate time series",
             "includeinoutput": "true",
+            "name": "Flow rate time series",
             "type": "timeseries",
             "unit": ""
         },
@@ -2039,6 +2304,7 @@
             "delegate": "",
             "description": "Saturated Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2047,6 +2313,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2055,6 +2322,7 @@
             "delegate": "",
             "description": "Lenght",
             "includeinoutput": "true",
+            "name": "Lenght",
             "type": "timeseries",
             "unit": ""
         },
@@ -2065,6 +2333,7 @@
             "delegate": "",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "true",
+            "name": "Manning's roughness coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2072,6 +2341,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2080,6 +2350,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2087,6 +2358,7 @@
             "delegate": "",
             "description": "Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -2095,6 +2367,7 @@
             "delegate": "",
             "description": "Connector length",
             "includeinoutput": "true",
+            "name": "Connector length",
             "type": "timeseries",
             "unit": ""
         },
@@ -2102,6 +2375,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2112,6 +2386,7 @@
             "delegate": "UnitBox",
             "description": "Head-loss coefficient",
             "includeinoutput": "",
+            "name": "Head-loss coefficient",
             "type": "value",
             "unit": "m~^3/day"
         },
@@ -2120,6 +2395,7 @@
             "delegate": "",
             "description": "Flow rate (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow rate (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2131,6 +2407,7 @@
             "delegate": "UnitBox",
             "description": "Crest Elevation",
             "includeinoutput": "",
+            "name": "Crest Elevation",
             "type": "value",
             "unit": "m;ft"
         },
@@ -2139,6 +2416,7 @@
             "delegate": "",
             "description": "Flow rate (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow rate (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2146,6 +2424,7 @@
             "delegate": "ValueBox",
             "description": "Head-loss coefficient",
             "includeinoutput": "",
+            "name": "Head-loss coefficient",
             "type": "value",
             "unit": ""
         },
@@ -2154,6 +2433,7 @@
             "delegate": "UnitBox",
             "description": "Pipe Diameter",
             "includeinoutput": "",
+            "name": "Pipe Diameter",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -2164,6 +2444,7 @@
             "delegate": "UnitBox",
             "description": "Initial Storage; Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage; Storage",
             "type": "timeseries",
             "unit": "m~^3;ft~^3"
         },
@@ -2172,6 +2453,7 @@
             "delegate": "UnitBox",
             "description": "Head",
             "includeinoutput": "true",
+            "name": "Head",
             "type": "timeseries",
             "unit": "m;ft"
         },
@@ -2183,6 +2465,7 @@
             "delegate": "ValueBox",
             "description": "Hydraulic Gradient",
             "includeinoutput": "true",
+            "name": "Hydraulic Gradient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2190,6 +2473,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2197,6 +2481,7 @@
             "delegate": "",
             "description": "Saturated Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2204,6 +2489,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2212,6 +2498,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2220,6 +2507,7 @@
             "delegate": "",
             "description": "m parameter",
             "includeinoutput": "true",
+            "name": "m parameter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2230,6 +2518,7 @@
             "delegate": "UnitBox",
             "description": "Interface Area",
             "includeinoutput": "false",
+            "name": "Interface Area",
             "type": "value",
             "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
@@ -2238,6 +2527,7 @@
             "delegate": "",
             "description": "Flow rate",
             "includeinoutput": "true",
+            "name": "Flow rate",
             "type": "timeseries",
             "unit": ""
         },
@@ -2246,6 +2536,7 @@
             "delegate": "UnitBox",
             "description": "Length",
             "includeinoutput": "false",
+            "name": "Length",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -2256,6 +2547,7 @@
             "delegate": "UnitBox",
             "description": "Interface Area",
             "includeinoutput": "false",
+            "name": "Interface Area",
             "type": "value",
             "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
@@ -2264,6 +2556,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2272,6 +2565,7 @@
             "delegate": "UnitBox",
             "description": "Length",
             "includeinoutput": "false",
+            "name": "Length",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -2282,6 +2576,7 @@
             "delegate": "UnitBox",
             "description": "Interface Area",
             "includeinoutput": "false",
+            "name": "Interface Area",
             "type": "value",
             "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
@@ -2290,6 +2585,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2297,6 +2593,7 @@
             "delegate": "UnitBox",
             "description": "Hydraulic Conductivity",
             "includeinoutput": "",
+            "name": "Hydraulic Conductivity",
             "type": "value",
             "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
@@ -2305,6 +2602,7 @@
             "delegate": "UnitBox",
             "description": "Length",
             "includeinoutput": "false",
+            "name": "Length",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -2315,6 +2613,7 @@
             "delegate": "",
             "description": "Interface Area",
             "includeinoutput": "true",
+            "name": "Interface Area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2323,6 +2622,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2331,6 +2631,7 @@
             "delegate": "UnitBox",
             "description": "Length",
             "includeinoutput": "false",
+            "name": "Length",
             "type": "value",
             "unit": "m;ft"
         },
@@ -2341,6 +2642,7 @@
             "delegate": "",
             "description": "Hydralic Gradient",
             "includeinoutput": "true",
+            "name": "Hydralic Gradient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2348,6 +2650,7 @@
             "delegate": "",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "true",
+            "name": "Manning's roughness coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2355,6 +2658,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2363,6 +2667,7 @@
             "delegate": "",
             "description": "Flow (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2370,6 +2675,7 @@
             "delegate": "",
             "description": "Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -2378,6 +2684,7 @@
             "delegate": "",
             "description": "Connector length",
             "includeinoutput": "true",
+            "name": "Connector length",
             "type": "timeseries",
             "unit": ""
         },
@@ -2385,6 +2692,7 @@
             "delegate": "",
             "description": "Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2395,6 +2703,7 @@
             "delegate": "",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "true",
+            "name": "Manning's roughness coefficient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2402,6 +2711,7 @@
             "delegate": "",
             "description": "Upstream cross-sectional area",
             "includeinoutput": "true",
+            "name": "Upstream cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2409,6 +2719,7 @@
             "delegate": "",
             "description": "Downstream area",
             "includeinoutput": "true",
+            "name": "Downstream area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2416,6 +2727,7 @@
             "delegate": "",
             "description": "End Depth",
             "includeinoutput": "true",
+            "name": "End Depth",
             "type": "timeseries",
             "unit": ""
         },
@@ -2424,6 +2736,7 @@
             "delegate": "UnitBox",
             "description": "Pipe bottom elevation at the pond",
             "includeinoutput": "false",
+            "name": "Pipe bottom elevation at the pond",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -2431,6 +2744,7 @@
             "delegate": "",
             "description": "Flow (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2438,6 +2752,7 @@
             "delegate": "",
             "description": "Hydraulic Gradient",
             "includeinoutput": "true",
+            "name": "Hydraulic Gradient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2445,6 +2760,7 @@
             "delegate": "",
             "description": "Upstream Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Upstream Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -2452,6 +2768,7 @@
             "delegate": "",
             "description": "Downstream Hydraulic Radius",
             "includeinoutput": "true",
+            "name": "Downstream Hydraulic Radius",
             "type": "timeseries",
             "unit": ""
         },
@@ -2460,6 +2777,7 @@
             "delegate": "",
             "description": "Connector length",
             "includeinoutput": "true",
+            "name": "Connector length",
             "type": "timeseries",
             "unit": ""
         },
@@ -2467,6 +2785,7 @@
             "delegate": "",
             "description": "Upstream Wetted Perimeter",
             "includeinoutput": "true",
+            "name": "Upstream Wetted Perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2474,6 +2793,7 @@
             "delegate": "",
             "description": "Downstream wetted perimeter",
             "includeinoutput": "true",
+            "name": "Downstream wetted perimeter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2484,6 +2804,7 @@
             "delegate": "UnitBox",
             "description": "Interface Area",
             "includeinoutput": "false",
+            "name": "Interface Area",
             "type": "value",
             "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
@@ -2492,6 +2813,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2499,6 +2821,7 @@
             "delegate": "UnitBox",
             "description": "Hydraulic Conductivity",
             "includeinoutput": "",
+            "name": "Hydraulic Conductivity",
             "type": "value",
             "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
@@ -2510,6 +2833,7 @@
             "delegate": "UnitBox",
             "description": "Transmissivity coefficient",
             "includeinoutput": "",
+            "name": "Transmissivity coefficient",
             "type": "value",
             "unit": "1/day"
         },
@@ -2518,6 +2842,7 @@
             "delegate": "",
             "description": "Flow (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2529,6 +2854,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2536,6 +2862,7 @@
             "delegate": "UnitBox",
             "description": "Saturated Hydraulc Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulc Conductivity",
             "type": "timeseries",
             "unit": "m/day;ft/day;m/s;ft/s"
         },
@@ -2543,6 +2870,7 @@
             "delegate": "ValueBox",
             "description": "Hydraulic conductivity scale factor",
             "includeinoutput": "",
+            "name": "Hydraulic conductivity scale factor",
             "type": "value",
             "unit": ""
         },
@@ -2550,6 +2878,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2557,6 +2886,7 @@
             "delegate": "UnitBox",
             "description": "Interface area",
             "includeinoutput": "true",
+            "name": "Interface area",
             "type": "timeseries",
             "unit": "m~^2;ft~^2"
         },
@@ -2565,6 +2895,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2573,6 +2904,7 @@
             "delegate": "UnitBox",
             "description": "Lenght",
             "includeinoutput": "true",
+            "name": "Lenght",
             "type": "timeseries",
             "unit": "m;ft"
         },
@@ -2580,6 +2912,7 @@
             "delegate": "",
             "description": "m parameter",
             "includeinoutput": "true",
+            "name": "m parameter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2590,6 +2923,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2597,6 +2931,7 @@
             "delegate": "",
             "description": "Saturated Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2604,6 +2939,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2612,6 +2948,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2620,6 +2957,7 @@
             "delegate": "",
             "description": "Lenght",
             "includeinoutput": "true",
+            "name": "Lenght",
             "type": "timeseries",
             "unit": ""
         },
@@ -2627,6 +2965,7 @@
             "delegate": "",
             "description": "m parameter",
             "includeinoutput": "true",
+            "name": "m parameter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2637,6 +2976,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2644,6 +2984,7 @@
             "delegate": "",
             "description": "Saturated Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2651,6 +2992,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2659,6 +3001,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2667,6 +3010,7 @@
             "delegate": "",
             "description": "Lenght",
             "includeinoutput": "true",
+            "name": "Lenght",
             "type": "timeseries",
             "unit": ""
         },
@@ -2674,6 +3018,7 @@
             "delegate": "",
             "description": "m parameter",
             "includeinoutput": "true",
+            "name": "m parameter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2684,6 +3029,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2691,6 +3037,7 @@
             "delegate": "",
             "description": "Saturated Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2698,6 +3045,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2705,6 +3053,7 @@
             "delegate": "UnitBox",
             "description": "Interface area",
             "includeinoutput": "true",
+            "name": "Interface area",
             "type": "timeseries",
             "unit": "m~^2;ft~^2"
         },
@@ -2713,6 +3062,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2721,6 +3071,7 @@
             "delegate": "UnitBox",
             "description": "Lenght",
             "includeinoutput": "true",
+            "name": "Lenght",
             "type": "timeseries",
             "unit": "m;ft"
         },
@@ -2728,6 +3079,7 @@
             "delegate": "",
             "description": "m parameter",
             "includeinoutput": "true",
+            "name": "m parameter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2738,6 +3090,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2745,6 +3098,7 @@
             "delegate": "",
             "description": "Saturated Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Saturated Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2752,6 +3106,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2759,6 +3114,7 @@
             "delegate": "UnitBox",
             "description": "Interface area",
             "includeinoutput": "true",
+            "name": "Interface area",
             "type": "timeseries",
             "unit": "m~^2;ft~^2"
         },
@@ -2767,6 +3123,7 @@
             "delegate": "",
             "description": "Flow (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2775,6 +3132,7 @@
             "delegate": "UnitBox",
             "description": "length",
             "includeinoutput": "true",
+            "name": "length",
             "type": "timeseries",
             "unit": "m;ft"
         },
@@ -2782,6 +3140,7 @@
             "delegate": "",
             "description": "m parameter",
             "includeinoutput": "true",
+            "name": "m parameter",
             "type": "timeseries",
             "unit": ""
         },
@@ -2792,6 +3151,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2799,6 +3159,7 @@
             "delegate": "",
             "description": "Effective Saturation",
             "includeinoutput": "true",
+            "name": "Effective Saturation",
             "type": "timeseries",
             "unit": ""
         },
@@ -2806,6 +3167,7 @@
             "delegate": "",
             "description": "Interface area",
             "includeinoutput": "true",
+            "name": "Interface area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2814,6 +3176,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2821,6 +3184,7 @@
             "delegate": "",
             "description": "Flux",
             "includeinoutput": "true",
+            "name": "Flux",
             "type": "timeseries",
             "unit": ""
         },
@@ -2828,6 +3192,7 @@
             "delegate": "",
             "description": "Hydraulic gradient",
             "includeinoutput": "true",
+            "name": "Hydraulic gradient",
             "type": "timeseries",
             "unit": ""
         },
@@ -2844,6 +3209,7 @@
             "delegate": "UnitBox",
             "description": "Interface Area",
             "includeinoutput": "false",
+            "name": "Interface Area",
             "type": "value",
             "unit": "m~^2;ft~^2;cm~^2;in~^2"
         },
@@ -2852,6 +3218,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2859,6 +3226,7 @@
             "delegate": "UnitBox",
             "description": "Hydraulic conductivity",
             "includeinoutput": "false",
+            "name": "Hydraulic conductivity",
             "type": "value",
             "unit": "m/day;ft/day;cm/s;in/s;m/s"
         },
@@ -2867,6 +3235,7 @@
             "delegate": "UnitBox",
             "description": "Length",
             "includeinoutput": "false",
+            "name": "Length",
             "type": "value",
             "unit": "m;ft;cm;in"
         },
@@ -2877,6 +3246,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2884,6 +3254,7 @@
             "delegate": "",
             "description": "Interface area",
             "includeinoutput": "true",
+            "name": "Interface area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2892,6 +3263,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2900,6 +3272,7 @@
             "delegate": "UnitBox",
             "description": "Lenght",
             "includeinoutput": "",
+            "name": "Lenght",
             "type": "value",
             "unit": "m;ft"
         },
@@ -2910,6 +3283,7 @@
             "delegate": "",
             "description": "Effective Hydraulic Conductivity",
             "includeinoutput": "true",
+            "name": "Effective Hydraulic Conductivity",
             "type": "timeseries",
             "unit": ""
         },
@@ -2917,6 +3291,7 @@
             "delegate": "",
             "description": "Interface area",
             "includeinoutput": "true",
+            "name": "Interface area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2925,6 +3300,7 @@
             "delegate": "",
             "description": "Flow",
             "includeinoutput": "true",
+            "name": "Flow",
             "type": "timeseries",
             "unit": ""
         },
@@ -2933,6 +3309,7 @@
             "delegate": "",
             "description": "Lenght",
             "includeinoutput": "true",
+            "name": "Lenght",
             "type": "timeseries",
             "unit": ""
         },
@@ -2943,6 +3320,7 @@
             "delegate": "ValueBox",
             "description": "Initial Storage;Storage",
             "includeinoutput": "true",
+            "name": "Initial Storage;Storage",
             "type": "timeseries",
             "unit": ""
         },
@@ -2951,6 +3329,7 @@
             "delegate": "Browser",
             "description": "Head (m)",
             "includeinoutput": "true",
+            "name": "Head (m)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2962,6 +3341,7 @@
             "delegate": "ValueBox",
             "description": "Manning's roughness coefficient",
             "includeinoutput": "false",
+            "name": "Manning's roughness coefficient",
             "type": "value",
             "unit": ""
         },
@@ -2969,6 +3349,7 @@
             "delegate": "",
             "description": "Cross-sectional area",
             "includeinoutput": "true",
+            "name": "Cross-sectional area",
             "type": "timeseries",
             "unit": ""
         },
@@ -2976,6 +3357,7 @@
             "delegate": "",
             "description": "Water depth",
             "includeinoutput": "true",
+            "name": "Water depth",
             "type": "timeseries",
             "unit": ""
         },
@@ -2984,6 +3366,7 @@
             "delegate": "",
             "description": "Flow rate (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow rate (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
@@ -2992,6 +3375,7 @@
             "delegate": "UnitBox",
             "description": "Channel length",
             "includeinoutput": "false",
+            "name": "Channel length",
             "type": "value",
             "unit": "m;ft;cm"
         },
@@ -3000,6 +3384,7 @@
             "delegate": "UnitBox",
             "description": "Width",
             "includeinoutput": "",
+            "name": "Width",
             "type": "value",
             "unit": "m;ft;cm"
         }
@@ -3009,6 +3394,7 @@
             "delegate": "ValueBox",
             "description": "Coefficient alpha in Q=alpha*(h-z_0)^beta",
             "includeinoutput": "",
+            "name": "Coefficient alpha in Q=alpha*(h-z_0)^beta",
             "type": "value",
             "unit": ""
         },
@@ -3016,6 +3402,7 @@
             "delegate": "ValueBox",
             "description": "Exponent beta in Q=alpha*(h-z_0)^beta",
             "includeinoutput": "",
+            "name": "Exponent beta in Q=alpha*(h-z_0)^beta",
             "type": "value",
             "unit": ""
         },
@@ -3023,6 +3410,7 @@
             "delegate": "UnitBox",
             "description": "Crest Elevation",
             "includeinoutput": "",
+            "name": "Crest Elevation",
             "type": "value",
             "unit": "m;ft"
         },
@@ -3031,6 +3419,7 @@
             "delegate": "",
             "description": "Flow rate (m~^3/day)",
             "includeinoutput": "true",
+            "name": "Flow rate (m~^3/day)",
             "type": "timeseries",
             "unit": ""
         },
