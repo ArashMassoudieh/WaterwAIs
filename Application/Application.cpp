@@ -76,9 +76,9 @@ void Application::setSettings() {
         if (auto app_url = url(); !app_url.isEmpty()) {
             auto data_folder = QStringLiteral("Data");            
 
-            if (auto fragment = app_url.fragment(); fragment == "Test") {
+            if (auto fragment = app_url.fragment(); !fragment.isEmpty()) {
                 app_url = app_url.adjusted(QUrl::RemoveFragment);
-                data_folder = QStringLiteral("TestData");
+                data_folder = QUrl::toPercentEncoding(fragment).constData();
             }
 
             host_path = app_url.adjusted(QUrl::RemoveFilename).toString()

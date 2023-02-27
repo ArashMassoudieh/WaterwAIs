@@ -51,17 +51,24 @@ MetaComponentItem::~MetaComponentItem() = default;
 MetaComponentItem::MetaComponentItem(const QJsonObject& json_object)
     : type_ {Type::Unknown} {
     for(auto& key: json_object.keys()) {
+        auto value = json_object.value(key);
+
         if (key == "icon")
-            icon_path_ = json_object.value(key).toString();
+            icon_path_ = value.toString();
+        if (key == "_width")
+            width_ = value.toString().toDouble();
+        if (key == "_height")
+            height_ = value.toString().toDouble();
         else if (key == "type") {
-            if (json_object.value(key).toString() == "node")
+            auto type = value.toString();
+
+            if (type == "node")
                 type_ = Type::Node;
-                
-            if (json_object.value(key).toString() == "link")
+            else if (type == "link")
                 type_ = Type::Link;
         } else {
             // Specifies a property, so let's store it
-            properties_.set(key, json_object.value(key).toObject());
+            properties_.set(key, value.toObject());
         }
     }
 }

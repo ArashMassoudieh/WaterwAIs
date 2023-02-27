@@ -27,7 +27,8 @@ public:
     Item(QStringView name, MetaComponentItem& component, MetaLayerModel& model);
 
     // Name
-    QStringView name() const { return name_; }
+    QStringView name() const 
+        { return display_name_.isEmpty() ? name_ : display_name_; }
 
     // Type
     Type type() const { return component_.type(); }
@@ -49,11 +50,24 @@ public:
     // Tooltip
     virtual QString toolTip() const;
 
+    // Model
+    MetaLayerModel& model() { return model_; }
+
 protected:
+    bool preProcessProperty(QStringView name, const QJsonValue& json_value);
+
+    virtual bool handleProperty(QStringView /*name*/,
+        const QJsonValue& /*json_value*/) {
+        // Allows derived classes to preprocess and consume the property
+        // instead of putting it into the properties map.
+        return false; /* not processed */
+    }
+
     virtual void onProperty(QStringView /*name*/, 
         const QJsonValue& /*json_value*/) {}
 
     QString            name_;
+    QString            display_name_;
     MetaComponentItem& component_;
     VariableMap        properties_;
     MetaLayerModel&    model_;
@@ -78,12 +92,21 @@ public:
 
     const QPointF coordinates() const { return coordinates_; }
 
+    // Width/Height for display in the Map view
+    double width () const { return width_ > 0  ? width_  : component_.width(); }
+    double height() const { return height_ > 0 ? height_ : component_.height(); }
+
     // Creates graphical layer item for Node.
     virtual NodeLayerItem* createLayerItem
         (const LayerGraphicsSettings& gsettings);
 
+protected:
+    bool handleProperty(QStringView name, const QJsonValue& json_value) override;
+
 private:
-    QPointF coordinates_;    
+    QPointF coordinates_;
+    double  width_  = 0.0;
+    double  height_ = 0.0;
 };
 
 
@@ -106,8 +129,8 @@ public:
 
     // Creates graphical layer item for Link.
     virtual LinkLayerItem* createLayerItem
-        (const LayerGraphicsSettings& gsettings, const NodeLayerItem* source,
-            const NodeLayerItem* destination);
+        (const LayerGraphicsSettings& gsettings, NodeLayerItem* source,
+            NodeLayerItem* destination);
 
 protected:
     void onProperty(QStringView name, 

@@ -69,8 +69,7 @@ Variable::Type typeFromProperty(QStringView prop_name,
 Item::Item(QStringView name, MetaComponentItem& component, MetaLayerModel& model)
     : name_{name.toString()}, component_{component}, model_{model} {
     // Preset "name" property as each item is supposed to have name.
-    properties_.set(u"name", {Variable::Type::String});
-    
+    //properties_.set(u"name", {Variable::Type::String});    
 }
 
 Item::Ptr Item::create(QStringView name, MetaComponentItem& component,
@@ -111,12 +110,32 @@ Item::Ptr Item::create(QStringView name, MetaComponentItem& component,
     return {};
 }
 
+bool Item::preProcessProperty(QStringView name, const QJsonValue& json_value) {
+    // Handle special item properties.
+    // Name
+    if (name == u"name") {
+        display_name_ = json_value.toString();
+        return true;
+    }
+
+    // Let derived classes to handle their own special properties.
+    return handleProperty(name, json_value);
+}
+
+
 void Item::getFromJson(const QJsonValue& json_value) {
     auto json_object = json_value.toObject();
 
     // Item properties
     for (auto& property : json_object.keys()) {
-        auto value = json_object.value(property);        
+        auto value = json_object.value(property);
+
+        //qDebug() << "[" << MetaComponentItem::typeToSting(type()) <<  
+        //    "] item, [set " << property_set << "] property=" <<
+        //    property << ", value =" << value;
+
+        if (preProcessProperty(property, value))
+            continue;
 
         // or properties that have been already preset.        
         auto prop_value = Variable{typeFromProperty(property, value)};
@@ -128,11 +147,7 @@ void Item::getFromJson(const QJsonValue& json_value) {
             // We set only properties that match component's meta model item.
             property_set = properties_.setIfExistInOtherMap
             (component_.properties(), property, value.toString());
-        }       
-
-        //qDebug() << "[" << MetaComponentItem::typeToSting(type()) <<  
-        //    "] item, [set " << property_set << "] property=" <<
-        //    property << ", value =" << value;
+        }
 
         onProperty(property, value);
     }
@@ -142,7 +157,7 @@ QString Item::toolTip() const {
     // Building basic tooltip from the model.
     auto tooltip = QString{};
 
-    tooltip += "<b><font color=blue>" + name_ + "</font></b> (" +
+    tooltip += "<b><font color=blue>" + name().toString() + "</font></b> (" +
         component_.name() + ")";
 
     if (properties_.empty())
@@ -204,6 +219,21 @@ NodeItem::NodeItem(QStringView name, MetaComponentItem& component,
     properties_.set(u"y", {Variable::Type::Value});
 }
 
+bool NodeItem::handleProperty(QStringView name, const QJsonValue& json_value) {
+    // Width
+    if (name == u"_width") {
+        width_ = json_value.toString().toDouble();
+        return true;
+    }
+
+    // Name
+    if (name == u"_height") {        
+        height_ = json_value.toString().toDouble();
+        return true;
+    }
+    return false;
+}
+
 void NodeItem::getFromJson(const QJsonValue& json_value) {
     Item::getFromJson(json_value);
 
@@ -251,8 +281,18 @@ void LinkItem::onProperty(QStringView name, const QJsonValue& json_value) {
 }
 
 LinkLayerItem* LinkItem::createLayerItem(const LayerGraphicsSettings& gsettings,
-    const NodeLayerItem* source, const NodeLayerItem* destination) {
-    return new LinkLayerItem{gsettings, *this, source, destination};
+    NodeLayerItem* source, NodeLayerItem* destination) {
+
+    auto link_item = new LinkLayerItem{gsettings, *this, source, destination};
+
+    auto link = std::make_shared<MetaLayerItemLink>(*source, *destination,
+        *link_item);
+
+    link_item  ->addLink(link);
+    source     ->addLink(link);
+    destination->addLink(link);
+
+    return link_item;
 }
 
 void LinkItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
@@ -270,17 +310,15 @@ void LinkItem::addGraphicsItems(const LayerGraphicsSettings& gsettings,
     auto source_node      = model_.getNode(source_);
     auto destination_node = model_.getNode(destination_);    
 
-    auto link = createLayerItem(gsettings, source_node, destination_node);
+    auto link_item = createLayerItem(gsettings, source_node, destination_node);
         
-    if (!link) {
+    if (!link_item) {
         qDebug() << "A null Node layer item was created";
         return;
     }
 
     // Add link to the graphics items collection.
-    items.addItem(link);
-
-    //link->adjust();
+    items.addItem(link_item);
 }
 
 

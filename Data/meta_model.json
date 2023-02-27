@@ -26,7 +26,9 @@
             "unit": ""
         },
         "icon": "Icons/Trapezoidal_Channel.png",
-        "name": "Sub-Catchment"
+        "name": "Sub-Catchment",
+		"_height": "100",
+        "_width": "100"
     },
 	"sub-catchment1": {
         "type": "node",

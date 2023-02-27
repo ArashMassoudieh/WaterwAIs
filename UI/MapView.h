@@ -69,7 +69,7 @@ protected:
     void selectItem(const QPoint& pos);
     void clearSelection();
 
-private:
+private:    
     class SelectedItem;    
     
     void onModeSet();    

@@ -20,7 +20,23 @@ NodeLayerItem::NodeLayerItem(const LayerGraphicsSettings& gsettings,
     : MetaLayerItem{gsettings, node_item} {    
 
     // Size
-    size_ = {node_width, node_height};
+    auto width  = node_item.width();
+    auto height = node_item.height();
+
+    if (width > 0 && height == 0)
+        height = width;
+
+    if (height > 0 && width == 0)
+        width = height;
+
+    if (height == 0) {
+        // Neither the Node item nor its component don't specify width and
+        // height, so let's use the default values.
+        width  = node_width;
+        height = node_height;
+    }
+
+    size_ = {width, height};
 
     // Set parameters from the node item.
     coordinates_ = node_item.coordinates();    
@@ -76,9 +92,9 @@ void NodeLayerItem::paint(QPainter* painter,
     painter->restore();
    
     // Pen
-    if (isSelected()) {
+    if (isSelected() || isHighlighted()) {
         auto pen = settings_.pen;
-        pen.setColor(settings_.selected_color);        
+        pen.setColor(settings_.selected_color);
         pen.setWidth(settings_.selected_line_width);
         painter->setPen(pen);
     }
@@ -87,17 +103,19 @@ void NodeLayerItem::paint(QPainter* painter,
     painter->drawEllipse(rc);
 
     // Draw a second rectangle for the selected item.
-    if (isSelected()) {
+    if (isSelected() || isHighlighted()) {
         auto path = QPainterPath{};
 
         path.addEllipse(selectedRect());
         path.addEllipse(rect());
 
-        painter->setBrush(Qt::darkCyan);
-        painter->drawPath(path);
-    }
-    
-    painter->restore(); // restore painter state
+        if (isSelected())
+            painter->setBrush(Qt::darkCyan);
+        else
+            painter->setBrush(Qt::darkYellow);
+
+        painter->drawPath(path);        
+    }    
 }
 
 void NodeLayerItem::setSize(const QSizeF& size) {

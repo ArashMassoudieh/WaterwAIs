@@ -2,8 +2,7 @@
     "subcatchment1":
         {
             "type": "sub-catchment",
-            "area": "1010[m~^2]",
-            "name": "venky",
+            "area": "1010[m~^2]",            
             "mail": "venkateshputta@gmail.com",
             "slope": "0.01",
             "x": "327946.519",
@@ -27,7 +26,9 @@
             "slope": "0.07",
             "x": "328356.8528",
             "y": "4309415.229",
-			"inflow": "Timeseries/subcatchment3.csv"
+			"inflow": "Timeseries/subcatchment3.csv",
+			"_height": "100",
+			"_width": "100"
         },
 	"subcatchment4": {
             "type": "sub-catchment1",

@@ -29,7 +29,7 @@ namespace {
 
 class MapView::SelectedItem {
 public:
-    SelectedItem(QGraphicsItem* item): item_{item} {
+    SelectedItem(MetaLayerItem* item): item_{item} {
         if (item_) {
             z_value_ = item_->zValue();
             item_->setZValue(z_value_ + 100);
@@ -37,17 +37,48 @@ public:
         }
     }
 
-    ~SelectedItem() { 
+    ~SelectedItem() {
         if (item_) {
             item_->setZValue(z_value_);
             item_->setSelected(false);
+            highlightLinks(false);
         }
     }
 
-    void clear() { item_ = nullptr; }
+    void toggleLinksHighlight() { highlightLinks(!links_highlighted_); }
+
+    void highlightLinks(bool highlight = true) {
+        if (!item_)
+            return;
+
+        auto& links = item_->links();
+
+        auto set_highlight = [this](bool highlight, MetaLayerItem* item) {
+            if (item != item_) {
+                item->setHighlighted(highlight);
+                item->update();
+            }
+        };
+
+        for (auto& link : links) {
+            set_highlight(highlight, &link->source());
+            set_highlight(highlight, &link->destination());
+            set_highlight(highlight, &link->link());
+        }
+        links_highlighted_ = highlight;
+    }
+
+    void clear() {
+        highlightLinks(false);
+        item_ = nullptr;
+    }
+
+    MetaLayerItem* item() { return item_; }
+
 private:
     qreal z_value_;
-    QGraphicsItem* item_;
+    MetaLayerItem* item_;
+    bool links_highlighted_ = false;
 };
 
 
@@ -109,8 +140,8 @@ void MapView::clearSelection() {
 void MapView::mousePressEvent(QMouseEvent* event) {
     if (event->button() & Qt::LeftButton) {
         is_pressed_ = true;
-        pressed_scene_point_ = mapToScene(event->pos());        
-        
+        pressed_scene_point_ = mapToScene(event->pos());
+
         selectItem(event->pos());
     } else {
         QGraphicsView::mousePressEvent(event);
@@ -213,24 +244,31 @@ void MapView::mouseMoveEvent(QMouseEvent* event) {
     }   
 }
 
+
 void MapView::selectItem(const QPoint& pos) {
     auto selected_items = items(pos);
     auto selected_item = static_cast<MetaLayerItem*>(nullptr);
 
     for (auto item : selected_items) {
         selected_item = MetaLayerItem::item_cast(item);
-        if (selected_item)           
+        if (selected_item)
             break;
-    }    
+    }
 
     if (selected_item) {
-        selected_items_.clear();
-        selected_items_.emplace_back(selected_item);
+        if (!selected_item->isSelected() || selected_items_.size() > 1) {
+            selected_items_.clear();
 
-        prop_model_ = std::make_unique<MetaItemPropertyModel>
-            (selected_item->modelItem(), this);
+            prop_model_ = std::make_unique<MetaItemPropertyModel>
+                (selected_item->modelItem(), this);
 
-        main_view_->setItemPropertiesModel(prop_model_.release(), selected_item);
+            main_view_->setItemPropertiesModel(prop_model_.release(), selected_item);
+            selected_items_.emplace_back(selected_item);
+        } else {
+            // We have already a selected item and it is in the selected_items_.
+            // So, let's toggle the link highlighting.
+            selected_items_.front().toggleLinksHighlight();
+        }       
     } else {
         // Clear previous selection of meta model layer items if no new item is
         // selected and we are not in the Pan mode. 

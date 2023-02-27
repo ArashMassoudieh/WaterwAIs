@@ -44,6 +44,10 @@ public:
     // Icon
     const QPixmap& icon() const { return icon_; }
 
+    // Width/Height for display in the Map view
+    double width () const { return width_; }
+    double height() const { return height_; }
+
     // Downloads item icon asynchronously and calls a callback when it is done.
     void downloadIcon(IconDownloadedFunc callback);
 
@@ -58,6 +62,9 @@ private:
     Type         type_;
     QString      icon_path_;
     QPixmap      icon_;
+
+    double       width_  = 0.0;
+    double       height_ = 0.0;
 
     VariableMap  properties_;
 

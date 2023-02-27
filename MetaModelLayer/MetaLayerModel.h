@@ -51,7 +51,7 @@ public:
     const LayerNodeItemMap& nodesMap() const { return node_map_; }
 
     // Get Node
-    const NodeLayerItem* getNode(QStringView node_name) const;
+    NodeLayerItem* getNode(QStringView node_name) const;
 
     // Map of Generic (no type) model items
           GenericItemMap& genericItemMap()       { return generic_item_map_; }

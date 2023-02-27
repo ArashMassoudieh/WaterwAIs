@@ -37,7 +37,9 @@
             "slope": "0.02",
             "x": "328787.1865",
             "y": "4309310.332",
-			"inflow": "Timeseries/subcatchment4.csv"
+			"inflow": "Timeseries/subcatchment4.csv",
+			"_height": "100",
+			"_width": "100"
         },
 	"subcatchment5": {
             "type": "sub-catchment",

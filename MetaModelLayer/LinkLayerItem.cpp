@@ -8,7 +8,7 @@
 namespace WaterwAIs {
 
 namespace {    
-    static constexpr auto link_arrow_size = 10.0;    
+    static constexpr auto link_arrow_size = 15.0;
     static constexpr auto link_line_width = 7;
 
     static constexpr double Pi = 3.14159265358979323846264338327950288419717;
@@ -63,11 +63,16 @@ void LinkLayerItem::paint(QPainter* painter,
     auto arrow_size = arrow_size_;
 
     // Draw the line itself
-    if (isSelected()) {
+    if (isSelected() || isHighlighted()) {
         color = settings_.selected_color;
         
-        line_width *= 2;
-        arrow_size *= 2;
+        if (isSelected()) {
+            line_width *= 2;
+            arrow_size *= 2;
+        } else {
+            line_width *= 1.5;
+            arrow_size *= 1.5;
+        }        
     }
 
     auto pen = QPen{color, line_width, Qt::SolidLine, Qt::RoundCap,
