@@ -1,0 +1,5 @@
+{
+	"MainOHQoutput": "C:/Infopact/QMapViewer/Data/OHQOutput/output.txt",
+	"TimeSeriesFolder": "C:/Infopact/Test/Data/Timeseries",
+	"ReadInterval": 30
+}

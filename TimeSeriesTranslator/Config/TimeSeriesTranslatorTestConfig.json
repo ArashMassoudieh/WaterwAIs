@@ -1,0 +1,9 @@
+{
+	"MainOHQoutput": "C:/Infopact/Test/Data/Timeseries/test_output.csv",
+	"TimeSeriesFolder": "C:/Infopact/Test/Data/Timeseries",
+	"NumOfSeries": 5,
+	"ReadInterval": 3,
+	"WriteData": true,
+	"WriteInterval": 2,
+	"MaxRows": 30
+}

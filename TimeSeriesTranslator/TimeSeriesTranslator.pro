@@ -12,21 +12,21 @@ INCLUDEPATH += \
         ../Common \
         ../Utilities
 
+HEADERS += \
+    ../Utilities/TimeSeriesSet_s.h \
+    ../Utilities/TimeSeriesSet_s.hpp \
+    ../Utilities/TimeSeries_s.h \
+    ../Utilities/TimeSeries_s.hpp \
+    OHQTimeSeriesTranslator.h
+
+
 SOURCES += \
         ../Utilities/Utilities.cpp \
         main.cpp \
-        translator.cpp
-
+        OHQTimeSeriesTranslator.cpp
 
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-HEADERS += \
-    ../Utilities/TimeSeriesSet_s.h \
-    ../Utilities/TimeSeriesSet_s.hpp \
-    ../Utilities/TimeSeries_s.h \
-    ../Utilities/TimeSeries_s.hpp \
-    translator.h

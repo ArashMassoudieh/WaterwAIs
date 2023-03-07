@@ -584,8 +584,10 @@ bool CTimeSeries<T>::readfile(std::string Filename) {
 }
 
 template<class T>
-bool CTimeSeries<T>::writefile(const std::string& Filename) {
-    std::ofstream file(Filename);
+bool CTimeSeries<T>::writefile(const std::string& Filename, bool append) {
+    auto open_mode = append ? std::ios_base::app : std::ios_base::out;
+
+    std::ofstream file(Filename, open_mode);
 
     if (file.good()) {
         //file << "n " << n << ", BTC size " << C.size() << std::endl;
@@ -594,7 +596,7 @@ bool CTimeSeries<T>::writefile(const std::string& Filename) {
         file.close();
     } else return false;
 
-
+    return true;
 }
 
 template<class T>
