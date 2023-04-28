@@ -34,7 +34,7 @@
 	},
 	"Model":
 	{
-		"url": "Example_input.json",
+		"url": "HickeyRun.json",
 		"description": "Model layer"
 	}
 }
